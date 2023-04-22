@@ -6,7 +6,7 @@ from functools import partial
 from django import forms
 from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm
-from foundry.models import UserProfile
+from django.contrib.auth.models import User
 
 # paypal
 from django.views.generic import FormView
@@ -20,8 +20,8 @@ class NewUserForm(UserCreationForm):
 	email = forms.EmailField(required=True)
 
 	class Meta:
-		model = UserProfile
-		fields = ("user.username", "user.email", "user.password1", "user.password2", "foundry")
+		model = User
+		fields = ("username", "email", "password1", "password2")
 
 	def save(self, commit=True):
 		user = super(NewUserForm, self).save(commit=False)

@@ -73,12 +73,6 @@ class FoundryAdmin(admin.ModelAdmin):
     display = 'Foundry'
 
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # add any additional fields you want for the user profile
-    foundry = models.ForeignKey(Foundry,blank=True, null=True, on_delete=models.CASCADE)
-
-
 class Company(models.Model):
     foundry = models.ForeignKey(Foundry, null=False, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=255, blank=True)
