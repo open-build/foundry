@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+<!--Register-->
+<div class="container mt-5 mb-5">
+
+	<div class="row d-flex align-items-center justify-content-center">
+
+	  <div class="col-md-8">
+
+		<div class="card px-5 py-5">
+			<div class="logo">
+				<a href="/">
+				  <img src="{% static 'img/logo.png' %}" width="500" class="img-fluid flex-center">
+				</a>
+			</div>
+
+		  <h5 class="mt-3">Join a Foundry</h5>
+		  <small class="mt-2 text-muted"></small>
+
+
+		  <div class="form-input">
+
+			<form method="POST">
+	
+				{% csrf_token %}
+				{{ register_form|crispy }}
+				
+
+			
+			</div>
+		  <div class="form-check">
+			<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+			<label class="form-check-label" for="flexCheckChecked">
+			  I agree with all the statements
+			</label>
+		  </div>
+
+			
+		  <button class="btn btn-primary mt-4 signup"  type="submit">Get Started!</button>
+			</form>
+		  </div>
+
+
+		  <div class="text-center mt-4">
+			
+			<span>Already a member?</span>
+			<a href="/login" class="text-decoration-none">Login</a>
+
+		  </div>
+		  
+		</div>
+
+
+		
+	  </div>
+	  
+	</div>
+	
+  </div>
+
+
+{% endblock %}
