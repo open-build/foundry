@@ -15,7 +15,7 @@ DATABASES = {
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['lionfish-app-ufv5e.ondigitalocean.app', '127.0.0.1', '[::1]','foundry.open.build','open.build']
+ALLOWED_HOSTS = ['foundry.ondigitalocean.app', '127.0.0.1', '[::1]','foundry.open.build','open.build']
 
 try:
     from .local import *
