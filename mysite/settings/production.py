@@ -8,7 +8,7 @@ DATABASES = {
         'NAME': 'foundry',
         'PASSWORD': os.environ.get("PASSWORD"),
         'USER': 'foundry',
-        'HOST': 'db-mysql-nyc3-97229-do-user-2508039-0.b.db.ondigitalocean.com',
+        'HOST': os.environ.get("DATABASE_URL"),
         'PORT': '25060',
     }
 }
