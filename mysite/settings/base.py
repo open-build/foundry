@@ -216,7 +216,7 @@ WAGTAILSEARCH_BACKENDS = {
 PUPUT_AS_PLUGIN = True
 
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'https://foundary.open.build'
+BASE_URL = 'https://foundry.open.build'
 
 LOGIN_REDIRECT_URL = '/'
 
