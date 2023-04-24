@@ -21,7 +21,7 @@ class HomePage(Page):
 class AboutPage(Page):
     pass
 
-class Foundry(Page):
+class News(Page):
     pass
 
 class Contact(Page):
