@@ -232,4 +232,3 @@ PAYPAL_RECEIVER_EMAIL = "info@open.build"
 PAYPAL_TEST = True
 
 SITE_ID = 1
-

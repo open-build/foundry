@@ -14,7 +14,7 @@ DEBUG = True
 SECRET_KEY = 'django-insecure-4w$$of)udb)qv8=vs^5vy#8%9+kk73x0u$de0dxg2xl+@s^v1g'
 
 # SECURITY WARNING: define the correct hosts in production!
-ALLOWED_HOSTS = ['foundry-c3ie3.ondigitalocean.app', 'localhost', '127.0.0.1','foundry.open.build','firstcityfoundry.com']
+ALLOWED_HOSTS = ['foundry-c3ie3.ondigitalocean.app', 'localhost', '127.0.0.1','foundry.open.build','firstcityfoundry.com','www.firstcityfoundry.com']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
