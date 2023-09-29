@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.conf.urls import url
 from foundry.views import *
 from . import views
+from foundry import views as foundry_views
 
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
@@ -40,6 +41,12 @@ urlpatterns = urlpatterns + [
     url(r'^company_add/$', CompanyCreate.as_view(), name='company_add'),
     url(r'^company_update/(?P<pk>\w+)/$', CompanyUpdate.as_view(), name='company_update'),
     url(r'^company_delete/(?P<pk>\w+)/$', CompanyDelete.as_view(), name='company_delete'),
+    
+    # URL for the startup application form (multi-step)
+    path('startup-application/', foundry_views.startup_application, name='startup_application'),
+
+    # URL for founder sign-up
+    path('founder-signup/', foundry_views.founder_signup, name='founder_signup'),
 ]
 
 urlpatterns = urlpatterns + [

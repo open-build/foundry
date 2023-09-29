@@ -1,54 +1,54 @@
 {% load i18n %}
 {% load static %}
 
-    <!-- ======= Top Bar ======= -->
-    <section id="topbar" class="d-flex align-items-center">
-      <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="contact-info d-flex align-items-center">
-          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:info@open.build">info@open.build</a></i>
-        </div>
-        <div class="social-links d-none d-md-flex align-items-center">
-          <a href="https://twitter.com/open_build" class="twitter"><i class="bi bi-twitter"></i></a>
-          <a href="https://www.facebook.com/OpenBuildSTEM" class="facebook"><i class="bi bi-facebook"></i></a>
-          <a href="https://www.youtube.com/channel/UCgl2V9zLj2SyDZ_Fnvq-bzQ" class="youtube"><i class="bi bi-youtube"></i></a>
-          <a href="https://www.linkedin.com/company/openbuild/" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-        </div>
-      </div>
-    </section>
-  
-    <!-- ======= Header ======= -->
-    <header id="header" class="d-flex align-items-center">
-      <div class="container d-flex justify-content-between align-items-center">
-        <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-  
-        <div class="logo">
-          <a href="/">
-            <img src="{% static 'img/logo-horizontal.png' %}" alt="Logo" class="img-fluid">
-          </a>
-        </div>
-  
-        <nav id="navbar" class="navbar">
-          <ul>
-            {% if user.is_authenticated %} 
-            <li></li><a href="/company_add/" class="nav-item nav-link">New Company</a></li>
-            <li></li><a href="/foundry/" class="nav-item nav-link">Your Foundry</a></li>
-            {% endif %}
+<!-- ======= Top Bar ======= -->
+<section id="topbar" class="d-flex align-items-center">
+  <div class="container d-flex justify-content-center justify-content-md-between">
+    <div class="contact-info d-flex align-items-center">
+      <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:foundry@buildly.io">foundry@buildly.io</a></i>
+    </div>
+    <div class="social-links d-none d-md-flex align-items-center">
+      <a href="https://twitter.com/open_build" class="twitter"><i class="bi bi-twitter"></i></a>
+      <a href="https://www.facebook.com/OpenBuildSTEM" class="facebook"><i class="bi bi-facebook"></i></a>
+      <a href="https://www.youtube.com/channel/UCgl2V9zLj2SyDZ_Fnvq-bzQ" class="youtube"><i class="bi bi-youtube"></i></a>
+      <a href="https://www.linkedin.com/company/openbuild/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+    </div>
+  </div>
+</section>
 
-            {% if user.is_authenticated %}
-            <li><a class="dropdown-item" href="/register">Account Details</a> </li>
-            <li><i> &nbsp; Welcome, {{user.username}} &nbsp;</i></li>
-            <li><a class="dropdown-item" href="/logout">Logout</a></li>
-            {% else %}
-            <li><a class="nav-item nav-link" href="/news">News</a></li>
-            <li><a class="nav-item nav-link" href="/register">Register</a></li>
-            <li><a class="nav-item nav-link" href="/login">Login</a></li>
-            {% endif %}
-        </nav><!-- .navbar -->
-  
-      </div>
-    </header><!-- End Header -->
+<!-- ======= Header ======= -->
+<header id="header" class="d-flex align-items-center">
+  <div class="container d-flex justify-content-between align-items-center">
+    <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+    <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
+    <div class="logo">
+      <a href="/">
+        <img src="{% static 'img/logo-horizontal.png' %}" alt="Logo" class="img-fluid">
+      </a>
+    </div>
 
+    <nav id="navbar" class="navbar">
+      <ul>
+        {% if user.is_authenticated %} 
+        <li><a href="/company_add/" class="nav-item nav-link">New Company</a></li>
+        <li><a href="/foundry/" class="nav-item nav-link">Your Foundry</a></li>
+        {% endif %}
+        <!-- Add the new URLs to the navigation -->
+        <li><a href="/startup-application/" class="nav-item nav-link">Startup Application</a></li>
+        <li><a href="/founder-signup/" class="nav-item nav-link">Founder Sign-Up</a></li>
 
+        {% if user.is_authenticated %}
+        <li><a class="dropdown-item" href="/register">Account Details</a></li>
+        <li><i> &nbsp; Welcome, {{user.username}} &nbsp;</i></li>
+        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+        {% else %}
+        <li><a class="nav-item nav-link" href="/news">News</a></li>
+        <li><a class="nav-item nav-link" href="/register">Register</a></li>
+        <li><a class="nav-item nav-link" href="/login">Login</a></li>
+        {% endif %}
+      </ul>
+    </nav><!-- .navbar -->
 
+  </div>
+</header><!-- End Header -->

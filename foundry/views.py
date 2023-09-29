@@ -15,8 +15,46 @@ from django.shortcuts import redirect
 
 
 from .models import Company, Foundry
-from .forms import CompanyForm
+from .forms import CompanyForm, StartupApplicationForm, FounderSignUpForm
 import requests
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
+
+
+def startup_application(request):
+
+    if request.method == 'POST':
+        form = StartupApplicationForm(request.POST)
+        if form.is_valid():
+            # Save form data here for each step
+            # Redirect to the next step or completion page
+            form = form.save()
+            return redirect('startup_application')
+            messages.success(request, 'Success, your Foundry application was Submitted!')
+    else:
+        form =  StartupApplicationForm()
+
+    return render(request, 'startup_application.html', {'form': form})
+
+
+@login_required
+def founder_signup(request):
+    if request.user.is_founder:
+        raise PermissionDenied
+
+    if request.method == 'POST':
+        form = FounderSignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('/login/')
+    else:
+        form = FounderSignUpForm()
+
+    return render(request, 'founder_signup.html', {'form': form})
 
 class MyView(LoginRequiredMixin, View):
     login_url = '/login/'
@@ -59,7 +97,7 @@ class CompanyList(ListView,LoginRequiredMixin):
 
         return render(request, self.template_name, {'getHunts': getHunts,})
 
-class CompanyCreate(CreateView,LoginRequiredMixin,):
+class CompanyCreate(CreateView):
     """
     Montior for sites creation
     """
