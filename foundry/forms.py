@@ -14,6 +14,11 @@ from django.contrib.auth.models import User
 from .models import StartupApplication
 
 class StartupApplicationForm(forms.ModelForm):
+    pitch_deck = forms.FileField(required=False,
+        label="Upload a file",
+        help_text="Select a PDF or DOC file to upload.",
+    )
+    
     class Meta:
         model = StartupApplication
 
@@ -45,7 +50,7 @@ class StartupApplicationForm(forms.ModelForm):
                 TabHolder(
                     Tab('Company Information',
                         Fieldset('',
-                            'company_name','business_description','legal_structure',
+                            'company_name','business_description','legal_structure','pitch_deck'
                             ),
                     ),
                     
@@ -57,19 +62,22 @@ class StartupApplicationForm(forms.ModelForm):
                     
                     Tab('Founders',
                         Fieldset('',
-                            'founder_names', 'team_members', 'advisors_mentors','target_audience','competition_analysis','market_demand_proof','marketing_strategy'
+                            'founder_names', 'team_members', 'advisors_mentors','target_audience','competition_analysis','market_demand_proof'
+                            ,'marketing_strategy'
                             ),
                     ),
                     
                     Tab('Stage and Strategy',
                         Fieldset('',
-                                'development_stage','intellectual_property','customer_base','customer_acquisition_strategy','current_funding_sources','future_funding_plans'
+                                'development_stage','intellectual_property','customer_base','customer_acquisition_strategy','current_funding_sources'
+                                ,'future_funding_plans'
                             ),
                     ),
                     
                     Tab('Compliance',
                         Fieldset('',
-                                    'regulatory_compliance','legal_issues', 'scalability','expansion_plans','social_impact','revenue_model','pricing_strategy','competitive_advantage','milestones_achievements','references_recommendations','alignment_with_mission','support_requested'
+                                    'regulatory_compliance','legal_issues', 'scalability','expansion_plans','social_impact','revenue_model',
+                                    'pricing_strategy','competitive_advantage','milestones_achievements','references_recommendations'
                             ),
                     ),
                         
