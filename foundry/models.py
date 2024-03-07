@@ -13,6 +13,7 @@ from wagtail.core.models import Page
 from modelcluster.fields import ParentalKey
 
 from django.contrib.auth.models import User
+from .util import analyze_ai_response
 
 
 class HomePage(Page):
@@ -235,6 +236,36 @@ class StartupApplication(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    # Evaluation fields
+    originality_score = models.FloatField(default=0.0)
+    marketability_score = models.FloatField(default=0.0)
+    feasibility_score = models.FloatField(default=0.0)
+    completeness_score = models.FloatField(default=0.0)
+    summary = models.TextField(blank=True)
+
+    # Override the save method to include evaluation logic
+    def save(self, *args, **kwargs):
+        # Convert the instance to a dictionary suitable for analysis
+        application_data = {
+            'company_name': self.company_name,
+            'business_description': self.business_description,
+            # Include other relevant fields as needed
+        }
+
+        # Assume `analyze_ai_response` is imported and ready to use
+        # and it now accepts a dictionary and returns a dictionary with scores and summary
+        evaluation_results = analyze_ai_response(application_data)
+
+        # Update the instance with evaluation results
+        self.originality_score = evaluation_results.get('originality_score', 0.0)
+        self.marketability_score = evaluation_results.get('marketability_score', 0.0)
+        self.feasibility_score = evaluation_results.get('feasibility_score', 0.0)
+        self.completeness_score = evaluation_results.get('completeness_score', 0.0)
+        self.summary = evaluation_results.get('summary', '')
+
+        super().save(*args, **kwargs)  # Call the "real" save() method.
+
+
     class Meta:
         verbose_name = "Startup Application"
         verbose_name_plural = "Startup Applications"
@@ -274,3 +305,14 @@ class SuccessData(models.Model):
 
     def __str__(self):
         return f"Success Data for {self.comparable_company.name}"
+    
+# https://cloud.google.com/vertex-ai/docs/generative-ai/learn-resources
+
+
+class EvaluationScores(models.Model):
+    startup_application = models.OneToOneField(StartupApplication, on_delete=models.CASCADE)
+    originality_score = models.FloatField()
+    marketability_score = models.FloatField()
+    feasibility_score = models.FloatField()
+    completeness_score = models.FloatField()
+

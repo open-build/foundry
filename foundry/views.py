@@ -15,6 +15,7 @@ from django.shortcuts import redirect
 
 
 from .models import Company, Foundry
+from .models import StartupApplication, EvaluationScores
 from .forms import CompanyForm, StartupApplicationForm, FounderSignUpForm
 import requests
 
@@ -22,6 +23,80 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
+
+import json
+
+def preprocess_application_data(application):
+    """
+    Preprocess the application data to create a comprehensive summary text.
+    Adjust the details as per your model's requirements.
+    """
+    details = [
+        application.business_description,
+        f"Legal Structure: {application.legal_structure}",
+        f"Ownership Structure: {application.ownership_structure}",
+        f"Annual Revenue: {application.annual_revenue}",
+        f"Funding Amount: {application.funding_amount}",
+        f"Outstanding Debt: {application.outstanding_debt}",
+        f"Development Stage: {application.development_stage}",
+        application.market_demand_proof,
+        application.marketing_strategy,
+        application.competitive_advantage,
+        # Add more fields as necessary
+    ]
+    return " ".join(details)
+
+def evaluate_startup_idea(application):
+    """
+    Evaluate the detailed startup application using Vertex AI.
+    """
+    project_id = "your-gcp-project-id"
+    location = "us-central1"  # Adjust based on your model's location
+    model_id = "your-model-id"  # The ID of your deployed model on Vertex AI
+    
+    # Initialize Vertex AI client
+    client_options = {"api_endpoint": f"{location}-aiplatform.googleapis.com"}
+    client = aiplatform.gapic.PredictionServiceClient(client_options=client_options)
+    
+    model_name = client.model_path(project=project_id, location=location, model=model_id)
+    
+    # Prepare the application data for the AI model
+    application_summary = preprocess_application_data(application)
+    payload = {
+        "text_snippet": {
+            "content": application_summary,
+            "mime_type": "text/plain"
+        }
+    }
+    parameters_dict = {}
+    parameters = client.types.Value(string_value=json.dumps(parameters_dict))
+    
+    request = client.types.ExplainRequest(
+        name=model_name,
+        payload=payload,
+        parameters=parameters
+    )
+    
+    # Send the request to Vertex AI
+    response = client.predict(name=model_name, instances=[payload], parameters=parameters)
+    
+    # Assume response includes scores and a summary; adjust as needed
+    # Placeholder logic for extracting scores and summary from the response
+    summary = "Extracted summary from AI response"  # Placeholder
+    originality_score = 0.85  # Placeholder
+    marketability_score = 0.75  # Placeholder
+    feasibility_score = 0.90  # Placeholder
+    completeness_score = 0.80  # Placeholder
+    
+    # Save evaluation scores
+    EvaluationScores.objects.create(
+        startup_application=application,
+        summary=summary,
+        originality_score=originality_score,
+        marketability_score=marketability_score,
+        feasibility_score=feasibility_score,
+        completeness_score=completeness_score
+    )
 
 
 def startup_application(request):
@@ -32,6 +107,10 @@ def startup_application(request):
             # Save form data here for each step
             # Redirect to the next step or completion page
             form = form.save()
+            
+            startup_application.user = request.user
+            startup_application.save()
+            
             return redirect('startup_application')
             messages.success(request, 'Success, your Foundry application was Submitted!')
     else:

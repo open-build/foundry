@@ -232,3 +232,5 @@ PAYPAL_RECEIVER_EMAIL = "info@open.build"
 PAYPAL_TEST = True
 
 SITE_ID = 1
+
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY') # Replace with your OpenAI API key
