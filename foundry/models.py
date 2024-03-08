@@ -8,7 +8,7 @@ from django.db import models
 from django.contrib import admin
 from django.utils import timezone
 
-from wagtail.core.models import Page
+from wagtail.models import Page
 
 from modelcluster.fields import ParentalKey
 
