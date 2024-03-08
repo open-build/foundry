@@ -1,8 +1,8 @@
 from django.conf import settings
-from django.urls import include, re_path
+from django.urls import include, re_path, path
 from django.contrib import admin
 
-from django.urls import url
+
 from foundry.views import *
 from . import views
 from foundry import views as foundry_views
@@ -34,13 +34,13 @@ urlpatterns = [
 
 urlpatterns = urlpatterns + [
     # Companys
-    url(r'^foundry/dashboard/(?P<pk>\w+)/$', dashboard),
-    url(r'^foundry/report/(?P<pk>\w+)/$', report),
-    url(r'^foundry/$', CompanyList.as_view(), name='company_list'),
+    re_path(r'^foundry/dashboard/(?P<pk>\w+)/$', dashboard),
+    re_path(r'^foundry/report/(?P<pk>\w+)/$', report),
+    re_path(r'^foundry/$', CompanyList.as_view(), name='company_list'),
     # Forms
-    url(r'^company_add/$', CompanyCreate.as_view(), name='company_add'),
-    url(r'^company_update/(?P<pk>\w+)/$', CompanyUpdate.as_view(), name='company_update'),
-    url(r'^company_delete/(?P<pk>\w+)/$', CompanyDelete.as_view(), name='company_delete'),
+    re_path(r'^company_add/$', CompanyCreate.as_view(), name='company_add'),
+    re_path(r'^company_update/(?P<pk>\w+)/$', CompanyUpdate.as_view(), name='company_update'),
+    re_path(r'^company_delete/(?P<pk>\w+)/$', CompanyDelete.as_view(), name='company_delete'),
     
     # URL for the startup application form (multi-step)
     path('startup-application/', foundry_views.startup_application, name='startup_application'),
