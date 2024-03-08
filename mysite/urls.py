@@ -1,8 +1,8 @@
 from django.conf import settings
-from django.urls import include, path
+from django.urls import include, re_path
 from django.contrib import admin
 
-from django.conf.urls import url
+from django.urls import url
 from foundry.views import *
 from . import views
 from foundry import views as foundry_views
