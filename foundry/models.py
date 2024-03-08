@@ -208,10 +208,6 @@ class StartupApplication(models.Model):
     regulatory_compliance = models.TextField(null=True, blank=True, help_text="Any Government or other compliance issues you need to address")
     legal_issues = models.TextField(null=True, blank=True, help_text="What if/any possible legal or regulatory issues have you identified")
 
-    # Scalability and Growth Potential
-    scalability = models.TextField(help_text="How well will your product scale")
-    expansion_plans = models.TextField(null=True, blank=True, help_text="How do you plan to grow and expand")
-
     # Social Impact (if applicable)
     social_impact = models.TextField(blank=True, null=True, help_text="Do you have a social mission or see a positive social impact with your product")
 

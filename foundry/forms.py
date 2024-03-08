@@ -76,7 +76,7 @@ class StartupApplicationForm(forms.ModelForm):
                     
                     Tab('Compliance',
                         Fieldset('',
-                                    'regulatory_compliance','legal_issues', 'scalability','expansion_plans','social_impact','revenue_model',
+                                    'regulatory_compliance','legal_issues','social_impact','revenue_model',
                                     'pricing_strategy','competitive_advantage','milestones_achievements','references_recommendations'
                             ),
                     ),
