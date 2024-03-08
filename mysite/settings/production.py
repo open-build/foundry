@@ -13,7 +13,7 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = ['foundry-c3ie3.ondigitalocean.app', '127.0.0.1', '[::1]','foundry.open.build','firstcityfoundry.com','www.firstcityfoundry.com','firstnationfoundry.com']
+ALLOWED_HOSTS = ['octopus-app-sqgq2.ondigitalocean.app', '127.0.0.1', '[::1]','foundry.open.build','firstcityfoundry.com','www.firstcityfoundry.com','firstnationfoundry.com']
 
 try:
     from .local import *

@@ -108,9 +108,6 @@ def startup_application(request):
             # Redirect to the next step or completion page
             form = form.save()
             
-            startup_application.user = request.user
-            startup_application.save()
-            
             return redirect('startup_application')
             messages.success(request, 'Success, your Foundry application was Submitted!')
     else:

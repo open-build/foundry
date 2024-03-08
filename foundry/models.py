@@ -13,7 +13,7 @@ from wagtail.core.models import Page
 from modelcluster.fields import ParentalKey
 
 from django.contrib.auth.models import User
-from .util import analyze_ai_response
+from .util import evaluate_startup_application
 
 
 class HomePage(Page):
@@ -254,7 +254,7 @@ class StartupApplication(models.Model):
 
         # Assume `analyze_ai_response` is imported and ready to use
         # and it now accepts a dictionary and returns a dictionary with scores and summary
-        evaluation_results = analyze_ai_response(application_data)
+        evaluation_results = evaluate_startup_application(application_data)
 
         # Update the instance with evaluation results
         self.originality_score = evaluation_results.get('originality_score', 0.0)

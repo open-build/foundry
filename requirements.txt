@@ -16,9 +16,9 @@ django-bootstrap-modal-forms
 crispy-bootstrap5
 django-storages
 boto3
-wagtail==4.2.2
+wagtail
 django-social-share==2.2.1
-puput==1.2.0
+puput
 django-colorful
 django-cors-headers
 openai

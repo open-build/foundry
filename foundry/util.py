@@ -13,7 +13,7 @@ def evaluate_startup_application(startup_application: dict) -> dict:
     try:
         response = openai.Completion.create(
             engine="text-davinci-003",  # Choose an appropriate engine for your task
-            prompt=f"Provide an evaluation of this startup idea: {description} give me a score based on originality, marketability, feasibility, and completeness as well as a summary.",
+            prompt=f"Provide an evaluation of this startup idea: {startup_application} give me a score based on originality, marketability, feasibility, and completeness as well as a summary.",
             max_tokens=1024,  # Adjust based on needs
             n=1,
             stop=None,
@@ -22,7 +22,12 @@ def evaluate_startup_application(startup_application: dict) -> dict:
         
         # Simulate analysis of the response to calculate scores
         # Replace this with actual analysis logic based on the response
-        analysis = analyze_ai_response(response)  # Assume this function exists and processes the OpenAI response
+        try:
+            analysis = analyze_ai_response(response)
+        except Exception as e:
+            # Handle the error here
+            print(f"An error occurred: {e}")
+            # Other error handling code if 
         
         # Return calculated scores
         return JsonResponse(analysis)
