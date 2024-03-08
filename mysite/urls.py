@@ -8,7 +8,7 @@ from . import views
 from foundry import views as foundry_views
 
 from wagtail.admin import urls as wagtailadmin_urls
-from wagtail.core import urls as wagtail_urls
+from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from puput import urls as puput_urls
