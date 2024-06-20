@@ -4,7 +4,7 @@ django-debug-toolbar
 django-crispy-forms
 colorful
 django_social_share
-django-allauth
+django-allauth==0.44.0
 pyopenssl
 django-paypal
 sentry-sdk
