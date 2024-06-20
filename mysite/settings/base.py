@@ -49,14 +49,6 @@ INSTALLED_APPS = [
     
     # auth
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.apple',
-    'allauth.socialaccount.providers.github',
-    'allauth.socialaccount.providers.gitlab',
 
     'django.contrib.admin',
     'django.contrib.auth',
