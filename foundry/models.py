@@ -188,17 +188,17 @@ class StartupApplication(models.Model):
 
     # Market Research
     target_audience = models.TextField(help_text="Primary and Secondary Markets")
-    competition_analysis = models.TextField(help_text="List your closest Competitors")
-    market_demand_proof = models.TextField(help_text="Any research, surveys or signups you have summarize them here")
-    marketing_strategy = models.TextField(help_text="Your marketing plans other then paid advertising")
+    competition_analysis = models.TextField(help_text="List your closest Competitors", null=True, blank=True)
+    market_demand_proof = models.TextField(help_text="Any research, surveys or signups you have summarize them here", null=True, blank=True)
+    marketing_strategy = models.TextField(help_text="Your marketing plans other then paid advertising", null=True, blank=True)
 
     # Product/Service Development
     development_stage = models.CharField(max_length=50,choices=STAGE)
-    intellectual_property = models.TextField(help_text="What IP have your registered or plan to register")
+    intellectual_property = models.TextField(help_text="What IP have your registered or plan to register", null=True, blank=True)
 
     # Customer Base
-    customer_base = models.TextField(help_text="Have you Identified your Users or Personas")
-    customer_acquisition_strategy = models.TextField(help_text="What is your plan to get them to pay for/use your product")
+    customer_base = models.TextField(help_text="Have you Identified your Users or Personas", null=True, blank=True)
+    customer_acquisition_strategy = models.TextField(help_text="What is your plan to get them to pay for/use your product", null=True, blank=True)
 
     # Funding and Investment
     current_funding_sources = models.TextField()
@@ -213,10 +213,10 @@ class StartupApplication(models.Model):
 
     # Business Model
     revenue_model = models.CharField(max_length=50,choices=MODEL)
-    pricing_strategy = models.TextField()
+    pricing_strategy = models.TextField(null=True, blank=True)
 
     # Competitive Advantage
-    competitive_advantage = models.TextField()
+    competitive_advantage = models.TextField(null=True, blank=True)
 
     # Milestones and Achievements
     milestones_achievements = models.TextField(help_text="List Milestones/Acheivments so far for your Product")
@@ -233,11 +233,11 @@ class StartupApplication(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     # Evaluation fields
-    originality_score = models.FloatField(default=0.0)
-    marketability_score = models.FloatField(default=0.0)
-    feasibility_score = models.FloatField(default=0.0)
-    completeness_score = models.FloatField(default=0.0)
-    summary = models.TextField(blank=True)
+    originality_score = models.FloatField(default=0.0, null=True, blank=True)
+    marketability_score = models.FloatField(default=0.0, null=True, blank=True)
+    feasibility_score = models.FloatField(default=0.0, null=True, blank=True)
+    completeness_score = models.FloatField(default=0.0, null=True, blank=True)
+    summary = models.TextField(blank=True, null=True, blank=True)
 
     # Override the save method to include evaluation logic
     def save(self, *args, **kwargs):

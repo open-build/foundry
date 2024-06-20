@@ -22,7 +22,7 @@ class StartupApplicationForm(forms.ModelForm):
     class Meta:
         model = StartupApplication
 
-        exclude = ['create_date','edit_date']
+        exclude = ['create_date','edit_date', 'originality_score', 'marketability_score', 'feasibility_score', 'completeness_score', 'summary']
         widgets = {
             'company_name': forms.TextInput(attrs={'class': 'form-control'}),
             'business_description': forms.Textarea(attrs={'class': 'form-control'}),
@@ -54,11 +54,6 @@ class StartupApplicationForm(forms.ModelForm):
                             ),
                     ),
                     
-                    Tab('Company Structure',
-                        Fieldset('',
-                            'ownership_structure', 'annual_revenue', 'funding_amount','outstanding_debt'
-                            ),
-                    ),
                     
                     Tab('Founders',
                         Fieldset('',
