@@ -237,7 +237,7 @@ class StartupApplication(models.Model):
     marketability_score = models.FloatField(default=0.0, null=True, blank=True)
     feasibility_score = models.FloatField(default=0.0, null=True, blank=True)
     completeness_score = models.FloatField(default=0.0, null=True, blank=True)
-    summary = models.TextField(blank=True, null=True, blank=True)
+    summary = models.TextField(blank=True, null=True)
 
     # Override the save method to include evaluation logic
     def save(self, *args, **kwargs):
