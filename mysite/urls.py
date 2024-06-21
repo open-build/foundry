@@ -28,7 +28,6 @@ urlpatterns = [
 
      path('payment2/', views.PaypalView.as_view(), name='payment2'),
 
-    path('accounts/', include('allauth.urls')),
 ]
 
 

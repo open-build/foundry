@@ -1,5 +1,4 @@
 Django==4.2.11
-django-allauth==0.61.1
 django-bootstrap-modal-forms==3.0.4
 django-celery-beat==2.6.0
 django-colorful==1.3

@@ -10,7 +10,6 @@ from .forms import PayPalPaymentsForm
 
 from bootstrap_modal_forms.generic import BSModalCreateView
 
-from allauth.socialaccount.forms import SignupForm
 
 class MyCustomSocialSignupForm(SignupForm):
 
