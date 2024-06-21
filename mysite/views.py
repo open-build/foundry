@@ -11,19 +11,6 @@ from .forms import PayPalPaymentsForm
 from bootstrap_modal_forms.generic import BSModalCreateView
 
 
-class MyCustomSocialSignupForm(SignupForm):
-
-    def save(self, request):
-
-        # Ensure you call the parent class's save.
-        # .save() returns a User object.
-        user = super(MyCustomSocialSignupForm, self).save(request)
-
-        # Add your own processing here.
-
-        # You must return the original result.
-        return user
-
 def register_request(request):
 	if request.method == "POST":
 		form = NewUserForm(request.POST)

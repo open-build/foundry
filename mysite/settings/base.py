@@ -59,7 +59,6 @@ INSTALLED_APPS = [
 
     'wagtail.contrib.sitemaps',
     'wagtail.contrib.routable_page',
-    'django_social_share',
     'paypal.standard.ipn',
     'puput',
     'colorful',
@@ -140,19 +139,6 @@ AUTHENTICATION_BACKENDS = (
  'django.contrib.auth.backends.ModelBackend',
  )
 
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
-    }
-}
-
-SOCIALACCOUNT_FORMS = {'signup': 'mysite.forms.MyCustomSocialSignupForm'}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
