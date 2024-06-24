@@ -15,7 +15,7 @@ DATABASES = {
 
 ALLOWED_HOSTS = ['octopus-app-sqgq2.ondigitalocean.app', '127.0.0.1', '[::1]','foundry.open.build','firstcityfoundry.com','www.firstcityfoundry.com','firstnationfoundry.com']
 
-CSRF_TRUSTED_ORIGINS = ['octopus-app-sqgq2.ondigitalocean.app', '127.0.0.1', '[::1]','foundry.open.build','firstcityfoundry.com','www.firstcityfoundry.com','firstnationfoundry.com','https://firstcityfoundry.com','https://www.firstcityfoundry.com','https://firstnationfoundry.com']
+CSRF_TRUSTED_ORIGINS = ['http://octopus-app-sqgq2.ondigitalocean.app','https://firstnationfoundry.com','https://firstcityfoundry.com','https://www.firstcityfoundry.com','https://firstnationfoundry.com']
 
 try:
     from .local import *
