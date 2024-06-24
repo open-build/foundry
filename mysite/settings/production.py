@@ -15,6 +15,8 @@ DATABASES = {
 
 ALLOWED_HOSTS = ['octopus-app-sqgq2.ondigitalocean.app', '127.0.0.1', '[::1]','foundry.open.build','firstcityfoundry.com','www.firstcityfoundry.com','firstnationfoundry.com']
 
+CSRF_TRUSTED_ORIGINS = ['octopus-app-sqgq2.ondigitalocean.app', '127.0.0.1', '[::1]','foundry.open.build','firstcityfoundry.com','www.firstcityfoundry.com','firstnationfoundry.com']
+
 try:
     from .local import *
 except ImportError:
@@ -45,7 +47,7 @@ sentry_sdk.init(
 )
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"  # new
-DEFAULT_FROM_EMAIL = "help@open.build"
+DEFAULT_FROM_EMAIL = "help@buildly.io"
 EMAIL_HOST = "smtp.sendgrid.net"  # new
 EMAIL_HOST_USER = "apikey"  # new
 EMAIL_HOST_PASSWORD = os.environ.get("SENDGRID_PASSWORD")  # new
@@ -69,4 +71,4 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 AWS_DEFAULT_ACL = 'public-read'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
