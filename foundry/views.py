@@ -88,6 +88,27 @@ def evaluate_startup_idea(application):
     return review_text, originality_score, marketability_score, feasibility_score, completeness_score
 
 
+import os
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
+def send_email_notification(to_email):
+    message = Mail(
+        from_email='foundry@buildly.io',
+        to_emails=to_email,
+        subject='Buildly Foundry Submission Notification',
+        html_content='<strong>Thank you for submitting your startup to the Buildly and First City Foundry</strong>')
+    
+    try:
+        sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
+        response = sg.send(message)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+    except Exception as e:
+        print(str(e))
+
+
 def startup_application(request):
 
     if request.method == 'POST':
@@ -96,7 +117,9 @@ def startup_application(request):
             # Save form data here for each step
             # Redirect to the next step or completion page
             form = form.save()
-            
+             # Send email notification
+            emails = form.contact_email + 'team@buildly.io' 
+            send_email_notification(emails)  # Assuming 'email' is the field in your form containing the recipient's email address
             return redirect('startup_application')
             messages.success(request, 'Success, your Foundry application was Submitted!')
     else:

@@ -28,3 +28,4 @@ boto3
 wagtail==5.0.5
 puput==2.0.0
 openai
+sendgrid==6.6.0
