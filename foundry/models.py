@@ -328,7 +328,7 @@ class EvaluationScores(models.Model):
     def __str__(self):
         return self.startup_application
 
-class StartupApplicationAdmin(admin.ModelAdmin):
+class EvaluationScoresAdmin(admin.ModelAdmin):
     list_display = ('startup_application','feasibility_score')
     search_fields = ('startup_application','feasibility_score')
     list_filter = ('startup_application',)
