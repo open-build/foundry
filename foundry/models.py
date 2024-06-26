@@ -321,11 +321,11 @@ class EvaluationScores(models.Model):
     feasibility_score = models.FloatField()
     completeness_score = models.FloatField()
     summary = models.TextField(blank=True, null=True)   
-    advisor = models.ForeignKey(User, on_delete=models.CASCADE) # Advisor who evaluated the application
-    advisor_originality_score = models.FloatField()
-    advisor_marketability_score = models.FloatField()
-    advisor_feasibility_score = models.FloatField()
-    advisor_completeness_score = models.FloatField()
+    advisor = models.ForeignKey(User, on_delete=models.CASCADE, null=True) # Advisor who evaluated the application
+    advisor_originality_score = models.FloatField(blank=True, null=True)
+    advisor_marketability_score = models.FloatField(blank=True, null=True)
+    advisor_feasibility_score = models.FloatField(blank=True, null=True)
+    advisor_completeness_score = models.FloatField(blank=True, null=True)
 
     class Meta:
         verbose_name = "Evaluation Scores"
