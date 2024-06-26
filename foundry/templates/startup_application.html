@@ -22,6 +22,13 @@
             </ul>
 
     </div>
+
+    {% if messages %}
+      <div class="alert alert-success">
+        <strong>{{ messages }}</strong>
+      </div>
+    {% endif %}
+
     {% if form.errors %}
       <div class="help-block">
       {% for field in form %}

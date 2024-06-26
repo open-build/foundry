@@ -70,5 +70,7 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
 AWS_DEFAULT_ACL = 'public-read'
 
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

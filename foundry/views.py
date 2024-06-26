@@ -25,6 +25,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 
 import json
+from django.conf import settings
 
 def preprocess_application_data(application):
     """
@@ -46,52 +47,35 @@ def preprocess_application_data(application):
     ]
     return " ".join(details)
 
+import openai
+
 def evaluate_startup_idea(application):
     """
-    Evaluate the detailed startup application using Vertex AI.
+    Evaluate the detailed startup application using ChatGPT for scoring based on specific criteria.
     """
-    project_id = "your-gcp-project-id"
-    location = "us-central1"  # Adjust based on your model's location
-    model_id = "your-model-id"  # The ID of your deployed model on Vertex AI
-    
-    # Initialize Vertex AI client
-    client_options = {"api_endpoint": f"{location}-aiplatform.googleapis.com"}
-    client = aiplatform.gapic.PredictionServiceClient(client_options=client_options)
-    
-    model_name = client.model_path(project=project_id, location=location, model=model_id)
-    
-    # Prepare the application data for the AI model
+    openai.api_key = settings.OPENAI_API_KEY
+
+    # Define the application summary from preprocess_application_data
     application_summary = preprocess_application_data(application)
-    payload = {
-        "text_snippet": {
-            "content": application_summary,
-            "mime_type": "text/plain"
-        }
-    }
-    parameters_dict = {}
-    parameters = client.types.Value(string_value=json.dumps(parameters_dict))
-    
-    request = client.types.ExplainRequest(
-        name=model_name,
-        payload=payload,
-        parameters=parameters
+
+    # Generate the review using ChatGPT
+    response = openai.Completion.create(
+        engine="davinci", 
+        prompt=application_summary + "\nCriteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\nScore:",
+        max_tokens=50
     )
-    
-    # Send the request to Vertex AI
-    response = client.predict(name=model_name, instances=[payload], parameters=parameters)
-    
-    # Assume response includes scores and a summary; adjust as needed
-    # Placeholder logic for extracting scores and summary from the response
-    summary = "Extracted summary from AI response"  # Placeholder
-    originality_score = 0.85  # Placeholder
-    marketability_score = 0.75  # Placeholder
-    feasibility_score = 0.90  # Placeholder
-    completeness_score = 0.80  # Placeholder
-    
+
+    # Extract scores from the response
+    review_text = response.choices[0].text
+    originality_score = float(review_text.split('\n')[1].split(':')[-1])
+    marketability_score = float(review_text.split('\n')[2].split(':')[-1])
+    feasibility_score = float(review_text.split('\n')[3].split(':')[-1])
+    completeness_score = float(review_text.split('\n')[4].split(':')[-1])
+
     # Save evaluation scores
     EvaluationScores.objects.create(
         startup_application=application,
-        summary=summary,
+        summary=review_text,
         originality_score=originality_score,
         marketability_score=marketability_score,
         feasibility_score=feasibility_score,

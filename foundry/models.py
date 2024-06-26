@@ -245,6 +245,15 @@ class StartupApplication(models.Model):
         application_data = {
             'company_name': self.company_name,
             'business_description': self.business_description,
+            'legal_structure': self.legal_structure,
+            'ownership_structure': self.ownership_structure,
+            'annual_revenue': self.annual_revenue,
+            'funding_amount': self.funding_amount,
+            'outstanding_debt': self.outstanding_debt,
+            'development_stage': self.development_stage,
+            'market_demand_proof': self.market_demand_proof,
+            'marketing_strategy': self.marketing_strategy,
+            'competitive_advantage': self.competitive_advantage,
             # Include other relevant fields as needed
         }
 
@@ -312,3 +321,15 @@ class EvaluationScores(models.Model):
     feasibility_score = models.FloatField()
     completeness_score = models.FloatField()
 
+    class Meta:
+        verbose_name = "Evaluation Scores"
+        verbose_name_plural = "Evaluation Scores"
+
+    def __str__(self):
+        return self.startup_application
+
+class StartupApplicationAdmin(admin.ModelAdmin):
+    list_display = ('startup_application','feasibility_score')
+    search_fields = ('startup_application','feasibility_score')
+    list_filter = ('startup_application',)
+    display = 'Startup AI Scores'
