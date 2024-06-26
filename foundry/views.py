@@ -66,7 +66,10 @@ def evaluate_startup_idea(application):
     )
 
     # Extract scores from the response
-    review_text = response.choices[0].text
+    if response.choices[0].text:
+        review_text = response.choices[0].text
+    else:
+        review_text = "AI Failed to Summarize the Application. Please review manually."
     originality_score = float(review_text.split('\n')[1].split(':')[-1])
     marketability_score = float(review_text.split('\n')[2].split(':')[-1])
     feasibility_score = float(review_text.split('\n')[3].split(':')[-1])
@@ -81,6 +84,8 @@ def evaluate_startup_idea(application):
         feasibility_score=feasibility_score,
         completeness_score=completeness_score
     )
+    
+    return review_text, originality_score, marketability_score, feasibility_score, completeness_score
 
 
 def startup_application(request):
