@@ -320,6 +320,12 @@ class EvaluationScores(models.Model):
     marketability_score = models.FloatField()
     feasibility_score = models.FloatField()
     completeness_score = models.FloatField()
+    summary = models.TextField(blank=True, null=True)   
+    advisor = models.ForeignKey(User, on_delete=models.CASCADE) # Advisor who evaluated the application
+    advisor_originality_score = models.FloatField()
+    advisor_marketability_score = models.FloatField()
+    advisor_feasibility_score = models.FloatField()
+    advisor_completeness_score = models.FloatField()
 
     class Meta:
         verbose_name = "Evaluation Scores"
@@ -329,7 +335,7 @@ class EvaluationScores(models.Model):
         return self.startup_application
 
 class EvaluationScoresAdmin(admin.ModelAdmin):
-    list_display = ('startup_application','feasibility_score')
-    search_fields = ('startup_application','feasibility_score')
+    list_display = ('startup_application','feasibility_score','advisor','advisor_feasibility_score')
+    search_fields = ('startup_application','feasibility_score','advisor')
     list_filter = ('startup_application',)
     display = 'Startup AI Scores'
