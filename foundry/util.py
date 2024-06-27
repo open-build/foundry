@@ -1,6 +1,4 @@
 from openai import OpenAI
-
-client = OpenAI(api_key=settings.OPENAI_API_KEY)
 from django.http import JsonResponse, HttpRequest
 from django.views.decorators.http import require_http_methods
 from django.conf import settings
