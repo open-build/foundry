@@ -37,21 +37,28 @@ def evaluate_startup_idea(application):
     application_summary = preprocess_application_data(application)
 
     # Generate the review using ChatGPT
-    response = client.completions.create(model="text-davinci-003",
-    prompt="Review this startup and business idea and evaluate:" + application_summary + "\nCriteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\nScore:",
-    max_tokens=50)
+    response = client.completions.create(
+        model="gpt-3.5-turbo-instruct",
+        prompt=f"Please review and evaluate the startup and business idea below:\n\n{application_summary}\n\nEvaluation Criteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\n\nScore:",
+        max_tokens=50
+    )
 
     # Extract scores from the response
     if response.choices[0].text:
         review_text = response.choices[0].text
     else:
         review_text = "AI Failed to Summarize the Application. Please review manually."
-    originality_score = float(review_text.split('\n')[1].split(':')[-1])
-    marketability_score = float(review_text.split('\n')[2].split(':')[-1])
-    feasibility_score = float(review_text.split('\n')[3].split(':')[-1])
-    completeness_score = float(review_text.split('\n')[4].split(':')[-1])
+
+    # Extract individual scores from the review text
+    scores = review_text.split('\n')[1:]
+
+    originality_score = float(scores[0].split(':')[-1])
+    marketability_score = float(scores[1].split(':')[-1])
+    feasibility_score = float(scores[2].split(':')[-1])
+    completeness_score = float(scores[3].split(':')[-1])
 
     return review_text, originality_score, marketability_score, feasibility_score, completeness_score
+
 
 def analyze_ai_response(response):
     """
