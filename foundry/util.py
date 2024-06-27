@@ -37,7 +37,7 @@ def evaluate_startup_idea(application):
     application_summary = preprocess_application_data(application)
 
     # Generate the review using ChatGPT
-    response = client.completions.create(engine="davinci", 
+    response = client.completions.create(engine="davinci", model="text-davinci-003",
     prompt=application_summary + "\nCriteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\nScore:",
     max_tokens=50)
 
