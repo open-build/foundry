@@ -1,10 +1,14 @@
-import openai
+from openai import OpenAI
+
+client = OpenAI(api_key=settings.OPENAI_API_KEY)
 from django.http import JsonResponse, HttpRequest
 from django.views.decorators.http import require_http_methods
 from django.conf import settings
 import re
 
-import openai
+from openai import OpenAI
+
+client = OpenAI(api_key=settings.OPENAI_API_KEY)
 
 def preprocess_application_data(application):
     """
@@ -30,17 +34,14 @@ def evaluate_startup_idea(application):
     """
     Evaluate the detailed startup application using ChatGPT for scoring based on specific criteria.
     """
-    openai.api_key = settings.OPENAI_API_KEY
 
     # Define the application summary from preprocess_application_data
     application_summary = preprocess_application_data(application)
 
     # Generate the review using ChatGPT
-    response = openai.Completion.create(
-        engine="davinci", 
-        prompt=application_summary + "\nCriteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\nScore:",
-        max_tokens=50
-    )
+    response = client.completions.create(engine="davinci", 
+    prompt=application_summary + "\nCriteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\nScore:",
+    max_tokens=50)
 
     # Extract scores from the response
     if response.choices[0].text:
@@ -51,7 +52,7 @@ def evaluate_startup_idea(application):
     marketability_score = float(review_text.split('\n')[2].split(':')[-1])
     feasibility_score = float(review_text.split('\n')[3].split(':')[-1])
     completeness_score = float(review_text.split('\n')[4].split(':')[-1])
-    
+
     return review_text, originality_score, marketability_score, feasibility_score, completeness_score
 
 def analyze_ai_response(response):
@@ -74,7 +75,7 @@ def analyze_ai_response(response):
     # Regex patterns to find scores and summary in the response
     score_pattern = r"originality: (\d\.\d+)|marketability: (\d\.\d+)|feasibility: (\d\.\d+)|completeness: (\d\.\d+)"
     summary_pattern = r"summary: (.+)"
-    
+
     # Extract scores using regex
     matches = re.finditer(score_pattern, text, re.IGNORECASE)
     for match in matches:
