@@ -27,67 +27,6 @@ from django.core.exceptions import PermissionDenied
 import json
 from django.conf import settings
 
-def preprocess_application_data(application):
-    """
-    Preprocess the application data to create a comprehensive summary text.
-    Adjust the details as per your model's requirements.
-    """
-    details = [
-        application.business_description,
-        f"Legal Structure: {application.legal_structure}",
-        f"Ownership Structure: {application.ownership_structure}",
-        f"Annual Revenue: {application.annual_revenue}",
-        f"Funding Amount: {application.funding_amount}",
-        f"Outstanding Debt: {application.outstanding_debt}",
-        f"Development Stage: {application.development_stage}",
-        application.market_demand_proof,
-        application.marketing_strategy,
-        application.competitive_advantage,
-        # Add more fields as necessary
-    ]
-    return " ".join(details)
-
-import openai
-
-def evaluate_startup_idea(application):
-    """
-    Evaluate the detailed startup application using ChatGPT for scoring based on specific criteria.
-    """
-    openai.api_key = settings.OPENAI_API_KEY
-
-    # Define the application summary from preprocess_application_data
-    application_summary = preprocess_application_data(application)
-
-    # Generate the review using ChatGPT
-    response = openai.Completion.create(
-        engine="davinci", 
-        prompt=application_summary + "\nCriteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\nScore:",
-        max_tokens=50
-    )
-
-    # Extract scores from the response
-    if response.choices[0].text:
-        review_text = response.choices[0].text
-    else:
-        review_text = "AI Failed to Summarize the Application. Please review manually."
-    originality_score = float(review_text.split('\n')[1].split(':')[-1])
-    marketability_score = float(review_text.split('\n')[2].split(':')[-1])
-    feasibility_score = float(review_text.split('\n')[3].split(':')[-1])
-    completeness_score = float(review_text.split('\n')[4].split(':')[-1])
-
-    # Save evaluation scores
-    EvaluationScores.objects.create(
-        startup_application=application,
-        summary=review_text,
-        originality_score=originality_score,
-        marketability_score=marketability_score,
-        feasibility_score=feasibility_score,
-        completeness_score=completeness_score
-    )
-    
-    return review_text, originality_score, marketability_score, feasibility_score, completeness_score
-
-
 import os
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail

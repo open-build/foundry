@@ -3,37 +3,66 @@ from django.http import JsonResponse, HttpRequest
 from django.views.decorators.http import require_http_methods
 from django.conf import settings
 import re
+from .models import EvaluationScores
+import openai
 
+def preprocess_application_data(application):
+    """
+    Preprocess the application data to create a comprehensive summary text.
+    Adjust the details as per your model's requirements.
+    """
+    details = [
+        application.business_description,
+        f"Legal Structure: {application.legal_structure}",
+        f"Ownership Structure: {application.ownership_structure}",
+        f"Annual Revenue: {application.annual_revenue}",
+        f"Funding Amount: {application.funding_amount}",
+        f"Outstanding Debt: {application.outstanding_debt}",
+        f"Development Stage: {application.development_stage}",
+        application.market_demand_proof,
+        application.marketing_strategy,
+        application.competitive_advantage,
+        # Add more fields as necessary
+    ]
+    return " ".join(details)
 
-def evaluate_startup_application(startup_application: dict) -> dict:
-    # Ensure OpenAI API key is available
+def evaluate_startup_idea(application):
+    """
+    Evaluate the detailed startup application using ChatGPT for scoring based on specific criteria.
+    """
     openai.api_key = settings.OPENAI_API_KEY
+
+    # Define the application summary from preprocess_application_data
+    application_summary = preprocess_application_data(application)
+
+    # Generate the review using ChatGPT
+    response = openai.Completion.create(
+        engine="davinci", 
+        prompt=application_summary + "\nCriteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\nScore:",
+        max_tokens=50
+    )
+
+    # Extract scores from the response
+    if response.choices[0].text:
+        review_text = response.choices[0].text
+    else:
+        review_text = "AI Failed to Summarize the Application. Please review manually."
+    originality_score = float(review_text.split('\n')[1].split(':')[-1])
+    marketability_score = float(review_text.split('\n')[2].split(':')[-1])
+    feasibility_score = float(review_text.split('\n')[3].split(':')[-1])
+    completeness_score = float(review_text.split('\n')[4].split(':')[-1])
+
+    # Save evaluation scores
+    EvaluationScores.objects.create(
+        startup_application=application,
+        summary=review_text,
+        originality_score=originality_score,
+        marketability_score=marketability_score,
+        feasibility_score=feasibility_score,
+        completeness_score=completeness_score
+    )
     
-    # Send description to OpenAI API for analysis
-    try:
-        response = openai.Completion.create(
-            engine="text-davinci-003",  # Choose an appropriate engine for your task
-            prompt=f"Provide an evaluation of this startup idea: {startup_application} give me a score based on originality, marketability, feasibility, and completeness as well as a summary.",
-            max_tokens=1024,  # Adjust based on needs
-            n=1,
-            stop=None,
-            temperature=0.5
-        )
-        
-        # Simulate analysis of the response to calculate scores
-        # Replace this with actual analysis logic based on the response
-        try:
-            analysis = analyze_ai_response(response)
-        except Exception as e:
-            # Handle the error here
-            print(f"An error occurred: {e}")
-            # Other error handling code if 
-        
-        # Return calculated scores
-        return JsonResponse(analysis)
-        
-    except Exception as e:
-        return JsonResponse({'error': str(e)}, status=500)
+    return review_text, originality_score, marketability_score, feasibility_score, completeness_score
 
 def analyze_ai_response(response):
     """

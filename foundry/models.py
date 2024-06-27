@@ -13,7 +13,7 @@ from wagtail.models import Page
 from modelcluster.fields import ParentalKey
 
 from django.contrib.auth.models import User
-from .views import evaluate_startup_application
+from .util import evaluate_startup_application
 
 
 class HomePage(Page):

@@ -35,7 +35,7 @@ class StartupApplicationForm(forms.ModelForm):
             # get rid of extra keywords before calling super
             self.request = kwargs.pop('request')
             # call super to get form fields
-            super(CompanyForm, self).__init__(*args, **kwargs)
+            super(StartupApplicationForm, self).__init__(*args, **kwargs)
             self.helper.form_id = 'Company_update_form'
             self.helper.form_class = 'form-horizontal'
             self.helper.label_class = 'col-sm-2'
@@ -50,7 +50,7 @@ class StartupApplicationForm(forms.ModelForm):
                 TabHolder(
                     Tab('Company Information',
                         Fieldset('',
-                            'company_name','business_description','legal_structure','pitch_deck'
+                            'company_name','contact_email','business_description','legal_structure','pitch_deck'
                             ),
                     ),
                     
@@ -69,9 +69,9 @@ class StartupApplicationForm(forms.ModelForm):
                             ),
                     ),
                     
-                    Tab('Compliance',
+                    Tab('Progress and Future Plans',
                         Fieldset('',
-                                    'regulatory_compliance','legal_issues','social_impact','revenue_model',
+                                    'social_impact','revenue_model',
                                     'pricing_strategy','competitive_advantage','milestones_achievements','references_recommendations'
                             ),
                     ),
