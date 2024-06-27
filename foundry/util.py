@@ -12,16 +12,16 @@ def preprocess_application_data(application):
     Adjust the details as per your model's requirements.
     """
     details = [
-        application.business_description,
-        f"Legal Structure: {application.legal_structure}",
-        f"Ownership Structure: {application.ownership_structure}",
-        f"Annual Revenue: {application.annual_revenue}",
-        f"Funding Amount: {application.funding_amount}",
-        f"Outstanding Debt: {application.outstanding_debt}",
-        f"Development Stage: {application.development_stage}",
-        application.market_demand_proof,
-        application.marketing_strategy,
-        application.competitive_advantage,
+        f"Business Description: {application['business_description']}",
+        f"Legal Structure: {application['legal_structure']}",
+        f"Ownership Structure: {application['ownership_structure']}",
+        f"Annual Revenue: {application['annual_revenue']}",
+        f"Funding Amount: {application['funding_amount']}",
+        f"Outstanding Debt: {application['outstanding_debt']}",
+        f"Development Stage: {application['development_stage']}",
+        f"Market Demand Proof: {application['market_demand_proof']}",
+        f"Marketing Strategy: {application['marketing_strategy']}",
+        f"Competitive Advantage: {application['competitive_advantage']}",
         # Add more fields as necessary
     ]
     return " ".join(details)
