@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpRequest
 from django.views.decorators.http import require_http_methods
 from django.conf import settings
 import re
-from .models import EvaluationScores
+
 import openai
 
 def preprocess_application_data(application):
