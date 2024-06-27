@@ -11,6 +11,9 @@ from openai import OpenAI
 
 client = OpenAI(api_key=settings.OPENAI_API_KEY)
 
+class RateLimitError(Exception):
+    pass
+
 def preprocess_application_data(application):
     """
     Preprocess the application data to create a comprehensive summary text.
