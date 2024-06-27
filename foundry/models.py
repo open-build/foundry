@@ -268,6 +268,16 @@ class StartupApplication(models.Model):
         self.feasibility_score = evaluation_results.get('feasibility_score', 0.0)
         self.completeness_score = evaluation_results.get('completeness_score', 0.0)
         self.summary = evaluation_results.get('summary', '')
+        
+        # Save evaluation scores
+        EvaluationScores.objects.create(
+            startup_application=self.id,
+            summary = evaluation_results.get('summary', ''),
+            originality_score = evaluation_results.get('originality_score', 0.0),
+            marketability_score = evaluation_results.get('marketability_score', 0.0),
+            feasibility_score = evaluation_results.get('feasibility_score', 0.0),
+            completeness_score = evaluation_results.get('completeness_score', 0.0)
+        )
 
         super().save(*args, **kwargs)  # Call the "real" save() method.
 

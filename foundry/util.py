@@ -51,16 +51,6 @@ def evaluate_startup_idea(application):
     marketability_score = float(review_text.split('\n')[2].split(':')[-1])
     feasibility_score = float(review_text.split('\n')[3].split(':')[-1])
     completeness_score = float(review_text.split('\n')[4].split(':')[-1])
-
-    # Save evaluation scores
-    EvaluationScores.objects.create(
-        startup_application=application,
-        summary=review_text,
-        originality_score=originality_score,
-        marketability_score=marketability_score,
-        feasibility_score=feasibility_score,
-        completeness_score=completeness_score
-    )
     
     return review_text, originality_score, marketability_score, feasibility_score, completeness_score
 
