@@ -64,10 +64,8 @@ def evaluate_startup_idea(application):
         feasibility_score = scores[2].split(':')[-1].strip() if len(scores) > 2 else '0'
         completeness_score = scores[3].split(':')[-1].strip() if len(scores) > 3 else '0'
 
-        raise RateLimitError("You exceeded your current quota")
-    except RateLimitError as e: 
+    except Exception as e: 
         logging.error(f"Rate Limit Error: {str(e)}")
-        
         scores = "0"
 
         originality_score = "0"

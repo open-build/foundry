@@ -268,6 +268,17 @@ class StartupApplication(models.Model):
         self.feasibility_score = evaluation_results[3]
         self.completeness_score = evaluation_results[4]
         self.summary = evaluation_results[0]
+        
+        if not self.pk:  # self.pk will be None for new instances
+            # Save evaluation scores
+            EvaluationScores.objects.create(
+                startup_application=self.pk,
+                summary = self.summary,
+                originality_score = self.originality_score,
+                marketability_score = self.marketability_score,
+                feasibility_score = self.feasibility_score,
+                completeness_score = self.completeness_score,
+            )
 
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
