@@ -234,10 +234,10 @@ class StartupApplication(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     # Evaluation fields
-    originality_score = models.FloatField(default=0.0, null=True, blank=True)
-    marketability_score = models.FloatField(default=0.0, null=True, blank=True)
-    feasibility_score = models.FloatField(default=0.0, null=True, blank=True)
-    completeness_score = models.FloatField(default=0.0, null=True, blank=True)
+    originality_score = models.TextField(null=True, blank=True)
+    marketability_score = models.TextField(null=True, blank=True)
+    feasibility_score = models.TextField(null=True, blank=True)
+    completeness_score = models.TextField(null=True, blank=True)
     summary = models.TextField(blank=True, null=True)
 
     # Override the save method to include evaluation logic
@@ -327,10 +327,10 @@ class SuccessData(models.Model):
 
 class EvaluationScores(models.Model):
     startup_application = models.OneToOneField(StartupApplication, on_delete=models.CASCADE)
-    originality_score = models.FloatField()
-    marketability_score = models.FloatField()
-    feasibility_score = models.FloatField()
-    completeness_score = models.FloatField()
+    originality_score = models.TextField(null=True, blank=True)
+    marketability_score = models.TextField(null=True, blank=True)
+    feasibility_score = models.TextField(null=True, blank=True)
+    completeness_score = models.TextField(null=True, blank=True)
     summary = models.TextField(blank=True, null=True)   
     advisor = models.ForeignKey(User, on_delete=models.CASCADE, null=True) # Advisor who evaluated the application
     advisor_originality_score = models.FloatField(blank=True, null=True)

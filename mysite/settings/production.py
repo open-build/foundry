@@ -73,4 +73,4 @@ AWS_DEFAULT_ACL = 'public-read'
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True

@@ -59,10 +59,10 @@ def evaluate_startup_idea(application):
         # Extract individual scores from the score text
         scores = score_text.split('\n')[1:]
 
-        originality_score = float(scores[0].split(':')[-1])
-        marketability_score = float(scores[1].split(':')[-1])
-        feasibility_score = float(scores[2].split(':')[-1])
-        completeness_score = float(scores[3].split(':')[-1])
+        originality_score = scores[0].split(':')[-1]
+        marketability_score = scores[1].split(':')[-1]
+        feasibility_score = scores[2].split(':')[-1]
+        completeness_score = scores[3].split(':')[-1]
 
         raise RateLimitError("You exceeded your current quota")
     except RateLimitError as e: 

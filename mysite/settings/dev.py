@@ -31,3 +31,5 @@ try:
     from .local import *
 except ImportError:
     pass
+
+OPENAI_API_KEY = "asdfghjkl1234567890"
