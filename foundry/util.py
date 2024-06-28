@@ -47,7 +47,7 @@ def evaluate_startup_idea(application):
         response = client.completions.create(
             model="gpt-3.5-turbo-instruct",
             prompt=f"Please review and evaluate the startup and business idea below:\n\n{application_summary}\n\nEvaluation Criteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\n\nPlease provide your summary text of how good or bad the idea is and individual numeric scores for each criterion out of 100 each:\n\nOriginality Score:\nMarketability Score:\nFeasibility Score:\nCompleteness Score:",
-            max_tokens=100  # Increase the max_tokens value to ensure scores are included in the response
+            max_tokens=125  # Increase the max_tokens value to ensure scores are included in the response
         )
 
         # Extract scores from the response
@@ -59,10 +59,10 @@ def evaluate_startup_idea(application):
         # Extract individual scores from the score text
         scores = score_text.split('\n')[2:]  # Adjust index to skip the summary line
 
-        originality_score = scores[0].split(':')[-1].strip()
-        marketability_score = scores[1].split(':')[-1].strip()
-        feasibility_score = scores[2].split(':')[-1].strip()
-        completeness_score = scores[3].split(':')[-1].strip()
+        originality_score = scores[0].split(':')[-1].strip() if len(scores) > 0 else '0'
+        marketability_score = scores[1].split(':')[-1].strip() if len(scores) > 1 else '0'
+        feasibility_score = scores[2].split(':')[-1].strip() if len(scores) > 2 else '0'
+        completeness_score = scores[3].split(':')[-1].strip() if len(scores) > 3 else '0'
 
         raise RateLimitError("You exceeded your current quota")
     except RateLimitError as e: 
