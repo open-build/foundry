@@ -46,23 +46,23 @@ def evaluate_startup_idea(application):
         # Generate the review using ChatGPT
         response = client.completions.create(
             model="gpt-3.5-turbo-instruct",
-            prompt=f"Please review and evaluate the startup and business idea below:\n\n{application_summary}\n\nEvaluation Criteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\n\nPlease provide a summary text and individual numeric scores for each criterion:\n\nOriginality Score:\nMarketability Score:\nFeasibility Score:\nCompleteness Score:",
-            max_tokens=50
+            prompt=f"Please review and evaluate the startup and business idea below:\n\n{application_summary}\n\nEvaluation Criteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\n\nPlease provide your summary text of how good or bad the idea is and individual numeric scores for each criterion out of 100 each:\n\nOriginality Score:\nMarketability Score:\nFeasibility Score:\nCompleteness Score:",
+            max_tokens=100  # Increase the max_tokens value to ensure scores are included in the response
         )
 
         # Extract scores from the response
-        if response.choices[0].text:
-            score_text = response.choices[0].text
+        if response.choices[0].logprobs:
+            score_text = response.choices[0].logprobs.token_text
         else:
             score_text = "AI Failed to Provide Scores. Please provide scores manually."
 
         # Extract individual scores from the score text
-        scores = score_text.split('\n')[1:]
+        scores = score_text.split('\n')[2:]  # Adjust index to skip the summary line
 
-        originality_score = scores[0].split(':')[-1]
-        marketability_score = scores[1].split(':')[-1]
-        feasibility_score = scores[2].split(':')[-1]
-        completeness_score = scores[3].split(':')[-1]
+        originality_score = scores[0].split(':')[-1].strip()
+        marketability_score = scores[1].split(':')[-1].strip()
+        feasibility_score = scores[2].split(':')[-1].strip()
+        completeness_score = scores[3].split(':')[-1].strip()
 
         raise RateLimitError("You exceeded your current quota")
     except RateLimitError as e: 
