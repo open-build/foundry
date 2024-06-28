@@ -263,11 +263,11 @@ class StartupApplication(models.Model):
         evaluation_results = evaluate_startup_idea(application_data)
         # review_text, originality_score, marketability_score, feasibility_score, completeness_score
         # Update the instance with evaluation results
-        self.originality_score = evaluation_results['originality_score']
-        self.marketability_score = evaluation_results['marketability_score']
-        self.feasibility_score = evaluation_results['feasibility_score']
-        self.completeness_score = evaluation_results['completeness_score']
-        self.summary = evaluation_results['review_text']
+        self.originality_score = evaluation_results[1]
+        self.marketability_score = evaluation_results[2]
+        self.feasibility_score = evaluation_results[3]
+        self.completeness_score = evaluation_results[4]
+        self.summary = evaluation_results[0]
         
         # Save evaluation scores
         EvaluationScores.objects.create(
