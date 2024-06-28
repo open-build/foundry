@@ -55,7 +55,7 @@ def evaluate_startup_idea(application):
         if response.choices[0].logprobs:
             score_text = response.choices[0].message
         else:
-            score_text = "AI Failed to Provide Scores. Please provide scores manually."
+            score_text = response.choices[0].message
         
         review_text = score_text.split('\n')[0]  # Extract the summary text from the response
 
