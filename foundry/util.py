@@ -51,8 +51,8 @@ def evaluate_startup_idea(application):
         )
 
         # Extract scores from the response
-        if response.choices[0].logprobs:
-            score_text = response.choices[0].logprobs.token_text
+        if response.choices[0].message.content:
+            score_text = response.choices[0].message.content
         else:
             score_text = "AI Failed to Provide Scores. Please provide scores manually."
         
