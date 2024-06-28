@@ -47,12 +47,13 @@ def evaluate_startup_idea(application):
         response = client.completions.create(
             model="gpt-3.5-turbo-instruct",
             prompt=f"Please review and evaluate the startup and business idea below:\n\n{application_summary}\n\nEvaluation Criteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\n\nPlease provide your summary text of how good or bad the idea is and individual numeric scores for each criterion out of 100 each:\n\nOriginality Score:\nMarketability Score:\nFeasibility Score:\nCompleteness Score:",
+            logprobs=True,
             max_tokens=125  # Increase the max_tokens value to ensure scores are included in the response
         )
 
         # Extract scores from the response
-        if response.choices[0].message.content:
-            score_text = response.choices[0].message.content
+        if response.choices[0].logprobs:
+            score_text = response.choices[0].message
         else:
             score_text = "AI Failed to Provide Scores. Please provide scores manually."
         
