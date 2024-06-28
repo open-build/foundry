@@ -261,22 +261,22 @@ class StartupApplication(models.Model):
         # Assume `analyze_ai_response` is imported and ready to use
         # and it now accepts a dictionary and returns a dictionary with scores and summary
         evaluation_results = evaluate_startup_idea(application_data)
-
+        # review_text, originality_score, marketability_score, feasibility_score, completeness_score
         # Update the instance with evaluation results
-        self.originality_score = evaluation_results.get('originality_score', 0.0)
-        self.marketability_score = evaluation_results.get('marketability_score', 0.0)
-        self.feasibility_score = evaluation_results.get('feasibility_score', 0.0)
-        self.completeness_score = evaluation_results.get('completeness_score', 0.0)
-        self.summary = evaluation_results.get('summary', '')
+        self.originality_score = evaluation_results['originality_score']
+        self.marketability_score = evaluation_results['marketability_score']
+        self.feasibility_score = evaluation_results['feasibility_score']
+        self.completeness_score = evaluation_results['completeness_score']
+        self.summary = evaluation_results['review_text']
         
         # Save evaluation scores
         EvaluationScores.objects.create(
             startup_application=self.id,
-            summary = evaluation_results.get('summary', ''),
-            originality_score = evaluation_results.get('originality_score', 0.0),
-            marketability_score = evaluation_results.get('marketability_score', 0.0),
-            feasibility_score = evaluation_results.get('feasibility_score', 0.0),
-            completeness_score = evaluation_results.get('completeness_score', 0.0)
+            summary = self.summary
+            originality_score = self.originality_score
+            marketability_score = self.marketability_score
+            feasibility_score = self.feasibility_score,
+            completeness_score = self.completeness_score
         )
 
         super().save(*args, **kwargs)  # Call the "real" save() method.
