@@ -273,6 +273,7 @@ class StartupApplication(models.Model):
             # Save evaluation scores
             EvaluationScores.objects.create(
                 startup_application=self.pk,
+                startup_application_id=self.pk,
                 summary = self.summary,
                 originality_score = self.originality_score,
                 marketability_score = self.marketability_score,
