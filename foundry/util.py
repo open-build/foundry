@@ -46,18 +46,18 @@ def evaluate_startup_idea(application):
         # Generate the review using ChatGPT
         response = client.completions.create(
             model="gpt-3.5-turbo-instruct",
-            prompt=f"Please review and evaluate the startup and business idea below:\n\n{application_summary}\n\nEvaluation Criteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\n\nScore:",
+            prompt=f"Please review and evaluate the startup and business idea below:\n\n{application_summary}\n\nEvaluation Criteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\n\nPlease provide a summary text and individual numeric scores for each criterion:\n\nOriginality Score:\nMarketability Score:\nFeasibility Score:\nCompleteness Score:",
             max_tokens=50
         )
 
         # Extract scores from the response
         if response.choices[0].text:
-            review_text = response.choices[0].text
+            score_text = response.choices[0].text
         else:
-            review_text = "AI Failed to Summarize the Application. Please review manually."
+            score_text = "AI Failed to Provide Scores. Please provide scores manually."
 
-        # Extract individual scores from the review text
-        scores = review_text.split('\n')[1:]
+        # Extract individual scores from the score text
+        scores = score_text.split('\n')[1:]
 
         originality_score = float(scores[0].split(':')[-1])
         marketability_score = float(scores[1].split(':')[-1])
