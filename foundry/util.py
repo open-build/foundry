@@ -55,6 +55,8 @@ def evaluate_startup_idea(application):
             score_text = response.choices[0].logprobs.token_text
         else:
             score_text = "AI Failed to Provide Scores. Please provide scores manually."
+        
+        review_text = score_text.split('\n')[0]  # Extract the summary text from the response
 
         # Extract individual scores from the score text
         scores = score_text.split('\n')[2:]  # Adjust index to skip the summary line
