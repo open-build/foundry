@@ -22,7 +22,7 @@ class StartupApplicationForm(forms.ModelForm):
     class Meta:
         model = StartupApplication
 
-        exclude = ['create_date','edit_date', 'originality_score', 'marketability_score', 'feasibility_score', 'completeness_score', 'summary']
+        exclude = ['support_requests','alignment_with_mission','create_date','edit_date', 'originality_score', 'marketability_score', 'feasibility_score', 'completeness_score', 'summary']
         widgets = {
             'company_name': forms.TextInput(attrs={'class': 'form-control'}),
             'business_description': forms.Textarea(attrs={'class': 'form-control'}),
