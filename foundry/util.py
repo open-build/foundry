@@ -50,12 +50,14 @@ def evaluate_startup_idea(application):
             logprobs=True,
             max_tokens=125  # Increase the max_tokens value to ensure scores are included in the response
         )
-
+        
         # Extract scores from the response
         if response.choices[0].logprobs:
             score_text = response.choices[0].message
         else:
             score_text = response.choices[0].message
+        
+        logging.info(f"openAI response: {str(score_text)}")
         
         review_text = score_text.split('\n')[0]  # Extract the summary text from the response
 
@@ -92,6 +94,7 @@ def evaluate_startup_idea(application):
             print(response.headers)
         except Exception as e:
             print(str(e))
+            
     return review_text, originality_score, marketability_score, feasibility_score, completeness_score
 
 def analyze_ai_response(response):

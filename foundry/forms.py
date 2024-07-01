@@ -15,7 +15,7 @@ from .models import StartupApplication
 
 class StartupApplicationForm(forms.ModelForm):
     pitch_deck = forms.FileField(required=False,
-        label="Upload a file",
+        label="Upload a Pitch Deck",
         help_text="Select a PDF or DOC file to upload.",
     )
     
@@ -36,7 +36,7 @@ class StartupApplicationForm(forms.ModelForm):
             self.request = kwargs.pop('request')
             # call super to get form fields
             super(StartupApplicationForm, self).__init__(*args, **kwargs)
-            self.helper.form_id = 'Company_update_form'
+            self.helper.form_id = 'company_update_form'
             self.helper.form_class = 'form-horizontal'
             self.helper.label_class = 'col-sm-2'
             self.helper.field_class = 'col-sm-6'
@@ -53,7 +53,6 @@ class StartupApplicationForm(forms.ModelForm):
                             'company_name','contact_email','business_description','legal_structure','pitch_deck'
                             ),
                     ),
-                    
                     
                     Tab('Founders',
                         Fieldset('',
@@ -88,12 +87,11 @@ class StartupApplicationForm(forms.ModelForm):
             super(StartupApplicationForm, self).__init__(*args, **kwargs)
 
 
-
-
 class FounderSignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+
 
 # Company Forms
 class CompanyForm(forms.ModelForm):
