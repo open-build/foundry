@@ -208,3 +208,8 @@ PAYPAL_TEST = True
 SITE_ID = 1
 
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY') # Replace with your OpenAI API key
+
+LOGGING = {
+    "version": 1,  # the dictConfig format version
+    "disable_existing_loggers": False,  # retain the default loggers
+}
