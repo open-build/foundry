@@ -174,7 +174,7 @@ class StartupApplication(models.Model):
     contact_email = models.CharField(max_length=255)
     business_description = models.TextField()
     legal_structure = models.CharField(max_length=50,choices=LEGAL)
-    ownership_structure = models.CharField(max_length=50)
+    ownership_structure = models.CharField(max_length=50,null=True, blank=True)
     pitch_deck = models.FileField(null=True, blank=True, help_text="Pitch Deck Upload")
 
     # Financial Information
