@@ -54,10 +54,11 @@ def evaluate_startup_idea(application):
         )
 
         print(completion.choices[0].message.content)
+        score_text = completion.choices[0].message.content
         
        # Extract scores from the response
         if completion.choices[0].message:
-            score_text = completion.choices[0].message.content
+            
             # Extract individual scores from the score text
             score_lines = score_text.split('\n')
 
@@ -89,7 +90,6 @@ def evaluate_startup_idea(application):
         marketability_score = "0"
         feasibility_score = "0"
         completeness_score = "0"
-        review_text = "AI Failed to Summarize the Application. Please review manually."
         
         # Send an email using SendGrid API
         message = Mail(
@@ -107,7 +107,7 @@ def evaluate_startup_idea(application):
         except Exception as e:
             print(str(e))
             
-    return review_text, originality_score, marketability_score, feasibility_score, completeness_score
+    return score_text, originality_score, marketability_score, feasibility_score, completeness_score
 
 def analyze_ai_response(response):
     """
