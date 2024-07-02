@@ -63,10 +63,10 @@ def evaluate_startup_idea(application):
         
         logging.info(f"openAI response: {str(score_text)}")
         
-        review_text = score_text.split('\n')[0]  # Extract the summary text from the response
+        review_text = str(score_text.content)  # Extract the summary text from the response
 
         # Extract individual scores from the score text
-        scores = score_text.split('\n')[2:]  # Adjust index to skip the summary line
+        scores = review_text.split('\n')[2:]  # Adjust index to skip the summary line
 
         originality_score = scores[0].split(':')[-1].strip() if len(scores) > 0 else '0'
         marketability_score = scores[1].split(':')[-1].strip() if len(scores) > 1 else '0'
