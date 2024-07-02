@@ -53,11 +53,11 @@ def evaluate_startup_idea(application):
         ]
         )
 
-        print(completion.choices[0].message['content'])
+        print(completion.choices[0].message.content)
         
         # Extract scores from the response
         if completion.choices[0].message:
-            score_text = completion.choices[0].message['content']
+            score_text = completion.choices[0].message.content
         else:
             score_text = "AI Failed to Summarize the Application. Please review manually."
         
