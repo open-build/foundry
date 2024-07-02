@@ -48,8 +48,8 @@ def evaluate_startup_idea(application):
         completion = client.chat.completions.create(
         model="gpt-4",
         messages=[
-            {"role": "system", "content": f"Please review and evaluate the startup and business idea here:\n\n{application_summary}\n\nEvaluation Criteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\n\nPlease provide your summary text of how good or bad the idea is and individual numeric scores for each criterion out of 100 each:\n\nOriginality Score:\nMarketability Score:\nFeasibility Score:\nCompleteness Score:"},
-            {"role": "user", "content": application_summary}
+            {"role": "system", "content": f"Please review and evaluate the startup and business idea: Evaluation Criteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\n\nPlease provide your summary text of how good or bad the idea is and individual numeric scores for each criterion out of 100 each:\n\nOriginality Score:\nMarketability Score:\nFeasibility Score:\nCompleteness Score:"},
+            {"role": "system", "content": application_summary}
         ]
         )
 
