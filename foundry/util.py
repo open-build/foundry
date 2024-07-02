@@ -55,23 +55,31 @@ def evaluate_startup_idea(application):
 
         print(completion.choices[0].message.content)
         
-        # Extract scores from the response
+       # Extract scores from the response
         if completion.choices[0].message:
             score_text = completion.choices[0].message.content
+            # Extract individual scores from the score text
+            score_lines = score_text.split('\n')
+
+            # Find and extract the scores
+            scores = {}
+            for line in score_lines:
+                if "Score" in line:
+                    criterion, score = line.split(":")
+                    scores[criterion.strip()] = int(score.split("/")[0])
+
+            originality_score = scores.get('Originality Score', 0)
+            marketability_score = scores.get('Marketability Score', 0)
+            feasibility_score = scores.get('Feasibility Score', 0)
+            completeness_score = scores.get('Completeness Score', 0)
         else:
             score_text = "AI Failed to Summarize the Application. Please review manually."
-        
+            originality_score = 0
+            marketability_score = 0
+            feasibility_score = 0
+            completeness_score = 0
+
         logging.info(f"openAI response: {score_text}")
-        
-        review_text = score_text  # Extract the summary text from the response
-
-        # Extract individual scores from the score text
-        scores = review_text.split('\n')[2:]  # Adjust index to skip the summary line
-
-        originality_score = scores[0].split(':')[-1].strip() if len(scores) > 0 else '0'
-        marketability_score = scores[1].split(':')[-1].strip() if len(scores) > 1 else '0'
-        feasibility_score = scores[2].split(':')[-1].strip() if len(scores) > 2 else '0'
-        completeness_score = scores[3].split(':')[-1].strip() if len(scores) > 3 else '0'
 
     except Exception as e: 
         logging.error(f"Rate Limit Error: {str(e)}")
