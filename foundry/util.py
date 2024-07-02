@@ -46,24 +46,24 @@ def evaluate_startup_idea(application):
         # Generate the review using ChatGPT
 
         completion = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4",
         messages=[
-            {"role": "system", "content": "Please review and evaluate the startup and business idea below:\n\n{application_summary}\n\nEvaluation Criteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\n\nPlease provide your summary text of how good or bad the idea is and individual numeric scores for each criterion out of 100 each:\n\nOriginality Score:\nMarketability Score:\nFeasibility Score:\nCompleteness Score:"},
-            {"role": "user", "content": "\n\n{application_summary}\n\n"}
+            {"role": "system", "content": f"Please review and evaluate the startup and business idea here:\n\n{application_summary}\n\nEvaluation Criteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\n\nPlease provide your summary text of how good or bad the idea is and individual numeric scores for each criterion out of 100 each:\n\nOriginality Score:\nMarketability Score:\nFeasibility Score:\nCompleteness Score:"},
+            {"role": "user", "content": application_summary}
         ]
         )
 
-        print(completion.choices[0].message)
+        print(completion.choices[0].message['content'])
         
         # Extract scores from the response
         if completion.choices[0].message:
-            score_text = completion.choices[0].message
+            score_text = completion.choices[0].message['content']
         else:
             score_text = "AI Failed to Summarize the Application. Please review manually."
         
-        logging.info(f"openAI response: {str(score_text)}")
+        logging.info(f"openAI response: {score_text}")
         
-        review_text = str(score_text.content)  # Extract the summary text from the response
+        review_text = score_text  # Extract the summary text from the response
 
         # Extract individual scores from the score text
         scores = review_text.split('\n')[2:]  # Adjust index to skip the summary line
