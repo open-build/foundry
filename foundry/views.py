@@ -120,7 +120,7 @@ class CompanyList(ListView,LoginRequiredMixin):
 
     def get(self, request, *args, **kwargs):
 
-        getHunts = Company.objects.all().filter(owner=request.user)
+        getHunts = Company.objects.all()
 
         return render(request, self.template_name, {'getHunts': getHunts,})
 
