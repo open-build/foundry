@@ -59,8 +59,8 @@ def startup_application(request):
              # Send email notification
             emails = form.contact_email + 'team@buildly.io' 
             send_email_notification(emails)  # Assuming 'email' is the field in your form containing the recipient's email address
-            return redirect('startup_application')
             messages.success(request, 'Success, your Foundry application was Submitted!')
+            return redirect('startup_application')
     else:
         form =  StartupApplicationForm()
 

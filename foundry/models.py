@@ -14,6 +14,7 @@ from modelcluster.fields import ParentalKey
 
 from django.contrib.auth.models import User
 from .util import evaluate_startup_idea
+import threading
 
 
 class HomePage(Page):
@@ -239,37 +240,50 @@ class StartupApplication(models.Model):
     feasibility_score = models.TextField(null=True, blank=True)
     completeness_score = models.TextField(null=True, blank=True)
     summary = models.TextField(blank=True, null=True)
+    gemini_originality_score = models.TextField(null=True, blank=True)
+    gemini_marketability_score = models.TextField(null=True, blank=True)
+    gemini_feasibility_score = models.TextField(null=True, blank=True)
+    gemini_completeness_score = models.TextField(null=True, blank=True)
+    gemini_summary = models.TextField(blank=True, null=True)
 
     # Override the save method to include evaluation logic
     def save(self, *args, **kwargs):
         # Convert the instance to a dictionary suitable for analysis
-        application_data = {
-            'company_name': self.company_name,
-            'business_description': self.business_description,
-            'legal_structure': self.legal_structure,
-            'ownership_structure': self.ownership_structure,
-            'annual_revenue': self.annual_revenue,
-            'funding_amount': self.funding_amount,
-            'outstanding_debt': self.outstanding_debt,
-            'development_stage': self.development_stage,
-            'market_demand_proof': self.market_demand_proof,
-            'marketing_strategy': self.marketing_strategy,
-            'competitive_advantage': self.competitive_advantage,
-            # Include other relevant fields as needed
-        }
+        def evaluate_startup_idea_background(instance, application_data):
+            evaluation_results = evaluate_startup_idea(application_data)
+            instance.originality_score = evaluation_results[1]
+            instance.marketability_score = evaluation_results[2]
+            instance.feasibility_score = evaluation_results[3]
+            instance.completeness_score = evaluation_results[4]
+            instance.summary = evaluation_results[0]
+            instance.gemini_originality_score = evaluation_results[6]
+            instance.gemini_marketability_score = evaluation_results[7]
+            instance.gemini_feasibility_score = evaluation_results[8]
+            instance.gemini_completeness_score = evaluation_results[9]
+            instance.gemini_summary = evaluation_results[5]
+            instance.save()
 
-        # Assume `analyze_ai_response` is imported and ready to use
-        # and it now accepts a dictionary and returns a dictionary with scores and summary
-        # evaluation_results = evaluate_startup_idea(application_data)
-        # review_text, originality_score, marketability_score, feasibility_score, completeness_score
-        # Update the instance with evaluation results
-        # self.originality_score = evaluation_results[1]
-        # self.marketability_score = evaluation_results[2]
-        # self.feasibility_score = evaluation_results[3]
-        # self.completeness_score = evaluation_results[4]
-        # self.summary = evaluation_results[0]
+        def save(self, *args, **kwargs):
+            application_data = {
+                'company_name': self.company_name,
+                'business_description': self.business_description,
+                'legal_structure': self.legal_structure,
+                'ownership_structure': self.ownership_structure,
+                'annual_revenue': self.annual_revenue,
+                'funding_amount': self.funding_amount,
+                'outstanding_debt': self.outstanding_debt,
+                'development_stage': self.development_stage,
+                'market_demand_proof': self.market_demand_proof,
+                'marketing_strategy': self.marketing_strategy,
+                'competitive_advantage': self.competitive_advantage,
+                # Include other relevant fields as needed
+            }
 
-        super().save(*args, **kwargs)  # Call the "real" save() method.
+            # Create a new thread to evaluate the startup idea in the background
+            threading.Thread(target=evaluate_startup_idea_background, args=(self, application_data)).start()
+
+            # Save the instance without waiting for the evaluation to complete
+            super().save(*args, **kwargs)
 
 
     class Meta:
