@@ -6,7 +6,7 @@ from import_export import resources
 class StartupApplicationResource(resources.ModelResource):
 
     class Meta:
-        model = StartupApplication  # or 'core.Book'
+        model = StartupApplication
 
 class StartupApplicationAdmin(ImportExportModelAdmin):
     resource_classes = [StartupApplicationResource]
