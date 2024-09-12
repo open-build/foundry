@@ -120,7 +120,7 @@ def evaluate_startup_idea(application):
     except Exception as e: 
         logging.error(f"Rate Limit Error: {str(e)}")
         scores = "0"
-
+        score_text = "AI Failed to Summarize the Application. Please review manually."
         originality_score = "0"
         marketability_score = "0"
         feasibility_score = "0"

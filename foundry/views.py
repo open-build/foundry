@@ -48,8 +48,8 @@ def send_email_notification(to_email):
         print(str(e))
 
 
-def startup_application(request):
-    referral_code = request.GET.get('referral_code')  # Get the referral_code from the URL
+def startup_application(request, referral_code=None):
+    referral_code = referral_code or request.GET.get('referral_code')  # Get the referral_code from the URL or use the default value
 
     if request.method == 'POST':
         form = StartupApplicationForm(request.POST)
@@ -62,7 +62,7 @@ def startup_application(request):
             emails = form.cleaned_data['contact_email'] + 'team@buildly.io'
             send_email_notification(emails)  # Assuming 'email' is the field in your form containing the recipient's email address
             messages.success(request, 'Success, your Foundry application was Submitted!')
-            return redirect('startup_application')
+            return redirect('/startup-application/')
     else:
         form = StartupApplicationForm()
 
