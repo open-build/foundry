@@ -42,7 +42,7 @@ urlpatterns = urlpatterns + [
     re_path(r'^company_delete/(?P<pk>\w+)/$', CompanyDelete.as_view(), name='company_delete'),
     
     # URL for the startup application form (multi-step)
-    path('startup-application/', foundry_views.startup_application, name='startup_application'),
+    re_path('startup-application/(?P<referral_code>\w+)/$', foundry_views.startup_application, name='startup_application'),
 
     # URL for founder sign-up
     path('founder-signup/', foundry_views.founder_signup, name='founder_signup'),

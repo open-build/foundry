@@ -232,6 +232,8 @@ class StartupApplication(models.Model):
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    referral_code = models.CharField(max_length=255, blank=True, null=True)
 
     # Evaluation fields
     originality_score = models.TextField(null=True, blank=True)

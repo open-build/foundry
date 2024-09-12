@@ -49,20 +49,22 @@ def send_email_notification(to_email):
 
 
 def startup_application(request):
+    referral_code = request.GET.get('referral_code')  # Get the referral_code from the URL
 
     if request.method == 'POST':
         form = StartupApplicationForm(request.POST)
         if form.is_valid():
             # Save form data here for each step
-            # Redirect to the next step or completion page
-            form = form.save()
-             # Send email notification
-            emails = form.contact_email + 'team@buildly.io' 
+            # Update the referral_code field in the form instance
+            form.instance.referral_code = referral_code
+            form.save()
+            # Send email notification
+            emails = form.cleaned_data['contact_email'] + 'team@buildly.io'
             send_email_notification(emails)  # Assuming 'email' is the field in your form containing the recipient's email address
             messages.success(request, 'Success, your Foundry application was Submitted!')
             return redirect('startup_application')
     else:
-        form =  StartupApplicationForm()
+        form = StartupApplicationForm()
 
     return render(request, 'startup_application.html', {'form': form})
 
