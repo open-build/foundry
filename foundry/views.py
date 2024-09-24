@@ -50,7 +50,7 @@ def send_email_notification(to_email):
 
 def startup_application(request, referral_code=None):
     referral_code = referral_code or request.GET.get('referral_code')  # Get the referral_code from the URL or use the default value
-
+    form = StartupApplicationForm()
     if request.method == 'POST':
         form = StartupApplicationForm(request.POST)
         if form.is_valid():
@@ -62,11 +62,30 @@ def startup_application(request, referral_code=None):
             emails = form.cleaned_data['contact_email'] + 'team@buildly.io'
             send_email_notification(emails)  # Assuming 'email' is the field in your form containing the recipient's email address
             messages.success(request, 'Success, your Foundry application was Submitted!')
+            # Retrieve the evaluation scores from the saved StartupApplication instance
+            application = StartupApplication.objects.get(pk=form.instance.pk)
+            originality_score = application.originality_score
+            marketability_score = application.marketability_score
+            feasibility_score = application.feasibility_score
+            completeness_score = application.completeness_score
+            summary = application.summary
+            
+            # Prepare the success message with evaluation scores
+            success_message = (
+                'Thank you for submitting your startup to the Buildly and First City Foundry. '
+                'Here are your AI based evaluation scores (this is for educational purposes only, you will get more direct mentor based feedback once accepted to the program): '
+                f'Originality: {originality_score}, '
+                f'Marketability: {marketability_score}, '
+                f'Feasibility: {feasibility_score}, '
+                f'Completeness: {completeness_score}, '
+                f'Summary: {summary}'
+            )
+            
+            messages.success(request, success_message)
             return redirect('/startup-application/')
     else:
-        form = StartupApplicationForm()
 
-    return render(request, 'startup_application.html', {'form': form})
+        return render(request, 'startup_application.html', {'form': form})
 
 
 @login_required

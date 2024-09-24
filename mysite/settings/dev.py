@@ -33,3 +33,12 @@ except ImportError:
     pass
 
 OPENAI_API_KEY = "asdfghjkl1234567890"
+
+STATIC_URL = '/mysite/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'mysite/static'),
+]
+
+# Ensure that the STATIC_ROOT is defined for collecting static files
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
