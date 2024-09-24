@@ -115,7 +115,7 @@ def evaluate_startup_idea(application):
             gemini_feasibility_score = 0
             gemini_completeness_score = 0
 
-        logging.info(f"openAI response: {score_text}")
+        logging.info(f"gemini response: {score_text}")
 
     except Exception as e: 
         logging.error(f"Rate Limit Error: {str(e)}")
