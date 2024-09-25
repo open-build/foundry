@@ -249,6 +249,9 @@ class StartupApplication(models.Model):
 
     # Override the save method to include evaluation logic
     def save(self, *args, **kwargs):
+        # First, save the instance to ensure it has a primary key
+        super().save(*args, **kwargs)
+
         # Convert the instance to a dictionary suitable for analysis
         application_data = {
             'company_name': self.company_name,
@@ -265,7 +268,7 @@ class StartupApplication(models.Model):
             # Include other relevant fields as needed
         }
 
-        # Assume `analyze_ai_response` is imported and ready to use
+        # Assume `evaluate_startup_idea` is imported and ready to use
         # and it now accepts a dictionary and returns a dictionary with scores and summary
         evaluation_results = evaluate_startup_idea(application_data)
         # review_text, originality_score, marketability_score, feasibility_score, completeness_score
@@ -281,7 +284,8 @@ class StartupApplication(models.Model):
         self.gemini_feasibility_score = evaluation_results[8]
         self.gemini_completeness_score = evaluation_results[9]
 
-        super().save(*args, **kwargs)  # Call the "real" save() method.
+        # Save the instance again with the updated data
+        super().save(*args, **kwargs)
 
 
     class Meta:
