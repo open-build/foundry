@@ -66,7 +66,7 @@ def evaluate_startup_idea(application):
                 
         
        # Extract scores from the response
-        if completion.choices[0].message:
+        if score_text:
             
             # Extract individual scores from the score text
             score_lines = score_text.split('\n')
@@ -83,7 +83,7 @@ def evaluate_startup_idea(application):
             feasibility_score = scores.get('Feasibility Score', 0)
             completeness_score = scores.get('Completeness Score', 0)
         else:
-            score_text = "AI Failed to Summarize the Application. Please review manually."
+            score_text = "AI Failed to Summarize the Application. Please review manually. OpenAI If Condition"   
             originality_score = 0
             marketability_score = 0
             feasibility_score = 0
@@ -109,7 +109,7 @@ def evaluate_startup_idea(application):
             gemini_feasibility_score = scores.get('Feasibility Score', 0)
             gemini_completeness_score = scores.get('Completeness Score', 0)
         else:
-            gemini_score_text = "Gemini AI Failed to Summarize the Application. Please review manually."
+            gemini_score_text = "Gemini AI Failed to Summarize the Application. Please review manually. If condition"
             gemini_originality_score = 0
             gemini_marketability_score = 0
             gemini_feasibility_score = 0
@@ -120,7 +120,7 @@ def evaluate_startup_idea(application):
     except Exception as e: 
         logging.error(f"Rate Limit Error: {str(e)}")
         scores = "0"
-        score_text = "AI Failed to Summarize the Application. Please review manually."
+        score_text = "EXCEPTION: ALL AI's Failed to Summarize the Application. Please review manually."
         originality_score = "0"
         marketability_score = "0"
         feasibility_score = "0"
