@@ -84,7 +84,7 @@ def evaluate_startup_idea(application):
             model = genai.GenerativeModel('gemini-1.0-pro-latest')
             response = model.generate_content(f"Please review and evaluate the startup and business idea: Evaluation Criteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\n\nPlease provide your summary text of how good or bad the idea is and individual numeric scores for each criterion out of 100 each:\n\nOriginality Score:\nMarketability Score:\nFeasibility Score:\nCompleteness Score: {application_summary}")
             
-            gemini_score_text = response
+            gemini_score_text = response.content  # Access the content attribute
 
             # Extract individual scores from the score text
             score_lines = gemini_score_text.split('\n')
