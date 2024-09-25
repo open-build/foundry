@@ -42,36 +42,20 @@ def evaluate_startup_idea(application):
     # Define the application summary from preprocess_application_data
     application_summary = preprocess_application_data(application)
     
-    try:
-        # Generate the review using ChatGPT
-        completion = client.chat.completions.create(
-        model="gpt-4",
-        messages=[
-            {"role": "system", "content": f"Please review and evaluate the startup and business idea: Evaluation Criteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\n\nPlease provide your summary text of how good or bad the idea is and individual numeric scores for each criterion out of 100 each:\n\nOriginality Score:\nMarketability Score:\nFeasibility Score:\nCompleteness Score:"},
-            {"role": "user", "content": application_summary}
-        ]
-        )
-        print(completion.choices[0].message.content)
-        score_text = completion.choices[0].message.content
-        
-        # Generate Review using Gemini
-        import google.generativeai as genai
-        import os
-
-        genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
-        model = genai.GenerativeModel('gemini-1.0-pro-latest')
-        response = model.generate_content(f"Please review and evaluate the startup and business idea: Evaluation Criteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\n\nPlease provide your summary text of how good or bad the idea is and individual numeric scores for each criterion out of 100 each:\n\nOriginality Score:\nMarketability Score:\nFeasibility Score:\nCompleteness Score: {application_summary}")
-        
-        gemini_score_text = response
-                
-        
-       # Extract scores from the response
-        if score_text:
+    def call_openai(application_summary):
+        try:
+            # Generate the review using ChatGPT
+            completion = client.chat.completions.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": f"Please review and evaluate the startup and business idea: Evaluation Criteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\n\nPlease provide your summary text of how good or bad the idea is and individual numeric scores for each criterion out of 100 each:\n\nOriginality Score:\nMarketability Score:\nFeasibility Score:\nCompleteness Score:"},
+                    {"role": "user", "content": application_summary}
+                ]
+            )
+            score_text = completion.choices[0].message.content
             
             # Extract individual scores from the score text
             score_lines = score_text.split('\n')
-
-            # Find and extract the scores
             scores = {}
             for line in score_lines:
                 if "Score" in line:
@@ -82,22 +66,28 @@ def evaluate_startup_idea(application):
             marketability_score = scores.get('Marketability Score', 0)
             feasibility_score = scores.get('Feasibility Score', 0)
             completeness_score = scores.get('Completeness Score', 0)
-        else:
-            score_text = "AI Failed to Summarize the Application. Please review manually. OpenAI If Condition"   
-            originality_score = 0
-            marketability_score = 0
-            feasibility_score = 0
-            completeness_score = 0
 
-        logging.info(f"openAI response: {score_text}")
-        
-        # Extract scores from the response
-        if gemini_score_text:
+            logging.info(f"openAI response: {score_text}")
+            return score_text, originality_score, marketability_score, feasibility_score, completeness_score
+
+        except Exception as e:
+            logging.error(f"OpenAI Error: {str(e)}")
+            return "AI Failed to Summarize the Application. Please review manually. OpenAI If Condition", 0, 0, 0, 0
+
+    def call_gemini(application_summary):
+        try:
+            # Generate Review using Gemini
+            import google.generativeai as genai
+            import os
+
+            genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+            model = genai.GenerativeModel('gemini-1.0-pro-latest')
+            response = model.generate_content(f"Please review and evaluate the startup and business idea: Evaluation Criteria:\n1. Originality\n2. Marketability\n3. Feasibility\n4. Completeness\n\nPlease provide your summary text of how good or bad the idea is and individual numeric scores for each criterion out of 100 each:\n\nOriginality Score:\nMarketability Score:\nFeasibility Score:\nCompleteness Score: {application_summary}")
             
+            gemini_score_text = response
+
             # Extract individual scores from the score text
             score_lines = gemini_score_text.split('\n')
-
-            # Find and extract the scores
             scores = {}
             for line in score_lines:
                 if "Score" in line:
@@ -108,36 +98,26 @@ def evaluate_startup_idea(application):
             gemini_marketability_score = scores.get('Marketability Score', 0)
             gemini_feasibility_score = scores.get('Feasibility Score', 0)
             gemini_completeness_score = scores.get('Completeness Score', 0)
-        else:
-            gemini_score_text = "Gemini AI Failed to Summarize the Application. Please review manually. If condition"
-            gemini_originality_score = 0
-            gemini_marketability_score = 0
-            gemini_feasibility_score = 0
-            gemini_completeness_score = 0
 
-        logging.info(f"gemini response: {score_text}")
+            logging.info(f"gemini response: {gemini_score_text}")
+            return gemini_score_text, gemini_originality_score, gemini_marketability_score, gemini_feasibility_score, gemini_completeness_score
 
-    except Exception as e: 
-        logging.error(f"Rate Limit Error: {str(e)}")
-        scores = "0"
-        score_text = "EXCEPTION: ALL AI's Failed to Summarize the Application. Please review manually."
-        originality_score = "0"
-        marketability_score = "0"
-        feasibility_score = "0"
-        completeness_score = "0"
-        gemini_score_text = "0"
-        gemini_originality_score = "0"
-        gemini_marketability_score = "0"
-        gemini_feasibility_score = "0"
-        gemini_completeness_score = "0"
-        
-        # Send an email using SendGrid API
+        except Exception as e:
+            logging.error(f"Gemini Error: {str(e)}")
+            return "Gemini AI Failed to Summarize the Application. Please review manually. If condition", 0, 0, 0, 0
+
+    # Call OpenAI and Gemini functions
+    openai_results = call_openai(application_summary)
+    gemini_results = call_gemini(application_summary)
+
+    # If both fail, send an email using SendGrid API
+    if openai_results[1] == 0 and gemini_results[1] == 0:
         message = Mail(
             from_email='foundry@buildly.io',
             to_emails='greg@buildly.io',
             subject='Open AI Rate Limit Exceeded',
-            html_content='<strong>Check the Foundry</strong>')
-        
+            html_content='<strong>Check the Foundry</strong>'
+        )
         try:
             sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
             response = sg.send(message)
@@ -146,8 +126,8 @@ def evaluate_startup_idea(application):
             print(response.headers)
         except Exception as e:
             print(str(e))
-            
-    return score_text, originality_score, marketability_score, feasibility_score, completeness_score, gemini_score_text, gemini_originality_score, gemini_marketability_score, gemini_feasibility_score, gemini_completeness_score
+
+    return openai_results + gemini_results
 
 def analyze_ai_response(response):
     """
