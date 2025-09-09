@@ -7,7 +7,7 @@
     <meta name="description" content="Your application to Buildly Labs Foundry has been successfully submitted.">
     
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -26,6 +26,17 @@
                     }
                 }
             }
+        }
+    </script>
+    
+    <!-- Suppress Tailwind production warning for GitHub Pages -->
+    <script>
+        if (typeof tailwind !== 'undefined' && tailwind.config) {
+            const originalWarn = console.warn;
+            console.warn = function(...args) {
+                if (args[0] && args[0].includes && args[0].includes('Tailwind CSS')) return;
+                originalWarn.apply(console, args);
+            };
         }
     </script>
     

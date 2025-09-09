@@ -31,7 +31,7 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -50,6 +50,18 @@
                     }
                 }
             }
+        }
+    </script>
+    
+    <!-- Suppress Tailwind production warning for GitHub Pages -->
+    <script>
+        if (typeof tailwind !== 'undefined' && tailwind.config) {
+            // Suppress production warning in console
+            const originalWarn = console.warn;
+            console.warn = function(...args) {
+                if (args[0] && args[0].includes && args[0].includes('Tailwind CSS')) return;
+                originalWarn.apply(console, args);
+            };
         }
     </script>
     
@@ -364,8 +376,8 @@
                 </div>
                 
                 <div class="relative">
-                    <img src="assets/img/logo.png" 
-                         alt="Buildly Labs Foundry Logo" 
+                    <img src="assets/img/OpenBuild.png" 
+                         alt="Buildly Labs Foundry - OpenBuild Partnership Logo" 
                          class="w-full max-w-md mx-auto rounded-2xl shadow-lg">
                 </div>
             </div>
