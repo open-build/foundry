@@ -1,4 +1,20 @@
 User-agent: *
 Allow: /
+Allow: /register.html
+Allow: /assets/
 
+# Block any temporary or development files
+Disallow: /docs/
+
+# Sitemap location
 Sitemap: https://www.firstcityfoundry.com/sitemap.xml
+
+# Crawl delay for AI bots (optional)
+User-agent: GPTBot
+Crawl-delay: 1
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /

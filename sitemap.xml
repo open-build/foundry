@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.firstcityfoundry.com/</loc>
     <lastmod>2025-09-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.firstcityfoundry.com/assets/img/OpenBuild.png</image:loc>
+      <image:caption>Startup Incubator for Developers - Buildly Labs Foundry</image:caption>
+      <image:title>Buildly Labs Foundry Logo</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://www.firstcityfoundry.com/register.html</loc>
     <lastmod>2025-09-09</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.firstcityfoundry.com/assets/img/logo-horizontal.png</image:loc>
+      <image:caption>Apply for Startup Incubator Program</image:caption>
+      <image:title>Startup Application Form</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://www.firstcityfoundry.com/success.html</loc>
-    <lastmod>2025-01-09</lastmod>
+    <lastmod>2025-09-09</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.5</priority>
   </url>
 </urlset>
