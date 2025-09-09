@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buildly Labs Foundry - Accelerate Your Startup Journey</title>
+    <meta name="description" content="Join the Buildly Labs Foundry network to accelerate your startup with equity-free assistance, partner connections, and expert guidance.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        },
+                        accent: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="font-sans antialiased">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50 top-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <img class="h-10 w-auto" src="assets/img/logo-horizontal.png" alt="Buildly Labs Foundry">
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">About</a>
+                    <a href="#benefits" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">Benefits</a>
+                    <a href="#partners" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">Partners</a>
+                    <a href="register.html" class="bg-primary-600 text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-primary-700 transition-colors">Apply Now</a>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button type="button" class="mobile-menu-button text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" aria-label="toggle menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div class="mobile-menu hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+                <a href="#about" class="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium">About</a>
+                <a href="#benefits" class="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium">Benefits</a>
+                <a href="#partners" class="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium">Partners</a>
+                <a href="register.html" class="bg-primary-600 text-white block px-3 py-2 text-base font-medium rounded-md mx-3 text-center">Apply Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-primary-50 to-blue-100 pt-20 pb-20 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-accent-500/10"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
+                        Accelerate Your 
+                        <span class="text-primary-600">Startup Journey</span>
+                        with Buildly Labs Foundry
+                    </h1>
+                    <p class="mt-6 text-xl text-gray-600 leading-relaxed">
+                        Join a network of innovative founders building the future. Get equity-free assistance, 
+                        partner connections, and expert guidance to turn your software ideas into thriving businesses.
+                    </p>
+                    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="register.html" 
+                           class="bg-primary-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                            Start Your Application
+                        </a>
+                        <a href="https://labs.buildly.io" 
+                           class="bg-white text-primary-600 px-8 py-4 rounded-lg text-lg font-semibold border-2 border-primary-600 hover:bg-primary-50 transition-colors">
+                            Try Buildly Labs
+                        </a>
+                    </div>
+                    
+                    <!-- Key metrics -->
+                    <div class="mt-12 grid grid-cols-3 gap-8 text-center lg:text-left">
+                        <div>
+                            <div class="text-3xl font-bold text-primary-600">100+</div>
+                            <div class="text-gray-600">Startups Supported</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-primary-600">$0</div>
+                            <div class="text-gray-600">Equity Required</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-primary-600">24/7</div>
+                            <div class="text-gray-600">Partner Network</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="assets/img/slide/oc-elevator.jpeg" 
+                             alt="Buildly Labs Foundry" 
+                             class="object-cover w-full h-full">
+                    </div>
+                    
+                    <!-- Floating cards -->
+                    <div class="absolute -top-6 -left-6 bg-white rounded-lg shadow-lg p-4 border border-gray-100">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                            <span class="text-sm font-medium">Free Hosting Credits</span>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute -bottom-6 -right-6 bg-white rounded-lg shadow-lg p-4 border border-gray-100">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                            <span class="text-sm font-medium">AI Startup Analysis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="benefits" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Why Choose Buildly Labs Foundry?
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    We provide everything you need to transform your software idea into a successful business
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center group">
+                    <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary-200 transition-colors">
+                        <i class="fas fa-binoculars text-2xl text-primary-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Lean Startup Methodology</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Bring your software product idea to life with proven lean startup principles and expert guidance from day one.
+                    </p>
+                </div>
+
+                <div class="text-center group">
+                    <div class="bg-accent-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-accent-200 transition-colors">
+                        <i class="fas fa-chart-line text-2xl text-accent-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Product First, Scale Smart</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Build a robust MVP with our expert advice, then scale strategically to attract investors and customers.
+                    </p>
+                </div>
+
+                <div class="text-center group">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-200 transition-colors">
+                        <i class="fas fa-rocket text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Rapid Development</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Accelerate your journey from concept to launch with our global network of developers and partners.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                        Join the Buildly Labs Foundry Network
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-8">
+                        Connect with successful entrepreneurs, technical experts, and industry partners. 
+                        We provide the knowledge, resources, and connections you need to build a sustainable business.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Equity-Free Assistance</h4>
+                                <p class="text-gray-600">Get all the support you need without giving up ownership of your company</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Free Google Cloud Hosting</h4>
+                                <p class="text-gray-600">Maximize your cloud credits with our optimized hosting until your MVP is market-ready</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">AI-Powered Startup Analysis</h4>
+                                <p class="text-gray-600">Receive comprehensive AI evaluation and feedback on your startup idea and business model</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Partner Network Access</h4>
+                                <p class="text-gray-600">Connect with developers, investors, marketing firms, CFO agencies, and industry experts</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <img src="assets/img/logo.png" 
+                         alt="Buildly Labs Foundry Logo" 
+                         class="w-full max-w-md mx-auto rounded-2xl shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section id="partners" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Trusted Partners
+            </h2>
+            <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                We work with industry leaders to provide you with the best resources and opportunities
+            </p>
+            
+            <div class="flex justify-center items-center space-x-12 grayscale hover:grayscale-0 transition-all">
+                <div class="partner-logo">
+                    <img src="assets/img/OpenBuild.png" 
+                         alt="OpenBuild" 
+                         class="h-16 w-auto hover:scale-110 transition-transform">
+                </div>
+                <div class="partner-logo">
+                    <img src="assets/img/buildly.png" 
+                         alt="Buildly" 
+                         class="h-16 w-auto hover:scale-110 transition-transform">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-primary-600 to-primary-700">
+        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                Ready to Transform Your Idea into Reality?
+            </h2>
+            <p class="text-xl text-primary-100 mb-8">
+                Join hundreds of successful founders who've accelerated their startups with Buildly Labs Foundry
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="register.html" 
+                   class="bg-white text-primary-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    Start Your Application
+                </a>
+                <a href="https://labs.buildly.io" 
+                   class="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-primary-600 transition-colors">
+                    Explore Buildly Labs
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <img src="assets/img/logo-horizontal.png" alt="Buildly Labs Foundry" class="h-10 mb-4 filter brightness-0 invert">
+                    <p class="text-gray-400 mb-4 max-w-md">
+                        Empowering startups to build, scale, and succeed with comprehensive support and resources.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="hover:text-white transition-colors">About</a></li>
+                        <li><a href="#benefits" class="hover:text-white transition-colors">Benefits</a></li>
+                        <li><a href="#partners" class="hover:text-white transition-colors">Partners</a></li>
+                        <li><a href="register.html" class="hover:text-white transition-colors">Apply</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://labs.buildly.io" class="hover:text-white transition-colors">Buildly Labs</a></li>
+                        <li><a href="https://www.buildly.io" class="hover:text-white transition-colors">Buildly Platform</a></li>
+                        <li><a href="https://babble.buildly.io" class="hover:text-white transition-colors">BabbleBeaver</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2025 Buildly Labs Foundry. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

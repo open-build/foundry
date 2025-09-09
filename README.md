@@ -17,31 +17,31 @@ A modern static website for the Buildly Labs Foundry program, helping startups a
 
 ## 📁 Site Structure
 
-- **Homepage** (`docs/index.html`): Hero section, benefits, partner showcase
-- **Application Form** (`docs/register.html`): Multi-step startup application
-- **Success Page** (`docs/success.html`): Post-submission confirmation
-- **Assets** (`docs/assets/`): CSS, JavaScript, and images
+- **Homepage** (`index.html`): Hero section, benefits, partner showcase
+- **Application Form** (`register.html`): Multi-step startup application
+- **Success Page** (`success.html`): Post-submission confirmation
+- **Assets** (`assets/`): CSS, JavaScript, and images
 
 ## 🔧 Quick Start
 
-The static site is located in the `/docs` directory and is ready for GitHub Pages deployment.
+The static site files are in the root directory and ready for GitHub Pages deployment.
 
-### 1. Enable GitHub Pages
+### GitHub Pages Setup
 - Go to Repository Settings → Pages
 - Set source to "Deploy from a branch"
-- Select "main" branch and "/docs" folder
+- Select "main" branch and "/ (root)" folder
 
-### 2. Custom Domain (Optional)
-- Update `docs/CNAME` with your domain
+### Custom Domain
+- The `CNAME` file is configured for `foundry.buildly.io`
 - Configure DNS: `CNAME foundry -> open-build.github.io`
 
-### 3. Configure Integrations
-- Set up Google Sheets integration (see docs/README.md)
+### Integrations
+- Set up Google Sheets integration (see site-README.md)
 - Configure BabbleBeaver API endpoint
 
 ## 📖 Documentation
 
-Complete setup and customization documentation is available in `/docs/README.md`.
+Complete setup and customization documentation is available in `site-README.md`.
 
 ## 🛠️ Local Development
 
@@ -95,32 +95,3 @@ Optimized for seamless deployment and hosting on GitHub Pages.
 ---
 
 **Join the Buildly Labs Foundry network and accelerate your startup journey today!**
-
-## startups datasources
-Finding a public API that lists startup companies with product descriptions, current stage, and founder details can be quite useful for market research and networking. Here are a few APIs and platforms you might consider:
-
-1. **Crunchbase API**:
-   - **Description**: Crunchbase is a platform for finding business information about private and public companies. Their API provides access to data about startups, including company descriptions, funding stages, and founder details.
-   - **Access**: Requires an API key which you can obtain by signing up for a developer account.
-   - **Link**: [Crunchbase API](https://www.crunchbase.com/apps)
-
-2. **AngelList API**:
-   - **Description**: AngelList is a platform for startups, angel investors, and job-seekers looking to work at startups. Their API allows access to data about startups, including product descriptions and founder information.
-   - **Access**: Requires an API key available upon request.
-   - **Link**: [AngelList API](https://angel.co/api)
-
-3. **Product Hunt API**:
-   - **Description**: Product Hunt is a community where product enthusiasts share and discover new products. The API provides data on newly launched products, including descriptions and founder information.
-   - **Access**: Requires an API key which you can obtain by signing up for a developer account.
-   - **Link**: [Product Hunt API](https://api.producthunt.com/v2/docs)
-
-4. **Mattermark API** (Note: Mattermark has been acquired, so availability may vary):
-   - **Description**: Mattermark provided data on startups, including growth signals, funding rounds, and key people. This might still be accessible through other means or their acquiring company.
-   - **Access**: Typically requires an API key, but it may be subject to change post-acquisition.
-
-5. **Clearbit API**:
-   - **Description**: Clearbit provides business intelligence APIs that can be used to find information about companies and people, including startups, product descriptions, and key personnel.
-   - **Access**: Requires an API key which you can obtain by signing up for a developer account.
-   - **Link**: [Clearbit API](https://clearbit.com/docs#company-api)
-
-Each of these APIs requires signing up for access and often an API key. Depending on your specific needs and the depth of information you require, one of these options should be a good fit.
