@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Buildly Labs Foundry</title>
+    <meta name="description" content="The page you're looking for could not be found.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        },
+                        accent: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="font-sans antialiased bg-gray-50">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50 top-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="index.html">
+                            <img class="h-10 w-auto" src="assets/img/logo-horizontal.png" alt="Buildly Labs Foundry">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">About</a>
+                    <a href="index.html#benefits" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">Benefits</a>
+                    <a href="register.html" class="bg-primary-600 text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-primary-700 transition-colors">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 404 Section -->
+    <section class="py-20 mt-16">
+        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            
+            <!-- 404 Icon -->
+            <div class="mx-auto flex items-center justify-center w-24 h-24 bg-gray-100 rounded-full mb-8">
+                <i class="fas fa-search text-4xl text-gray-400"></i>
+            </div>
+            
+            <h1 class="text-6xl md:text-8xl font-bold text-gray-300 mb-4">
+                404
+            </h1>
+            
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                Page Not Found
+            </h2>
+            
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                Sorry, we couldn't find the page you're looking for. It might have been moved, deleted, or you entered the wrong URL.
+            </p>
+
+            <!-- Quick Actions -->
+            <div class="space-y-4">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="index.html" 
+                       class="bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors">
+                        Go Home
+                    </a>
+                    <a href="register.html" 
+                       class="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold border-2 border-primary-600 hover:bg-primary-50 transition-colors">
+                        Apply Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Helpful Links -->
+    <section class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">
+                Popular Pages
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center group">
+                    <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary-200 transition-colors">
+                        <i class="fas fa-home text-2xl text-primary-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Homepage</h3>
+                    <p class="text-gray-600 mb-4">Learn about the Buildly Labs Foundry program and our mission.</p>
+                    <a href="index.html" class="text-primary-600 hover:underline font-medium">
+                        Visit Homepage →
+                    </a>
+                </div>
+                
+                <div class="text-center group">
+                    <div class="bg-accent-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent-200 transition-colors">
+                        <i class="fas fa-edit text-2xl text-accent-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Application</h3>
+                    <p class="text-gray-600 mb-4">Start your journey by submitting a startup application.</p>
+                    <a href="register.html" class="text-primary-600 hover:underline font-medium">
+                        Apply Now →
+                    </a>
+                </div>
+                
+                <div class="text-center group">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
+                        <i class="fas fa-flask text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Buildly Labs</h3>
+                    <p class="text-gray-600 mb-4">Explore our collaboration platform for remote product teams.</p>
+                    <a href="https://labs.buildly.io" class="text-primary-600 hover:underline font-medium">
+                        Try Buildly Labs →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-2xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Still can't find what you're looking for?</h3>
+            <p class="text-gray-600 mb-8">Contact us and we'll help you find the right information.</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="mailto:foundry@buildly.io" 
+                   class="bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors">
+                    <i class="fas fa-envelope mr-2"></i>
+                    Contact Support
+                </a>
+                <a href="https://www.buildly.io" 
+                   class="bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold border-2 border-primary-600 hover:bg-primary-50 transition-colors">
+                    <i class="fas fa-external-link-alt mr-2"></i>
+                    Visit Buildly
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <img src="assets/img/logo-horizontal.png" alt="Buildly Labs Foundry" class="h-10 mb-4 filter brightness-0 invert">
+                    <p class="text-gray-400 mb-4 max-w-md">
+                        Empowering startups to build, scale, and succeed with comprehensive support and resources.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="index.html#about" class="hover:text-white transition-colors">About</a></li>
+                        <li><a href="index.html#benefits" class="hover:text-white transition-colors">Benefits</a></li>
+                        <li><a href="register.html" class="hover:text-white transition-colors">Apply</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://labs.buildly.io" class="hover:text-white transition-colors">Buildly Labs</a></li>
+                        <li><a href="https://www.buildly.io" class="hover:text-white transition-colors">Buildly Platform</a></li>
+                        <li><a href="https://babble.buildly.io" class="hover:text-white transition-colors">BabbleBeaver</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2025 Buildly Labs Foundry. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
