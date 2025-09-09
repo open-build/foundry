@@ -12,7 +12,7 @@ A modern static website for the Buildly Labs Foundry program, helping startups a
 
 ## 🚀 Live Site
 
-- **Production**: https://foundry.buildly.io
+- **Production**: https://www.firstcityfoundry.com
 - **GitHub Pages**: https://open-build.github.io/foundry
 
 ## 📁 Site Structure
