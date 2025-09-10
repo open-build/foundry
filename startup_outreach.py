@@ -212,23 +212,41 @@ class StartupOutreachBot:
             json.dump(data, f, indent=2)
 
     def load_config(self):
-        """Load configuration from config.py"""
+        """Load configuration from environment variables and config.py"""
+        config_data = {
+            'email': {
+                'smtp_server': os.getenv('BREVO_SMTP_HOST', 'smtp-relay.brevo.com'),
+                'smtp_port': int(os.getenv('BREVO_SMTP_PORT', '587')),
+                'username': os.getenv('BREVO_SMTP_USER', ''),
+                'password': os.getenv('BREVO_SMTP_PASSWORD', ''),
+                'from_email': os.getenv('FROM_EMAIL', 'team@open.build'),
+                'from_name': os.getenv('FROM_NAME', 'Open Build Foundry Team'),
+                'reply_to': os.getenv('REPLY_TO_EMAIL', 'team@open.build')
+            },
+            'cli': {'interactive_mode': True},
+            'notifications': {
+                'daily_summary': True,
+                'notification_email': os.getenv('DAILY_NOTIFICATION_EMAIL', 'team@open.build')
+            },
+            'rate_limits': {
+                'max_daily_outreach': int(os.getenv('MAX_DAILY_OUTREACH', '50')),
+                'max_per_organization': int(os.getenv('MAX_PER_ORGANIZATION', '4')),
+                'min_delay_seconds': int(os.getenv('MIN_DELAY_SECONDS', '30')),
+                'max_delay_seconds': int(os.getenv('MAX_DELAY_SECONDS', '60'))
+            }
+        }
+        
+        # Try to load additional config from config.py if it exists
         try:
             import config
-            return {
-                'email': getattr(config, 'EMAIL_CONFIG', {}),
-                'cli': getattr(config, 'CLI_CONFIG', {}),
-                'notifications': getattr(config, 'NOTIFICATION_CONFIG', {}),
-                'rate_limits': getattr(config, 'RATE_LIMITS', {})
-            }
+            config_data['email'].update(getattr(config, 'EMAIL_CONFIG', {}))
+            config_data['cli'].update(getattr(config, 'CLI_CONFIG', {}))
+            config_data['notifications'].update(getattr(config, 'NOTIFICATION_CONFIG', {}))
+            config_data['rate_limits'].update(getattr(config, 'RATE_LIMITS', {}))
         except ImportError:
-            logger.warning("config.py not found, using defaults")
-            return {
-                'email': {},
-                'cli': {'interactive_mode': True},
-                'notifications': {},
-                'rate_limits': {}
-            }
+            logger.info("config.py not found, using environment variables only")
+        
+        return config_data
 
     def initialize_default_targets(self):
         """Initialize with default startup-focused targets"""
@@ -882,65 +900,63 @@ Buildly Labs Foundry Team
         self.console.print(f"⏭️  Skipped: {skipped_count}")
         self.console.print(f"⏳ Remaining: {len([p for p in pending_outreach if not p.sent and not p.approved])}")
 
-    def send_daily_notification(self):
-        """Send daily summary notification"""
+    def send_daily_analytics_report(self):
+        """Send comprehensive daily analytics report"""
         try:
-            # Generate summary
-            pending_count = len([p for p in self.pending_outreach if not p.sent])
-            recent_sent = len([log for log in self.outreach_log 
-                             if datetime.fromisoformat(log['timestamp']) > datetime.now() - timedelta(days=1)])
+            # Import analytics module
+            from analytics_reporter import AnalyticsCollector, format_daily_report_email
             
-            notification_config = self.config.get('notifications', {})
-            if not notification_config.get('daily_summary', False):
-                return
+            # Generate analytics report
+            collector = AnalyticsCollector()
+            analytics = collector.generate_daily_report()
+            report = format_daily_report_email(analytics)
             
-            subject = f"Daily Outreach Summary - {datetime.now().strftime('%Y-%m-%d')}"
-            
-            body = f"""
-Daily Outreach Summary for Buildly Labs Foundry
-===============================================
-
-📊 Today's Stats:
-• Messages sent: {recent_sent}
-• Pending review: {pending_count}
-• Total contacts: {len(self.contacts)}
-• Total targets: {len(self.targets)}
-
-⏳ Action Required:
-{f"You have {pending_count} messages waiting for review." if pending_count > 0 else "No messages pending review."}
-
-To review pending messages, run:
-python startup_outreach.py --mode interactive
-
----
-Buildly Labs Foundry Outreach System
-            """
-            
-            # Send notification email
+            # Send report email
             email_config = self.config.get('email', {})
-            notification_email = notification_config.get('notification_email', email_config.get('from_email'))
+            notification_email = os.getenv('DAILY_NOTIFICATION_EMAIL', email_config.get('from_email'))
             
             if notification_email and email_config:
-                dummy_contact = Contact(
-                    name="Greg",
-                    email=notification_email,
-                    organization="Buildly Labs Foundry",
-                    role="Founder",
-                    source="internal",
-                    category="notification"
-                )
+                # Create SMTP connection
+                server = smtplib.SMTP(email_config['smtp_server'], email_config['smtp_port'])
+                server.starttls()
+                server.login(email_config['username'], email_config['password'])
                 
-                notification_message = {
-                    'subject': subject,
-                    'body': body.strip(),
-                    'template_used': 'notification'
-                }
+                # Create HTML message
+                msg = MIMEMultipart('alternative')
+                msg['From'] = f"{email_config['from_name']} <{email_config['from_email']}>"
+                msg['To'] = notification_email
+                msg['Subject'] = report['subject']
+                msg['Reply-To'] = email_config['from_email']
                 
-                self.send_outreach_message(dummy_contact, notification_message)
-                logger.info("Daily notification sent")
+                # Add BCC if configured
+                bcc_email = os.getenv('BCC_EMAIL')
+                if bcc_email:
+                    msg['Bcc'] = bcc_email
+                
+                # Add both plain text and HTML versions
+                text_part = MIMEText(report['text_body'], 'plain')
+                html_part = MIMEText(report['html_body'], 'html')
+                
+                msg.attach(text_part)
+                msg.attach(html_part)
+                
+                # Send message (include BCC in recipient list)
+                recipients = [notification_email]
+                if bcc_email:
+                    recipients.append(bcc_email)
+                
+                server.send_message(msg, to_addrs=recipients)
+                server.quit()
+                
+                logger.info(f"✅ Daily analytics report sent to {notification_email}")
             
         except Exception as e:
-            logger.error(f"Failed to send daily notification: {e}")
+            logger.error(f"Failed to send daily analytics report: {e}")
+    
+    def send_daily_notification(self):
+        """Send daily summary notification (legacy method)"""
+        # Call the new analytics report method
+        self.send_daily_analytics_report()
 
     def send_outreach_message(self, contact: Contact, message: Dict[str, str], dry_run: bool = False) -> bool:
         """Send outreach message via Brevo SMTP"""
@@ -973,11 +989,20 @@ Buildly Labs Foundry Outreach System
             msg['Subject'] = message['subject']
             msg['Reply-To'] = email_config['from_email']
             
+            # Add BCC if configured
+            bcc_email = os.getenv('BCC_EMAIL')
+            if bcc_email:
+                msg['Bcc'] = bcc_email
+            
             # Add body
             msg.attach(MIMEText(message['body'], 'plain'))
             
-            # Send message
-            server.send_message(msg)
+            # Send message (include BCC in recipient list)
+            recipients = [contact.email]
+            if bcc_email:
+                recipients.append(bcc_email)
+            
+            server.send_message(msg, to_addrs=recipients)
             server.quit()
             
             logger.info(f"✅ Message sent successfully to {contact.email}")
@@ -1232,7 +1257,7 @@ Buildly Labs Foundry Outreach System
 def main():
     """Main function to handle command line arguments"""
     parser = argparse.ArgumentParser(description='Startup Outreach Automation')
-    parser.add_argument('--mode', choices=['discover', 'outreach', 'review', 'send', 'notify', 'report', 'full'], 
+    parser.add_argument('--mode', choices=['discover', 'outreach', 'review', 'send', 'notify', 'report', 'analytics', 'full'], 
                        default='full', help='Operation mode')
     parser.add_argument('--dry-run', action='store_true', 
                        help='Run without actually sending emails')
@@ -1266,8 +1291,12 @@ def main():
             bot.send_all_pending()
         
         if args.mode == 'notify':
-            # Send daily notification
+            # Send daily notification (legacy)
             bot.send_daily_notification()
+        
+        if args.mode == 'analytics':
+            # Send comprehensive daily analytics report
+            bot.send_daily_analytics_report()
         
         if args.mode in ['report', 'full']:
             bot.generate_analytics_report()

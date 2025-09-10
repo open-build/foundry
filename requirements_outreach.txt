@@ -6,6 +6,18 @@ jinja2>=3.1.0
 lxml>=4.9.0
 python-dotenv>=1.0.0
 rich>=13.0.0
+schedule>=1.2.0
+
+# Analytics and Reporting Dependencies
+google-analytics-data>=0.17.0
+google-auth>=2.23.0
+google-auth-oauthlib>=1.1.0
+google-auth-httplib2>=0.1.1
+google-api-python-client>=2.0.0
+
+# Standard library modules (no pip install needed):
+# json, csv, time, random, logging, argparse, os, datetime, dataclasses, typing
+# pathlib, smtplib, email, re, urllib
 
 # Optional: For more advanced features
 # selenium>=4.0.0  # For JavaScript-heavy sites
