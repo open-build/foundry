@@ -4,9 +4,12 @@ beautifulsoup4>=4.11.0
 yagmail>=0.15.0
 jinja2>=3.1.0
 lxml>=4.9.0
+python-dotenv>=1.0.0
+rich>=13.0.0
 
 # Optional: For more advanced features
 # selenium>=4.0.0  # For JavaScript-heavy sites
 # scrapy>=2.6.0    # For large-scale scraping
 # openai>=0.27.0   # For AI-powered personalization
 # sendgrid>=6.9.0  # Alternative email service
+# pushover>=0.4    # For push notifications

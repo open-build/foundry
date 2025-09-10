@@ -50,6 +50,9 @@ outreach.log*
 email_config.json
 credentials.json
 .env
+.env.local
+.env.production
+config.py
 
 # OS generated files
 .DS_Store

@@ -1,14 +1,19 @@
 # Startup Outreach Bot Configuration
 # Copy this to config.py and update with your settings
 
-# Email Configuration
+# Email Configuration - Brevo SMTP
+# Use environment variables for security
+import os
+
 EMAIL_CONFIG = {
-    'service': 'gmail',  # 'gmail', 'sendgrid', 'smtp'
-    'username': 'your-email@gmail.com',
-    'password': 'your-app-password',  # Use app-specific password for Gmail
-    'smtp_server': 'smtp.gmail.com',
+    'service': 'brevo',  # 'gmail', 'sendgrid', 'smtp', 'brevo'
+    'username': os.getenv('BREVO_SMTP_USERNAME', 'your-brevo-username@smtp-brevo.com'),
+    'password': os.getenv('BREVO_SMTP_PASSWORD', 'your-brevo-master-password'),
+    'smtp_server': 'smtp-relay.brevo.com',
     'smtp_port': 587,
-    'from_name': 'Buildly Labs Foundry Team'
+    'from_email': os.getenv('FROM_EMAIL', 'team@open.build'),
+    'from_name': 'Buildly Labs Foundry Team',
+    'use_tls': True
 }
 
 # SendGrid Configuration (Alternative)
@@ -75,4 +80,22 @@ ADVANCED_CONFIG = {
     'use_selenium': False,  # For JavaScript-heavy sites
     'proxy_rotation': False,  # For large-scale scraping
     'social_media_integration': False  # Twitter, LinkedIn APIs
+}
+
+# Interactive CLI Configuration
+CLI_CONFIG = {
+    'interactive_mode': True,  # Show preview before sending
+    'auto_approve_trusted': False,  # Auto-approve known good contacts
+    'batch_size': 5,  # Number of messages to preview at once
+    'show_full_message': True,  # Show complete message in preview
+    'require_confirmation': True  # Require explicit confirmation
+}
+
+# Notification Configuration
+NOTIFICATION_CONFIG = {
+    'daily_summary': True,  # Send daily summary
+    'summary_time': '09:00',  # Time for daily summary (24-hour format)
+    'notification_email': 'greg@open.build',  # Where to send notifications
+    'include_analytics': True,  # Include performance metrics
+    'include_pending_approvals': True  # Show messages waiting for approval
 }

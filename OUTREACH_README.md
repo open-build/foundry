@@ -89,14 +89,26 @@ Community-friendly introduction emphasizing value for members.
 
 ## ⚙️ Configuration
 
-### Email Setup (Gmail)
-```python
-EMAIL_CONFIG = {
-    'service': 'gmail',
-    'username': 'your-email@gmail.com', 
-    'password': 'your-app-password',  # Generate in Google Account settings
-    'from_name': 'Buildly Labs Foundry Team'
-}
+### Email Setup (Brevo SMTP) - SECURE
+```bash
+# Step 1: Run secure credential setup
+python setup_credentials.py
+
+# Step 2: Verify .env file is created (and gitignored)
+ls -la .env
+
+# Your .env file will contain:
+# BREVO_SMTP_USERNAME=your-username@smtp-brevo.com
+# BREVO_SMTP_PASSWORD=your-master-password
+# FROM_EMAIL=team@open.build
+```
+
+### Alternative: Gmail Setup
+```bash
+# Set environment variables
+export BREVO_SMTP_USERNAME="your-gmail@gmail.com"
+export BREVO_SMTP_PASSWORD="your-app-password"
+export FROM_EMAIL="team@open.build"
 ```
 
 ### Rate Limiting
@@ -109,13 +121,25 @@ RATE_LIMITS = {
 }
 ```
 
-## 🔒 Privacy & Ethics
+## 🔒 Security & Privacy
 
+### Credential Security
+- **Environment Variables**: All sensitive data stored in .env (never committed)
+- **Secure Setup**: Use `python setup_credentials.py` for safe credential entry
+- **Hidden Input**: Passwords entered with masked input (getpass)
+- **Git Exclusion**: .env files automatically excluded from version control
+
+### Data Privacy
+- **Local Storage**: All contact data stored locally and gitignored
+- **No Cloud Storage**: Contact information never sent to third-party services
+- **Opt-out Compliance**: Automatic unsubscribe handling
+- **GDPR Ready**: Easy data deletion and export capabilities
+
+### Operational Security
 - **Respect Rate Limits**: Built-in delays prevent server overload
 - **Duplicate Prevention**: Never contacts the same person twice within 30 days
-- **Opt-out Handling**: Automatically processes unsubscribe requests
-- **Data Security**: All contact data stored locally and gitignored
 - **Professional Messaging**: Templates maintain professional tone and clear value proposition
+- **Audit Trail**: Complete logging of all outreach activities
 
 ## 📁 Data Structure
 

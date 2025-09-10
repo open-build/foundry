@@ -31,6 +31,7 @@ import random
 import logging
 import argparse
 import requests
+import os
 from datetime import datetime, timedelta
 from dataclasses import dataclass, asdict
 from typing import List, Dict, Set, Optional
@@ -45,6 +46,21 @@ from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
 import yagmail
 from jinja2 import Template
+
+# Load environment variables
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    print("Warning: python-dotenv not installed. Using system environment variables only.")
+import schedule
+from rich.console import Console
+from rich.table import Table
+from rich.panel import Panel
+from rich.prompt import Confirm, Prompt
+from rich.syntax import Syntax
+from rich.progress import Progress, SpinnerColumn, TextColumn
+import textwrap
 
 # Configure logging
 logging.basicConfig(
@@ -85,6 +101,15 @@ class OutreachTarget:
     contacts_found: int = 0
     last_scraped: Optional[str] = None
 
+@dataclass
+class PendingOutreach:
+    """Data class for pending outreach messages"""
+    contact: Contact
+    message: Dict[str, str]
+    timestamp: str
+    approved: bool = False
+    sent: bool = False
+
 class StartupOutreachBot:
     """Main outreach automation class"""
     
@@ -97,16 +122,24 @@ class StartupOutreachBot:
         self.targets_file = self.data_dir / "targets.json"
         self.outreach_log_file = self.data_dir / "outreach_log.json"
         self.analytics_file = self.data_dir / "analytics.json"
+        self.pending_file = self.data_dir / "pending_outreach.json"
         
         # Load existing data
         self.contacts = self.load_contacts()
         self.targets = self.load_targets()
         self.outreach_log = self.load_outreach_log()
+        self.pending_outreach = self.load_pending_outreach()
         
         # Configuration
         self.max_outreach_per_target = 4
         self.min_outreach_per_target = 2
         self.rate_limit_delay = (30, 60)  # Random delay between 30-60 seconds
+        
+        # Rich console for beautiful CLI
+        self.console = Console()
+        
+        # Load configuration
+        self.config = self.load_config()
         
         # Initialize with default targets
         if not self.targets:
@@ -149,6 +182,53 @@ class StartupOutreachBot:
         """Save outreach log to JSON file"""
         with open(self.outreach_log_file, 'w') as f:
             json.dump(self.outreach_log, f, indent=2)
+
+    def load_pending_outreach(self) -> List[PendingOutreach]:
+        """Load pending outreach from JSON file"""
+        if self.pending_file.exists():
+            with open(self.pending_file, 'r') as f:
+                data = json.load(f)
+                return [PendingOutreach(
+                    contact=Contact(**item['contact']),
+                    message=item['message'],
+                    timestamp=item['timestamp'],
+                    approved=item.get('approved', False),
+                    sent=item.get('sent', False)
+                ) for item in data]
+        return []
+
+    def save_pending_outreach(self):
+        """Save pending outreach to JSON file"""
+        data = []
+        for pending in self.pending_outreach:
+            data.append({
+                'contact': asdict(pending.contact),
+                'message': pending.message,
+                'timestamp': pending.timestamp,
+                'approved': pending.approved,
+                'sent': pending.sent
+            })
+        with open(self.pending_file, 'w') as f:
+            json.dump(data, f, indent=2)
+
+    def load_config(self):
+        """Load configuration from config.py"""
+        try:
+            import config
+            return {
+                'email': getattr(config, 'EMAIL_CONFIG', {}),
+                'cli': getattr(config, 'CLI_CONFIG', {}),
+                'notifications': getattr(config, 'NOTIFICATION_CONFIG', {}),
+                'rate_limits': getattr(config, 'RATE_LIMITS', {})
+            }
+        except ImportError:
+            logger.warning("config.py not found, using defaults")
+            return {
+                'email': {},
+                'cli': {'interactive_mode': True},
+                'notifications': {},
+                'rate_limits': {}
+            }
 
     def initialize_default_targets(self):
         """Initialize with default startup-focused targets"""
@@ -662,26 +742,244 @@ Buildly Labs Foundry Team
         
         return "entrepreneurship and startup development"
 
-    def send_outreach_message(self, contact: Contact, message: Dict[str, str]) -> bool:
-        """Send outreach message (placeholder for actual email sending)"""
+    def preview_message_cli(self, contact: Contact, message: Dict[str, str]) -> str:
+        """Preview message in CLI and get user decision"""
         
-        # In production, integrate with email service (Gmail API, SendGrid, etc.)
-        # For now, log the message and simulate sending
+        # Create contact info panel
+        contact_info = f"""
+[bold cyan]Name:[/bold cyan] {contact.name}
+[bold cyan]Email:[/bold cyan] {contact.email}
+[bold cyan]Organization:[/bold cyan] {contact.organization}
+[bold cyan]Role:[/bold cyan] {contact.role}
+[bold cyan]Category:[/bold cyan] {contact.category}
+[bold cyan]Source:[/bold cyan] {contact.source}
+        """
+        
+        self.console.print(Panel(contact_info.strip(), title="📧 Contact Information", border_style="blue"))
+        
+        # Show subject
+        self.console.print(f"\n[bold yellow]Subject:[/bold yellow] {message['subject']}")
+        
+        # Show message body with syntax highlighting
+        wrapped_body = textwrap.fill(message['body'], width=80)
+        self.console.print(Panel(wrapped_body, title="📝 Message Body", border_style="green"))
+        
+        # Show options
+        self.console.print("\n[bold]Options:[/bold]")
+        self.console.print("  [green]s[/green] - Send message")
+        self.console.print("  [yellow]e[/yellow] - Edit message")
+        self.console.print("  [red]k[/red] - Skip this contact")
+        self.console.print("  [blue]q[/blue] - Quit and save progress")
+        
+        while True:
+            choice = Prompt.ask("\nWhat would you like to do?", choices=["s", "e", "k", "q"], default="s")
+            
+            if choice == "s":
+                return "send"
+            elif choice == "e":
+                return "edit" 
+            elif choice == "k":
+                return "skip"
+            elif choice == "q":
+                return "quit"
+
+    def edit_message_cli(self, message: Dict[str, str]) -> Dict[str, str]:
+        """Allow user to edit message in CLI"""
+        
+        self.console.print("\n[bold]Edit Message[/bold]")
+        
+        # Edit subject
+        new_subject = Prompt.ask("Subject", default=message['subject'])
+        
+        # Edit body (simplified - in production, could use external editor)
+        self.console.print("\nCurrent message body:")
+        self.console.print(Panel(message['body'], border_style="dim"))
+        
+        if Confirm.ask("Would you like to edit the message body?"):
+            self.console.print("Enter your new message (type 'END' on a new line to finish):")
+            lines = []
+            while True:
+                line = input()
+                if line.strip() == 'END':
+                    break
+                lines.append(line)
+            new_body = '\n'.join(lines)
+        else:
+            new_body = message['body']
+        
+        return {
+            'subject': new_subject,
+            'body': new_body,
+            'template_used': message['template_used']
+        }
+
+    def interactive_outreach_session(self, pending_outreach: List[PendingOutreach]) -> None:
+        """Run interactive outreach session"""
+        
+        if not pending_outreach:
+            self.console.print("[yellow]No pending outreach messages to review.[/yellow]")
+            return
+        
+        self.console.print(f"\n[bold green]📧 Interactive Outreach Session[/bold green]")
+        self.console.print(f"Found {len(pending_outreach)} messages to review\n")
+        
+        sent_count = 0
+        skipped_count = 0
+        
+        for i, pending in enumerate(pending_outreach):
+            if pending.sent or pending.approved:
+                continue
+                
+            self.console.print(f"\n[bold]Message {i+1} of {len(pending_outreach)}[/bold]")
+            self.console.rule()
+            
+            decision = self.preview_message_cli(pending.contact, pending.message)
+            
+            if decision == "send":
+                if self.send_outreach_message(pending.contact, pending.message):
+                    pending.sent = True
+                    pending.approved = True
+                    sent_count += 1
+                    self.console.print("[green]✅ Message sent successfully![/green]")
+                else:
+                    self.console.print("[red]❌ Failed to send message[/red]")
+                
+            elif decision == "edit":
+                edited_message = self.edit_message_cli(pending.message)
+                pending.message = edited_message
+                
+                # Ask again after editing
+                decision = self.preview_message_cli(pending.contact, edited_message)
+                if decision == "send":
+                    if self.send_outreach_message(pending.contact, edited_message):
+                        pending.sent = True
+                        pending.approved = True
+                        sent_count += 1
+                        self.console.print("[green]✅ Edited message sent successfully![/green]")
+                
+            elif decision == "skip":
+                skipped_count += 1
+                self.console.print("[yellow]⏭️  Skipped this contact[/yellow]")
+                
+            elif decision == "quit":
+                self.console.print("[blue]💾 Saving progress and exiting...[/blue]")
+                break
+            
+            # Add delay between sends
+            if decision == "send" and sent_count > 0:
+                delay = random.uniform(10, 30)
+                self.console.print(f"[dim]Waiting {delay:.1f} seconds before next message...[/dim]")
+                time.sleep(delay)
+        
+        # Save progress
+        self.save_pending_outreach()
+        self.save_contacts()
+        self.save_outreach_log()
+        
+        # Summary
+        self.console.print(f"\n[bold green]📊 Session Summary[/bold green]")
+        self.console.print(f"✅ Sent: {sent_count}")
+        self.console.print(f"⏭️  Skipped: {skipped_count}")
+        self.console.print(f"⏳ Remaining: {len([p for p in pending_outreach if not p.sent and not p.approved])}")
+
+    def send_daily_notification(self):
+        """Send daily summary notification"""
+        try:
+            # Generate summary
+            pending_count = len([p for p in self.pending_outreach if not p.sent])
+            recent_sent = len([log for log in self.outreach_log 
+                             if datetime.fromisoformat(log['timestamp']) > datetime.now() - timedelta(days=1)])
+            
+            notification_config = self.config.get('notifications', {})
+            if not notification_config.get('daily_summary', False):
+                return
+            
+            subject = f"Daily Outreach Summary - {datetime.now().strftime('%Y-%m-%d')}"
+            
+            body = f"""
+Daily Outreach Summary for Buildly Labs Foundry
+===============================================
+
+📊 Today's Stats:
+• Messages sent: {recent_sent}
+• Pending review: {pending_count}
+• Total contacts: {len(self.contacts)}
+• Total targets: {len(self.targets)}
+
+⏳ Action Required:
+{f"You have {pending_count} messages waiting for review." if pending_count > 0 else "No messages pending review."}
+
+To review pending messages, run:
+python startup_outreach.py --mode interactive
+
+---
+Buildly Labs Foundry Outreach System
+            """
+            
+            # Send notification email
+            email_config = self.config.get('email', {})
+            notification_email = notification_config.get('notification_email', email_config.get('from_email'))
+            
+            if notification_email and email_config:
+                dummy_contact = Contact(
+                    name="Greg",
+                    email=notification_email,
+                    organization="Buildly Labs Foundry",
+                    role="Founder",
+                    source="internal",
+                    category="notification"
+                )
+                
+                notification_message = {
+                    'subject': subject,
+                    'body': body.strip(),
+                    'template_used': 'notification'
+                }
+                
+                self.send_outreach_message(dummy_contact, notification_message)
+                logger.info("Daily notification sent")
+            
+        except Exception as e:
+            logger.error(f"Failed to send daily notification: {e}")
+
+    def send_outreach_message(self, contact: Contact, message: Dict[str, str], dry_run: bool = False) -> bool:
+        """Send outreach message via Brevo SMTP"""
+        
+        if dry_run:
+            logger.info(f"[DRY RUN] Would send to {contact.name} at {contact.email}")
+            logger.info(f"[DRY RUN] Subject: {message['subject']}")
+            return True
         
         logger.info(f"Sending outreach to {contact.name} at {contact.email}")
         logger.info(f"Subject: {message['subject']}")
         
-        # Simulate email sending with yagmail (requires configuration)
         try:
-            # Uncomment and configure for actual sending:
-            # yag = yagmail.SMTP('your-gmail@gmail.com', 'your-app-password')
-            # yag.send(
-            #     to=contact.email,
-            #     subject=message['subject'],
-            #     contents=message['body']
-            # )
+            # Brevo SMTP configuration
+            email_config = self.config.get('email', {})
             
-            # For now, just log
+            if not email_config:
+                logger.error("No email configuration found")
+                return False
+            
+            # Create SMTP connection
+            server = smtplib.SMTP(email_config['smtp_server'], email_config['smtp_port'])
+            server.starttls()
+            server.login(email_config['username'], email_config['password'])
+            
+            # Create message
+            msg = MIMEMultipart()
+            msg['From'] = f"{email_config['from_name']} <{email_config['from_email']}>"
+            msg['To'] = contact.email
+            msg['Subject'] = message['subject']
+            msg['Reply-To'] = email_config['from_email']
+            
+            # Add body
+            msg.attach(MIMEText(message['body'], 'plain'))
+            
+            # Send message
+            server.send_message(msg)
+            server.quit()
+            
             logger.info(f"✅ Message sent successfully to {contact.email}")
             
             # Update contact record
@@ -753,8 +1051,8 @@ Buildly Labs Foundry Team
         
         logger.info(f"✅ Discovery complete. Total contacts: {len(self.contacts)}")
 
-    def run_outreach_phase(self):
-        """Run the outreach phase"""
+    def run_outreach_phase(self, interactive: bool = True):
+        """Run the outreach phase - generate pending messages"""
         logger.info("📧 Starting outreach phase...")
         
         # Filter contacts for outreach
@@ -780,36 +1078,74 @@ Buildly Labs Foundry Team
                 org_contacts[contact.organization] = []
             org_contacts[contact.organization].append(contact)
         
-        # Send outreach messages
-        total_sent = 0
+        # Generate pending outreach messages
+        new_pending = []
         
         for org, contacts in org_contacts.items():
             # Limit contacts per organization
             max_contacts = min(len(contacts), random.randint(self.min_outreach_per_target, self.max_outreach_per_target))
             selected_contacts = random.sample(contacts, max_contacts)
             
-            logger.info(f"Reaching out to {len(selected_contacts)} contacts from {org}")
+            logger.info(f"Preparing outreach to {len(selected_contacts)} contacts from {org}")
             
             for contact in selected_contacts:
                 try:
                     # Generate personalized message
                     message = self.generate_outreach_message(contact)
                     
-                    # Send message
-                    if self.send_outreach_message(contact, message):
-                        total_sent += 1
+                    # Create pending outreach
+                    pending = PendingOutreach(
+                        contact=contact,
+                        message=message,
+                        timestamp=datetime.now().isoformat()
+                    )
                     
-                    # Rate limiting between sends
-                    time.sleep(random.uniform(*self.rate_limit_delay))
+                    new_pending.append(pending)
                     
                 except Exception as e:
-                    logger.error(f"Error sending to {contact.email}: {e}")
+                    logger.error(f"Error generating message for {contact.email}: {e}")
         
-        # Save updated data
-        self.save_contacts()
-        self.save_outreach_log()
+        # Add to pending outreach
+        self.pending_outreach.extend(new_pending)
+        self.save_pending_outreach()
         
-        logger.info(f"✅ Outreach complete. Sent {total_sent} messages.")
+        logger.info(f"✅ Generated {len(new_pending)} pending outreach messages.")
+        
+        # Run interactive session if enabled
+        if interactive and self.config.get('cli', {}).get('interactive_mode', True):
+            self.interactive_outreach_session(self.pending_outreach)
+        
+        return len(new_pending)
+    
+    def send_all_pending(self):
+        """Send all pending outreach messages (for non-interactive mode)"""
+        if not self.pending_outreach:
+            logger.info("No pending messages to send")
+            return 0
+        
+        sent_count = 0
+        failed_count = 0
+        
+        for pending in self.pending_outreach[:]:  # Copy list to avoid modification issues
+            try:
+                if self.send_outreach_message(pending.contact, pending.message):
+                    sent_count += 1
+                    self.pending_outreach.remove(pending)
+                else:
+                    failed_count += 1
+                
+                # Rate limiting between sends
+                time.sleep(random.uniform(*self.rate_limit_delay))
+                
+            except Exception as e:
+                logger.error(f"Error sending to {pending.contact.email}: {e}")
+                failed_count += 1
+        
+        # Save updated pending list
+        self.save_pending_outreach()
+        
+        logger.info(f"✅ Sent {sent_count} messages, {failed_count} failed")
+        return sent_count
 
     def generate_analytics_report(self):
         """Generate analytics and performance report"""
@@ -896,10 +1232,12 @@ Buildly Labs Foundry Team
 def main():
     """Main function to handle command line arguments"""
     parser = argparse.ArgumentParser(description='Startup Outreach Automation')
-    parser.add_argument('--mode', choices=['discover', 'outreach', 'report', 'full'], 
+    parser.add_argument('--mode', choices=['discover', 'outreach', 'review', 'send', 'notify', 'report', 'full'], 
                        default='full', help='Operation mode')
     parser.add_argument('--dry-run', action='store_true', 
                        help='Run without actually sending emails')
+    parser.add_argument('--non-interactive', action='store_true',
+                       help='Run in non-interactive mode (auto-send all messages)')
     
     args = parser.parse_args()
     
@@ -910,8 +1248,26 @@ def main():
         if args.mode in ['discover', 'full']:
             bot.run_discovery_phase()
         
-        if args.mode in ['outreach', 'full'] and not args.dry_run:
-            bot.run_outreach_phase()
+        if args.mode in ['outreach', 'full']:
+            interactive = not args.non_interactive and not args.dry_run
+            bot.run_outreach_phase(interactive=interactive)
+        
+        if args.mode == 'review':
+            # Load pending outreach and start interactive session
+            bot.load_pending_outreach()
+            if bot.pending_outreach:
+                bot.interactive_outreach_session(bot.pending_outreach)
+            else:
+                print("No pending outreach messages to review")
+        
+        if args.mode == 'send':
+            # Send all pending messages without review
+            bot.load_pending_outreach()
+            bot.send_all_pending()
+        
+        if args.mode == 'notify':
+            # Send daily notification
+            bot.send_daily_notification()
         
         if args.mode in ['report', 'full']:
             bot.generate_analytics_report()

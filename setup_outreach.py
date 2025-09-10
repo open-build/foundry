@@ -25,9 +25,18 @@ def setup_outreach_system():
         if Path("config_template.py").exists():
             shutil.copy("config_template.py", "config.py")
             print("✅ Created config.py from template")
-            print("⚠️  Please edit config.py with your email settings!")
         else:
             print("❌ config_template.py not found!")
+    
+    # Create .env file from template if it doesn't exist
+    if not Path(".env").exists():
+        if Path(".env.example").exists():
+            shutil.copy(".env.example", ".env")
+            print("✅ Created .env from template")
+            print("⚠️  IMPORTANT: Please edit .env with your REAL credentials!")
+            print("⚠️  Never commit .env to git - it contains sensitive data!")
+        else:
+            print("❌ .env.example not found!")
     
     # Update .gitignore
     gitignore_path = Path(".gitignore")
