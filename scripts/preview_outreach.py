@@ -11,7 +11,7 @@ import sys
 import os
 from pathlib import Path
 
-# Add the current directory to Python path
+# Add the scripts directory to Python path
 sys.path.append(str(Path(__file__).parent))
 
 from startup_outreach import StartupOutreachBot

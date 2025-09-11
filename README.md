@@ -1,47 +1,59 @@
 # Buildly Labs Foundry
 
-A modern static website for the Buildly Labs Foundry program, helping startups accelerate their journey with equity-free assistance, partner connections, and expert guidance.
+**Status**: ✅ FULLY OPERATIONAL | **Launch Date**: September 10, 2025
 
-## 🌟 Features
+A global startup incubator website with automated outreach capabilities, targeting startup publications and communities worldwide with an equity-free support model.
 
-- **Modern Design**: Built with Tailwind CSS for a professional, responsive experience
-- **Multi-Step Application**: Comprehensive startup application form with validation
-- **AI Integration**: BabbleBeaver AI analysis for startup ideas
-- **Google Sheets**: Automatic form submission to Google Sheets
-- **GitHub Pages**: Optimized for easy deployment and hosting
+## 🌟 Current Features
 
-## 🚀 Live Site
+- **Live Website**: https://www.firstcityfoundry.com (GitHub Pages deployment)
+- **Automated Outreach**: 27 messages sent to major startup publications
+- **Daily Analytics**: HTML reports with website traffic and campaign metrics
+- **BCC Monitoring**: All outreach messages copied to team@open.build
+- **Rate Limited**: Ethical outreach with 30-60 second delays
 
-- **Production**: https://www.firstcityfoundry.com
-- **GitHub Pages**: https://open-build.github.io/foundry
+## 🎯 Active Campaigns
 
-## 📁 Site Structure
+- **TechCrunch**: 2 contacts (tips & events teams)
+- **AI News**: 3 contacts (editorial team)
+- **StartupGrind**: 1 contact (community management)
+- **Entrepreneur.com**: 4 contacts (business development, franchise, events)
 
-- **Homepage** (`index.html`): Hero section, benefits, partner showcase
-- **Application Form** (`register.html`): Multi-step startup application
-- **Success Page** (`success.html`): Post-submission confirmation
-- **Assets** (`assets/`): CSS, JavaScript, and images
+## 📁 Project Structure
 
-## 🔧 Quick Start
+```
+foundry/
+├── devdocs/               # 📚 Development documentation
+├── scripts/               # 🐍 Automation scripts (outreach, analytics)
+├── .github/prompts/       # 🤖 Development context for AI assistants
+├── outreach_data/         # 📊 Campaign data and analytics
+├── assets/                # 🎨 Website assets
+└── *.html                 # 🌐 Static website files
+```
 
+## � Quick Start
+
+### For Website Development
 The static site files are in the root directory and ready for GitHub Pages deployment.
 
-### GitHub Pages Setup
-- Go to Repository Settings → Pages
-- Set source to "Deploy from a branch"
-- Select "main" branch and "/ (root)" folder
+### For Outreach Automation
+```bash
+# Install dependencies
+pip3 install -r requirements_outreach.txt
 
-### Custom Domain
-- The `CNAME` file is configured for `foundry.buildly.io`
-- Configure DNS: `CNAME foundry -> open-build.github.io`
+# Run outreach campaign
+python3 scripts/startup_outreach.py --mode outreach
 
-### Integrations
-- Set up Google Sheets integration (see site-README.md)
-- Configure BabbleBeaver API endpoint
+# Generate analytics report
+python3 scripts/startup_outreach.py --mode analytics
+```
 
 ## 📖 Documentation
 
-Complete setup and customization documentation is available in `site-README.md`.
+- **[Development Docs](devdocs/README.md)** - Complete development guide
+- **[Scripts Guide](scripts/README.md)** - Automation system documentation  
+- **[Project Status](.github/prompts/project-status.md)** - Current operational status
+- **[Development Context](.github/prompts/development-context.md)** - AI assistant prompts
 
 ## 🛠️ Local Development
 

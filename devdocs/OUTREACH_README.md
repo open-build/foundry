@@ -30,19 +30,19 @@ cp config_template.py config.py
 
 ```bash
 # Discover new contacts and targets
-python startup_outreach.py --mode discover
+python3 scripts/startup_outreach.py --mode discover
 
 # Send outreach messages  
-python startup_outreach.py --mode outreach
+python3 scripts/startup_outreach.py --mode outreach
 
 # Generate analytics report
-python startup_outreach.py --mode report
+python3 scripts/startup_outreach.py --mode report
 
 # Run full cycle (discover + outreach + report)
-python startup_outreach.py --mode full
+python3 scripts/startup_outreach.py --mode full
 
 # Test without sending emails
-python startup_outreach.py --mode full --dry-run
+python3 scripts/startup_outreach.py --mode full --dry-run
 ```
 
 ## 📊 Target Categories
@@ -185,13 +185,13 @@ ADVANCED_CONFIG = {
 ### Cron Job Setup (Linux/Mac)
 ```bash
 # Run discovery daily at 9 AM
-0 9 * * * cd /path/to/foundry && python startup_outreach.py --mode discover
+0 9 * * * cd /path/to/foundry && python3 scripts/startup_outreach.py --mode discover
 
 # Run outreach Mon/Wed/Fri at 10 AM  
-0 10 * * 1,3,5 cd /path/to/foundry && python startup_outreach.py --mode outreach
+0 10 * * 1,3,5 cd /path/to/foundry && python3 scripts/startup_outreach.py --mode outreach
 
 # Generate weekly reports on Sundays
-0 18 * * 0 cd /path/to/foundry && python startup_outreach.py --mode report
+0 18 * * 0 cd /path/to/foundry && python3 scripts/startup_outreach.py --mode report
 ```
 
 ### GitHub Actions (Alternative)
@@ -206,7 +206,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run Outreach
-        run: python startup_outreach.py --mode discover
+        run: python3 scripts/startup_outreach.py --mode discover
 ```
 
 ## 🎯 Target Outreach Strategy

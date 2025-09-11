@@ -42,7 +42,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 import re
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, quote
 from bs4 import BeautifulSoup
 import yagmail
 from jinja2 import Template
@@ -114,7 +114,9 @@ class StartupOutreachBot:
     """Main outreach automation class"""
     
     def __init__(self):
-        self.data_dir = Path("outreach_data")
+        # Set data directory relative to the root project directory
+        root_dir = Path(__file__).parent.parent
+        self.data_dir = root_dir / "outreach_data"
         self.data_dir.mkdir(exist_ok=True)
         
         # Data files
@@ -123,12 +125,14 @@ class StartupOutreachBot:
         self.outreach_log_file = self.data_dir / "outreach_log.json"
         self.analytics_file = self.data_dir / "analytics.json"
         self.pending_file = self.data_dir / "pending_outreach.json"
+        self.opt_outs_file = self.data_dir / "opt_outs.json"
         
         # Load existing data
         self.contacts = self.load_contacts()
         self.targets = self.load_targets()
         self.outreach_log = self.load_outreach_log()
         self.pending_outreach = self.load_pending_outreach()
+        self.opt_outs = self.load_opt_outs()
         
         # Configuration
         self.max_outreach_per_target = 4
@@ -211,6 +215,54 @@ class StartupOutreachBot:
         with open(self.pending_file, 'w') as f:
             json.dump(data, f, indent=2)
 
+    def load_opt_outs(self) -> Dict:
+        """Load opt-outs from JSON file"""
+        if self.opt_outs_file.exists():
+            with open(self.opt_outs_file, 'r') as f:
+                return json.load(f)
+        return {
+            "opt_outs": [],
+            "created": datetime.now().strftime("%Y-%m-%d"),
+            "last_updated": datetime.now().strftime("%Y-%m-%d"),
+            "total_opt_outs": 0
+        }
+
+    def save_opt_outs(self):
+        """Save opt-outs to JSON file"""
+        with open(self.opt_outs_file, 'w') as f:
+            json.dump(self.opt_outs, f, indent=2)
+
+    def is_opted_out(self, email: str) -> bool:
+        """Check if an email address has opted out"""
+        opt_out_emails = [opt_out['email'].lower() for opt_out in self.opt_outs.get('opt_outs', [])]
+        return email.lower() in opt_out_emails
+
+    def add_opt_out(self, email: str, reason: str = "", source: str = "manual") -> bool:
+        """Add an email to the opt-out list"""
+        if self.is_opted_out(email):
+            return False  # Already opted out
+        
+        opt_out_entry = {
+            'email': email.lower(),
+            'reason': reason,
+            'timestamp': datetime.now().isoformat(),
+            'source': source  # 'web', 'manual', 'bounce', etc.
+        }
+        
+        self.opt_outs['opt_outs'].append(opt_out_entry)
+        self.opt_outs['last_updated'] = datetime.now().strftime("%Y-%m-%d")
+        self.opt_outs['total_opt_outs'] = len(self.opt_outs['opt_outs'])
+        
+        self.save_opt_outs()
+        logger.info(f"✅ Added {email} to opt-out list (reason: {reason or 'no reason'})")
+        return True
+
+    def generate_opt_out_link(self, email: str) -> str:
+        """Generate a personalized opt-out link"""
+        base_url = "https://www.firstcityfoundry.com/opt-out.html"
+        encoded_email = quote(email)
+        return f"{base_url}?email={encoded_email}&auto=true"
+
     def load_config(self):
         """Load configuration from environment variables and config.py"""
         config_data = {
@@ -238,6 +290,13 @@ class StartupOutreachBot:
         
         # Try to load additional config from config.py if it exists
         try:
+            # Add parent directory to sys.path to find config.py in root
+            import sys
+            from pathlib import Path
+            root_dir = Path(__file__).parent.parent
+            if str(root_dir) not in sys.path:
+                sys.path.insert(0, str(root_dir))
+            
             import config
             config_data['email'].update(getattr(config, 'EMAIL_CONFIG', {}))
             config_data['cli'].update(getattr(config, 'CLI_CONFIG', {}))
@@ -620,6 +679,9 @@ Best regards,
 Buildly Labs Foundry Team
 
 P.S. We're also happy to provide exclusive early access to our platform for {{ organization }}'s readers if that would be of interest.
+
+---
+If you no longer wish to receive these communications, you can unsubscribe here: {{ opt_out_link }}
             """,
             
             'influencer': """
@@ -648,6 +710,9 @@ Feel free to reach out with questions to team@open.build.
 
 Best,
 Buildly Labs Foundry Team
+
+---
+If you no longer wish to receive these communications, you can unsubscribe here: {{ opt_out_link }}
             """,
             
             'platform': """
@@ -680,6 +745,9 @@ Please reach out to team@open.build with any questions or to discuss further.
 
 Best regards,
 Buildly Labs Foundry Partnership Team
+
+---
+If you no longer wish to receive these communications, you can unsubscribe here: {{ opt_out_link }}
             """,
             
             'community': """
@@ -708,6 +776,9 @@ Happy to answer any questions at team@open.build.
 
 Cheers,
 Buildly Labs Foundry Team
+
+---
+If you no longer wish to receive these communications, you can unsubscribe here: {{ opt_out_link }}
             """
         }
         
@@ -725,7 +796,8 @@ Buildly Labs Foundry Team
             contact=contact,
             organization=contact.organization,
             focus_area=focus_area,
-            site_url="https://www.firstcityfoundry.com"
+            site_url="https://www.firstcityfoundry.com",
+            opt_out_link=self.generate_opt_out_link(contact.email)
         )
         
         # Extract subject line
@@ -961,6 +1033,11 @@ Buildly Labs Foundry Team
     def send_outreach_message(self, contact: Contact, message: Dict[str, str], dry_run: bool = False) -> bool:
         """Send outreach message via Brevo SMTP"""
         
+        # Check if contact has opted out
+        if self.is_opted_out(contact.email):
+            logger.warning(f"❌ Skipping {contact.email} - opted out")
+            return False
+        
         if dry_run:
             logger.info(f"[DRY RUN] Would send to {contact.name} at {contact.email}")
             logger.info(f"[DRY RUN] Subject: {message['subject']}")
@@ -1084,6 +1161,11 @@ Buildly Labs Foundry Team
         eligible_contacts = []
         
         for contact in self.contacts:
+            # Skip if opted out
+            if self.is_opted_out(contact.email):
+                logger.info(f"Skipping {contact.name} ({contact.email}) - opted out")
+                continue
+                
             # Skip if already contacted recently (within 30 days)
             if contact.last_contact:
                 last_contact = datetime.fromisoformat(contact.last_contact)
@@ -1182,8 +1264,10 @@ Buildly Labs Foundry Team
             'total_contacts': len(self.contacts),
             'total_outreach_sent': len([log for log in self.outreach_log if log['status'] == 'sent']),
             'total_outreach_failed': len([log for log in self.outreach_log if log['status'] == 'failed']),
+            'total_opt_outs': len(self.opt_outs.get('opt_outs', [])),
             'contacts_by_category': {},
             'outreach_by_organization': {},
+            'opt_outs_by_reason': {},
             'response_rate': 0,
             'top_performing_templates': {},
             'recent_activity': []
@@ -1202,6 +1286,15 @@ Buildly Labs Foundry Team
             if org not in analytics['outreach_by_organization']:
                 analytics['outreach_by_organization'][org] = {'sent': 0, 'failed': 0}
             analytics['outreach_by_organization'][org][log['status']] += 1
+        
+        # Opt-outs by reason
+        for opt_out in self.opt_outs.get('opt_outs', []):
+            reason = opt_out.get('reason', 'no_reason')
+            if not reason:
+                reason = 'no_reason'
+            if reason not in analytics['opt_outs_by_reason']:
+                analytics['opt_outs_by_reason'][reason] = 0
+            analytics['opt_outs_by_reason'][reason] += 1
         
         # Template performance
         template_stats = {}
@@ -1237,7 +1330,8 @@ Buildly Labs Foundry Team
         print(f"👥 Total Contacts: {analytics['total_contacts']}")
         print(f"✅ Messages Sent: {analytics['total_outreach_sent']}")
         print(f"❌ Failed Messages: {analytics['total_outreach_failed']}")
-        print(f"📈 Response Rate: {analytics['response_rate']:.1f}%")
+        print(f"� Opt-outs: {analytics['total_opt_outs']}")
+        print(f"�📈 Response Rate: {analytics['response_rate']:.1f}%")
         print(f"🕒 Recent Activity (7 days): {len(analytics['recent_activity'])} actions")
         
         print("\n📊 Contacts by Category:")
@@ -1250,6 +1344,11 @@ Buildly Labs Foundry Team
         for org, count in org_totals[:10]:
             print(f"  • {org}: {count} messages")
         
+        if analytics['total_opt_outs'] > 0:
+            print("\n🚫 Opt-outs by Reason:")
+            for reason, count in analytics['opt_outs_by_reason'].items():
+                print(f"  • {reason.replace('_', ' ').title()}: {count}")
+        
         print("="*60)
         
         logger.info("✅ Analytics report generated")
@@ -1257,12 +1356,16 @@ Buildly Labs Foundry Team
 def main():
     """Main function to handle command line arguments"""
     parser = argparse.ArgumentParser(description='Startup Outreach Automation')
-    parser.add_argument('--mode', choices=['discover', 'outreach', 'review', 'send', 'notify', 'report', 'analytics', 'full'], 
+    parser.add_argument('--mode', choices=['discover', 'outreach', 'review', 'send', 'notify', 'report', 'analytics', 'opt-out', 'full'], 
                        default='full', help='Operation mode')
     parser.add_argument('--dry-run', action='store_true', 
                        help='Run without actually sending emails')
     parser.add_argument('--non-interactive', action='store_true',
                        help='Run in non-interactive mode (auto-send all messages)')
+    parser.add_argument('--email', type=str,
+                       help='Email address for opt-out mode')
+    parser.add_argument('--reason', type=str, default='',
+                       help='Reason for opt-out')
     
     args = parser.parse_args()
     
@@ -1270,6 +1373,19 @@ def main():
     bot = StartupOutreachBot()
     
     try:
+        if args.mode == 'opt-out':
+            if not args.email:
+                print("❌ Email address required for opt-out mode")
+                print("Usage: python startup_outreach.py --mode opt-out --email user@example.com --reason 'reason'")
+                return
+            
+            success = bot.add_opt_out(args.email, args.reason, source='manual')
+            if success:
+                print(f"✅ Successfully opted out {args.email}")
+            else:
+                print(f"ℹ️  {args.email} was already opted out")
+            return
+        
         if args.mode in ['discover', 'full']:
             bot.run_discovery_phase()
         
