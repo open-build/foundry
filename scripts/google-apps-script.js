@@ -15,8 +15,12 @@ const SHEET_ID = '1CXtcY76rIECYdY8o2m1I7Rq7CMQA8p9CZ6_5jSSQWmE';
 const APPLICATIONS_SHEET_NAME = 'Applications';
 const AI_EVALUATIONS_SHEET_NAME = 'AI_Evaluations';
 const BABBLE_BEAVER_API = 'https://babble.buildly.io/api/analyze';
-const PYTHON_SMTP_ENDPOINT = 'https://www.firstcityfoundry.com/api/send-notification';
 const NOTIFICATION_EMAIL = 'greg@open.build';
+
+// Brevo SMTP Configuration
+const BREVO_API_KEY = 'your-brevo-api-key-here'; // Replace with your Brevo API key
+const FROM_EMAIL = 'noreply@open.build'; // Your verified Brevo sender email
+const BREVO_API_URL = 'https://api.brevo.com/v3/smtp/email';
 
 /**
  * Main function to handle POST requests from the form
