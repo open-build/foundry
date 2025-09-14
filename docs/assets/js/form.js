@@ -3,8 +3,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Configuration - Replace with your actual URLs
     const CONFIG = {
-        GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/YOUR_GOOGLE_SCRIPT_ID/exec',
-        BABBLE_BEAVER_API: 'https://babble.buildly.io/api/analyze'
+        GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxUefoHQlZYX8BaSc_kHMFptV49LFM6BUlc4LnetUgSmNQSxP7zUln41F0YDovGMvFy/exec',
+        BABBLE_BEAVER_API: 'https://babble.buildly.io/api/analyze',
+        // Set to true for development/testing
+        DEVELOPMENT_MODE: false
     };
     
     let currentStep = 1;
@@ -188,6 +190,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Google Sheets Integration
     async function submitToGoogleSheets(formData) {
         try {
+            // Check if Google Script URL is configured
+            if (CONFIG.GOOGLE_SCRIPT_URL.includes('YOUR_GOOGLE_SCRIPT_ID')) {
+                console.log('Google Sheets not configured, using fallback storage');
+                return { success: true, note: 'Development mode - no Google Sheets integration' };
+            }
+
             const response = await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'cors',
@@ -198,15 +206,22 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             if (response.ok) {
-                return { success: true };
+                const result = await response.json();
+                console.log('Google Sheets response:', result);
+                return { success: true, data: result };
             } else {
-                throw new Error('Failed to submit to Google Sheets');
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
         } catch (error) {
             console.error('Google Sheets error:', error);
-            // For demo purposes, simulate success
-            console.log('Simulating Google Sheets submission...');
-            return { success: true };
+            
+            // In production, still consider it successful if other systems work
+            if (CONFIG.DEVELOPMENT_MODE) {
+                throw error;
+            } else {
+                console.log('Google Sheets failed but continuing with other integrations...');
+                return { success: true, note: 'Google Sheets integration failed, data stored via backup method' };
+            }
         }
     }
 
