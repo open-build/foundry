@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Configuration - Same Google Apps Script endpoint as foundry applications
     const CONFIG = {
-        GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxUefoHQlZYX8BaSc_kHMFptV49LFM6BUlc4LnetUgSmNQSxP7zUln41F0YDovGMvFy/exec',
+        GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzaXn82jf98akTlphk00Ao0luuM9lDQF6kN2ZN73lWGdSblLsdKtBjxLSfobnlknSvG/exec',
         // Set to true for development/testing
         DEVELOPMENT_MODE: true  // Enable debugging
     };
