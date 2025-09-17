@@ -1,5 +1,6 @@
 // Podcast guest application form handling
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🎙️ Podcast form JavaScript loaded!');
     
     // Configuration - Same Google Apps Script endpoint as foundry applications
     const CONFIG = {
@@ -18,6 +19,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const submitBtn = document.getElementById('submitBtn');
+
+    console.log('📋 Form elements found:', {
+        form: !!form,
+        steps: steps.length,
+        stepIndicators: stepIndicators.length,
+        progressBars: progressBars.length,
+        prevBtn: !!prevBtn,
+        nextBtn: !!nextBtn,
+        submitBtn: !!submitBtn
+    });
 
     // Initialize form
     showStep(currentStep);
@@ -80,13 +91,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function showStep(step) {
+        console.log(`🔄 Showing step ${step}`);
+        
         // Hide all steps
         steps.forEach(s => s.classList.remove('active'));
         
         // Show current step
         const currentStepElement = document.querySelector(`[data-step="${step}"]`);
+        console.log('📍 Current step element:', currentStepElement);
         if (currentStepElement) {
             currentStepElement.classList.add('active');
+            console.log('✅ Added active class to step', step);
+        } else {
+            console.error('❌ Could not find step element for step', step);
         }
         
         // Update step indicators

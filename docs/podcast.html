@@ -54,10 +54,14 @@
         }
         
         .form-step {
-            display: none;
+            display: block;
         }
         
         .form-step.active {
+            display: block !important;
+        }
+        
+        .form-step[data-step="1"] {
             display: block;
         }
         
