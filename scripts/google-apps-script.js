@@ -1,5 +1,14 @@
 /**
- * Google Apps Script for Buildly Labs Foundry Applications
+ * Googl// Configuration
+const SHEET_ID = '1CXtcY76rIECYdY8o2m1I7Rq7CMQA8p9CZ6_5jSSQWmE';
+const APPLICATIONS_SHEET_NAME = 'Applications';
+const AI_EVALUATIONS_SHEET_NAME = 'AI_Evaluations';
+const PODCAST_GUESTS_SHEET_NAME = 'Podcast_Guests';
+const BABBLE_BEAVER_API = 'https://api.babblebeaver.com/analyze';
+const NOTIFICATION_EMAIL = 'greg@open.build';
+
+// Email sender info (using Gmail API - no exposed credentials)
+const FROM_EMAIL = 'team@open.build';t for Buildly Labs Foundry Applications
  * Handles form submissions and AI evaluations
  * 
  * Setup Instructions:
@@ -14,13 +23,12 @@
 const SHEET_ID = '1CXtcY76rIECYdY8o2m1I7Rq7CMQA8p9CZ6_5jSSQWmE';
 const APPLICATIONS_SHEET_NAME = 'Applications';
 const AI_EVALUATIONS_SHEET_NAME = 'AI_Evaluations';
-const BABBLE_BEAVER_API = 'https://babble.buildly.io/api/analyze';
+const PODCAST_GUESTS_SHEET_NAME = 'Podcast_Guests';
+const BABBLE_BEAVER_API = 'https://api.babblebeaver.com/analyze';
 const NOTIFICATION_EMAIL = 'greg@open.build';
 
-// Brevo SMTP Configuration
-const BREVO_API_KEY = 'your-brevo-api-key-here'; // Replace with your Brevo API key
-const FROM_EMAIL = 'noreply@open.build'; // Your verified Brevo sender email
-const BREVO_API_URL = 'https://api.brevo.com/v3/smtp/email';
+// Email sender info (using Gmail API - no exposed credentials)
+const FROM_EMAIL = 'team@open.build';
 
 /**
  * Main function to handle POST requests from the form
@@ -33,21 +41,40 @@ function doPost(e) {
     const formData = parseFormData(e);
     Logger.log('Parsed form data: ' + JSON.stringify(formData));
     
-    // Store application in Google Sheets
-    const applicationId = storeApplication(formData);
-    Logger.log('Stored application with ID: ' + applicationId);
+    // Determine form type based on presence of specific fields
+    const isPodcastApplication = formData.hasOwnProperty('bootstrap_story') || 
+                                 formData.hasOwnProperty('founder_name') || 
+                                 formData.hasOwnProperty('discussion_topics');
     
-    // Send to BabbleBeaver for AI analysis (async)
-    requestAIAnalysis(formData, applicationId);
+    let applicationId, sheetType;
     
-    // Send notification email
-    sendNotificationEmail(formData, applicationId);
+    if (isPodcastApplication) {
+      // Handle podcast guest application
+      applicationId = storePodcastApplication(formData);
+      sheetType = 'podcast';
+      Logger.log('Stored podcast application with ID: ' + applicationId);
+      
+      // Send notification email for podcast
+      sendPodcastNotificationEmail(formData, applicationId);
+    } else {
+      // Handle regular foundry application
+      applicationId = storeApplication(formData);
+      sheetType = 'foundry';
+      Logger.log('Stored foundry application with ID: ' + applicationId);
+      
+      // Send to BabbleBeaver for AI analysis (async)
+      requestAIAnalysis(formData, applicationId);
+      
+      // Send notification email
+      sendNotificationEmail(formData, applicationId);
+    }
     
     // Return success response
     return ContentService
       .createTextOutput(JSON.stringify({
         success: true,
         applicationId: applicationId,
+        type: sheetType,
         message: 'Application submitted successfully'
       }))
       .setMimeType(ContentService.MimeType.JSON);
@@ -162,6 +189,95 @@ function storeApplication(formData) {
     formData.competitive_advantage || '',
     formData.marketing_strategy || '',
     'Pending AI Analysis',
+    ''
+  ];
+  
+  // Add row to sheet
+  sheet.appendRow(rowData);
+  
+  // Auto-resize columns
+  sheet.autoResizeColumns(1, rowData.length);
+  
+  return applicationId;
+}
+
+/**
+ * Store podcast guest application in Google Sheets
+ */
+function storePodcastApplication(formData) {
+  const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
+  
+  // Get or create podcast guests sheet
+  let sheet = spreadsheet.getSheetByName(PODCAST_GUESTS_SHEET_NAME);
+  if (!sheet) {
+    sheet = spreadsheet.insertSheet(PODCAST_GUESTS_SHEET_NAME);
+    
+    // Add headers for podcast applications
+    const headers = [
+      'Submission Date',
+      'Application ID',
+      'Founder Name',
+      'Founder Title',
+      'Email',
+      'Phone',
+      'Company Name',
+      'Company Website',
+      'Company Description',
+      'Founded Year',
+      'Current Stage',
+      'Revenue Range',
+      'Team Size',
+      'Bootstrap Story',
+      'Biggest Challenge',
+      'Discussion Topics',
+      'Advice for Founders',
+      'Recording Preference',
+      'Availability',
+      'Social Media Links',
+      'Additional Info',
+      'Application Status',
+      'Notes'
+    ];
+    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+    
+    // Format headers
+    const headerRange = sheet.getRange(1, 1, 1, headers.length);
+    headerRange.setFontWeight('bold');
+    headerRange.setBackground('#4285f4');
+    headerRange.setFontColor('white');
+    
+    // Freeze header row
+    sheet.setFrozenRows(1);
+  }
+  
+  // Generate unique application ID
+  const timestamp = new Date().getTime();
+  const applicationId = 'PODCAST-' + timestamp;
+  
+  // Prepare row data
+  const rowData = [
+    new Date(),
+    applicationId,
+    formData.founder_name || '',
+    formData.founder_title || '',
+    formData.email || '',
+    formData.phone || '',
+    formData.company_name || '',
+    formData.company_website || '',
+    formData.company_description || '',
+    formData.founded_year || '',
+    formData.current_stage || '',
+    formData.revenue_range || '',
+    formData.team_size || '',
+    formData.bootstrap_story || '',
+    formData.biggest_challenge || '',
+    formData.discussion_topics || '',
+    formData.advice_for_founders || '',
+    formData.recording_preference || '',
+    formData.availability || '',
+    formData.social_media || '',
+    formData.additional_info || '',
+    'New Application',
     ''
   ];
   
@@ -297,7 +413,7 @@ function updateApplicationStatus(applicationId, status) {
 }
 
 /**
- * Send notification email via Python SMTP system
+ * Send notification email via Gmail API (secure)
  */
 function sendNotificationEmail(formData, applicationId) {
   try {
@@ -354,61 +470,113 @@ function sendNotificationEmail(formData, applicationId) {
     </div>
     `;
     
-    // Prepare notification data for Python SMTP system
-    const notificationData = {
-      to: NOTIFICATION_EMAIL,
-      subject: subject,
-      html_body: htmlBody,
-      application_data: {
-        id: applicationId,
-        company: formData.company_name,
-        contact: formData.contact_email,
-        founders: formData.founder_names,
-        description: formData.business_description,
-        funding_sought: formData.funding_amount,
-        revenue: formData.annual_revenue,
-        legal_structure: formData.legal_structure,
-        development_stage: formData.development_stage
-      }
-    };
+    // Send via Gmail API (secure, no exposed credentials)
+    const plainTextBody = htmlBody.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+    GmailApp.sendEmail(NOTIFICATION_EMAIL, subject, plainTextBody, {
+      htmlBody: htmlBody,
+      name: 'Buildly Labs Foundry'
+    });
     
-    // Try to send via Python SMTP endpoint first
-    try {
-      const response = UrlFetchApp.fetch(PYTHON_SMTP_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        payload: JSON.stringify(notificationData)
-      });
-      
-      if (response.getResponseCode() === 200) {
-        Logger.log('✅ Notification sent via Python SMTP to: ' + NOTIFICATION_EMAIL);
-        return;
-      } else {
-        throw new Error('Python SMTP endpoint returned: ' + response.getResponseCode());
-      }
-    } catch (smtpError) {
-      Logger.log('⚠️ Python SMTP failed: ' + smtpError.toString());
-      Logger.log('Falling back to Gmail API...');
-    }
-    
-    // Fallback to Gmail API if Python SMTP fails
-    try {
-      const plainTextBody = htmlBody.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
-      GmailApp.sendEmail(NOTIFICATION_EMAIL, subject, plainTextBody, {
-        htmlBody: htmlBody
-      });
-      Logger.log('✅ Fallback notification sent via Gmail to: ' + NOTIFICATION_EMAIL);
-    } catch (gmailError) {
-      Logger.log('❌ Both notification methods failed:');
-      Logger.log('SMTP Error: ' + smtpError);
-      Logger.log('Gmail Error: ' + gmailError);
-      throw new Error('Failed to send notification via both SMTP and Gmail');
-    }
+    Logger.log('✅ Notification sent via Gmail to: ' + NOTIFICATION_EMAIL);
     
   } catch (error) {
     Logger.log('❌ Error in sendNotificationEmail: ' + error.toString());
+    throw error;
+  }
+}
+
+/**
+ * Send notification email for podcast guest applications via Gmail API (secure)
+ */
+function sendPodcastNotificationEmail(formData, applicationId) {
+  try {
+    const subject = `🎙️ New Podcast Guest Application: ${formData.founder_name || 'Unknown Founder'}`;
+    
+    const htmlBody = `
+    <h2>New Podcast Guest Application Submitted</h2>
+    
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+      <h3 style="color: #2563eb; margin-top: 0;">Founder & Company Info</h3>
+      <p><strong>Application ID:</strong> ${applicationId}</p>
+      <p><strong>Founder:</strong> ${formData.founder_name || 'Not provided'} (${formData.founder_title || 'Not provided'})</p>
+      <p><strong>Email:</strong> ${formData.email || 'Not provided'}</p>
+      <p><strong>Phone:</strong> ${formData.phone || 'Not provided'}</p>
+      <p><strong>Company:</strong> ${formData.company_name || 'Not provided'}</p>
+      <p><strong>Website:</strong> ${formData.company_website || 'Not provided'}</p>
+    </div>
+    
+    <div style="background: #fff; border: 1px solid #e5e7eb; padding: 20px; border-radius: 8px; margin: 20px 0;">
+      <h4 style="color: #374151; margin-top: 0;">Company Description:</h4>
+      <p style="line-height: 1.6;">${formData.company_description || 'Not provided'}</p>
+    </div>
+    
+    <div style="background: #fef3c7; padding: 15px; border-radius: 8px; margin: 20px 0;">
+      <h4 style="color: #92400e; margin-top: 0;">Business Details:</h4>
+      <p><strong>Founded:</strong> ${formData.founded_year || 'Not specified'}</p>
+      <p><strong>Current Stage:</strong> ${formData.current_stage || 'Not specified'}</p>
+      <p><strong>Revenue Range:</strong> ${formData.revenue_range || 'Not specified'}</p>
+      <p><strong>Team Size:</strong> ${formData.team_size || 'Not specified'}</p>
+    </div>
+    
+    <div style="background: #ecfdf5; padding: 15px; border-radius: 8px; margin: 20px 0;">
+      <h4 style="color: #065f46; margin-top: 0;">Bootstrap Story:</h4>
+      <p style="line-height: 1.6;">${formData.bootstrap_story || 'Not provided'}</p>
+    </div>
+    
+    <div style="background: #fef2f2; padding: 15px; border-radius: 8px; margin: 20px 0;">
+      <h4 style="color: #991b1b; margin-top: 0;">Current Challenge:</h4>
+      <p style="line-height: 1.6;">${formData.biggest_challenge || 'Not provided'}</p>
+    </div>
+    
+    <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin: 20px 0;">
+      <h4 style="color: #0369a1; margin-top: 0;">Podcast Details:</h4>
+      <p><strong>Discussion Topics:</strong> ${formData.discussion_topics || 'Not provided'}</p>
+      <p><strong>Advice for Founders:</strong> ${formData.advice_for_founders || 'Not provided'}</p>
+      <p><strong>Recording Preference:</strong> ${formData.recording_preference || 'Not specified'}</p>
+      <p><strong>Availability:</strong> ${formData.availability || 'Not specified'}</p>
+      <p><strong>Social Media:</strong> ${formData.social_media || 'Not provided'}</p>
+    </div>
+    
+    ${formData.additional_info ? `
+    <div style="background: #f9fafb; padding: 15px; border-radius: 8px; margin: 20px 0;">
+      <h4 style="color: #374151; margin-top: 0;">Additional Information:</h4>
+      <p style="line-height: 1.6;">${formData.additional_info}</p>
+    </div>
+    ` : ''}
+    
+    <div style="text-align: center; margin: 30px 0;">
+      <a href="https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit" 
+         style="background: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
+        📊 View Full Application in Google Sheets
+      </a>
+    </div>
+    
+    <div style="background: #f3f4f6; padding: 15px; border-radius: 8px; margin: 20px 0; font-size: 14px; color: #6b7280;">
+      <p><strong>Next Steps:</strong></p>
+      <ul>
+        <li>Review the founder's bootstrap story and current challenges</li>
+        <li>Evaluate if they're a good fit for the podcast</li>
+        <li>Reach out to schedule a pre-interview conversation</li>
+        <li>Plan discussion topics and questions</li>
+      </ul>
+      
+      <hr style="margin: 15px 0; border: none; border-top: 1px solid #d1d5db;">
+      <p style="margin: 0;"><em>FirstCityFoundry Bootstrapped Founders Podcast</em><br>
+      Portland StartupGrind Partnership</p>
+    </div>
+    `;
+    
+    // Send via Gmail API (secure, no exposed credentials)
+    const plainTextBody = htmlBody.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+    GmailApp.sendEmail(NOTIFICATION_EMAIL, subject, plainTextBody, {
+      htmlBody: htmlBody,
+      name: 'FirstCityFoundry Podcast'
+    });
+    
+    Logger.log('✅ Podcast notification sent via Gmail to: ' + NOTIFICATION_EMAIL);
+    
+  } catch (error) {
+    Logger.log('❌ Error in sendPodcastNotificationEmail: ' + error.toString());
     throw error;
   }
 }

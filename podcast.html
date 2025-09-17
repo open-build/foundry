@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrapped Founders Podcast | FirstCityFoundry</title>
+    <meta name="description" content="Share your bootstrapped startup journey on the FirstCityFoundry Bootstrapped Founders Podcast. Connect with Portland StartupGrind and inspire other entrepreneurs.">
+    <meta name="keywords" content="bootstrapped startups, founders podcast, Portland startup community, startup grind, entrepreneur stories, self-funded startups">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.firstcityfoundry.com/podcast">
+    <meta property="og:title" content="Bootstrapped Founders Podcast | FirstCityFoundry">
+    <meta property="og:description" content="Share your bootstrapped startup journey on our podcast. Connect with Portland StartupGrind and inspire other entrepreneurs.">
+    <meta property="og:image" content="https://www.firstcityfoundry.com/assets/img/OpenBuild.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.firstcityfoundry.com/podcast">
+    <meta property="twitter:title" content="Bootstrapped Founders Podcast | FirstCityFoundry">
+    <meta property="twitter:description" content="Share your bootstrapped startup journey on our podcast. Connect with Portland StartupGrind and inspire other entrepreneurs.">
+    <meta property="twitter:image" content="https://www.firstcityfoundry.com/assets/img/OpenBuild.png">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                        accent: '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Styles -->
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .podcast-hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%);
+        }
+        
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+        }
+        
+        .step-indicator {
+            @apply w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-200;
+        }
+        
+        .step-indicator.completed {
+            @apply bg-green-500 text-white;
+        }
+        
+        .step-indicator.current {
+            @apply bg-primary text-white;
+        }
+        
+        .step-indicator.pending {
+            @apply bg-gray-200 text-gray-600;
+        }
+        
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        
+        .spinner {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .podcast-card {
+            @apply bg-white rounded-xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-shadow duration-300;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <img src="assets/img/OpenBuild.png" alt="Buildly Labs" class="h-10 w-auto">
+                        <span class="ml-3 text-xl font-bold text-gray-900">FirstCityFoundry</span>
+                    </a>
+                </div>
+                
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+                        <a href="register.html" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Apply to Foundry</a>
+                        <a href="podcast.html" class="text-primary bg-blue-50 px-3 py-2 rounded-md text-sm font-medium">Podcast Guest</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="text-gray-700 hover:text-primary focus:outline-none focus:text-primary">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="podcast-hero text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    Bootstrapped Founders <br>
+                    <span class="text-yellow-300">Podcast</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
+                    Share your bootstrapped startup journey with the Portland StartupGrind community. 
+                    Inspire other founders with your story, challenges, and victories.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#apply" class="bg-yellow-400 text-blue-900 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-yellow-300 transition-colors">
+                        Apply to be a Guest
+                    </a>
+                    <a href="#about" class="border-2 border-white text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-white hover:text-blue-900 transition-colors">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Why Share Your Story?
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    The FirstCityFoundry Bootstrapped Founders Podcast, in partnership with Portland StartupGrind, 
+                    showcases the real stories behind self-funded startups. Your experience can inspire and guide other entrepreneurs.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="podcast-card text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Share Your Journey</h3>
+                    <p class="text-gray-600">
+                        Tell the Portland startup community about your bootstrapping experience, 
+                        from the initial idea to where you are today.
+                    </p>
+                </div>
+
+                <div class="podcast-card text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Inspire Others</h3>
+                    <p class="text-gray-600">
+                        Your story can motivate other entrepreneurs to pursue their dreams and 
+                        learn from your successes and challenges.
+                    </p>
+                </div>
+
+                <div class="podcast-card text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Build Your Brand</h3>
+                    <p class="text-gray-600">
+                        Gain exposure for your startup and establish yourself as a thought leader 
+                        in the Portland entrepreneurship community.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We'll Discuss Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    What We'll Discuss
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Our conversations dive deep into the real experiences of bootstrapped founders
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold text-gray-900 mb-2">Your Origin Story</h4>
+                    <p class="text-sm text-gray-600">How did you come up with your idea and decide to bootstrap?</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold text-gray-900 mb-2">Early Challenges</h4>
+                    <p class="text-sm text-gray-600">What obstacles did you face in the early days?</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold text-gray-900 mb-2">Growth Strategies</h4>
+                    <p class="text-sm text-gray-600">How did you grow without external funding?</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold text-gray-900 mb-2">Current Struggles</h4>
+                    <p class="text-sm text-gray-600">What are you working through right now?</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold text-gray-900 mb-2">Financial Management</h4>
+                    <p class="text-sm text-gray-600">How do you manage cash flow and reinvestment?</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold text-gray-900 mb-2">Team Building</h4>
+                    <p class="text-sm text-gray-600">How do you build a team on a bootstrap budget?</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold text-gray-900 mb-2">Lessons Learned</h4>
+                    <p class="text-sm text-gray-600">What would you do differently if starting over?</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold text-gray-900 mb-2">Advice for Others</h4>
+                    <p class="text-sm text-gray-600">What wisdom can you share with other founders?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Form Section -->
+    <section id="apply" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Apply to be a Podcast Guest
+                </h2>
+                <p class="text-lg text-gray-600">
+                    Share your bootstrapped startup story with our community
+                </p>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div class="mb-8">
+                <div class="flex items-center justify-center space-x-4 mb-4">
+                    <div class="step-indicator current" data-step="1">1</div>
+                    <div class="w-12 h-1 bg-gray-200 rounded">
+                        <div class="progress-bar bg-primary h-full rounded" style="width: 0%"></div>
+                    </div>
+                    <div class="step-indicator pending" data-step="2">2</div>
+                    <div class="w-12 h-1 bg-gray-200 rounded">
+                        <div class="progress-bar bg-primary h-full rounded" style="width: 0%"></div>
+                    </div>
+                    <div class="step-indicator pending" data-step="3">3</div>
+                </div>
+                <div class="text-center text-sm text-gray-600">
+                    <span id="step-text">Personal & Company Info</span>
+                </div>
+            </div>
+
+            <!-- Application Form -->
+            <form id="podcastApplicationForm" class="space-y-6">
+                
+                <!-- Step 1: Personal & Company Info -->
+                <div class="form-step active" data-step="1">
+                    <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Tell Us About You and Your Company</h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="founder_name" class="block text-sm font-medium text-gray-700 mb-2">Your Name *</label>
+                                <input type="text" id="founder_name" name="founder_name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            
+                            <div>
+                                <label for="founder_title" class="block text-sm font-medium text-gray-700 mb-2">Your Title *</label>
+                                <input type="text" id="founder_title" name="founder_title" placeholder="e.g., CEO, Founder, Co-founder" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mt-4">
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                                <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mt-4">
+                            <div>
+                                <label for="company_name" class="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
+                                <input type="text" id="company_name" name="company_name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            
+                            <div>
+                                <label for="company_website" class="block text-sm font-medium text-gray-700 mb-2">Company Website</label>
+                                <input type="url" id="company_website" name="company_website" placeholder="https://" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <label for="company_description" class="block text-sm font-medium text-gray-700 mb-2">What does your company do? *</label>
+                            <textarea id="company_description" name="company_description" rows="3" required placeholder="Brief description of your business and what problem you solve..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Bootstrapping Experience -->
+                <div class="form-step" data-step="2">
+                    <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Your Bootstrapping Journey</h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="founded_year" class="block text-sm font-medium text-gray-700 mb-2">When was your company founded? *</label>
+                                <input type="number" id="founded_year" name="founded_year" min="1900" max="2030" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            
+                            <div>
+                                <label for="current_stage" class="block text-sm font-medium text-gray-700 mb-2">Current Stage *</label>
+                                <select id="current_stage" name="current_stage" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">Select stage...</option>
+                                    <option value="idea">Idea Stage</option>
+                                    <option value="prototype">Prototype/MVP</option>
+                                    <option value="early_revenue">Early Revenue</option>
+                                    <option value="growing">Growing Revenue</option>
+                                    <option value="profitable">Profitable</option>
+                                    <option value="scaling">Scaling</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mt-4">
+                            <div>
+                                <label for="revenue_range" class="block text-sm font-medium text-gray-700 mb-2">Current Annual Revenue Range</label>
+                                <select id="revenue_range" name="revenue_range" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">Prefer not to say</option>
+                                    <option value="0">$0 (Pre-revenue)</option>
+                                    <option value="1-10k">$1K - $10K</option>
+                                    <option value="10k-50k">$10K - $50K</option>
+                                    <option value="50k-100k">$50K - $100K</option>
+                                    <option value="100k-500k">$100K - $500K</option>
+                                    <option value="500k-1m">$500K - $1M</option>
+                                    <option value="1m+">$1M+</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="team_size" class="block text-sm font-medium text-gray-700 mb-2">Current Team Size</label>
+                                <select id="team_size" name="team_size" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">Select team size...</option>
+                                    <option value="solo">Just me (Solo founder)</option>
+                                    <option value="2-3">2-3 people</option>
+                                    <option value="4-10">4-10 people</option>
+                                    <option value="11-25">11-25 people</option>
+                                    <option value="26-50">26-50 people</option>
+                                    <option value="50+">50+ people</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <label for="bootstrap_story" class="block text-sm font-medium text-gray-700 mb-2">Tell us your bootstrapping story *</label>
+                            <textarea id="bootstrap_story" name="bootstrap_story" rows="4" required placeholder="How did you start? What challenges have you faced? What victories have you had? What are you struggling with now?" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <label for="biggest_challenge" class="block text-sm font-medium text-gray-700 mb-2">What's your biggest challenge right now? *</label>
+                            <textarea id="biggest_challenge" name="biggest_challenge" rows="3" required placeholder="What's keeping you up at night? What obstacle are you trying to overcome?" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Podcast Details -->
+                <div class="form-step" data-step="3">
+                    <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Podcast Participation</h3>
+                        
+                        <div class="mt-4">
+                            <label for="discussion_topics" class="block text-sm font-medium text-gray-700 mb-2">What topics would you like to discuss? *</label>
+                            <textarea id="discussion_topics" name="discussion_topics" rows="3" required placeholder="e.g., Customer acquisition, product development, team building, financial management, work-life balance..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <label for="advice_for_founders" class="block text-sm font-medium text-gray-700 mb-2">What advice would you give to aspiring bootstrapped founders? *</label>
+                            <textarea id="advice_for_founders" name="advice_for_founders" rows="3" required placeholder="Share your wisdom and lessons learned..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mt-4">
+                            <div>
+                                <label for="recording_preference" class="block text-sm font-medium text-gray-700 mb-2">Recording Preference *</label>
+                                <select id="recording_preference" name="recording_preference" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">Select preference...</option>
+                                    <option value="remote">Remote (Video call)</option>
+                                    <option value="in_person">In-person (Portland area)</option>
+                                    <option value="either">Either is fine</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="availability" class="block text-sm font-medium text-gray-700 mb-2">Best Time for Recording</label>
+                                <select id="availability" name="availability" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">Select timeframe...</option>
+                                    <option value="morning">Morning (9 AM - 12 PM)</option>
+                                    <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
+                                    <option value="evening">Evening (5 PM - 8 PM)</option>
+                                    <option value="flexible">Flexible</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <label for="social_media" class="block text-sm font-medium text-gray-700 mb-2">Social Media Links</label>
+                            <textarea id="social_media" name="social_media" rows="2" placeholder="LinkedIn, Twitter, Instagram, etc. (optional)" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <label for="additional_info" class="block text-sm font-medium text-gray-700 mb-2">Anything else you'd like us to know?</label>
+                            <textarea id="additional_info" name="additional_info" rows="3" placeholder="Any other information that would help us prepare for the interview..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Navigation -->
+                <div class="flex justify-between items-center pt-6">
+                    <button type="button" id="prevBtn" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors" style="display: none;">
+                        Previous
+                    </button>
+                    
+                    <div class="flex space-x-4">
+                        <button type="button" id="nextBtn" class="px-8 py-3 bg-primary text-white rounded-md hover:bg-secondary transition-colors">
+                            Next Step
+                        </button>
+                        
+                        <button type="submit" id="submitBtn" class="px-8 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors" style="display: none;">
+                            Submit Application
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="message" class="mt-4 p-4 rounded-md hidden"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <img src="assets/img/OpenBuild.png" alt="Buildly Labs" class="h-10 w-auto">
+                        <span class="ml-3 text-xl font-bold">FirstCityFoundry</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Empowering bootstrapped founders through community, content, and connection. 
+                        Part of the Portland StartupGrind ecosystem.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.097.118.112.221.083.343-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.746-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="register.html" class="text-gray-300 hover:text-white transition-colors">Apply to Foundry</a></li>
+                        <li><a href="podcast.html" class="text-gray-300 hover:text-white transition-colors">Podcast Guest</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <p class="text-gray-300">
+                        Email: team@open.build<br>
+                        Portland, Oregon
+                    </p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2025 FirstCityFoundry. Part of Buildly Labs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/podcast-form.js"></script>
+</body>
+
+</html>

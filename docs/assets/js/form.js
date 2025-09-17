@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Configuration - Replace with your actual URLs
     const CONFIG = {
         GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxUefoHQlZYX8BaSc_kHMFptV49LFM6BUlc4LnetUgSmNQSxP7zUln41F0YDovGMvFy/exec',
-        BABBLE_BEAVER_API: 'https://babble.buildly.io/api/analyze',
+        BABBLE_BEAVER_API: 'https://api.babblebeaver.com/analyze', // Fixed URL
         // Set to true for development/testing
-        DEVELOPMENT_MODE: false
+        DEVELOPMENT_MODE: true  // Enable debugging
     };
     
     let currentStep = 1;
@@ -190,12 +190,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Google Sheets Integration
     async function submitToGoogleSheets(formData) {
         try {
+            console.log('📋 Starting Google Sheets submission...');
+            console.log('Form data:', formData);
+            
             // Check if Google Script URL is configured
             if (CONFIG.GOOGLE_SCRIPT_URL.includes('YOUR_GOOGLE_SCRIPT_ID')) {
                 console.log('Google Sheets not configured, using fallback storage');
                 return { success: true, note: 'Development mode - no Google Sheets integration' };
             }
 
+            console.log('🚀 Submitting to:', CONFIG.GOOGLE_SCRIPT_URL);
+            
             const response = await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'cors',
@@ -205,15 +210,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: new URLSearchParams(formData)
             });
             
+            console.log('📡 Response status:', response.status, response.statusText);
+            console.log('📡 Response headers:', [...response.headers.entries()]);
+            
             if (response.ok) {
-                const result = await response.json();
-                console.log('Google Sheets response:', result);
-                return { success: true, data: result };
+                const result = await response.text(); // Get as text first
+                console.log('📄 Raw response:', result);
+                
+                try {
+                    const jsonResult = JSON.parse(result);
+                    console.log('✅ Parsed response:', jsonResult);
+                    return { success: true, data: jsonResult };
+                } catch (parseError) {
+                    console.log('⚠️ Response is not JSON, treating as success:', result);
+                    return { success: true, data: { message: result } };
+                }
             } else {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                const errorText = await response.text();
+                console.error('❌ Error response:', errorText);
+                throw new Error(`HTTP ${response.status}: ${response.statusText} - ${errorText}`);
             }
         } catch (error) {
-            console.error('Google Sheets error:', error);
+            console.error('💥 Google Sheets error:', error);
+            console.error('Stack trace:', error.stack);
             
             // In production, still consider it successful if other systems work
             if (CONFIG.DEVELOPMENT_MODE) {

@@ -94,13 +94,16 @@ const CONFIG = {
 ```javascript
 // You can modify these constants:
 const SHEET_ID = '1CXtcY76rIECYdY8o2m1I7Rq7CMQA8p9CZ6_5jSSQWmE';
-const NOTIFICATION_EMAIL = 'team@open.build';  // Change notification email
+const NOTIFICATION_EMAIL = 'greg@open.build';  // Change notification email
+const BREVO_API_KEY = 'your-brevo-api-key-here'; // Your Brevo API key
+const FROM_EMAIL = 'noreply@open.build'; // Your verified Brevo sender email
 const BABBLE_BEAVER_API = 'https://babble.buildly.io/api/analyze';
 ```
 
 ### **Email Notifications:**
-- Sends automatic email to `team@open.build` for each new application
-- Includes application summary and link to Google Sheet
+- Sends automatic email via **Brevo SMTP** to `greg@open.build` for each new application
+- Includes rich HTML formatting with application summary and link to Google Sheet
+- Falls back to Gmail API if Brevo fails
 - Can be disabled by commenting out the `sendNotificationEmail()` call
 
 ## 🔍 **Troubleshooting**

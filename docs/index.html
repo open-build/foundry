@@ -3,11 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buildly Labs Foundry - Accelerate Your Startup Journey</title>
-    <meta name="description" content="Join the Buildly Labs Foundry network to accelerate your startup with equity-free assistance, partner connections, and expert guidance.">
+    <title>Global Startup Incubator | Developer Program | Buildly Labs Foundry - Apply for Help Today</title>
+    <meta name="description" content="Join our global startup incubator for developers worldwide. Partner with OpenBuild and Buildly Labs for equity-free help, cloud hosting credits, AI analysis, and expert mentorship. Transform your software ideas into successful businesses globally.">
+    
+    <!-- SEO Keywords -->
+    <meta name="keywords" content="global startup incubator, international developer program, apply for help, cloud hosting, startup mentorship, equity-free incubator, software development, MVP development, startup accelerator, tech incubator, entrepreneur support, business development, startup funding, developer resources, startup advice, OpenBuild partnership, Buildly Labs, worldwide startup foundry, international software incubator">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.firstcityfoundry.com/">
+    <meta property="og:title" content="Global Startup Incubator for Developers | OpenBuild & Buildly Labs Partnership">
+    <meta property="og:description" content="Join our global startup incubator for developers worldwide. Partner with OpenBuild and Buildly Labs for equity-free help, cloud hosting, and expert mentorship.">
+    <meta property="og:image" content="https://www.firstcityfoundry.com/assets/img/OpenBuild.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.firstcityfoundry.com/">
+    <meta property="twitter:title" content="Global Startup Incubator for Developers | OpenBuild & Buildly Labs Partnership">
+    <meta property="twitter:description" content="Join our global startup incubator for developers worldwide. Partner with OpenBuild and Buildly Labs for equity-free help and mentorship.">
+    <meta property="twitter:image" content="https://www.firstcityfoundry.com/assets/img/OpenBuild.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.firstcityfoundry.com/">
+    
+    <!-- Author and Organization -->
+    <meta name="author" content="Buildly Labs Foundry">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -29,6 +53,18 @@
         }
     </script>
     
+    <!-- Suppress Tailwind production warning for GitHub Pages -->
+    <script>
+        if (typeof tailwind !== 'undefined' && tailwind.config) {
+            // Suppress production warning in console
+            const originalWarn = console.warn;
+            console.warn = function(...args) {
+                if (args[0] && args[0].includes && args[0].includes('Tailwind CSS')) return;
+                originalWarn.apply(console, args);
+            };
+        }
+    </script>
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/main.css">
     
@@ -37,6 +73,84 @@
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Buildly Labs Foundry",
+        "description": "Global startup incubator and developer program in partnership with OpenBuild and Buildly Labs, offering equity-free assistance, cloud hosting, and mentorship for software entrepreneurs worldwide",
+        "url": "https://www.firstcityfoundry.com",
+        "logo": "https://www.firstcityfoundry.com/assets/img/logo-horizontal.png",
+        "sameAs": [
+            "https://labs.buildly.io",
+            "https://www.buildly.io",
+            "https://babble.buildly.io"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "Customer Service",
+            "url": "https://www.firstcityfoundry.com/register.html"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "US"
+        },
+        "offers": {
+            "@type": "Offer",
+            "name": "Startup Incubator Program",
+            "description": "Equity-free startup assistance, cloud hosting credits, AI analysis, and expert mentorship",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Global Startup Incubator Program",
+        "description": "Comprehensive international startup development program for software entrepreneurs and developers worldwide, powered by partnerships with OpenBuild and Buildly Labs",
+        "provider": {
+            "@type": "Organization",
+            "name": "Buildly Labs Foundry"
+        },
+        "serviceType": "Global Startup Incubator",
+        "areaServed": "Worldwide",
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Startup Support Services",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Equity-Free Mentorship",
+                        "description": "Expert guidance without giving up company ownership"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Cloud Hosting Credits",
+                        "description": "Free Google Cloud hosting for MVP development"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "AI Startup Analysis",
+                        "description": "Comprehensive AI-powered evaluation of your startup idea"
+                    }
+                }
+            ]
+        }
+    }
+    </script>
 </head>
 <body class="font-sans antialiased">
 
@@ -46,15 +160,17 @@
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <img class="h-10 w-auto" src="assets/img/logo-horizontal.png" alt="Buildly Labs Foundry">
+                        <a href="/" aria-label="Buildly Labs Foundry - Startup Incubator Home">
+                            <img class="h-10 w-auto" src="assets/img/logo-horizontal.png" alt="Buildly Labs Foundry - Startup Incubator for Developers">
+                        </a>
                     </div>
                 </div>
                 
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">About</a>
-                    <a href="#benefits" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">Benefits</a>
-                    <a href="#partners" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">Partners</a>
-                    <a href="register.html" class="bg-primary-600 text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-primary-700 transition-colors">Apply Now</a>
+                    <a href="#benefits" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">Incubator Benefits</a>
+                    <a href="#partners" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">Developer Partners</a>
+                    <a href="podcast.html" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">Podcast</a>
+                    <a href="register.html" class="bg-primary-600 text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-primary-700 transition-colors" aria-label="Apply for startup incubator help">Apply for Help</a>
                 </div>
                 
                 <!-- Mobile menu button -->
@@ -71,10 +187,10 @@
         <!-- Mobile menu -->
         <div class="mobile-menu hidden md:hidden">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
-                <a href="#about" class="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium">About</a>
-                <a href="#benefits" class="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium">Benefits</a>
-                <a href="#partners" class="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium">Partners</a>
-                <a href="register.html" class="bg-primary-600 text-white block px-3 py-2 text-base font-medium rounded-md mx-3 text-center">Apply Now</a>
+                <a href="#benefits" class="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium">Incubator Benefits</a>
+                <a href="#partners" class="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium">Developer Partners</a>
+                <a href="podcast.html" class="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium">Podcast</a>
+                <a href="register.html" class="bg-primary-600 text-white block px-3 py-2 text-base font-medium rounded-md mx-3 text-center" aria-label="Apply for startup incubator help">Apply for Help</a>
             </div>
         </div>
     </nav>
@@ -86,21 +202,24 @@
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="text-center lg:text-left">
                     <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
-                        Accelerate Your 
-                        <span class="text-primary-600">Startup Journey</span>
-                        with Buildly Labs Foundry
+                        <span class="text-primary-600">Global Startup Foundry</span> for Developers
+                        <br>Apply for Help Worldwide
                     </h1>
                     <p class="mt-6 text-xl text-gray-600 leading-relaxed">
-                        Join a network of innovative founders building the future. Get equity-free assistance, 
-                        partner connections, and expert guidance to turn your software ideas into thriving businesses.
+                        Join our global equity-free startup incubator designed for software developers and entrepreneurs worldwide. 
+                        In partnership with OpenBuild and Buildly Labs, get cloud hosting credits, AI-powered startup analysis, 
+                        expert mentorship, and international connections to transform your ideas into successful businesses.
                     </p>
                     <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                         <a href="register.html" 
-                           class="bg-primary-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                            Start Your Application
+                           class="bg-primary-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                           aria-label="Apply for startup incubator program">
+                            Apply for Help Today
                         </a>
                         <a href="https://labs.buildly.io" 
-                           class="bg-white text-primary-600 px-8 py-4 rounded-lg text-lg font-semibold border-2 border-primary-600 hover:bg-primary-50 transition-colors">
+                           class="bg-white text-primary-600 px-8 py-4 rounded-lg text-lg font-semibold border-2 border-primary-600 hover:bg-primary-50 transition-colors"
+                           target="_blank" rel="noopener noreferrer"
+                           aria-label="Try Buildly Labs developer platform">
                             Try Buildly Labs
                         </a>
                     </div>
@@ -124,23 +243,24 @@
                 
                 <div class="relative">
                     <div class="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden shadow-2xl">
-                        <img src="assets/img/slide/oc-elevator.jpeg" 
-                             alt="Buildly Labs Foundry" 
-                             class="object-cover w-full h-full">
+                        <img src="assets/img/slide/berlin.png" 
+                             alt="Global startup incubator program for developers - modern collaborative workspace showcasing international software entrepreneur community" 
+                             class="object-cover w-full h-full"
+                             loading="eager">
                     </div>
                     
                     <!-- Floating cards -->
                     <div class="absolute -top-6 -left-6 bg-white rounded-lg shadow-lg p-4 border border-gray-100">
                         <div class="flex items-center space-x-3">
-                            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                            <span class="text-sm font-medium">Free Hosting Credits</span>
+                            <div class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></div>
+                            <span class="text-sm font-medium">Free Cloud Hosting Credits</span>
                         </div>
                     </div>
                     
                     <div class="absolute -bottom-6 -right-6 bg-white rounded-lg shadow-lg p-4 border border-gray-100">
                         <div class="flex items-center space-x-3">
-                            <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
-                            <span class="text-sm font-medium">AI Startup Analysis</span>
+                            <div class="w-3 h-3 bg-blue-500 rounded-full" aria-hidden="true"></div>
+                            <span class="text-sm font-medium">AI-Powered Startup Analysis</span>
                         </div>
                     </div>
                 </div>
@@ -153,10 +273,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                    Why Choose Buildly Labs Foundry?
+                    Why Developers Choose Our Startup Incubator Program
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    We provide everything you need to transform your software idea into a successful business
+                    Get comprehensive startup help including cloud hosting, expert mentorship, and AI analysis 
+                    to accelerate your software development journey from idea to successful business
                 </p>
             </div>
 
@@ -165,9 +286,10 @@
                     <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary-200 transition-colors">
                         <i class="fas fa-binoculars text-2xl text-primary-600"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Lean Startup Methodology</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Startup Incubator Methodology</h3>
                     <p class="text-gray-600 leading-relaxed">
-                        Bring your software product idea to life with proven lean startup principles and expert guidance from day one.
+                        Apply for help with proven lean startup principles. Our developer-focused incubator provides 
+                        expert guidance and mentorship to bring your software ideas to market successfully.
                     </p>
                 </div>
 
@@ -175,9 +297,10 @@
                     <div class="bg-accent-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-accent-200 transition-colors">
                         <i class="fas fa-chart-line text-2xl text-accent-600"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Product First, Scale Smart</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Developer-First Scaling</h3>
                     <p class="text-gray-600 leading-relaxed">
-                        Build a robust MVP with our expert advice, then scale strategically to attract investors and customers.
+                        Build robust MVPs with cloud hosting support and technical expertise, then scale strategically 
+                        to attract investors and customers in the competitive software market.
                     </p>
                 </div>
 
@@ -185,9 +308,11 @@
                     <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-200 transition-colors">
                         <i class="fas fa-rocket text-2xl text-green-600"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Rapid Development</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Global Cloud-Powered Development</h3>
                     <p class="text-gray-600 leading-relaxed">
-                        Accelerate your journey from concept to launch with our global network of developers and partners.
+                        Accelerate your startup journey worldwide with free cloud hosting credits, AI analysis tools, 
+                        and our international network of developers, mentors, and industry partners through OpenBuild 
+                        and Buildly Labs partnerships.
                     </p>
                 </div>
             </div>
@@ -200,11 +325,13 @@
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                        Join the Buildly Labs Foundry Network
+                        Apply Now - Join Our Global Developer Startup Foundry
                     </h2>
                     <p class="text-lg text-gray-600 mb-8">
-                        Connect with successful entrepreneurs, technical experts, and industry partners. 
-                        We provide the knowledge, resources, and connections you need to build a sustainable business.
+                        Connect with successful entrepreneurs, cloud computing experts, and industry partners worldwide through 
+                        our comprehensive startup foundry program. Powered by partnerships with OpenBuild and Buildly Labs, 
+                        get international access to resources, mentorship, and global networks to transform your software 
+                        development skills into a thriving business.
                     </p>
                     
                     <div class="space-y-4">
@@ -213,8 +340,8 @@
                                 <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-900">Equity-Free Assistance</h4>
-                                <p class="text-gray-600">Get all the support you need without giving up ownership of your company</p>
+                                <h4 class="font-semibold text-gray-900">Equity-Free Startup Incubator Help</h4>
+                                <p class="text-gray-600">Apply for comprehensive startup support without giving up ownership. Our developer-focused incubator provides mentorship and resources at no equity cost</p>
                             </div>
                         </div>
                         
@@ -223,8 +350,8 @@
                                 <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-900">Free Google Cloud Hosting</h4>
-                                <p class="text-gray-600">Maximize your cloud credits with our optimized hosting until your MVP is market-ready</p>
+                                <h4 class="font-semibold text-gray-900">Free Cloud Hosting & Developer Resources</h4>
+                                <p class="text-gray-600">Maximize Google Cloud credits with optimized hosting for developers. Get technical infrastructure support until your MVP reaches market readiness</p>
                             </div>
                         </div>
                         
@@ -233,8 +360,8 @@
                                 <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-900">AI-Powered Startup Analysis</h4>
-                                <p class="text-gray-600">Receive comprehensive AI evaluation and feedback on your startup idea and business model</p>
+                                <h4 class="font-semibold text-gray-900">AI-Powered Startup Analysis & Recommendations</h4>
+                                <p class="text-gray-600">Receive comprehensive AI evaluation of your startup idea, business model validation, and strategic recommendations for software entrepreneurs</p>
                             </div>
                         </div>
                         
@@ -243,16 +370,16 @@
                                 <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-900">Partner Network Access</h4>
-                                <p class="text-gray-600">Connect with developers, investors, marketing firms, CFO agencies, and industry experts</p>
+                                <h4 class="font-semibold text-gray-900">Developer & Startup Partner Network</h4>
+                                <p class="text-gray-600">Connect with experienced developers, startup mentors, cloud computing experts, investors, and industry specialists in our incubator network</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="relative">
-                    <img src="assets/img/logo.png" 
-                         alt="Buildly Labs Foundry Logo" 
+                    <img src="assets/img/OpenBuild.png" 
+                         alt="Buildly Labs Foundry - OpenBuild Partnership Logo" 
                          class="w-full max-w-md mx-auto rounded-2xl shadow-lg">
                 </div>
             </div>
@@ -263,22 +390,27 @@
     <section id="partners" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Trusted Partners
+                Global Partnership Network
             </h2>
-            <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-                We work with industry leaders to provide you with the best resources and opportunities
+            <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+                Powered by strategic partnerships with OpenBuild and Buildly Labs, we provide global access 
+                to industry-leading resources, international developer communities, and worldwide opportunities
             </p>
             
-            <div class="flex justify-center items-center space-x-12 grayscale hover:grayscale-0 transition-all">
-                <div class="partner-logo">
+            <div class="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+                <div class="partner-logo bg-gray-50 p-8 rounded-xl hover:shadow-lg transition-all">
                     <img src="assets/img/OpenBuild.png" 
-                         alt="OpenBuild" 
-                         class="h-16 w-auto hover:scale-110 transition-transform">
+                         alt="OpenBuild - Global Developer Community Partner" 
+                         class="h-16 w-auto mx-auto hover:scale-110 transition-transform">
+                    <h3 class="mt-4 font-semibold text-gray-900">OpenBuild</h3>
+                    <p class="text-sm text-gray-600 mt-2">Global developer community and resources</p>
                 </div>
-                <div class="partner-logo">
+                <div class="partner-logo bg-gray-50 p-8 rounded-xl hover:shadow-lg transition-all">
                     <img src="assets/img/buildly.png" 
-                         alt="Buildly" 
-                         class="h-16 w-auto hover:scale-110 transition-transform">
+                         alt="Buildly Labs - Cloud Platform and AI Tools Partner" 
+                         class="h-16 w-auto mx-auto hover:scale-110 transition-transform">
+                    <h3 class="mt-4 font-semibold text-gray-900">Buildly Labs</h3>
+                    <p class="text-sm text-gray-600 mt-2">Cloud platform and AI-powered development tools</p>
                 </div>
             </div>
         </div>
@@ -288,10 +420,11 @@
     <section class="py-20 bg-gradient-to-r from-primary-600 to-primary-700">
         <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
-                Ready to Transform Your Idea into Reality?
+                Ready to Transform Your Idea into Global Reality?
             </h2>
             <p class="text-xl text-primary-100 mb-8">
-                Join hundreds of successful founders who've accelerated their startups with Buildly Labs Foundry
+                Join hundreds of successful founders worldwide who've accelerated their startups through our 
+                global foundry network powered by OpenBuild and Buildly Labs partnerships
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="register.html" 
@@ -307,13 +440,88 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-12">
+    <!-- FAQ Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Frequently Asked Questions About Our Startup Incubator
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Get answers about applying for help, our developer program, and startup support services
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                        How do I apply for the startup incubator program?
+                    </h3>
+                    <p class="text-gray-600">
+                        Simply click "Apply Now" and complete our multi-step application form. We'll review your startup idea, 
+                        team information, and provide AI-powered analysis and recommendations. The entire process is designed 
+                        for developers and software entrepreneurs seeking comprehensive startup help.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                        Is the incubator program really equity-free?
+                    </h3>
+                    <p class="text-gray-600">
+                        Yes! Unlike traditional accelerators, our startup incubator provides mentorship, cloud hosting credits, 
+                        AI analysis, and partner connections without taking any equity in your company. You maintain 100% ownership 
+                        while getting the help you need to succeed.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                        What kind of cloud hosting help do you provide?
+                    </h3>
+                    <p class="text-gray-600">
+                        We provide free Google Cloud hosting credits and technical optimization support for developers. 
+                        Our team helps maximize your cloud resources to support MVP development and scaling until your 
+                        startup reaches market readiness and revenue generation.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                        Who is eligible to apply for startup help globally?
+                    </h3>
+                    <p class="text-gray-600">
+                        Our global startup foundry welcomes software developers, technical entrepreneurs, and startup founders 
+                        worldwide who are building technology-based businesses. Through our partnerships with OpenBuild and 
+                        Buildly Labs, we particularly focus on helping developers internationally transition their technical 
+                        skills into successful startups and scalable software companies with global reach.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                        What is the AI startup analysis you provide?
+                    </h3>
+                    <p class="text-gray-600">
+                        Our AI-powered analysis evaluates your startup idea, market potential, technical approach, and business model. 
+                        You'll receive comprehensive recommendations, risk assessment, and strategic guidance to help refine 
+                        your approach and increase your chances of success in the competitive startup landscape.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div class="md:col-span-2">
-                    <img src="assets/img/logo-horizontal.png" alt="Buildly Labs Foundry" class="h-10 mb-4 filter brightness-0 invert">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <img src="assets/img/logo-horizontal.png" 
+                         alt="Buildly Labs Foundry - Startup Incubator for Developers" 
+                         class="h-12 mb-4">
                     <p class="text-gray-400 mb-4 max-w-md">
-                        Empowering startups to build, scale, and succeed with comprehensive support and resources.
+                        Empowering software developers and entrepreneurs to build, scale, and succeed with comprehensive startup incubator support, cloud hosting, and expert mentorship.
                     </p>
                     <div class="flex space-x-4">
                         <a href="#" class="text-gray-400 hover:text-white transition-colors">
