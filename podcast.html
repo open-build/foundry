@@ -62,19 +62,30 @@
         }
         
         .step-indicator {
-            @apply w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-200;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
         }
         
         .step-indicator.completed {
-            @apply bg-green-500 text-white;
+            background-color: #10b981;
+            color: white;
         }
         
         .step-indicator.current {
-            @apply bg-primary text-white;
+            background-color: #2563eb;
+            color: white;
         }
         
         .step-indicator.pending {
-            @apply bg-gray-200 text-gray-600;
+            background-color: #e5e7eb;
+            color: #4b5563;
         }
         
         .progress-bar {
@@ -97,7 +108,16 @@
         }
 
         .podcast-card {
-            @apply bg-white rounded-xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-shadow duration-300;
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f3f4f6;
+            padding: 1.5rem;
+            transition: box-shadow 0.3s;
+        }
+        
+        .podcast-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
     </style>
 </head>
