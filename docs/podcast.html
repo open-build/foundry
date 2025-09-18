@@ -57,6 +57,11 @@
             background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%);
         }
         
+        /* Ensure first step is visible by default */
+        .step[data-step="1"] {
+            display: block !important;
+        }
+        
         .progress-bar {
             transition: width 0.3s ease;
         }
@@ -287,7 +292,7 @@
             <form id="podcastApplicationForm" class="space-y-6">
                 
                 <!-- Step 1: Personal & Company Info -->
-                <div class="step active" data-step="1" style="display: block !important;">
+                <div class="step active" data-step="1">
                     <div class="bg-gray-50 p-6 rounded-lg mb-6">
                         <h3 class="text-xl font-semibold text-gray-900 mb-4">Tell Us About You and Your Company</h3>
                         

@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bootstrapped Founders Podcast | FirstCityFoundry</title>
-    <meta name="description" content="Share your bootstrapped startup journey on the FirstCityFoundry Bootstrapped Founders Podcast. Connect with Portland StartupGrind and inspire other entrepreneurs.">
+    <meta name="description" content="Share your bootstrapped startup journe                <!-- Step 1: Personal & Company Info -->
+                <div class="step active" data-step="1" style="display: block !important;">on the FirstCityFoundry Bootstrapped Founders Podcast. Connect with Portland StartupGrind and inspire other entrepreneurs.">
     <meta name="keywords" content="bootstrapped startups, founders podcast, Portland startup community, startup grind, entrepreneur stories, self-funded startups">
     
     <!-- Open Graph / Facebook -->
@@ -54,6 +55,11 @@
         
         .podcast-hero {
             background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%);
+        }
+        
+        /* Ensure first step is visible by default */
+        .step[data-step="1"] {
+            display: block !important;
         }
         
         .progress-bar {
