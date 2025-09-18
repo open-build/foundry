@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalSteps = 3;
     
     const form = document.getElementById('podcastApplicationForm');
-    const steps = document.querySelectorAll('.form-step');
+    const steps = document.querySelectorAll('.step');
     const stepIndicators = document.querySelectorAll('.step-indicator');
     const progressBars = document.querySelectorAll('.progress-bar');
     const prevBtn = document.getElementById('prevBtn');

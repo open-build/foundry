@@ -43,6 +43,9 @@
         }
     </script>
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+
     <!-- Custom Styles -->
     <style>
         .gradient-bg {
@@ -51,41 +54,6 @@
         
         .podcast-hero {
             background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%);
-        }
-        
-        .form-step {
-            display: none;
-        }
-        
-        .form-step.active {
-            display: block;
-        }
-        
-        .step-indicator {
-            width: 2rem;
-            height: 2rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-        
-        .step-indicator.completed {
-            background-color: #10b981;
-            color: white;
-        }
-        
-        .step-indicator.current {
-            background-color: #2563eb;
-            color: white;
-        }
-        
-        .step-indicator.pending {
-            background-color: #e5e7eb;
-            color: #4b5563;
         }
         
         .progress-bar {
@@ -318,67 +286,67 @@
             <form id="podcastApplicationForm" class="space-y-6">
                 
                 <!-- Step 1: Personal & Company Info -->
-                <div class="form-step active" data-step="1">
+                <div class="step active" data-step="1">
                     <div class="bg-gray-50 p-6 rounded-lg mb-6">
                         <h3 class="text-xl font-semibold text-gray-900 mb-4">Tell Us About You and Your Company</h3>
                         
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label for="founder_name" class="block text-sm font-medium text-gray-700 mb-2">Your Name *</label>
-                                <input type="text" id="founder_name" name="founder_name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <input type="text" id="founder_name" name="founder_name" required class="form-input">
                             </div>
                             
                             <div>
                                 <label for="founder_title" class="block text-sm font-medium text-gray-700 mb-2">Your Title *</label>
-                                <input type="text" id="founder_title" name="founder_title" placeholder="e.g., CEO, Founder, Co-founder" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <input type="text" id="founder_title" name="founder_title" placeholder="e.g., CEO, Founder, Co-founder" required class="form-input">
                             </div>
                         </div>
                         
                         <div class="grid md:grid-cols-2 gap-6 mt-4">
                             <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
-                                <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <input type="email" id="email" name="email" required class="form-input">
                             </div>
                             
                             <div>
                                 <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                                <input type="tel" id="phone" name="phone" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <input type="tel" id="phone" name="phone" class="form-input">
                             </div>
                         </div>
                         
                         <div class="grid md:grid-cols-2 gap-6 mt-4">
                             <div>
                                 <label for="company_name" class="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
-                                <input type="text" id="company_name" name="company_name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <input type="text" id="company_name" name="company_name" required class="form-input">
                             </div>
                             
                             <div>
                                 <label for="company_website" class="block text-sm font-medium text-gray-700 mb-2">Company Website</label>
-                                <input type="url" id="company_website" name="company_website" placeholder="https://" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <input type="url" id="company_website" name="company_website" placeholder="https://" class="form-input">
                             </div>
                         </div>
                         
                         <div class="mt-4">
                             <label for="company_description" class="block text-sm font-medium text-gray-700 mb-2">What does your company do? *</label>
-                            <textarea id="company_description" name="company_description" rows="3" required placeholder="Brief description of your business and what problem you solve..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                            <textarea id="company_description" name="company_description" rows="3" required placeholder="Brief description of your business and what problem you solve..." class="form-textarea"></textarea>
                         </div>
                     </div>
                 </div>
 
                 <!-- Step 2: Bootstrapping Experience -->
-                <div class="form-step" data-step="2">
+                <div class="step" data-step="2">
                     <div class="bg-gray-50 p-6 rounded-lg mb-6">
                         <h3 class="text-xl font-semibold text-gray-900 mb-4">Your Bootstrapping Journey</h3>
                         
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label for="founded_year" class="block text-sm font-medium text-gray-700 mb-2">When was your company founded? *</label>
-                                <input type="number" id="founded_year" name="founded_year" min="1900" max="2030" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <input type="number" id="founded_year" name="founded_year" min="1900" max="2030" required class="form-input">
                             </div>
                             
                             <div>
                                 <label for="current_stage" class="block text-sm font-medium text-gray-700 mb-2">Current Stage *</label>
-                                <select id="current_stage" name="current_stage" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <select id="current_stage" name="current_stage" required class="form-select">
                                     <option value="">Select stage...</option>
                                     <option value="idea">Idea Stage</option>
                                     <option value="prototype">Prototype/MVP</option>
@@ -393,7 +361,7 @@
                         <div class="grid md:grid-cols-2 gap-6 mt-4">
                             <div>
                                 <label for="revenue_range" class="block text-sm font-medium text-gray-700 mb-2">Current Annual Revenue Range</label>
-                                <select id="revenue_range" name="revenue_range" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <select id="revenue_range" name="revenue_range" class="form-select">
                                     <option value="">Prefer not to say</option>
                                     <option value="0">$0 (Pre-revenue)</option>
                                     <option value="1-10k">$1K - $10K</option>
@@ -407,7 +375,7 @@
                             
                             <div>
                                 <label for="team_size" class="block text-sm font-medium text-gray-700 mb-2">Current Team Size</label>
-                                <select id="team_size" name="team_size" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <select id="team_size" name="team_size" class="form-select">
                                     <option value="">Select team size...</option>
                                     <option value="solo">Just me (Solo founder)</option>
                                     <option value="2-3">2-3 people</option>
@@ -421,35 +389,35 @@
                         
                         <div class="mt-4">
                             <label for="bootstrap_story" class="block text-sm font-medium text-gray-700 mb-2">Tell us your bootstrapping story *</label>
-                            <textarea id="bootstrap_story" name="bootstrap_story" rows="4" required placeholder="How did you start? What challenges have you faced? What victories have you had? What are you struggling with now?" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                            <textarea id="bootstrap_story" name="bootstrap_story" rows="4" required placeholder="How did you start? What challenges have you faced? What victories have you had? What are you struggling with now?" class="form-textarea"></textarea>
                         </div>
                         
                         <div class="mt-4">
                             <label for="biggest_challenge" class="block text-sm font-medium text-gray-700 mb-2">What's your biggest challenge right now? *</label>
-                            <textarea id="biggest_challenge" name="biggest_challenge" rows="3" required placeholder="What's keeping you up at night? What obstacle are you trying to overcome?" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                            <textarea id="biggest_challenge" name="biggest_challenge" rows="3" required placeholder="What's keeping you up at night? What obstacle are you trying to overcome?" class="form-textarea"></textarea>
                         </div>
                     </div>
                 </div>
 
                 <!-- Step 3: Podcast Details -->
-                <div class="form-step" data-step="3">
+                <div class="step" data-step="3">
                     <div class="bg-gray-50 p-6 rounded-lg mb-6">
                         <h3 class="text-xl font-semibold text-gray-900 mb-4">Podcast Participation</h3>
                         
                         <div class="mt-4">
                             <label for="discussion_topics" class="block text-sm font-medium text-gray-700 mb-2">What topics would you like to discuss? *</label>
-                            <textarea id="discussion_topics" name="discussion_topics" rows="3" required placeholder="e.g., Customer acquisition, product development, team building, financial management, work-life balance..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                            <textarea id="discussion_topics" name="discussion_topics" rows="3" required placeholder="e.g., Customer acquisition, product development, team building, financial management, work-life balance..." class="form-textarea"></textarea>
                         </div>
                         
                         <div class="mt-4">
                             <label for="advice_for_founders" class="block text-sm font-medium text-gray-700 mb-2">What advice would you give to aspiring bootstrapped founders? *</label>
-                            <textarea id="advice_for_founders" name="advice_for_founders" rows="3" required placeholder="Share your wisdom and lessons learned..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                            <textarea id="advice_for_founders" name="advice_for_founders" rows="3" required placeholder="Share your wisdom and lessons learned..." class="form-textarea"></textarea>
                         </div>
                         
                         <div class="grid md:grid-cols-2 gap-6 mt-4">
                             <div>
                                 <label for="recording_preference" class="block text-sm font-medium text-gray-700 mb-2">Recording Preference *</label>
-                                <select id="recording_preference" name="recording_preference" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <select id="recording_preference" name="recording_preference" required class="form-select">
                                     <option value="">Select preference...</option>
                                     <option value="remote">Remote (Video call)</option>
                                     <option value="in_person">In-person (Portland area)</option>
@@ -459,7 +427,7 @@
                             
                             <div>
                                 <label for="availability" class="block text-sm font-medium text-gray-700 mb-2">Best Time for Recording</label>
-                                <select id="availability" name="availability" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <select id="availability" name="availability" class="form-select">
                                     <option value="">Select timeframe...</option>
                                     <option value="morning">Morning (9 AM - 12 PM)</option>
                                     <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
@@ -471,12 +439,12 @@
                         
                         <div class="mt-4">
                             <label for="social_media" class="block text-sm font-medium text-gray-700 mb-2">Social Media Links</label>
-                            <textarea id="social_media" name="social_media" rows="2" placeholder="LinkedIn, Twitter, Instagram, etc. (optional)" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                            <textarea id="social_media" name="social_media" rows="2" placeholder="LinkedIn, Twitter, Instagram, etc. (optional)" class="form-textarea"></textarea>
                         </div>
                         
                         <div class="mt-4">
                             <label for="additional_info" class="block text-sm font-medium text-gray-700 mb-2">Anything else you'd like us to know?</label>
-                            <textarea id="additional_info" name="additional_info" rows="3" placeholder="Any other information that would help us prepare for the interview..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                            <textarea id="additional_info" name="additional_info" rows="3" placeholder="Any other information that would help us prepare for the interview..." class="form-textarea"></textarea>
                         </div>
                     </div>
                 </div>
