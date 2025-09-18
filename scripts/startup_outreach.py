@@ -90,6 +90,7 @@ class Contact:
     last_contact: Optional[str] = None
 
 @dataclass
+@dataclass
 class OutreachTarget:
     """Data class for outreach targets"""
     name: str
@@ -100,6 +101,7 @@ class OutreachTarget:
     priority: int  # 1-5, 5 being highest
     contacts_found: int = 0
     last_scraped: Optional[str] = None
+    region: str = "US/Global"
 
 @dataclass
 class PendingOutreach:
@@ -654,7 +656,7 @@ class StartupOutreachBot:
         # Message templates based on contact category
         templates = {
             'publication': """
-Subject: Partnership Opportunity: Global Startup Foundry Launch
+Subject: Partnership Opportunity: Global Startup Foundry Launch + Bootstrapped Founders Podcast
 
 Hi {{ contact.name }},
 
@@ -668,10 +670,17 @@ What makes us different:
 • Free cloud hosting credits through partnerships
 • Global developer community access via OpenBuild
 • Focus on solo founders and first-time entrepreneurs
+• FirstCityFoundry Bootstrapped Founders Podcast featuring real founder stories
 
-Our platform at https://www.firstcityfoundry.com showcases how we're democratizing startup support globally.
+Our platform at https://www.firstcityfoundry.com showcases how we're democratizing startup support globally, and our podcast (https://www.firstcityfoundry.com/podcast.html) highlights authentic bootstrapping journeys from Portland StartupGrind community.
 
-Would you be interested in learning more about our story, our partnerships, or perhaps interviewing some of our founders? I'd be happy to provide additional information, press materials, or arrange interviews.
+Would you be interested in:
+- Learning more about our story and partnerships
+- Interviewing some of our founders
+- Having our founders as podcast guests to share their bootstrapping stories
+- Featuring our podcast content or cross-promoting with your audience
+
+I'd be happy to provide additional information, press materials, or arrange interviews.
 
 Please feel free to reach out with any questions or inquiries to team@open.build.
 
@@ -685,7 +694,7 @@ If you no longer wish to receive these communications, you can unsubscribe here:
             """,
             
             'influencer': """
-Subject: New Global Startup Foundry - Partnership with OpenBuild & Buildly Labs
+Subject: New Global Startup Foundry + Bootstrapped Founders Podcast - Partnership with OpenBuild
 
 Hi {{ contact.name }},
 
@@ -699,12 +708,16 @@ Key differentiators:
 • Partnership with OpenBuild for global developer community access
 • Free cloud infrastructure support
 • Specific focus on solo founders and developers transitioning to entrepreneurship
+• FirstCityFoundry Bootstrapped Founders Podcast showcasing real founder journeys
 
-You can check out our platform at https://www.firstcityfoundry.com
+You can check out our platform at https://www.firstcityfoundry.com and our podcast at https://www.firstcityfoundry.com/podcast.html
 
-Given your influence in the startup community, I'd love to get your thoughts on our approach. Would you be open to a brief conversation about what we're building?
+Given your influence in the startup community, I'd love to get your thoughts on our approach. Would you be open to:
+- A brief conversation about what we're building
+- Being a guest on our Bootstrapped Founders Podcast to share your insights
+- Cross-promoting our podcast content with your audience
 
-If this resonates with your audience, we'd also be happy to discuss collaboration opportunities or provide exclusive insights for your community.
+If this resonates with your community, we'd also be happy to discuss other collaboration opportunities or provide exclusive insights.
 
 Feel free to reach out with questions to team@open.build.
 
@@ -716,7 +729,7 @@ If you no longer wish to receive these communications, you can unsubscribe here:
             """,
             
             'platform': """
-Subject: Partnership Opportunity: Buildly Labs Foundry Launch
+Subject: Partnership Opportunity: Buildly Labs Foundry Launch + Podcast Content
 
 Hello {{ contact.name }},
 
@@ -730,14 +743,17 @@ Our unique approach:
 • Global reach through OpenBuild partnership  
 • Free cloud hosting and technical infrastructure
 • Focus on underserved founders (solo, first-time, international)
+• FirstCityFoundry Bootstrapped Founders Podcast with authentic founder stories
 
 Our platform: https://www.firstcityfoundry.com
+Our podcast: https://www.firstcityfoundry.com/podcast.html
 
 I'd love to explore potential partnership opportunities, whether that's:
 - Cross-promotion to relevant communities
 - Integration opportunities
-- Content collaboration
+- Content collaboration (including podcast content sharing)
 - Joint events or initiatives
+- Podcast guest exchanges
 
 Would you be interested in a conversation about how we might work together to better serve the startup community?
 
@@ -751,7 +767,7 @@ If you no longer wish to receive these communications, you can unsubscribe here:
             """,
             
             'community': """
-Subject: Introducing Buildly Labs Foundry - Global Startup Support
+Subject: Introducing Buildly Labs Foundry + Bootstrapped Founders Podcast
 
 Hi {{ contact.name }},
 
@@ -765,12 +781,18 @@ What makes us unique:
 • Partnership with OpenBuild for global developer community access
 • Free cloud hosting and infrastructure support  
 • Designed specifically for solo founders, developers, and first-time entrepreneurs
+• FirstCityFoundry Bootstrapped Founders Podcast featuring real founder stories from Portland StartupGrind
 
 Check it out: https://www.firstcityfoundry.com
+Our podcast: https://www.firstcityfoundry.com/podcast.html
 
 I thought this might resonate with {{ organization }}'s community, especially those looking to transition from development to entrepreneurship or seeking startup support without giving up equity.
 
-Would you be open to me sharing this with the community, or perhaps discussing how we might collaborate to better support developers and entrepreneurs?
+Would you be open to:
+- Me sharing this with the community
+- Discussing collaboration opportunities
+- Having community members as podcast guests to share their bootstrapping journeys
+- Cross-promoting our podcast content
 
 Happy to answer any questions at team@open.build.
 

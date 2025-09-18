@@ -10,11 +10,30 @@ and outreach activities to generate comprehensive daily status reports.
 import os
 import json
 import requests
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, asdict
 import logging
 from pathlib import Path
+
+# Import email config
+try:
+    from config import EMAIL_CONFIG
+except ImportError:
+    # Fallback configuration
+    EMAIL_CONFIG = {
+        'service': 'brevo',
+        'username': os.getenv('SMTP_USERNAME', '96af72001@smtp-brevo.com'),
+        'password': os.getenv('SMTP_PASSWORD', 'F9BCg30JqkyZmVWw'),
+        'smtp_server': 'smtp-relay.brevo.com',
+        'smtp_port': 587,
+        'from_name': 'Buildly Labs Foundry Analytics',
+        'from_email': 'team@open.build',
+        'reply_to': 'team@open.build'
+    }
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -674,8 +693,149 @@ https://www.firstcityfoundry.com
         'text_body': text_body
     }
 
+def send_email_notification(report: Dict[str, str], recipient_email: str = "greg@open.build") -> bool:
+    """Send email notification with analytics report"""
+    try:
+        # Create message
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = report['subject']
+        msg['From'] = f"{EMAIL_CONFIG['from_name']} <{EMAIL_CONFIG['from_email']}>"
+        msg['To'] = recipient_email
+        msg['Reply-To'] = EMAIL_CONFIG['reply_to']
+
+        # Create HTML and text parts
+        text_part = MIMEText(report['text_body'], 'plain')
+        html_part = MIMEText(report['html_body'], 'html')
+
+        # Attach parts
+        msg.attach(text_part)
+        msg.attach(html_part)
+
+        # Send email via SMTP
+        with smtplib.SMTP(EMAIL_CONFIG['smtp_server'], EMAIL_CONFIG['smtp_port']) as server:
+            server.starttls()
+            server.login(EMAIL_CONFIG['username'], EMAIL_CONFIG['password'])
+            server.send_message(msg)
+            
+        logger.info(f"✅ Analytics report sent to {recipient_email}")
+        return True
+        
+    except Exception as e:
+        logger.error(f"❌ Failed to send analytics report: {e}")
+        return False
+
+def send_outreach_notification(outreach_summary: Dict[str, Any], recipient_email: str = "greg@open.build") -> bool:
+    """Send email notification about outreach activities"""
+    try:
+        # Create outreach summary email
+        subject = f"📧 Outreach Update - {outreach_summary.get('date', 'Today')} | Buildly Labs Foundry"
+        
+        html_body = f"""
+        <html>
+        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+            <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                <h2 style="color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">
+                    🚀 Outreach Activity Summary
+                </h2>
+                
+                <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <h3 style="color: #1e40af; margin-top: 0;">📊 Today's Outreach</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin: 10px 0;"><strong>Messages Sent:</strong> {outreach_summary.get('messages_sent', 0)}</li>
+                        <li style="margin: 10px 0;"><strong>New Contacts:</strong> {outreach_summary.get('new_contacts', 0)}</li>
+                        <li style="margin: 10px 0;"><strong>Success Rate:</strong> {outreach_summary.get('success_rate', 0)}%</li>
+                        <li style="margin: 10px 0;"><strong>Total Contacts in DB:</strong> {outreach_summary.get('total_contacts', 0)}</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #ecfdf5; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <h3 style="color: #059669; margin-top: 0;">🎯 Target Organizations</h3>
+                    <p>Recent outreach includes the new podcast promotion to:</p>
+                    <ul>
+                        {"".join([f"<li>{org}</li>" for org in outreach_summary.get('organizations', [])])}
+                    </ul>
+                </div>
+                
+                <div style="background: #fef7cd; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <h3 style="color: #b45309; margin-top: 0;">🎙️ Podcast Promotion</h3>
+                    <p>Updated outreach templates now include:</p>
+                    <ul>
+                        <li>FirstCityFoundry Bootstrapped Founders Podcast</li>
+                        <li>Podcast guest opportunities</li>
+                        <li>Cross-promotion possibilities</li>
+                        <li>Content collaboration offers</li>
+                    </ul>
+                </div>
+                
+                <hr style="margin: 30px 0; border: none; border-top: 1px solid #e5e7eb;">
+                <p style="font-size: 12px; color: #6b7280; text-align: center;">
+                    Generated by Buildly Labs Foundry Outreach System<br>
+                    <a href="https://www.firstcityfoundry.com">https://www.firstcityfoundry.com</a>
+                </p>
+            </div>
+        </body>
+        </html>
+        """
+        
+        text_body = f"""
+OUTREACH ACTIVITY SUMMARY
+========================
+Date: {outreach_summary.get('date', 'Today')}
+
+TODAY'S OUTREACH
+===============
+Messages Sent: {outreach_summary.get('messages_sent', 0)}
+New Contacts: {outreach_summary.get('new_contacts', 0)}
+Success Rate: {outreach_summary.get('success_rate', 0)}%
+Total Contacts in DB: {outreach_summary.get('total_contacts', 0)}
+
+TARGET ORGANIZATIONS
+==================
+Recent outreach includes the new podcast promotion to:
+{chr(10).join([f"- {org}" for org in outreach_summary.get('organizations', [])])}
+
+PODCAST PROMOTION
+================
+Updated outreach templates now include:
+- FirstCityFoundry Bootstrapped Founders Podcast
+- Podcast guest opportunities  
+- Cross-promotion possibilities
+- Content collaboration offers
+
+Generated by Buildly Labs Foundry Outreach System
+https://www.firstcityfoundry.com
+"""
+
+        # Create message
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = subject
+        msg['From'] = f"{EMAIL_CONFIG['from_name']} <{EMAIL_CONFIG['from_email']}>"
+        msg['To'] = recipient_email
+        msg['Reply-To'] = EMAIL_CONFIG['reply_to']
+
+        # Create HTML and text parts
+        text_part = MIMEText(text_body, 'plain')
+        html_part = MIMEText(html_body, 'html')
+
+        # Attach parts
+        msg.attach(text_part)
+        msg.attach(html_part)
+
+        # Send email via SMTP
+        with smtplib.SMTP(EMAIL_CONFIG['smtp_server'], EMAIL_CONFIG['smtp_port']) as server:
+            server.starttls()
+            server.login(EMAIL_CONFIG['username'], EMAIL_CONFIG['password'])
+            server.send_message(msg)
+            
+        logger.info(f"✅ Outreach summary sent to {recipient_email}")
+        return True
+        
+    except Exception as e:
+        logger.error(f"❌ Failed to send outreach summary: {e}")
+        return False
+
 if __name__ == "__main__":
-    # Test the analytics system
+    # Generate and send daily analytics report
     collector = AnalyticsCollector()
     analytics = collector.generate_daily_report()
     report = format_daily_report_email(analytics)
@@ -685,3 +845,9 @@ if __name__ == "__main__":
     print(f"Sessions: {analytics.website_sessions}")
     print(f"Emails Sent: {analytics.emails_sent}")
     print("\nEmail Subject:", report['subject'])
+    
+    # Send email notification
+    if send_email_notification(report):
+        print("✅ Analytics report sent successfully")
+    else:
+        print("❌ Failed to send analytics report")
