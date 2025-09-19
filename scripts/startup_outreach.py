@@ -516,7 +516,7 @@ class StartupOutreachBot:
         return sample_discoveries[:random.randint(0, 2)]  # Return 0-2 random discoveries
 
     def scrape_contacts_from_target(self, target: OutreachTarget) -> List[Contact]:
-        """Scrape contact information from a target website"""
+        """Enhanced contact scraping with better source discovery"""
         logger.info(f"Scraping contacts from {target.name}")
         
         contacts = []
@@ -524,32 +524,55 @@ class StartupOutreachBot:
         try:
             # Add headers to appear as a real browser
             headers = {
-                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Accept-Encoding': 'gzip, deflate',
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1'
             }
             
-            # Common contact page URLs to try
+            # Enhanced contact page URLs to try
             contact_urls = [
                 urljoin(target.website, '/contact'),
+                urljoin(target.website, '/contact-us'),
                 urljoin(target.website, '/about'),
+                urljoin(target.website, '/about-us'),
                 urljoin(target.website, '/team'),
                 urljoin(target.website, '/staff'),
                 urljoin(target.website, '/contributors'),
+                urljoin(target.website, '/authors'),
+                urljoin(target.website, '/press'),
+                urljoin(target.website, '/media'),
+                urljoin(target.website, '/partnerships'),
+                urljoin(target.website, '/advertising'),
+                urljoin(target.website, '/submit'),
+                urljoin(target.website, '/tips'),
                 target.website  # Main page
             ]
             
+            # Try to find additional contact methods specific to startup sites
+            additional_urls = self.discover_startup_specific_urls(target)
+            contact_urls.extend(additional_urls)
+            
             for url in contact_urls:
                 try:
-                    response = requests.get(url, headers=headers, timeout=10)
+                    response = requests.get(url, headers=headers, timeout=15)
                     if response.status_code == 200:
                         soup = BeautifulSoup(response.content, 'html.parser')
                         page_contacts = self.extract_contacts_from_page(soup, target, url)
-                        contacts.extend(page_contacts)
+                        
+                        # Filter out test emails and duplicates
+                        for contact in page_contacts:
+                            if (not self.is_test_email(contact.email) and 
+                                contact.email not in [c.email for c in contacts]):
+                                contacts.append(contact)
                         
                         # Limit contacts per target
                         if len(contacts) >= self.max_outreach_per_target:
                             break
                             
-                    time.sleep(random.uniform(2, 5))  # Rate limiting
+                    time.sleep(random.uniform(3, 7))  # Increased rate limiting
                     
                 except requests.RequestException as e:
                     logger.warning(f"Error accessing {url}: {e}")
@@ -564,42 +587,110 @@ class StartupOutreachBot:
         
         logger.info(f"Found {len(contacts)} contacts from {target.name}")
         return contacts
+    
+    def discover_startup_specific_urls(self, target: OutreachTarget) -> List[str]:
+        """Discover startup-specific contact URLs based on target type"""
+        urls = []
+        base_url = target.website
+        
+        # Publication-specific paths
+        if target.category == 'publication':
+            urls.extend([
+                urljoin(base_url, '/pitch'),
+                urljoin(base_url, '/submit-story'),
+                urljoin(base_url, '/tip-us'),
+                urljoin(base_url, '/editorial'),
+                urljoin(base_url, '/newsroom'),
+                urljoin(base_url, '/contribute'),
+            ])
+        
+        # Platform-specific paths
+        elif target.category == 'platform':
+            urls.extend([
+                urljoin(base_url, '/partners'),
+                urljoin(base_url, '/partnership'),
+                urljoin(base_url, '/business'),
+                urljoin(base_url, '/enterprise'),
+                urljoin(base_url, '/api'),
+            ])
+        
+        # Community-specific paths
+        elif target.category == 'community':
+            urls.extend([
+                urljoin(base_url, '/organizers'),
+                urljoin(base_url, '/moderators'),
+                urljoin(base_url, '/events'),
+                urljoin(base_url, '/speakers'),
+            ])
+        
+        return urls
 
     def extract_contacts_from_page(self, soup: BeautifulSoup, target: OutreachTarget, url: str) -> List[Contact]:
-        """Extract contact information from a web page"""
+        """Enhanced contact extraction with better name detection"""
         contacts = []
         
-        # Email regex pattern
+        # Enhanced email regex pattern
         email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
         
-        # Find emails in text
+        # Find emails in various locations
+        emails_found = set()
+        
+        # 1. Find emails in text
         page_text = soup.get_text()
-        emails = re.findall(email_pattern, page_text)
+        text_emails = re.findall(email_pattern, page_text)
+        emails_found.update(text_emails)
         
-        # Find team/staff information
-        team_sections = soup.find_all(['div', 'section'], class_=re.compile(r'team|staff|about|contact|contributor', re.I))
+        # 2. Find emails in mailto links
+        mailto_links = soup.find_all('a', href=re.compile(r'^mailto:', re.I))
+        for link in mailto_links:
+            email = link['href'].replace('mailto:', '').split('?')[0]
+            if re.match(email_pattern, email):
+                emails_found.add(email)
         
-        for section in team_sections:
-            section_text = section.get_text()
-            section_emails = re.findall(email_pattern, section_text)
-            emails.extend(section_emails)
+        # 3. Find emails in data attributes and form actions
+        for element in soup.find_all(attrs={'data-email': True}):
+            if element.get('data-email'):
+                emails_found.add(element['data-email'])
+        
+        # 4. Look for obfuscated emails (simple cases)
+        obfuscated_patterns = [
+            r'\b[A-Za-z0-9._%+-]+\s*\[at\]\s*[A-Za-z0-9.-]+\s*\[dot\]\s*[A-Z|a-z]{2,}\b',
+            r'\b[A-Za-z0-9._%+-]+\s*@\s*[A-Za-z0-9.-]+\s*\.\s*[A-Z|a-z]{2,}\b'
+        ]
+        
+        for pattern in obfuscated_patterns:
+            obfuscated_emails = re.findall(pattern, page_text, re.I)
+            for email in obfuscated_emails:
+                clean_email = email.replace('[at]', '@').replace('[dot]', '.').replace(' ', '')
+                if re.match(email_pattern, clean_email):
+                    emails_found.add(clean_email)
         
         # Process unique emails
-        unique_emails = list(set(emails))
-        
-        for email in unique_emails:
-            # Skip common non-contact emails
-            if any(skip in email.lower() for skip in ['noreply', 'no-reply', 'donotreply', 'support', 'help']):
+        for email in emails_found:
+            email = email.lower().strip()
+            
+            # Enhanced filtering
+            skip_patterns = [
+                'noreply', 'no-reply', 'donotreply', 'mailer-daemon',
+                'postmaster', 'abuse', 'security', 'legal',
+                'privacy', 'gdpr', 'unsubscribe', 'bounces'
+            ]
+            
+            if any(skip in email for skip in skip_patterns):
+                continue
+            
+            # Skip if it's a test email
+            if self.is_test_email(email):
                 continue
                 
-            # Try to extract name and role context
-            name, role = self.extract_name_and_role_context(soup, email)
+            # Try to extract name and role context with improved methods
+            name, role = self.extract_enhanced_name_and_role(soup, email, target)
             
             contact = Contact(
                 name=name or "Unknown",
                 email=email,
                 organization=target.name,
-                role=role or "Unknown",
+                role=role or "Contact",
                 source=url,
                 category=target.category,
                 social_links=[]
@@ -608,13 +699,13 @@ class StartupOutreachBot:
             contacts.append(contact)
             
             # Limit per page
-            if len(contacts) >= 3:
+            if len(contacts) >= 5:
                 break
         
         return contacts
 
-    def extract_name_and_role_context(self, soup: BeautifulSoup, email: str) -> tuple:
-        """Try to extract name and role associated with an email"""
+    def extract_enhanced_name_and_role(self, soup: BeautifulSoup, email: str, target: OutreachTarget) -> tuple:
+        """Enhanced name and role extraction with better pattern matching"""
         name = None
         role = None
         
@@ -624,41 +715,122 @@ class StartupOutreachBot:
         for element in email_elements:
             parent = element.parent
             if parent:
-                # Look for name patterns near the email
-                parent_text = parent.get_text()
+                # Get surrounding context
+                context_text = parent.get_text()
                 
-                # Simple name extraction (this could be improved with NLP)
-                words = parent_text.split()
-                for i, word in enumerate(words):
-                    if email in word:
-                        # Look for capitalized words before the email (likely names)
-                        for j in range(max(0, i-5), i):
-                            if words[j].istitle() and len(words[j]) > 2:
-                                if not name:
-                                    name = words[j]
-                                elif j == max(0, i-5) or words[j-1].istitle():
-                                    name = f"{words[j-1]} {words[j]}" if j > 0 and words[j-1].istitle() else words[j]
-                        break
+                # Look for structured data (JSON-LD, microdata)
+                structured_data = self.extract_structured_contact_data(soup, email)
+                if structured_data:
+                    name = structured_data.get('name', name)
+                    role = structured_data.get('role', role)
                 
-                # Look for role indicators
-                role_indicators = ['editor', 'writer', 'founder', 'ceo', 'cto', 'author', 'journalist', 'reporter']
-                text_lower = parent_text.lower()
-                for indicator in role_indicators:
-                    if indicator in text_lower:
-                        role = indicator.title()
-                        break
+                # Extract name using multiple patterns
+                if not name:
+                    name = self.extract_name_patterns(context_text, email)
+                
+                # Extract role using enhanced patterns
+                if not role:
+                    role = self.extract_role_patterns(context_text, target)
+        
+        # Fallback: try to extract generic contact info
+        if not name and not role:
+            name, role = self.extract_generic_contact_info(soup, email, target)
+        
+        return name, role
+    
+    def extract_structured_contact_data(self, soup: BeautifulSoup, email: str) -> dict:
+        """Extract contact data from structured markup"""
+        data = {}
+        
+        # Look for JSON-LD
+        scripts = soup.find_all('script', type='application/ld+json')
+        for script in scripts:
+            try:
+                json_data = json.loads(script.string)
+                if isinstance(json_data, dict):
+                    # Look for Person or Organization schema
+                    if json_data.get('@type') in ['Person', 'Organization']:
+                        if email in str(json_data):
+                            data['name'] = json_data.get('name')
+                            data['role'] = json_data.get('jobTitle')
+            except json.JSONDecodeError:
+                continue
+        
+        return data
+    
+    def extract_name_patterns(self, text: str, email: str) -> str:
+        """Extract names using various patterns"""
+        # Common name patterns
+        patterns = [
+            # "Name <email>"
+            r'([A-Z][a-z]+ [A-Z][a-z]+)\s*<[^>]*' + re.escape(email) + r'[^>]*>',
+            # "Name - email"
+            r'([A-Z][a-z]+ [A-Z][a-z]+)\s*[-–—]\s*[^@]*' + re.escape(email),
+            # "Contact: Name"
+            r'Contact:\s*([A-Z][a-z]+ [A-Z][a-z]+)',
+            # "Name (title)"
+            r'([A-Z][a-z]+ [A-Z][a-z]+)\s*\([^)]*\)',
+        ]
+        
+        for pattern in patterns:
+            match = re.search(pattern, text, re.I)
+            if match:
+                return match.group(1).strip()
+        
+        return None
+    
+    def extract_role_patterns(self, text: str, target: OutreachTarget) -> str:
+        """Extract roles using enhanced patterns"""
+        role_patterns = {
+            'publication': ['editor', 'writer', 'journalist', 'reporter', 'contributor', 'author', 'correspondent'],
+            'platform': ['founder', 'ceo', 'cto', 'product', 'marketing', 'business development', 'partnerships'],
+            'community': ['organizer', 'moderator', 'community manager', 'event coordinator', 'ambassador'],
+            'influencer': ['founder', 'consultant', 'advisor', 'speaker', 'thought leader']
+        }
+        
+        patterns = role_patterns.get(target.category, role_patterns['publication'])
+        text_lower = text.lower()
+        
+        for pattern in patterns:
+            if pattern in text_lower:
+                return pattern.title()
+        
+        return None
+    
+    def extract_generic_contact_info(self, soup: BeautifulSoup, email: str, target: OutreachTarget) -> tuple:
+        """Extract generic contact information when specific patterns fail"""
+        # Look for common contact section headers
+        contact_headers = soup.find_all(['h1', 'h2', 'h3', 'h4'], text=re.compile(r'contact|team|about|staff', re.I))
+        
+        for header in contact_headers:
+            # Look in the section following this header
+            section = header.find_next_sibling()
+            if section and email in section.get_text():
+                # Extract any capitalized words that might be names
+                words = section.get_text().split()
+                names = [word for word in words if word.istitle() and len(word) > 2 and word.isalpha()]
+                if names:
+                    if len(names) >= 2:
+                        return f"{names[0]} {names[1]}", None
+                    else:
+                        return names[0], None
+        
+        return None, None
         
         return name, role
 
     def generate_outreach_message(self, contact: Contact) -> Dict[str, str]:
-        """Generate personalized outreach message"""
+        """Generate personalized outreach message with improved name handling"""
+        
+        # Get improved contact name
+        contact_name = self.improve_contact_name(contact)
         
         # Message templates based on contact category
         templates = {
             'publication': """
 Subject: Partnership Opportunity: Global Startup Foundry Launch + Bootstrapped Founders Podcast
 
-Hi {{ contact.name }},
+{{ contact_name }},
 
 I hope this email finds you well. I'm reaching out from Buildly Labs Foundry, a new global startup incubator that just launched in partnership with OpenBuild and Buildly Labs.
 
@@ -696,7 +868,7 @@ If you no longer wish to receive these communications, you can unsubscribe here:
             'influencer': """
 Subject: New Global Startup Foundry + Bootstrapped Founders Podcast - Partnership with OpenBuild
 
-Hi {{ contact.name }},
+{{ contact_name }},
 
 I've been following your work at {{ organization }} and your insights on {{ focus_area }} - really appreciate your perspective on the startup ecosystem.
 
@@ -731,7 +903,7 @@ If you no longer wish to receive these communications, you can unsubscribe here:
             'platform': """
 Subject: Partnership Opportunity: Buildly Labs Foundry Launch + Podcast Content
 
-Hello {{ contact.name }},
+{{ contact_name }},
 
 I'm reaching out from Buildly Labs Foundry, a new global startup incubator that recently launched in partnership with OpenBuild and Buildly Labs.
 
@@ -769,7 +941,7 @@ If you no longer wish to receive these communications, you can unsubscribe here:
             'community': """
 Subject: Introducing Buildly Labs Foundry + Bootstrapped Founders Podcast
 
-Hi {{ contact.name }},
+{{ contact_name }},
 
 I hope you're doing well! I wanted to share something new that I think the {{ organization }} community would find interesting.
 
@@ -815,6 +987,7 @@ If you no longer wish to receive these communications, you can unsubscribe here:
         focus_area = self.get_focus_area_for_organization(contact.organization)
         
         message = template.render(
+            contact_name=contact_name,
             contact=contact,
             organization=contact.organization,
             focus_area=focus_area,
@@ -926,7 +1099,7 @@ If you no longer wish to receive these communications, you can unsubscribe here:
         }
 
     def interactive_outreach_session(self, pending_outreach: List[PendingOutreach]) -> None:
-        """Run interactive outreach session"""
+        """Run interactive outreach session with option for batch approval"""
         
         if not pending_outreach:
             self.console.print("[yellow]No pending outreach messages to review.[/yellow]")
@@ -934,6 +1107,199 @@ If you no longer wish to receive these communications, you can unsubscribe here:
         
         self.console.print(f"\n[bold green]📧 Interactive Outreach Session[/bold green]")
         self.console.print(f"Found {len(pending_outreach)} messages to review\n")
+        
+        # Ask for review mode
+        self.console.print("[bold]Choose review mode:[/bold]")
+        self.console.print("1. [green]Individual review[/green] - Review each message separately")
+        self.console.print("2. [blue]Batch approval[/blue] - Review all recipients and approve in bulk")
+        self.console.print("3. [red]Auto-send all[/red] - Send all messages without review")
+        
+        mode_choice = Prompt.ask("Select mode", choices=["1", "2", "3"], default="1")
+        
+        if mode_choice == "2":
+            return self.batch_approval_session(pending_outreach)
+        elif mode_choice == "3":
+            return self.auto_send_all_session(pending_outreach)
+        else:
+            return self.individual_review_session(pending_outreach)
+    
+    def batch_approval_session(self, pending_outreach: List[PendingOutreach]) -> None:
+        """Batch approval mode - show all recipients and approve in bulk"""
+        
+        self.console.print(f"\n[bold blue]📋 Batch Approval Mode[/bold blue]")
+        self.console.print(f"Reviewing {len(pending_outreach)} pending messages\n")
+        
+        # Create summary table
+        table = Table(title="Pending Outreach Messages")
+        table.add_column("No.", style="cyan", no_wrap=True)
+        table.add_column("Name", style="green")
+        table.add_column("Email", style="blue")
+        table.add_column("Organization", style="yellow")
+        table.add_column("Category", style="magenta")
+        table.add_column("Subject Preview", style="white")
+        
+        for i, pending in enumerate(pending_outreach):
+            if not pending.sent:
+                subject_preview = pending.message['subject'][:50] + "..." if len(pending.message['subject']) > 50 else pending.message['subject']
+                table.add_row(
+                    str(i+1),
+                    pending.contact.name,
+                    pending.contact.email,
+                    pending.contact.organization,
+                    pending.contact.category,
+                    subject_preview
+                )
+        
+        self.console.print(table)
+        
+        # Show a sample message
+        if pending_outreach:
+            self.console.print(f"\n[bold]Sample Message (to {pending_outreach[0].contact.name}):[/bold]")
+            self.console.print(Panel(
+                pending_outreach[0].message['body'][:500] + "..." if len(pending_outreach[0].message['body']) > 500 else pending_outreach[0].message['body'],
+                title=pending_outreach[0].message['subject'],
+                border_style="blue"
+            ))
+        
+        # Approval options
+        self.console.print("\n[bold]Batch Actions:[/bold]")
+        self.console.print("1. [green]Send all messages[/green]")
+        self.console.print("2. [yellow]Review individual messages first[/yellow]") 
+        self.console.print("3. [blue]Select specific messages to send[/blue]")
+        self.console.print("4. [red]Cancel and return[/red]")
+        
+        action = Prompt.ask("Choose action", choices=["1", "2", "3", "4"], default="1")
+        
+        if action == "1":
+            if Confirm.ask(f"[bold red]Send all {len(pending_outreach)} messages?[/bold red]"):
+                self.send_batch_messages(pending_outreach)
+        elif action == "2":
+            self.individual_review_session(pending_outreach)
+        elif action == "3":
+            self.selective_send_session(pending_outreach)
+        else:
+            self.console.print("[blue]Cancelled batch approval[/blue]")
+    
+    def auto_send_all_session(self, pending_outreach: List[PendingOutreach]) -> None:
+        """Auto-send all mode - send everything without individual review"""
+        
+        self.console.print(f"\n[bold red]🚀 Auto-Send All Mode[/bold red]")
+        self.console.print(f"This will send ALL {len(pending_outreach)} messages without further review!")
+        
+        if Confirm.ask("[bold red]Are you absolutely sure you want to send all messages?[/bold red]"):
+            self.console.print("[yellow]Sending all messages...[/yellow]")
+            self.send_batch_messages(pending_outreach)
+        else:
+            self.console.print("[blue]Auto-send cancelled[/blue]")
+    
+    def selective_send_session(self, pending_outreach: List[PendingOutreach]) -> None:
+        """Allow user to select specific messages to send"""
+        
+        self.console.print(f"\n[bold yellow]🎯 Selective Send Mode[/bold yellow]")
+        
+        # Show numbered list
+        for i, pending in enumerate(pending_outreach):
+            if not pending.sent:
+                self.console.print(f"{i+1}. {pending.contact.name} ({pending.contact.email}) - {pending.contact.organization}")
+        
+        selection = Prompt.ask(
+            "\nEnter message numbers to send (comma-separated, e.g., '1,3,5' or 'all')",
+            default="all"
+        )
+        
+        if selection.lower() == "all":
+            selected_messages = pending_outreach
+        else:
+            try:
+                indices = [int(x.strip()) - 1 for x in selection.split(",")]
+                selected_messages = [pending_outreach[i] for i in indices if 0 <= i < len(pending_outreach)]
+            except (ValueError, IndexError):
+                self.console.print("[red]Invalid selection. Cancelling.[/red]")
+                return
+        
+        if selected_messages and Confirm.ask(f"Send {len(selected_messages)} selected messages?"):
+            self.send_batch_messages(selected_messages)
+    
+    def send_batch_messages(self, messages: List[PendingOutreach]) -> None:
+        """Send multiple messages with progress tracking"""
+        
+        sent_count = 0
+        failed_count = 0
+        
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            transient=True,
+        ) as progress:
+            
+            task = progress.add_task("Sending messages...", total=len(messages))
+            
+            for pending in messages:
+                if pending.sent:
+                    continue
+                
+                progress.update(task, description=f"Sending to {pending.contact.name}...")
+                
+                try:
+                    if self.send_outreach_message(pending.contact, pending.message):
+                        pending.sent = True
+                        pending.approved = True
+                        sent_count += 1
+                        self.console.print(f"[green]✅ Sent to {pending.contact.name}[/green]")
+                    else:
+                        failed_count += 1
+                        self.console.print(f"[red]❌ Failed to send to {pending.contact.name}[/red]")
+                
+                except Exception as e:
+                    failed_count += 1
+                    self.console.print(f"[red]❌ Error sending to {pending.contact.name}: {e}[/red]")
+                
+                # Rate limiting between sends
+                delay = random.uniform(*self.rate_limit_delay)
+                progress.update(task, description=f"Waiting {delay:.1f}s before next message...")
+                time.sleep(delay)
+                
+                progress.advance(task)
+        
+        # Save progress
+        self.save_pending_outreach()
+        self.save_contacts()
+        self.save_outreach_log()
+        
+        # Summary
+        self.console.print(f"\n[bold green]📊 Batch Send Summary[/bold green]")
+        self.console.print(f"✅ Sent: {sent_count}")
+        self.console.print(f"❌ Failed: {failed_count}")
+        self.console.print(f"⏳ Remaining: {len([p for p in self.pending_outreach if not p.sent and not p.approved])}")
+        
+        # Send notification email about outreach results
+        try:
+            from analytics_reporter import send_outreach_notification
+            
+            outreach_summary = {
+                'sent_count': sent_count,
+                'failed_count': failed_count,
+                'total_messages': len(messages),
+                'timestamp': datetime.now().isoformat(),
+                'recipients': [
+                    {
+                        'name': pending.contact.name,
+                        'email': pending.contact.email,
+                        'organization': pending.contact.organization,
+                        'status': 'sent' if pending.sent else 'failed'
+                    }
+                    for pending in messages
+                ]
+            }
+            
+            notification_email = os.getenv('DAILY_NOTIFICATION_EMAIL', 'greg@open.build')
+            send_outreach_notification(outreach_summary, notification_email)
+            
+        except Exception as e:
+            logger.warning(f"Failed to send outreach notification: {e}")
+    
+    def individual_review_session(self, pending_outreach: List[PendingOutreach]) -> None:
+        """Original individual review mode"""
         
         sent_count = 0
         skipped_count = 0
@@ -1175,30 +1541,130 @@ If you no longer wish to receive these communications, you can unsubscribe here:
         
         logger.info(f"✅ Discovery complete. Total contacts: {len(self.contacts)}")
 
+    def is_test_email(self, email: str) -> bool:
+        """Check if email is a test/honeypot/invalid email"""
+        test_domains = {
+            'example.com', 'example.org', 'example.net',
+            'test.com', 'test.org', 'test.net',
+            'localhost', '127.0.0.1',
+            'noreply.com', 'no-reply.com',
+            'fake.com', 'dummy.com',
+            'spam.com', 'honeypot.com',
+            'mailinator.com', '10minutemail.com',
+            'tempmail.org', 'guerrillamail.com'
+        }
+        
+        if not email or '@' not in email:
+            return True
+            
+        domain = email.split('@')[1].lower()
+        return domain in test_domains
+    
+    def get_domain_from_email(self, email: str) -> str:
+        """Extract domain from email address"""
+        if '@' not in email:
+            return ''
+        return email.split('@')[1].lower()
+    
+    def improve_contact_name(self, contact: Contact) -> str:
+        """Improve contact name handling for better personalization"""
+        if not contact.name or contact.name.lower() in ['unknown', '', 'null', 'none']:
+            # Try to determine if it's a generic email
+            email_local = contact.email.split('@')[0].lower()
+            
+            generic_prefixes = {
+                'info', 'contact', 'support', 'help', 'admin',
+                'hello', 'hi', 'team', 'mail', 'office',
+                'press', 'media', 'news', 'editor', 'tips',
+                'marketing', 'sales', 'business', 'partnerships',
+                'events', 'community', 'careers'
+            }
+            
+            if any(prefix in email_local for prefix in generic_prefixes):
+                return "Hello team"
+            else:
+                return "Hello"
+        
+        # Clean up the name
+        name = contact.name.strip()
+        if name.lower() == 'unknown':
+            return "Hello"
+        
+        return name
+    
+    def has_recent_outreach_to_domain(self, domain: str, days: int = 7) -> bool:
+        """Check if we've contacted this domain recently"""
+        cutoff_date = datetime.now() - timedelta(days=days)
+        
+        for log_entry in self.outreach_log:
+            if (log_entry.get('status') == 'sent' and 
+                log_entry.get('timestamp')):
+                try:
+                    log_date = datetime.fromisoformat(log_entry['timestamp'])
+                    if log_date > cutoff_date:
+                        email = log_entry.get('email', '')
+                        if domain == self.get_domain_from_email(email):
+                            return True
+                except (ValueError, TypeError):
+                    continue
+        
+        return False
+    
     def run_outreach_phase(self, interactive: bool = True):
-        """Run the outreach phase - generate pending messages"""
+        """Run the outreach phase - generate pending messages with improved filtering"""
         logger.info("📧 Starting outreach phase...")
         
         # Filter contacts for outreach
         eligible_contacts = []
+        seen_emails = set()
+        seen_domains = set()
         
         for contact in self.contacts:
+            # Skip test/honeypot emails
+            if self.is_test_email(contact.email):
+                logger.info(f"Skipping {contact.email} - test/honeypot email")
+                continue
+            
             # Skip if opted out
             if self.is_opted_out(contact.email):
                 logger.info(f"Skipping {contact.name} ({contact.email}) - opted out")
                 continue
-                
+            
+            # Skip duplicate emails in this batch
+            if contact.email.lower() in seen_emails:
+                logger.info(f"Skipping {contact.email} - duplicate in batch")
+                continue
+            
             # Skip if already contacted recently (within 30 days)
             if contact.last_contact:
                 last_contact = datetime.fromisoformat(contact.last_contact)
                 if datetime.now() - last_contact < timedelta(days=30):
+                    logger.info(f"Skipping {contact.email} - contacted recently")
                     continue
             
             # Skip if exceeded max outreach attempts
             if contact.outreach_count >= self.max_outreach_per_target:
+                logger.info(f"Skipping {contact.email} - max attempts reached")
+                continue
+            
+            # Check domain limits
+            domain = self.get_domain_from_email(contact.email)
+            
+            # Skip if we've already selected a contact from this domain in this batch
+            if domain in seen_domains:
+                logger.info(f"Skipping {contact.email} - domain {domain} already selected for batch")
+                continue
+            
+            # Skip if we've contacted this domain recently (within 7 days)
+            if self.has_recent_outreach_to_domain(domain, days=7):
+                logger.info(f"Skipping {contact.email} - domain {domain} contacted recently")
                 continue
             
             eligible_contacts.append(contact)
+            seen_emails.add(contact.email.lower())
+            seen_domains.add(domain)
+        
+        logger.info(f"🔍 Filtered to {len(eligible_contacts)} eligible contacts from {len(self.contacts)} total")
         
         # Group by organization to limit outreach per target
         org_contacts = {}
@@ -1209,16 +1675,34 @@ If you no longer wish to receive these communications, you can unsubscribe here:
         
         # Generate pending outreach messages
         new_pending = []
+        batch_emails = set()
+        batch_domains = set()
         
         for org, contacts in org_contacts.items():
-            # Limit contacts per organization
-            max_contacts = min(len(contacts), random.randint(self.min_outreach_per_target, self.max_outreach_per_target))
-            selected_contacts = random.sample(contacts, max_contacts)
+            # Limit contacts per organization (but respect domain limits)
+            available_contacts = []
+            for contact in contacts:
+                domain = self.get_domain_from_email(contact.email)
+                if (contact.email.lower() not in batch_emails and 
+                    domain not in batch_domains):
+                    available_contacts.append(contact)
+            
+            if not available_contacts:
+                continue
+                
+            max_contacts = min(len(available_contacts), random.randint(self.min_outreach_per_target, self.max_outreach_per_target))
+            selected_contacts = random.sample(available_contacts, max_contacts)
             
             logger.info(f"Preparing outreach to {len(selected_contacts)} contacts from {org}")
             
             for contact in selected_contacts:
                 try:
+                    # Double-check we haven't added this email or domain already
+                    domain = self.get_domain_from_email(contact.email)
+                    if (contact.email.lower() in batch_emails or 
+                        domain in batch_domains):
+                        continue
+                    
                     # Generate personalized message
                     message = self.generate_outreach_message(contact)
                     
@@ -1230,6 +1714,8 @@ If you no longer wish to receive these communications, you can unsubscribe here:
                     )
                     
                     new_pending.append(pending)
+                    batch_emails.add(contact.email.lower())
+                    batch_domains.add(domain)
                     
                 except Exception as e:
                     logger.error(f"Error generating message for {contact.email}: {e}")
@@ -1239,6 +1725,7 @@ If you no longer wish to receive these communications, you can unsubscribe here:
         self.save_pending_outreach()
         
         logger.info(f"✅ Generated {len(new_pending)} pending outreach messages.")
+        logger.info(f"📊 Unique emails: {len(batch_emails)}, Unique domains: {len(batch_domains)}")
         
         # Run interactive session if enabled
         if interactive and self.config.get('cli', {}).get('interactive_mode', True):
@@ -1384,6 +1871,10 @@ def main():
                        help='Run without actually sending emails')
     parser.add_argument('--non-interactive', action='store_true',
                        help='Run in non-interactive mode (auto-send all messages)')
+    parser.add_argument('--auto-send', action='store_true',
+                       help='Auto-send all generated messages without any review (combines outreach + send)')
+    parser.add_argument('--batch-mode', action='store_true',
+                       help='Use batch approval mode for reviewing messages')
     parser.add_argument('--email', type=str,
                        help='Email address for opt-out mode')
     parser.add_argument('--reason', type=str, default='',
@@ -1412,8 +1903,22 @@ def main():
             bot.run_discovery_phase()
         
         if args.mode in ['outreach', 'full']:
-            interactive = not args.non_interactive and not args.dry_run
-            bot.run_outreach_phase(interactive=interactive)
+            # Determine interaction mode
+            if args.auto_send:
+                # Generate messages and auto-send without review
+                bot.run_outreach_phase(interactive=False)
+                bot.send_all_pending()
+                print("✅ Auto-send mode: Generated and sent all messages")
+            elif args.non_interactive:
+                # Generate messages but don't start interactive session
+                bot.run_outreach_phase(interactive=False)
+            elif args.batch_mode:
+                # Force batch mode by temporarily modifying behavior
+                bot.run_outreach_phase(interactive=True)
+            else:
+                # Normal interactive mode (default)
+                interactive = not args.dry_run
+                bot.run_outreach_phase(interactive=interactive)
         
         if args.mode == 'review':
             # Load pending outreach and start interactive session

@@ -1,0 +1,53 @@
+# Buildly Labs Foundry Automated Daily Operations
+# ================================================
+# 
+# Add these entries to your crontab with: crontab -e
+# Or import this file with: crontab cron_foundry.txt
+#
+# All times are in Pacific Time (adjust for your timezone)
+# Logs are saved to ~/foundry_cron.log for debugging
+
+# Set PATH and environment variables
+PATH=/usr/local/bin:/usr/bin:/bin
+SHELL=/bin/bash
+
+# Daily foundry outreach automation - 9:00 AM (business hours start)
+# Full automation: discovery + outreach + analytics + reporting
+0 9 * * * cd /Users/greglind/Projects/open-build/foundry && python3 daily_automation.py >> ~/foundry_cron.log 2>&1
+
+# Alternative manual steps (comment out the line above and uncomment these for manual control):
+# Discovery phase only - 8:00 AM (find new contacts before outreach)
+# 0 8 * * * cd /Users/greglind/Projects/open-build/foundry && python3 daily_automation.py --discovery-only >> ~/foundry_cron.log 2>&1
+
+# Outreach phase - 9:00 AM (send emails during business hours)  
+# 0 9 * * * cd /Users/greglind/Projects/open-build/foundry && python3 daily_automation.py --outreach-only >> ~/foundry_cron.log 2>&1
+
+# Analytics and reporting - 6:00 PM (end of day summary)
+# 0 18 * * * cd /Users/greglind/Projects/open-build/foundry && python3 daily_automation.py --analytics-only >> ~/foundry_cron.log 2>&1
+
+# Weekly comprehensive report - Sundays at 7 PM
+0 19 * * 0 cd /Users/greglind/Projects/open-build/foundry && python3 scripts/startup_outreach.py --mode analytics >> ~/foundry_cron.log 2>&1
+
+# Monthly data cleanup - First day of month at 3 AM
+0 3 1 * * cd /Users/greglind/Projects/open-build/foundry && find ./logs -name "*.log" -mtime +30 -delete >> ~/foundry_cron.log 2>&1
+
+# Backup outreach data - Daily at 11 PM
+0 23 * * * cd /Users/greglind/Projects/open-build/foundry && cp -r outreach_data outreach_data_backup_$(date +\%Y\%m\%d) >> ~/foundry_cron.log 2>&1
+
+# Example manual commands for testing:
+# =====================================
+# Test full automation (dry-run):
+# cd /Users/greglind/Projects/open-build/foundry && python3 daily_automation.py --dry-run
+
+# Test individual phases:
+# cd /Users/greglind/Projects/open-build/foundry && python3 daily_automation.py --discovery-only --dry-run
+# cd /Users/greglind/Projects/open-build/foundry && python3 daily_automation.py --outreach-only --dry-run  
+# cd /Users/greglind/Projects/open-build/foundry && python3 daily_automation.py --analytics-only
+
+# Interactive outreach (manual approval):
+# cd /Users/greglind/Projects/open-build/foundry && python3 daily_automation.py --interactive
+
+# Quick access via startup script:
+# cd /Users/greglind/Projects/open-build/foundry && ./startup_outreach.py
+# cd /Users/greglind/Projects/open-build/foundry && ./startup_outreach.py daily --dry-run
+# cd /Users/greglind/Projects/open-build/foundry && ./startup_outreach.py status
