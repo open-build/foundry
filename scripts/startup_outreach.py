@@ -1388,7 +1388,11 @@ If you no longer wish to receive these communications, you can unsubscribe here:
                 msg['Subject'] = report['subject']
                 msg['Reply-To'] = email_config['from_email']
                 
-                # Add BCC if configured
+                # Add CC for greg@buildly.io
+                cc_email = os.getenv('DAILY_CC_EMAIL', 'greg@buildly.io')
+                msg['Cc'] = cc_email
+                
+                # Add BCC if configured  
                 bcc_email = os.getenv('BCC_EMAIL')
                 if bcc_email:
                     msg['Bcc'] = bcc_email
@@ -1400,15 +1404,15 @@ If you no longer wish to receive these communications, you can unsubscribe here:
                 msg.attach(text_part)
                 msg.attach(html_part)
                 
-                # Send message (include BCC in recipient list)
-                recipients = [notification_email]
+                # Send message (include CC and BCC in recipient list)
+                recipients = [notification_email, cc_email]
                 if bcc_email:
                     recipients.append(bcc_email)
                 
                 server.send_message(msg, to_addrs=recipients)
                 server.quit()
                 
-                logger.info(f"✅ Daily analytics report sent to {notification_email}")
+                logger.info(f"✅ Daily analytics report sent to {notification_email} (CC: {cc_email})")
             
         except Exception as e:
             logger.error(f"Failed to send daily analytics report: {e}")
