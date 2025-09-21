@@ -27,8 +27,8 @@ except ImportError:
     # Fallback configuration
     EMAIL_CONFIG = {
         'service': 'brevo',
-        'username': os.getenv('SMTP_USERNAME', '96af72001@smtp-brevo.com'),
-        'password': os.getenv('SMTP_PASSWORD', 'F9BCg30JqkyZmVWw'),
+        'username': os.getenv('BREVO_SMTP_USER', '96af72001@smtp-brevo.com'),
+        'password': os.getenv('BREVO_SMTP_PASSWORD', 'F9BCg30JqkyZmVWw'),
         'smtp_server': 'smtp-relay.brevo.com',
         'smtp_port': 587,
         'from_name': 'Buildly Labs Foundry Analytics',
@@ -543,12 +543,30 @@ class AnalyticsCollector:
     
     def _save_daily_report(self, analytics: AnalyticsData):
         """Save daily report to file"""
-        reports_file = self.data_dir / "daily_reports.json"
+        # Save to reports directory with clean current name and timestamped archives
+        reports_dir = Path("reports/daily")
+        reports_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Archive previous current report if it exists
+        current_report = reports_dir / "analytics.json"
+        if current_report.exists():
+            # Create timestamped archive of previous version
+            prev_timestamp = datetime.fromtimestamp(current_report.stat().st_mtime).strftime('%Y%m%d_%H%M%S')
+            archive_file = reports_dir / f"analytics_{prev_timestamp}.json"
+            current_report.rename(archive_file)
+            logger.info(f"Archived previous report: {archive_file}")
+        
+        # Save new current report (no timestamp)
+        with open(current_report, 'w') as f:
+            json.dump(asdict(analytics), f, indent=2)
+        
+        # Also update the main daily reports file for backward compatibility
+        legacy_reports_file = self.data_dir / "daily_reports.json"
         
         # Load existing reports
         reports = []
-        if reports_file.exists():
-            with open(reports_file) as f:
+        if legacy_reports_file.exists():
+            with open(legacy_reports_file) as f:
                 reports = json.load(f)
         
         # Add new report
@@ -558,10 +576,27 @@ class AnalyticsCollector:
         reports = reports[-30:]
         
         # Save updated reports
-        with open(reports_file, 'w') as f:
+        with open(legacy_reports_file, 'w') as f:
             json.dump(reports, f, indent=2)
         
-        logger.info(f"Daily report saved for {analytics.date}")
+        # Clean up old report files (30 day retention)
+        self._cleanup_old_reports(reports_dir)
+        
+        logger.info(f"Daily report saved: {current_report} and {legacy_reports_file}")
+
+    def _cleanup_old_reports(self, reports_dir: Path):
+        """Clean up archived report files older than 30 days"""
+        try:
+            cutoff_date = datetime.now() - timedelta(days=30)
+            
+            # Only clean up timestamped archives, not current files
+            for report_file in reports_dir.glob('*_[0-9]*_[0-9]*.json'):
+                if report_file.stat().st_mtime < cutoff_date.timestamp():
+                    report_file.unlink()
+                    logger.info(f"Deleted old report archive: {report_file}")
+        
+        except Exception as e:
+            logger.warning(f"Error cleaning old report archives: {e}")
 
 def get_new_sources_summary() -> Dict[str, Any]:
     """Get summary of new sources discovered today"""

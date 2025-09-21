@@ -1,76 +1,40 @@
-#!/usr/bin/env python3#!/usr/bin/env python3
+#!/usr/bin/env python3
+"""
+Daily Automation Master Script for Buildly Labs Foundry
+Runs the complete outreach pipeline: discovery -> outreach -> analytics -> notifications
 
-""""""
+This script orchestrates all outreach activities in the proper sequence with
+comprehensive error handling, logging, and status reporting.
 
-Daily Automation LauncherDaily Automation Master Script for Buildly Labs Foundry
-
-=========================Runs the complete outreach pipeline: discovery -> outreach -> analytics -> notifications
-
-
-
-Simple wrapper to run the daily automation from any location.This script orchestrates all outreach activities in the proper sequence with
-
-Automatically handles path resolution and imports.comprehensive error handling, logging, and status reporting.
-
-
-
-Usage:Usage:
-
-    python3 daily_automation.py [options]    python3 daily_automation.py                    # Full daily run
-
-        python3 daily_automation.py --discovery-only   # Just discovery
-
-All options are passed through to scripts/daily_automation.py    python3 daily_automation.py --outreach-only    # Just outreach 
-
-"""    python3 daily_automation.py --analytics-only   # Just analytics
-
+Usage:
+    python3 daily_automation.py                    # Full daily run
+    python3 daily_automation.py --discovery-only   # Just discovery
+    python3 daily_automation.py --outreach-only    # Just outreach 
+    python3 daily_automation.py --analytics-only   # Just analytics
     python3 daily_automation.py --dry-run          # Test run without sending
-
-import sys    python3 daily_automation.py --interactive      # Interactive approval mode
-
-import os"""
-
-from pathlib import Path
+    python3 daily_automation.py --interactive      # Interactive approval mode
+"""
 
 import os
-
-# Add scripts directory to pathimport sys
-
-script_dir = Path(__file__).parent / 'scripts'import logging
-
-sys.path.insert(0, str(script_dir))import argparse
-
+import sys
+import logging
+import argparse
 import traceback
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, Any, Optional
 
-# Change to project root directoryfrom datetime import datetime
+# Add scripts directory to path
+SCRIPT_DIR = Path(__file__).parent / 'scripts'
+sys.path.insert(0, str(SCRIPT_DIR))
 
-project_root = Path(__file__).parentfrom pathlib import Path
-
-os.chdir(project_root)from typing import Dict, Any, Optional
-
-
-
-# Import and run the main automation# Add scripts directory to path
-
-try:SCRIPT_DIR = Path(__file__).parent / 'scripts'
-
-    from daily_automation import mainsys.path.insert(0, str(SCRIPT_DIR))
-
-    main()
-
-except ImportError as e:def setup_logging() -> logging.Logger:
-
-    print(f"❌ Error importing daily automation: {e}")    """Set up comprehensive logging"""
-
-    print(f"Make sure scripts/daily_automation.py exists")    log_dir = Path('logs')
-
-    sys.exit(1)    log_dir.mkdir(exist_ok=True)
-
-except Exception as e:    
-
-    print(f"❌ Error running daily automation: {e}")    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-
-    sys.exit(1)    log_file = log_dir / f'daily_automation_{timestamp}.log'
+def setup_logging() -> logging.Logger:
+    """Set up comprehensive logging"""
+    log_dir = Path('logs')
+    log_dir.mkdir(exist_ok=True)
+    
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    log_file = log_dir / f'daily_automation_{timestamp}.log'
     
     # Configure logging
     logging.basicConfig(

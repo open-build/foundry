@@ -13,11 +13,11 @@ SHELL=/bin/bash
 
 # Daily foundry outreach automation - 9:00 AM (business hours start)
 # Full automation: discovery + outreach + analytics + reporting
-0 9 * * * cd /Users/greglind/Projects/open-build/foundry && python3 daily_automation.py >> ~/foundry_cron.log 2>&1
+0 9 * * * cd /Users/greglind/Projects/open-build/foundry && python3 run_automation.py >> ~/foundry_cron.log 2>&1
 
 # Alternative manual steps (comment out the line above and uncomment these for manual control):
 # Discovery phase only - 8:00 AM (find new contacts before outreach)
-# 0 8 * * * cd /Users/greglind/Projects/open-build/foundry && python3 daily_automation.py --discovery-only >> ~/foundry_cron.log 2>&1
+# 0 8 * * * cd /Users/greglind/Projects/open-build/foundry && python3 scripts/daily_automation.py --discovery-only >> ~/foundry_cron.log 2>&1
 
 # Outreach phase - 9:00 AM (send emails during business hours)  
 # 0 9 * * * cd /Users/greglind/Projects/open-build/foundry && python3 daily_automation.py --outreach-only >> ~/foundry_cron.log 2>&1

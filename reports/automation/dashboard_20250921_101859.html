@@ -1,0 +1,714 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buildly Labs Foundry - Automation Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e1e8ed;
+        }
+        
+        .card h2 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .metric:last-child {
+            border-bottom: none;
+        }
+        
+        .metric-label {
+            font-weight: 500;
+            color: #4a5568;
+        }
+        
+        .metric-value {
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        .status-good { color: #38a169; }
+        .status-warning { color: #d69e2e; }
+        .status-error { color: #e53e3e; }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+        
+        .recommendation {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+        
+        .recommendation.info {
+            background: #ebf8ff;
+            border-color: #3182ce;
+        }
+        
+        .recommendation.warning {
+            background: #fffaf0;
+            border-color: #d69e2e;
+        }
+        
+        .recommendation.error {
+            background: #fed7d7;
+            border-color: #e53e3e;
+        }
+        
+        .recommendation h4 {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .env-var {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: #f8fafc;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .env-var.configured {
+            border-color: #38a169;
+            background: #f0fff4;
+        }
+        
+        .env-var.missing {
+            border-color: #e53e3e;
+            background: #fef5e7;
+        }
+        
+        .env-var-name {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .env-var-value {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .log-file {
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            background: #f8fafc;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .log-file:hover {
+            background: #e2e8f0;
+        }
+        
+        .log-file-name {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .log-file-size {
+            font-size: 0.85rem;
+            color: #718096;
+        }
+        
+        .tab-container {
+            margin-top: 2rem;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 1rem;
+        }
+        
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: #718096;
+            transition: color 0.2s;
+        }
+        
+        .tab-button.active {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            margin-bottom: -2px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .error-log {
+            background: #fef5e7;
+            border: 1px solid #fed7aa;
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.85rem;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #718096;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 Buildly Labs Foundry</h1>
+        <p>Automation Dashboard - Generated 2025-09-21 at 10:18:59</p>
+    </div>
+    
+    <div class="container">
+        <!-- Recommendations Section -->
+        <div class="card">
+            <h2>🎯 Recommendations & Alerts</h2>
+            
+        <div class="recommendation warning">
+            <h4>Missing Environment Variables</h4>
+            <p><strong>Issue:</strong> 8 required environment variables are missing</p>
+            <p><strong>Action:</strong> Update .env file with missing variables</p>
+        </div>
+        
+        <div class="recommendation info">
+            <h4>High Pending Outreach Volume</h4>
+            <p><strong>Issue:</strong> 87 messages ready to send</p>
+            <p><strong>Action:</strong> Run outreach automation or review pending messages</p>
+        </div>
+        
+        <div class="recommendation warning">
+            <h4>No New Contacts Today</h4>
+            <p><strong>Issue:</strong> Discovery phase may not be finding new sources</p>
+            <p><strong>Action:</strong> Check discovery automation and target list</p>
+        </div>
+        
+        </div>
+        
+        <!-- Quick Stats Grid -->
+        <div class="grid">
+            <!-- Automation Status -->
+            <div class="card">
+                <h2>📊 Automation Status</h2>
+                <div class="metric">
+                    <span class="metric-label">Last 24 Hours</span>
+                    <span class="metric-value status-good">
+                        4 success, 0 failures
+                    </span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Last 7 Days</span>
+                    <span class="metric-value">
+                        8 success, 0 failures
+                    </span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Last 30 Days</span>
+                    <span class="metric-value">
+                        8 success, 0 failures
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Outreach Stats -->
+            <div class="card">
+                <h2>📧 Outreach Performance</h2>
+                <div class="metric">
+                    <span class="metric-label">Total Contacts</span>
+                    <span class="metric-value">68</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">New Today</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Emails Sent (Week)</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Pending Messages</span>
+                    <span class="metric-value status-warning">87</span>
+                </div>
+            </div>
+            
+            <!-- Configuration Status -->
+            <div class="card">
+                <h2>⚙️ Configuration Status</h2>
+                <div class="metric">
+                    <span class="metric-label">Configured Variables</span>
+                    <span class="metric-value status-good">0</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Missing Variables</span>
+                    <span class="metric-value status-error">8</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">System Health</span>
+                    <span class="metric-value status-good">Operational</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Detailed Tabs -->
+        <div class="tab-container">
+            <div class="tab-buttons">
+                <button class="tab-button active" onclick="showTab('outreach')">📧 Outreach Details</button>
+                <button class="tab-button" onclick="showTab('environment')">⚙️ Environment</button>
+                <button class="tab-button" onclick="showTab('logs')">📋 Error Logs</button>
+                <button class="tab-button" onclick="showTab('system')">🔧 System Health</button>
+            </div>
+            
+            <!-- Outreach Tab -->
+            <div id="outreach" class="tab-content active">
+                <div class="grid">
+                    <div class="card">
+                        <h2>Contact Sources</h2>
+                        
+        <div class="metric">
+            <span class="metric-label">https://substack.com/contact</span>
+            <span class="metric-value">6</span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">https://entrepreneur.com/contact</span>
+            <span class="metric-value">5</span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">https://saastr.com/contact</span>
+            <span class="metric-value">4</span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">https://uktech.news/contact</span>
+            <span class="metric-value">3</span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">https://startupnorway.com/contact</span>
+            <span class="metric-value">3</span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">https://startupnorway.com/about</span>
+            <span class="metric-value">3</span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">https://technode.com/about</span>
+            <span class="metric-value">3</span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">https://antler.co/about</span>
+            <span class="metric-value">3</span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">https://www.eban.org/contact</span>
+            <span class="metric-value">3</span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">https://www.eban.org/about</span>
+            <span class="metric-value">3</span>
+        </div>
+        
+                    </div>
+                    <div class="card">
+                        <h2>Target Categories</h2>
+                        
+        <div class="metric">
+            <span class="metric-label">Publication</span>
+            <span class="metric-value">61</span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">Platform</span>
+            <span class="metric-value">30</span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">Community</span>
+            <span class="metric-value">8</span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">Podcast</span>
+            <span class="metric-value">1</span>
+        </div>
+        
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2>Outreach Timeline</h2>
+                    <div class="metric">
+                        <span class="metric-label">Today</span>
+                        <span class="metric-value">0 emails</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">This Week</span>
+                        <span class="metric-value">0 emails</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">This Month</span>
+                        <span class="metric-value">0 emails</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Total Historical</span>
+                        <span class="metric-value">170 emails</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Environment Tab -->
+            <div id="environment" class="tab-content">
+                <div class="card">
+                    <h2>✅ Configured Variables</h2>
+                    <p>No variables in this category.</p>
+                </div>
+                
+                
+        <div class="card">
+            <h2>❌ Missing Required Variables</h2>
+        
+        <div class="env-var missing">
+            <div>
+                <div class="env-var-name">SMTP_USERNAME</div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">Email SMTP username for Brevo</div>
+            </div>
+            <div class="env-var-value">MISSING</div>
+        </div>
+        
+        <div class="env-var missing">
+            <div>
+                <div class="env-var-name">SMTP_PASSWORD</div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">Email SMTP password for Brevo</div>
+            </div>
+            <div class="env-var-value">MISSING</div>
+        </div>
+        
+        <div class="env-var missing">
+            <div>
+                <div class="env-var-name">DAILY_NOTIFICATION_EMAIL</div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">Primary email for daily reports</div>
+            </div>
+            <div class="env-var-value">MISSING</div>
+        </div>
+        
+        <div class="env-var missing">
+            <div>
+                <div class="env-var-name">DAILY_CC_EMAIL</div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">CC email for daily reports</div>
+            </div>
+            <div class="env-var-value">MISSING</div>
+        </div>
+        
+        <div class="env-var missing">
+            <div>
+                <div class="env-var-name">GOOGLE_ANALYTICS_PROPERTY_ID</div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">GA4 Property ID for website analytics</div>
+            </div>
+            <div class="env-var-value">MISSING</div>
+        </div>
+        
+        <div class="env-var missing">
+            <div>
+                <div class="env-var-name">YOUTUBE_CHANNEL_ID</div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">YouTube channel ID for analytics</div>
+            </div>
+            <div class="env-var-value">MISSING</div>
+        </div>
+        
+        <div class="env-var missing">
+            <div>
+                <div class="env-var-name">YOUTUBE_API_KEY</div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">YouTube Data API key</div>
+            </div>
+            <div class="env-var-value">MISSING</div>
+        </div>
+        
+        <div class="env-var missing">
+            <div>
+                <div class="env-var-name">WEBSITE_URL</div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">Main website URL for monitoring</div>
+            </div>
+            <div class="env-var-value">MISSING</div>
+        </div>
+        </div>
+        <div class="card">
+            <h2>⚠️ Missing Optional Variables</h2>
+        
+        <div class="env-var missing">
+            <div>
+                <div class="env-var-name">BCC_EMAIL</div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">BCC email (optional)</div>
+            </div>
+            <div class="env-var-value">MISSING</div>
+        </div>
+        
+        <div class="env-var missing">
+            <div>
+                <div class="env-var-name">GOOGLE_ANALYTICS_API_KEY</div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">GA4 API key (optional)</div>
+            </div>
+            <div class="env-var-value">MISSING</div>
+        </div>
+        
+        <div class="env-var missing">
+            <div>
+                <div class="env-var-name">GOOGLE_ANALYTICS_CREDENTIALS_FILE</div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">GA4 service account file (optional)</div>
+            </div>
+            <div class="env-var-value">MISSING</div>
+        </div>
+        </div>
+            </div>
+            
+            <!-- Logs Tab -->
+            <div id="logs" class="tab-content">
+                <div class="card">
+                    <h2>Recent Error Logs</h2>
+                    <p class="status-good">No recent errors found. ✅</p>
+                </div>
+                
+                <div class="card">
+                    <h2>📋 Recent Log Files</h2>
+                    
+        <div class="log-file" onclick="openLogFile('daily_automation_20250921_101210.log')">
+            <div class="log-file-name">daily_automation_20250921_101210.log</div>
+            <div class="log-file-size">0.9 KB • Modified 2025-09-21 10:12</div>
+        </div>
+        
+        <div class="log-file" onclick="openLogFile('daily_automation_20250921_092352.log')">
+            <div class="log-file-name">daily_automation_20250921_092352.log</div>
+            <div class="log-file-size">1.3 KB • Modified 2025-09-21 09:23</div>
+        </div>
+        
+        <div class="log-file" onclick="openLogFile('daily_automation_20250921_092000.log')">
+            <div class="log-file-name">daily_automation_20250921_092000.log</div>
+            <div class="log-file-size">0.9 KB • Modified 2025-09-21 09:20</div>
+        </div>
+        
+        <div class="log-file" onclick="openLogFile('daily_automation_20250921_090001.log')">
+            <div class="log-file-name">daily_automation_20250921_090001.log</div>
+            <div class="log-file-size">18.4 KB • Modified 2025-09-21 09:01</div>
+        </div>
+        
+        <div class="log-file" onclick="openLogFile('daily_automation_20250920_090002.log')">
+            <div class="log-file-name">daily_automation_20250920_090002.log</div>
+            <div class="log-file-size">18.4 KB • Modified 2025-09-20 09:01</div>
+        </div>
+        
+        <div class="log-file" onclick="openLogFile('daily_automation_20250919_115039.log')">
+            <div class="log-file-name">daily_automation_20250919_115039.log</div>
+            <div class="log-file-size">1.5 KB • Modified 2025-09-19 11:50</div>
+        </div>
+        
+        <div class="log-file" onclick="openLogFile('daily_automation_20250919_095156.log')">
+            <div class="log-file-name">daily_automation_20250919_095156.log</div>
+            <div class="log-file-size">18.4 KB • Modified 2025-09-19 09:52</div>
+        </div>
+        
+        <div class="log-file" onclick="openLogFile('daily_automation_20250919_093802.log')">
+            <div class="log-file-name">daily_automation_20250919_093802.log</div>
+            <div class="log-file-size">1.3 KB • Modified 2025-09-19 09:38</div>
+        </div>
+        
+                </div>
+            </div>
+            
+            <!-- System Tab -->
+            <div id="system" class="tab-content">
+                <div class="grid">
+                    <div class="card">
+                        <h2>📁 Directories</h2>
+                        
+        <div class="metric">
+            <span class="metric-label">✅ outreach_data</span>
+            <span class="metric-value status-good">
+                OK
+            </span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">✅ logs</span>
+            <span class="metric-value status-good">
+                OK
+            </span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">✅ scripts</span>
+            <span class="metric-value status-good">
+                OK
+            </span>
+        </div>
+        
+                    </div>
+                    <div class="card">
+                        <h2>📄 Key Files</h2>
+                        
+        <div class="metric">
+            <span class="metric-label">✅ config.py</span>
+            <span class="metric-value status-good">
+                OK
+            </span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">❌ daily_automation.py</span>
+            <span class="metric-value status-error">
+                ERROR
+            </span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">✅ scripts/startup_outreach.py</span>
+            <span class="metric-value status-good">
+                OK
+            </span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">✅ scripts/analytics_reporter.py</span>
+            <span class="metric-value status-good">
+                OK
+            </span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">✅ .env</span>
+            <span class="metric-value status-good">
+                OK
+            </span>
+        </div>
+        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Generated by Buildly Labs Foundry Dashboard • 2025-09-21 10:18:59</p>
+        <p>Auto-refresh this page to see updated metrics</p>
+    </div>
+    
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            // Show selected tab and mark button as active
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        function openLogFile(filename) {
+            // In a real implementation, this would show log contents
+            alert('Log file: ' + filename + '\n\nTo view full contents, check logs/' + filename);
+        }
+        
+        // Auto-refresh every 5 minutes
+        setTimeout(() => {
+            location.reload();
+        }, 300000);
+    </script>
+</body>
+</html>
+    
