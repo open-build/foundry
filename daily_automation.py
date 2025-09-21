@@ -139,8 +139,10 @@ def run_analytics_phase(logger: logging.Logger, dry_run: bool = False) -> bool:
             logger.info("DRY RUN: Would generate analytics report")
             return True
         else:
-            # Generate and send daily analytics report
-            bot.send_daily_analytics_report()
+            # Only generate analytics data, do not send email here
+            # The email will be sent after all phases in main()
+            if hasattr(bot, 'generate_analytics_report'):
+                bot.generate_analytics_report()
             logger.info("✅ Analytics phase completed successfully")
             return True
             
@@ -226,13 +228,23 @@ def main():
             # Phase 3: Analytics (always run for reporting)
             results['analytics'] = run_analytics_phase(logger, args.dry_run)
         
+        # After all phases, send the daily summary email (if not dry run)
+        if not args.dry_run:
+            try:
+                from startup_outreach import StartupOutreachBot
+                bot = StartupOutreachBot()
+                bot.send_daily_analytics_report()
+                logger.info("✅ Daily summary email sent after all phases")
+            except Exception as e:
+                logger.error(f"❌ Failed to send daily summary email: {e}")
+
         # Send completion notification
         send_completion_notification(logger, results, args.dry_run)
-        
+
         # Final status
         success_count = sum(results.values())
         total_phases = len(results)
-        
+
         if success_count == total_phases:
             logger.info("🎉 Daily automation completed successfully!")
             sys.exit(0)
