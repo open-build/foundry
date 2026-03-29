@@ -23,18 +23,37 @@ A global startup incubator website with automated outreach capabilities, targeti
 
 ```
 foundry/
+├── docs/                  # 🌐 Static website (deployed to GitHub Pages)
+├── ForgeWeb/              # 🛠️ Content management admin (git submodule, local only)
+├── ai-tools/              # 🤖 AI-powered reporting & automation
+│   ├── reporting/         #    Report generation scripts
+│   ├── automation/        #    Task runner & scheduling
+│   └── openclaw/          #    OpenClaw cron jobs & skill definitions
+├── scripts/               # 🐍 Outreach & analytics scripts
 ├── devdocs/               # 📚 Development documentation
-├── scripts/               # 🐍 Automation scripts (outreach, analytics)
-├── .github/prompts/       # 🤖 Development context for AI assistants
-├── outreach_data/         # 📊 Campaign data and analytics
-├── assets/                # 🎨 Website assets
-└── *.html                 # 🌐 Static website files
+├── reports/               # 📊 Generated reports
+└── .github/prompts/       # 💡 AI assistant context
 ```
 
-## � Quick Start
+## 🚀 Quick Start
 
-### For Website Development
-The static site files are in the root directory and ready for GitHub Pages deployment.
+### Website Development
+```bash
+# Serve the site locally
+npm run serve            # http://localhost:3000
+
+# Or use ForgeWeb admin interface
+npm run forgeweb         # http://localhost:8000/admin/
+```
+
+### Content Management (ForgeWeb)
+ForgeWeb is included as a git submodule and provides a local admin UI for
+editing the site in `docs/`. After cloning, initialise the submodule:
+```bash
+git submodule update --init --recursive
+cd ForgeWeb && ./ops/startup.sh start
+# Open http://localhost:8000/admin/
+```
 
 ### For Outreach Automation
 ```bash
@@ -48,10 +67,37 @@ python3 scripts/startup_outreach.py --mode outreach
 python3 scripts/startup_outreach.py --mode analytics
 ```
 
+### AI Tools & Reporting
+```bash
+# Generate a dashboard report
+npm run report
+
+# Build a weekly summary
+npm run report:weekly
+
+# Or directly
+python3 ai-tools/reporting/generate_report.py
+python3 ai-tools/reporting/weekly_summary.py
+```
+
+### OpenClaw Local Automation
+OpenClaw is installed locally and can schedule recurring tasks:
+```bash
+# Register cron jobs
+openclaw cron add --file ai-tools/openclaw/cron-jobs.json
+
+# List jobs
+openclaw cron list
+
+# Run a job now (debug)
+openclaw cron run foundry-daily-report
+```
+
 ## 📖 Documentation
 
 - **[Development Docs](devdocs/README.md)** - Complete development guide
-- **[Scripts Guide](scripts/README.md)** - Automation system documentation  
+- **[Scripts Guide](scripts/README.md)** - Automation system documentation
+- **[AI Tools](ai-tools/README.md)** - Reporting & automation tools
 - **[Project Status](.github/prompts/project-status.md)** - Current operational status
 - **[Development Context](.github/prompts/development-context.md)** - AI assistant prompts
 

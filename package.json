@@ -7,7 +7,10 @@
     "serve": "npx serve docs -p 3000",
     "dev": "npx serve docs -p 3000 --reload",
     "build": "echo 'Static site - no build process needed'",
-    "deploy": "./cleanup-deploy.sh"
+    "deploy": "./cleanup-deploy.sh",
+    "forgeweb": "cd ForgeWeb && ./ops/startup.sh start",
+    "report": "python3 ai-tools/reporting/generate_report.py",
+    "report:weekly": "python3 ai-tools/reporting/weekly_summary.py"
   },
   "repository": {
     "type": "git",

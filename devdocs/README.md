@@ -1,8 +1,11 @@
-# Buildly Labs Foundry - Development Documentation
+# The Foundry Collective - Development Documentation
 
-This folder contains all development documentation for the Buildly Labs Foundry project.
+This folder contains all development documentation for The Foundry Collective project.
 
 ## 📚 Documentation Overview
+
+### Architecture & Design
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Site architecture, partner model, ForgeWeb integration, AI automation
 
 ### Project Documentation
 - **[CAMPAIGN_COMPLETE.md](CAMPAIGN_COMPLETE.md)** - Outreach campaign completion summary

@@ -1,0 +1,30 @@
+<!-- Foundry Collective — Shared Header -->
+<nav id="site-nav" class="bg-white/95 backdrop-blur-sm shadow-sm fixed w-full z-50 top-0">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/img/logo-horizontal.png" alt="Foundry Collective" class="h-8 w-auto" onerror="this.style.display='none'">
+        <span class="text-lg font-bold text-gray-900">The Foundry <span class="text-orange-500">Collective</span></span>
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="index.html" class="text-gray-700 hover:text-orange-500 transition-colors">Home</a>
+        <a href="pages/partners.html" class="text-gray-700 hover:text-orange-500 transition-colors">Partners</a>
+        <a href="pages/podcast.html" class="text-gray-700 hover:text-orange-500 transition-colors">Podcast</a>
+        <a href="pages/index-report.html" class="text-gray-700 hover:text-orange-500 transition-colors">The Index</a>
+        <a href="pages/about.html" class="text-gray-700 hover:text-orange-500 transition-colors">About</a>
+        <a href="register.html" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors">Join the Index</a>
+      </div>
+      <button id="mobile-toggle" class="md:hidden text-gray-700" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-nav" class="hidden md:hidden border-t bg-white px-4 pb-4 pt-2 space-y-2">
+    <a href="index.html" class="block py-2 text-gray-700 hover:text-orange-500">Home</a>
+    <a href="pages/partners.html" class="block py-2 text-gray-700 hover:text-orange-500">Partners</a>
+    <a href="pages/podcast.html" class="block py-2 text-gray-700 hover:text-orange-500">Podcast</a>
+    <a href="pages/index-report.html" class="block py-2 text-gray-700 hover:text-orange-500">The Index</a>
+    <a href="pages/about.html" class="block py-2 text-gray-700 hover:text-orange-500">About</a>
+    <a href="register.html" class="block py-2 bg-orange-500 text-white text-center rounded-lg">Join the Index</a>
+  </div>
+</nav>

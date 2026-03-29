@@ -1,0 +1,18 @@
+<!-- Partner Card Component — loaded dynamically by partners page -->
+<!-- Usage: rendered via JS from data/partners.json -->
+<template id="partner-card-template">
+  <div class="partner-card bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-lg hover:border-orange-200 transition-all">
+    <div class="flex items-start gap-4">
+      <img data-field="logo" src="" alt="" class="h-12 w-12 rounded-lg object-contain bg-gray-50 p-1" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22><rect fill=%22%23f3f4f6%22 width=%2240%22 height=%2240%22 rx=%228%22/><text x=%2220%22 y=%2226%22 text-anchor=%22middle%22 fill=%22%239ca3af%22 font-size=%2216%22>?</text></svg>'">
+      <div class="flex-1">
+        <div class="flex items-center gap-2 mb-1">
+          <h3 data-field="name" class="font-semibold text-gray-900"></h3>
+          <span data-field="type-badge" class="text-xs font-medium px-2 py-0.5 rounded-full"></span>
+        </div>
+        <p data-field="role" class="text-sm text-orange-600 font-medium mb-2"></p>
+        <p data-field="description" class="text-sm text-gray-600 leading-relaxed"></p>
+        <a data-field="url" href="#" target="_blank" rel="noopener" class="inline-block mt-3 text-sm text-blue-600 hover:text-blue-800 font-medium">Learn more &rarr;</a>
+      </div>
+    </div>
+  </div>
+</template>
