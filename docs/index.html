@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="path-depth" content="0">
-    <title>First City Foundry — Portland's Startup Foundry | Part of The Foundry Collective</title>
-    <meta name="description" content="Portland's startup foundry helping founders build AI-native products, scale operations, and achieve founder independence. Part of The Foundry Collective global network.">
-    <meta name="keywords" content="First City Foundry, Portland startups, startup foundry, founder network, AI-native products, operational architecture, Buildly, Kurent, Open.Build, Foundry Collective">
+    <title>First City Foundry — Portland Metro's Startup Foundry | Part of The Foundry Collective</title>
+    <meta name="description" content="Portland Metro's startup foundry helping founders build AI-native products, scale operations, and achieve founder independence. Part of The Foundry Collective global network.">
+    <meta name="keywords" content="First City Foundry, Portland Metro startups, startup foundry, founder network, AI-native products, operational architecture, Buildly, Kurent, Open.Build, Foundry Collective">
     <meta name="author" content="First City Foundry">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.firstcityfoundry.com/">
-    <meta property="og:title" content="First City Foundry — Portland's Startup Foundry">
-    <meta property="og:description" content="Portland's startup foundry helping founders build AI-native products, scale operations, and achieve independence. Part of The Foundry Collective.">
+    <meta property="og:title" content="First City Foundry — Portland Metro's Startup Foundry">
+    <meta property="og:description" content="Portland Metro's startup foundry helping founders build AI-native products, scale operations, and achieve independence. Part of The Foundry Collective.">
     <meta property="og:image" content="https://www.firstcityfoundry.com/assets/img/logo-horizontal.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="First City Foundry — Portland's Startup Foundry">
-    <meta property="twitter:description" content="Portland's startup foundry helping founders build AI-native products, scale operations, and achieve independence. Part of The Foundry Collective.">
+    <meta property="twitter:title" content="First City Foundry — Portland Metro's Startup Foundry">
+    <meta property="twitter:description" content="Portland Metro's startup foundry helping founders build AI-native products, scale operations, and achieve independence. Part of The Foundry Collective.">
 
     <link rel="canonical" href="https://www.firstcityfoundry.com/">
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
@@ -32,20 +32,62 @@
         theme: {
             extend: {
                 colors: {
-                    brand:   { 500: '#F97316', 600: '#EA580C', 700: '#C2410C' },
-                    navy:    { 700: '#1E3A5F', 800: '#162D4A', 900: '#0F1F35' },
-                    mint:    { 500: '#10B981', 600: '#059669' }
+                    brand:   { 400: '#FBBF24', 500: '#F59E0B', 600: '#D97706', 700: '#B45309' },
+                    forest:  { 50: '#F0FDF4', 100: '#DCFCE7', 500: '#22C55E', 600: '#16A34A', 700: '#15803D', 800: '#1A3A2A', 900: '#14261D' },
+                    slate:   { 750: '#293548', 850: '#1A2332' },
+                    mist:    { 50: '#F8FAFC', 100: '#F1F5F9', 200: '#E2E8F0' },
+                    cedar:   { 500: '#D97706', 600: '#B45309' },
+                    stone:   { 50: '#FAFAF9', 100: '#F5F5F4', 200: '#E7E5E4' }
                 },
-                fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+                fontFamily: {
+                    sans: ['DM Sans', 'Inter', 'system-ui', 'sans-serif'],
+                    display: ['DM Sans', 'Inter', 'system-ui', 'sans-serif']
+                }
             }
         }
     }
     </script>
 
-    <!-- Google Fonts — Inter -->
+    <!-- Google Fonts — DM Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* PNW grain texture overlay */
+        .nw-grain::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        /* Soft fade for sections */
+        .nw-fade-in { animation: nwFadeIn 0.8s ease-out both; }
+        @keyframes nwFadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        /* Glass card */
+        .nw-glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        /* Photo overlay for hero/CTA */
+        .nw-photo-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+        .nw-photo-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(20,38,29,0.88) 0%, rgba(26,58,42,0.82) 50%, rgba(20,38,29,0.92) 100%);
+        }
+    </style>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -60,79 +102,130 @@
         "@type": "Organization",
         "name": "First City Foundry",
         "alternateName": "The Foundry Collective — Portland",
-        "description": "Portland's startup foundry helping founders build AI-native products, scale operations, and achieve founder independence.",
+        "description": "Portland Metro's startup foundry helping founders build AI-native products, scale operations, and achieve founder independence.",
         "url": "https://www.firstcityfoundry.com",
         "sameAs": ["https://buildly.io","https://kurentco.com","https://open.build"]
     }
     </script>
 </head>
-<body class="bg-white text-gray-900 font-sans antialiased">
+<body class="bg-mist-50 text-gray-900 font-sans antialiased">
 
 <!-- ═══════════════ HEADER ═══════════════ -->
 <div id="header-slot"></div>
 
 <!-- ═══════════════ HERO ═══════════════ -->
-<section class="relative bg-gradient-to-br from-navy-900 via-navy-800 to-navy-700 text-white pt-28 pb-20 overflow-hidden">
-    <!-- subtle grid overlay -->
-    <div class="absolute inset-0 opacity-[0.04]" style="background-image:url(&quot;data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0z' fill='none' stroke='white' stroke-width='0.5'/%3E%3C/svg%3E&quot;)"></div>
-    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <img src="assets/img/logo-horizontal.png" alt="First City Foundry" class="h-16 sm:h-20 mx-auto mb-6 drop-shadow-lg bg-white/90 rounded-xl px-4 py-2">
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-4">
-            First City <span class="text-brand-500">Foundry</span>
+<section class="relative text-white pt-32 pb-36 overflow-hidden">
+    <!-- Portland skyline — Hawthorne Bridge & downtown along the Willamette -->
+    <div class="nw-photo-bg" style="background-image:url('assets/images/Portland_panorama3.jpg')"></div>
+    <div class="absolute inset-0 nw-grain"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <img src="assets/img/logo-horizontal.png" alt="First City Foundry" class="h-14 sm:h-18 mx-auto mb-8 bg-white/95 rounded-2xl px-6 py-3 shadow-lg shadow-black/10">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.1] mb-5 tracking-tight font-display">
+            First City <span class="text-brand-400">Foundry</span>
         </h1>
-        <p class="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-3 leading-relaxed">
-            Portland's startup foundry — helping founders build AI-native products,
+        <p class="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto mb-3 leading-relaxed font-light">
+            The Portland Metro region's startup foundry — helping founders build AI-native products,
             scale operations, and create businesses that run without them.
         </p>
-        <p class="text-sm text-gray-400 mb-10">
-            Part of <a href="pages/partners.html" class="text-brand-500 hover:text-brand-600 font-semibold">The Foundry Collective</a> global network
+        <p class="text-sm text-white/50 mb-12">
+            Part of <a href="pages/partners.html" class="text-brand-400 hover:text-brand-500 font-semibold transition-colors">The Foundry Collective</a> global network
         </p>
         <div class="flex flex-wrap justify-center gap-4">
-            <a href="register.html" class="inline-block bg-brand-500 hover:bg-brand-600 text-white font-semibold px-8 py-3.5 rounded-lg transition-colors shadow-lg shadow-brand-500/25">
+            <a href="register.html" class="inline-flex items-center bg-brand-500 hover:bg-brand-600 text-white font-semibold px-8 py-3.5 rounded-xl transition-all shadow-lg shadow-brand-500/20 hover:shadow-brand-500/30 hover:-translate-y-0.5">
                 Join the Index
             </a>
-            <a href="pages/podcast.html" class="inline-block border border-white/30 hover:border-white/60 text-white font-semibold px-8 py-3.5 rounded-lg transition-colors">
-                <i class="fa-solid fa-headphones mr-2"></i>Listen to the Podcast
+            <a href="pages/podcast.html" class="inline-flex items-center border border-white/20 hover:border-white/40 hover:bg-white/5 text-white font-semibold px-8 py-3.5 rounded-xl transition-all">
+                <i class="fa-solid fa-headphones mr-2 text-brand-400"></i>Listen to the Podcast
             </a>
         </div>
     </div>
 </section>
 
-<!-- ═══════════════ THE PROBLEM ═══════════════ -->
-<section id="problem" class="py-20 bg-gray-50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-14">
-            <h2 class="text-3xl sm:text-4xl font-bold mb-4">The Problem We Solve</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">Most founders are stuck — building alone, scaling manually, and trapped inside the very businesses they created.</p>
+<!-- ═══════════════ STATS BAR ═══════════════ -->
+<section class="bg-forest-900 border-t border-white/5">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+                <div class="text-3xl sm:text-4xl font-extrabold text-brand-400 font-display">5</div>
+                <div class="text-white/50 text-sm mt-1 font-medium">Partner Organizations</div>
+            </div>
+            <div>
+                <div class="text-3xl sm:text-4xl font-extrabold text-white font-display">4</div>
+                <div class="text-white/50 text-sm mt-1 font-medium">Cities Planned</div>
+            </div>
+            <div>
+                <div class="text-3xl sm:text-4xl font-extrabold text-brand-400 font-display">3</div>
+                <div class="text-white/50 text-sm mt-1 font-medium">VMI Dimensions</div>
+            </div>
+            <div>
+                <div class="text-3xl sm:text-4xl font-extrabold text-white font-display">100%</div>
+                <div class="text-white/50 text-sm mt-1 font-medium">Founder-Focused</div>
+            </div>
         </div>
-        <div class="grid md:grid-cols-3 gap-8">
+    </div>
+</section>
+
+<!-- ═══════════════ ECOSYSTEM PARTNERS ═══════════════ -->
+<section class="py-16 bg-white border-b border-stone-100">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p class="text-center uppercase tracking-[0.25em] text-stone-400 text-xs font-semibold mb-10">Ecosystem Partners</p>
+        <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
+            <a href="https://buildly.io" target="_blank" rel="noopener" class="opacity-60 hover:opacity-100 transition-opacity duration-300">
+                <img src="assets/img/partners/buildly.png" alt="Buildly" class="h-8 sm:h-10 object-contain grayscale hover:grayscale-0 transition-all duration-300">
+            </a>
+            <a href="https://kurentco.com" target="_blank" rel="noopener" class="opacity-60 hover:opacity-100 transition-opacity duration-300">
+                <img src="assets/img/partners/kurent.png" alt="Kurent Co" class="h-8 sm:h-10 object-contain grayscale hover:grayscale-0 transition-all duration-300">
+            </a>
+            <a href="https://open.build" target="_blank" rel="noopener" class="opacity-60 hover:opacity-100 transition-opacity duration-300">
+                <img src="assets/img/partners/openbuild.png" alt="Open.Build" class="h-8 sm:h-10 object-contain grayscale hover:grayscale-0 transition-all duration-300">
+            </a>
+            <a href="https://www.startupgrind.com/portland/" target="_blank" rel="noopener" class="opacity-60 hover:opacity-100 transition-opacity duration-300">
+                <img src="assets/img/partners/startupgrind.png" alt="Startup Grind PDX" class="h-8 sm:h-10 object-contain grayscale hover:grayscale-0 transition-all duration-300">
+            </a>
+            <a href="#" class="opacity-60 hover:opacity-100 transition-opacity duration-300">
+                <img src="assets/img/partners/prepare4vc.png" alt="Prepare4VC" class="h-8 sm:h-10 object-contain grayscale hover:grayscale-0 transition-all duration-300">
+            </a>
+        </div>
+        <p class="text-center text-stone-400 text-xs mt-8"><a href="pages/partners.html" class="hover:text-brand-600 transition-colors">View all partners &rarr;</a></p>
+    </div>
+</section>
+
+<!-- ═══════════════ THE PROBLEM ═══════════════ -->
+<section id="problem" class="py-24 bg-stone-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <p class="uppercase tracking-[0.2em] text-forest-600 text-xs font-semibold mb-3">Why We Exist</p>
+            <h2 class="text-3xl sm:text-4xl font-bold mb-4 font-display">The Problem We Solve</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">Most founders are stuck — building alone, scaling manually, and trapped inside the very businesses they created.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
             <!-- Card 1 -->
-            <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                <div class="w-12 h-12 bg-red-100 text-red-600 rounded-lg flex items-center justify-center text-xl mb-5">
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-stone-200/60 hover:shadow-md hover:border-stone-300 transition-all duration-300">
+                <div class="w-11 h-11 bg-red-50 text-red-500 rounded-xl flex items-center justify-center text-lg mb-5">
                     <i class="fa-solid fa-person-digging"></i>
                 </div>
                 <h3 class="font-semibold text-lg mb-2">Founder Bottlenecks</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">
+                <p class="text-gray-500 text-sm leading-relaxed">
                     Solo founders wear every hat. Without structured handoff and tooling, growth stalls at the first hire — or the first burnout.
                 </p>
             </div>
             <!-- Card 2 -->
-            <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center text-xl mb-5">
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-stone-200/60 hover:shadow-md hover:border-stone-300 transition-all duration-300">
+                <div class="w-11 h-11 bg-amber-50 text-amber-500 rounded-xl flex items-center justify-center text-lg mb-5">
                     <i class="fa-solid fa-lock"></i>
                 </div>
                 <h3 class="font-semibold text-lg mb-2">The Principal's Trap</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">
+                <p class="text-gray-500 text-sm leading-relaxed">
                     You built the company, now the company owns you. Without operational architecture, there's no exit — only execution.
                 </p>
             </div>
             <!-- Card 3 -->
-            <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-xl mb-5">
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-stone-200/60 hover:shadow-md hover:border-stone-300 transition-all duration-300">
+                <div class="w-11 h-11 bg-forest-50 text-forest-600 rounded-xl flex items-center justify-center text-lg mb-5">
                     <i class="fa-solid fa-arrows-spin"></i>
                 </div>
                 <h3 class="font-semibold text-lg mb-2">Agile Fatigue</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">
+                <p class="text-gray-500 text-sm leading-relaxed">
                     Sprints, stand-ups, and story points don't ship products — AI-native workflows and modular architecture do.
                 </p>
             </div>
@@ -141,49 +234,55 @@
 </section>
 
 <!-- ═══════════════ ABOUT FIRST CITY FOUNDRY ═══════════════ -->
-<section id="about" class="py-20">
+<section id="about" class="py-24 bg-white">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="md:flex items-start gap-12">
+        <div class="md:flex items-start gap-14">
             <div class="md:w-1/2 mb-10 md:mb-0">
-                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Portland's Startup Foundry</h2>
-                <p class="text-gray-600 leading-relaxed mb-4">
-                    First City Foundry is Portland's chapter of <strong>The Foundry Collective</strong> — a global network that helps founders build AI-native products, scale operations, and achieve true independence from their own companies.
+                <p class="uppercase tracking-[0.2em] text-brand-600 text-xs font-semibold mb-3">Our Story</p>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-5 font-display">Portland Metro's Startup Foundry</h2>
+                <p class="text-gray-500 leading-relaxed mb-4">
+                    First City Foundry is the Portland Metro region's chapter of <strong class="text-gray-700">The Foundry Collective</strong> — a global network that helps founders build AI-native products, scale operations, and achieve true independence from their own companies.
                 </p>
-                <p class="text-gray-600 leading-relaxed mb-4">
-                    We connect Portland founders with specialised partners across the full startup lifecycle: product development, operational architecture, community events, developer training, and investor readiness.
+                <p class="text-gray-500 leading-relaxed mb-4">
+                    We connect Portland Metro founders with specialised partners across the full startup lifecycle: product development, operational architecture, community events, developer training, and investor readiness.
                 </p>
-                <p class="text-gray-600 leading-relaxed">
-                    Through our flagship <strong>Portland Operations &amp; AI Index</strong>, we measure how local companies adopt AI, manage operations, and pursue founder independence across three dimensions: Visibility, Margin, and Independence.
+                <p class="text-gray-500 leading-relaxed">
+                    Through our flagship <strong class="text-gray-700">Portland Operations &amp; AI Index</strong>, we measure how local companies adopt AI, manage operations, and pursue founder independence across three dimensions: Visibility, Margin, and Independence.
                 </p>
             </div>
             <div class="md:w-1/2">
-                <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
-                    <h3 class="font-bold text-lg mb-5">Part of The Foundry Collective</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-6">
-                        The Collective is a curated network of partners — not an accelerator, not an incubator — where each organisation owns a stage of the founder lifecycle. Portland is the flagship chapter, with expansion planned to Medellín, Nairobi, and Lisbon.
-                    </p>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-center gap-3 text-sm">
-                            <span class="w-8 h-8 bg-orange-100 text-brand-600 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-hammer"></i></span>
-                            <span><strong>Build</strong> — AI-native product development</span>
+                <!-- Portland collaboration image + Collective overlay card -->
+                <div class="relative rounded-3xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&auto=format" alt="Founders collaborating" class="w-full h-80 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-forest-900/80 via-forest-900/20 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6">
+                        <h3 class="font-bold text-white text-lg mb-1 font-display">Part of The Foundry Collective</h3>
+                        <p class="text-white/70 text-sm leading-relaxed mb-4">
+                            A curated network of partners — not an accelerator, not an incubator — where each organisation owns a stage of the founder lifecycle.
+                        </p>
+                        <div class="grid grid-cols-2 gap-2 mb-4">
+                            <div class="flex items-center gap-2 text-xs text-white/90">
+                                <span class="w-6 h-6 bg-brand-500/30 text-brand-400 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-hammer text-[10px]"></i></span>
+                                <span><strong>Build</strong> — AI-native dev</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-xs text-white/90">
+                                <span class="w-6 h-6 bg-forest-500/30 text-forest-100 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-graduation-cap text-[10px]"></i></span>
+                                <span><strong>Train</strong> — Skills</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-xs text-white/90">
+                                <span class="w-6 h-6 bg-purple-500/30 text-purple-300 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-satellite-dish text-[10px]"></i></span>
+                                <span><strong>Connect</strong> — Events</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-xs text-white/90">
+                                <span class="w-6 h-6 bg-white/20 text-white/80 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-gears text-[10px]"></i></span>
+                                <span><strong>Operate</strong> — SOPs</span>
+                            </div>
                         </div>
-                        <div class="flex items-center gap-3 text-sm">
-                            <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-graduation-cap"></i></span>
-                            <span><strong>Train</strong> — Skills &amp; open-source onboarding</span>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="pages/partners.html" class="text-brand-400 hover:text-brand-300 font-semibold text-sm transition-colors">Meet our partners &rarr;</a>
+                            <span class="text-white/20">|</span>
+                            <a href="pages/index-report.html" class="text-brand-400 hover:text-brand-300 font-semibold text-sm transition-colors">The Portland Index &rarr;</a>
                         </div>
-                        <div class="flex items-center gap-3 text-sm">
-                            <span class="w-8 h-8 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-satellite-dish"></i></span>
-                            <span><strong>Connect</strong> — Events &amp; investor readiness</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-sm">
-                            <span class="w-8 h-8 bg-emerald-100 text-mint-600 rounded-lg flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-gears"></i></span>
-                            <span><strong>Operate</strong> — SOPs &amp; founder independence</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap gap-3">
-                        <a href="pages/partners.html" class="text-brand-600 hover:text-brand-700 font-semibold text-sm">Meet our partners &rarr;</a>
-                        <span class="text-gray-300">|</span>
-                        <a href="pages/index-report.html" class="text-brand-600 hover:text-brand-700 font-semibold text-sm">The Portland Index &rarr;</a>
                     </div>
                 </div>
             </div>
@@ -192,65 +291,72 @@
 </section>
 
 <!-- ═══════════════ THE INDEX ═══════════════ -->
-<section id="index" class="py-20 bg-navy-900 text-white">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-            <p class="uppercase tracking-widest text-brand-500 text-sm font-semibold mb-3">Data-Driven</p>
-            <h2 class="text-3xl sm:text-4xl font-bold mb-4">The Portland Operations &amp; AI Index</h2>
-            <p class="text-gray-400 max-w-2xl mx-auto">
+<section id="index" class="relative py-24 bg-forest-900 text-white nw-grain overflow-hidden">
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+            <p class="uppercase tracking-[0.2em] text-brand-400 text-xs font-semibold mb-3">Data-Driven</p>
+            <h2 class="text-3xl sm:text-4xl font-bold mb-4 font-display">The Portland Operations &amp; AI Index</h2>
+            <p class="text-white/50 max-w-2xl mx-auto">
                 A living survey measuring how Portland-area companies adopt AI, manage operations, and pursue founder independence. Scores across three dimensions:
             </p>
         </div>
-        <div class="grid md:grid-cols-3 gap-6 mb-12">
-            <div class="bg-white/5 border border-white/10 rounded-xl p-6 text-center">
-                <div class="text-3xl mb-3"><i class="fa-solid fa-eye text-brand-500"></i></div>
+        <div class="grid md:grid-cols-3 gap-6 mb-14">
+            <div class="bg-white/[0.06] border border-white/10 rounded-2xl p-7 text-center hover:bg-white/[0.1] transition-colors duration-300">
+                <div class="text-3xl mb-3"><i class="fa-solid fa-eye text-brand-400"></i></div>
                 <h3 class="font-bold text-lg mb-1">Visibility</h3>
-                <p class="text-gray-400 text-sm">How well do stakeholders see what's happening — dashboards, KPIs, real-time data.</p>
+                <p class="text-white/50 text-sm">How well do stakeholders see what's happening — dashboards, KPIs, real-time data.</p>
             </div>
-            <div class="bg-white/5 border border-white/10 rounded-xl p-6 text-center">
-                <div class="text-3xl mb-3"><i class="fa-solid fa-chart-line text-mint-500"></i></div>
+            <div class="bg-white/[0.06] border border-white/10 rounded-2xl p-7 text-center hover:bg-white/[0.1] transition-colors duration-300">
+                <div class="text-3xl mb-3"><i class="fa-solid fa-chart-line text-forest-500"></i></div>
                 <h3 class="font-bold text-lg mb-1">Margin</h3>
-                <p class="text-gray-400 text-sm">Operational efficiency — automation, AI leverage, and the ratio of output to effort.</p>
+                <p class="text-white/50 text-sm">Operational efficiency — automation, AI leverage, and the ratio of output to effort.</p>
             </div>
-            <div class="bg-white/5 border border-white/10 rounded-xl p-6 text-center">
-                <div class="text-3xl mb-3"><i class="fa-solid fa-door-open text-blue-400"></i></div>
+            <div class="bg-white/[0.06] border border-white/10 rounded-2xl p-7 text-center hover:bg-white/[0.1] transition-colors duration-300">
+                <div class="text-3xl mb-3"><i class="fa-solid fa-door-open text-purple-400"></i></div>
                 <h3 class="font-bold text-lg mb-1">Independence</h3>
-                <p class="text-gray-400 text-sm">Can the business run without the founder? SOPs, delegation, and decision autonomy.</p>
+                <p class="text-white/50 text-sm">Can the business run without the founder? SOPs, delegation, and decision autonomy.</p>
             </div>
         </div>
         <div class="text-center">
-            <a href="register.html" class="inline-block bg-brand-500 hover:bg-brand-600 text-white font-semibold px-8 py-3.5 rounded-lg transition-colors shadow-lg shadow-brand-500/30">
+            <a href="register.html" class="inline-flex items-center bg-brand-500 hover:bg-brand-600 text-white font-semibold px-8 py-3.5 rounded-xl transition-all shadow-lg shadow-brand-500/20 hover:shadow-brand-500/30 hover:-translate-y-0.5">
                 Take the Index Survey
             </a>
-            <p class="text-gray-500 text-sm mt-3">Free · 5 minutes · Get your personalised score</p>
+            <p class="text-white/40 text-sm mt-3">Free · 5 minutes · Get your personalised score</p>
         </div>
     </div>
 </section>
 
 <!-- ═══════════════ PODCAST ═══════════════ -->
-<section id="podcast" class="py-20 bg-gray-50">
+<section id="podcast" class="py-24 bg-stone-50">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="md:flex items-center gap-12">
+        <div class="md:flex items-center gap-14">
             <div class="md:w-1/2 mb-8 md:mb-0">
-                <p class="uppercase tracking-widest text-brand-500 text-sm font-semibold mb-3">Now Streaming</p>
-                <h2 class="text-3xl sm:text-4xl font-bold mb-4">The Foundry Podcast</h2>
-                <p class="text-gray-600 leading-relaxed mb-6">
+                <p class="uppercase tracking-[0.2em] text-brand-600 text-xs font-semibold mb-3">Now Streaming</p>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 font-display">The Foundry Podcast</h2>
+                <p class="text-gray-500 leading-relaxed mb-6">
                     Real conversations with founders, operators, and builders about visibility, margin, and independence. Hosted from Portland, heard everywhere.
                 </p>
                 <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="text-xs font-medium bg-orange-100 text-orange-700 px-3 py-1 rounded-full">Visibility</span>
-                    <span class="text-xs font-medium bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full">Margin</span>
-                    <span class="text-xs font-medium bg-blue-100 text-blue-700 px-3 py-1 rounded-full">Independence</span>
+                    <span class="text-xs font-medium bg-amber-50 text-amber-700 px-3 py-1 rounded-full border border-amber-100">Visibility</span>
+                    <span class="text-xs font-medium bg-forest-50 text-forest-700 px-3 py-1 rounded-full border border-forest-100">Margin</span>
+                    <span class="text-xs font-medium bg-purple-50 text-purple-700 px-3 py-1 rounded-full border border-purple-100">Independence</span>
                 </div>
-                <a href="pages/podcast.html" class="inline-block bg-navy-800 hover:bg-navy-900 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
-                    <i class="fa-solid fa-headphones mr-2"></i>Browse Episodes
+                <a href="pages/podcast.html" class="inline-flex items-center bg-forest-800 hover:bg-forest-900 text-white font-semibold px-6 py-3 rounded-xl transition-all hover:-translate-y-0.5">
+                    <i class="fa-solid fa-headphones mr-2 text-brand-400"></i>Browse Episodes
                 </a>
             </div>
             <div class="md:w-1/2">
-                <div class="aspect-video bg-gray-200 rounded-xl flex items-center justify-center text-gray-400">
-                    <div class="text-center">
-                        <i class="fa-brands fa-youtube text-5xl mb-2"></i>
-                        <p class="text-sm">Latest Episode — Coming Soon</p>
+                <div class="relative rounded-2xl overflow-hidden shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&q=80&auto=format" alt="Podcast recording studio" class="w-full h-72 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-forest-900/70 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between">
+                        <div>
+                            <p class="text-white font-bold text-sm">Latest Episode</p>
+                            <p class="text-white/60 text-xs">Coming Soon</p>
+                        </div>
+                        <div class="w-12 h-12 bg-brand-500 rounded-full flex items-center justify-center shadow-lg shadow-brand-500/30">
+                            <i class="fa-solid fa-play text-white text-sm ml-0.5"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -259,11 +365,12 @@
 </section>
 
 <!-- ═══════════════ GLOBAL EXPANSION ═══════════════ -->
-<section id="cities" class="py-20">
+<section id="cities" class="py-24 bg-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl sm:text-4xl font-bold mb-4">Going Global</h2>
-            <p class="text-gray-600 max-w-xl mx-auto">
+        <div class="text-center mb-14">
+            <p class="uppercase tracking-[0.2em] text-forest-600 text-xs font-semibold mb-3">Expanding</p>
+            <h2 class="text-3xl sm:text-4xl font-bold mb-4 font-display">Going Global</h2>
+            <p class="text-gray-500 max-w-xl mx-auto">
                 The Foundry Collective is launching city-by-city — each chapter adapts the model to its local ecosystem while staying connected to the global network.
             </p>
         </div>
@@ -275,56 +382,82 @@
 <script>document.addEventListener('DOMContentLoaded', () => { if (typeof loadCities === 'function') loadCities('city-list'); });</script>
 
 <!-- ═══════════════ PATHWAYS ═══════════════ -->
-<section id="pathways" class="py-20 bg-gray-50">
+<section id="pathways" class="py-24 bg-stone-50">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-14">
-            <h2 class="text-3xl sm:text-4xl font-bold mb-4">Your Pathway</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">Three journeys, one collective. Find the path that fits where you are right now.</p>
+        <div class="text-center mb-16">
+            <p class="uppercase tracking-[0.2em] text-brand-600 text-xs font-semibold mb-3">Get Started</p>
+            <h2 class="text-3xl sm:text-4xl font-bold mb-4 font-display">Your Pathway</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">Three journeys, one collective. Find the path that fits where you are right now.</p>
         </div>
-        <div class="grid md:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-3 gap-6">
             <!-- Pathway 1 -->
-            <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:border-brand-500/40 transition-colors text-center">
-                <div class="w-14 h-14 bg-orange-100 text-brand-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-5">
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-stone-200/60 hover:border-brand-500/40 transition-all duration-300 text-center group">
+                <div class="w-14 h-14 bg-amber-50 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-5 group-hover:scale-105 transition-transform">
                     <i class="fa-solid fa-rocket"></i>
                 </div>
-                <h3 class="font-bold text-lg mb-2">Founder &rarr; Foundry</h3>
-                <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                <h3 class="font-bold text-lg mb-2 font-display">Founder &rarr; Foundry</h3>
+                <p class="text-gray-500 text-sm leading-relaxed mb-5">
                     You have an idea or early product. Get AI-powered product development, mentorship, and your first users through the Foundry network.
                 </p>
-                <a href="register.html" class="text-brand-600 hover:text-brand-700 font-semibold text-sm">Apply now &rarr;</a>
+                <a href="register.html" class="text-brand-600 hover:text-brand-700 font-semibold text-sm transition-colors">Apply now &rarr;</a>
             </div>
             <!-- Pathway 2 -->
-            <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:border-mint-500/40 transition-colors text-center">
-                <div class="w-14 h-14 bg-emerald-100 text-mint-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-5">
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-stone-200/60 hover:border-forest-500/40 transition-all duration-300 text-center group">
+                <div class="w-14 h-14 bg-forest-50 text-forest-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-5 group-hover:scale-105 transition-transform">
                     <i class="fa-solid fa-gears"></i>
                 </div>
-                <h3 class="font-bold text-lg mb-2">Scaling Company &rarr; Kurent</h3>
-                <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                <h3 class="font-bold text-lg mb-2 font-display">Scaling Company &rarr; Kurent</h3>
+                <p class="text-gray-500 text-sm leading-relaxed mb-5">
                     Revenue is growing but you're stuck in the day-to-day. Kurent builds operational architecture so the business runs without you.
                 </p>
-                <a href="https://kurentco.com" target="_blank" rel="noopener" class="text-mint-600 hover:text-mint-500 font-semibold text-sm">Learn about Kurent &rarr;</a>
+                <a href="https://kurentco.com" target="_blank" rel="noopener" class="text-forest-600 hover:text-forest-700 font-semibold text-sm transition-colors">Learn about Kurent &rarr;</a>
             </div>
             <!-- Pathway 3 -->
-            <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:border-blue-500/40 transition-colors text-center">
-                <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-5">
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-stone-200/60 hover:border-purple-500/40 transition-all duration-300 text-center group">
+                <div class="w-14 h-14 bg-purple-50 text-purple-500 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-5 group-hover:scale-105 transition-transform">
                     <i class="fa-solid fa-code"></i>
                 </div>
-                <h3 class="font-bold text-lg mb-2">Developer &rarr; Open.Build</h3>
-                <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                <h3 class="font-bold text-lg mb-2 font-display">Developer &rarr; Open.Build</h3>
+                <p class="text-gray-500 text-sm leading-relaxed mb-5">
                     Level up your skills, join open-source projects, and connect with teams building real products on the CollabHub marketplace.
                 </p>
-                <a href="https://open.build" target="_blank" rel="noopener" class="text-blue-600 hover:text-blue-700 font-semibold text-sm">Explore Open.Build &rarr;</a>
+                <a href="https://open.build" target="_blank" rel="noopener" class="text-purple-500 hover:text-purple-600 font-semibold text-sm transition-colors">Explore Open.Build &rarr;</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ SOCIAL PROOF ═══════════════ -->
+<section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="uppercase tracking-[0.25em] text-forest-600 text-xs font-semibold mb-8">What Founders Say</p>
+        <div class="relative">
+            <i class="fa-solid fa-quote-left text-4xl text-stone-200 absolute -top-2 left-0 md:left-8"></i>
+            <blockquote class="text-xl sm:text-2xl text-gray-700 font-medium leading-relaxed max-w-3xl mx-auto px-8 md:px-16">
+                The Foundry Collective isn't another accelerator — it's the operational backbone my company needed. They helped us build systems so the business runs whether I'm in the room or not.
+            </blockquote>
+        </div>
+        <div class="mt-8 flex items-center justify-center gap-4">
+            <div class="w-12 h-12 bg-forest-100 rounded-full flex items-center justify-center text-forest-700 font-bold text-lg">
+                P
+            </div>
+            <div class="text-left">
+                <p class="font-semibold text-gray-800">Portland Founder</p>
+                <p class="text-sm text-gray-400">First City Foundry Member</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- ═══════════════ CTA ═══════════════ -->
-<section class="py-16 bg-brand-500 text-white">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-4">Ready to build something that lasts?</h2>
-        <p class="text-orange-100 mb-8">Join Portland founders in the First City Foundry — the flagship chapter of The Foundry Collective.</p>
-        <a href="register.html" class="inline-block bg-white text-brand-600 hover:bg-gray-100 font-semibold px-8 py-3.5 rounded-lg transition-colors shadow-lg">
+<section class="relative py-24 text-white overflow-hidden">
+    <!-- PNW forest/mountain backdrop -->
+    <div class="nw-photo-bg" style="background-image:url('https://images.unsplash.com/photo-1511497584788-876760111969?w=1920&q=80&auto=format')"></div>
+    <div class="absolute inset-0 nw-grain"></div>
+    <div class="relative z-10 max-w-3xl mx-auto px-4 text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4 font-display">Ready to build something that lasts?</h2>
+        <p class="text-white/70 mb-10 text-lg">Join Portland Metro founders in the First City Foundry — the flagship chapter of The Foundry Collective.</p>
+        <a href="register.html" class="inline-flex items-center bg-brand-500 hover:bg-brand-600 text-white font-semibold px-8 py-3.5 rounded-xl transition-all shadow-lg shadow-brand-500/20 hover:shadow-brand-500/30 hover:-translate-y-0.5">
             Join the Index — It's Free
         </a>
     </div>
