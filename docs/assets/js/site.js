@@ -30,6 +30,12 @@ function initComponents() {
         a.setAttribute('href', prefix + href);
       }
     });
+    document.querySelectorAll('#header-slot img, #footer-slot img').forEach(img => {
+      const src = img.getAttribute('src');
+      if (src && !src.startsWith('http') && !src.startsWith('/') && !src.startsWith('../')) {
+        img.setAttribute('src', prefix + src);
+      }
+    });
   }
 }
 
