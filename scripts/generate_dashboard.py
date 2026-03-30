@@ -41,8 +41,8 @@ def load_env_variables() -> Dict[str, Any]:
     """Load and analyze environment variables"""
     env_vars = {}
     required_vars = {
-        'BREVO_SMTP_USER': 'Email SMTP username for Brevo',
-        'BREVO_SMTP_PASSWORD': 'Email SMTP password for Brevo', 
+        'BREVO_SMTP_KEY': 'SMTP key for Brevo',
+        'BREVO_SMTP_LOGIN': 'SMTP login for Brevo', 
         'DAILY_NOTIFICATION_EMAIL': 'Primary email for daily reports',
         'DAILY_CC_EMAIL': 'CC email for daily reports',
         'BCC_EMAIL': 'BCC email (optional)',

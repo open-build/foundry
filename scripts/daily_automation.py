@@ -17,6 +17,7 @@ Usage:
 
 import os
 import sys
+import json
 import logging
 import argparse
 import traceback
@@ -151,6 +152,75 @@ def run_analytics_phase(logger: logging.Logger, dry_run: bool = False) -> bool:
         logger.error(traceback.format_exc())
         return False
 
+
+def run_social_phase(logger: logging.Logger, dry_run: bool = False) -> bool:
+    """Process the social media queue — post anything due."""
+    try:
+        logger.info("📱 Starting social media phase...")
+        from social_media import SocialQueue
+
+        q = SocialQueue()
+        pending = q.pending_count()
+        if pending == 0:
+            logger.info("No pending social posts — skipping")
+            return True
+
+        posted = q.process_due(dry_run=dry_run)
+        logger.info(f"{'[DRY RUN] ' if dry_run else ''}Social: {posted} posts processed ({pending} were pending)")
+        return True
+    except Exception as e:
+        logger.error(f"❌ Social media phase failed: {e}")
+        logger.error(traceback.format_exc())
+        return False
+
+
+def run_content_phase(logger: logging.Logger, dry_run: bool = False) -> bool:
+    """Publish any pending blog drafts from content/blog/."""
+    try:
+        logger.info("📝 Starting content publishing phase...")
+        from seo_content import BlogPublisher
+
+        pub = BlogPublisher()
+        drafts = list((Path(__file__).parent.parent / "content" / "blog").glob("*.md"))
+
+        if not drafts:
+            logger.info("No blog drafts to publish — skipping")
+            return True
+
+        if dry_run:
+            logger.info(f"DRY RUN: Would publish {len(drafts)} draft(s)")
+            return True
+
+        published = pub.publish_all_drafts()
+        logger.info(f"Published {len(published)} blog post(s)")
+        return True
+    except Exception as e:
+        logger.error(f"❌ Content phase failed: {e}")
+        logger.error(traceback.format_exc())
+        return False
+
+
+def run_dashboard_phase(logger: logging.Logger, dry_run: bool = False) -> bool:
+    """Generate the unified marketing dashboard."""
+    try:
+        logger.info("📈 Generating marketing dashboard...")
+        from marketing_dashboard import MarketingDashboard
+
+        dash = MarketingDashboard()
+
+        if dry_run:
+            report = dash.generate_report()
+            logger.info(f"DRY RUN: Dashboard data — {json.dumps(report, indent=2)}")
+            return True
+
+        path = dash.generate_html()
+        logger.info(f"✅ Dashboard → {path}")
+        return True
+    except Exception as e:
+        logger.error(f"❌ Dashboard phase failed: {e}")
+        logger.error(traceback.format_exc())
+        return False
+
 def send_completion_notification(logger: logging.Logger, results: Dict[str, bool], dry_run: bool = False):
     """Send notification about automation completion"""
     try:
@@ -187,6 +257,9 @@ def main():
     parser.add_argument('--discovery-only', action='store_true', help='Run only discovery phase')
     parser.add_argument('--outreach-only', action='store_true', help='Run only outreach phase')
     parser.add_argument('--analytics-only', action='store_true', help='Run only analytics phase')
+    parser.add_argument('--social-only', action='store_true', help='Run only social media phase')
+    parser.add_argument('--content-only', action='store_true', help='Run only content publishing phase')
+    parser.add_argument('--dashboard-only', action='store_true', help='Run only dashboard generation')
     parser.add_argument('--dry-run', action='store_true', help='Test run without sending emails')
     parser.add_argument('--interactive', action='store_true', help='Interactive approval for outreach')
     
@@ -211,6 +284,12 @@ def main():
             results['discovery'] = run_discovery_phase(logger, args.dry_run)
         elif args.outreach_only:
             results['outreach'] = run_outreach_phase(logger, args.dry_run, args.interactive)
+        elif args.social_only:
+            results['social'] = run_social_phase(logger, args.dry_run)
+        elif args.content_only:
+            results['content'] = run_content_phase(logger, args.dry_run)
+        elif args.dashboard_only:
+            results['dashboard'] = run_dashboard_phase(logger, args.dry_run)
         else:
             # Full daily run - all phases in sequence
             logger.info("🚀 Starting full daily automation sequence...")
@@ -225,8 +304,17 @@ def main():
                 logger.warning("⚠️ Skipping outreach phase due to discovery failure")
                 results['outreach'] = False
             
-            # Phase 3: Analytics (always run for reporting)
+            # Phase 3: Social media
+            results['social'] = run_social_phase(logger, args.dry_run)
+
+            # Phase 4: Content publishing
+            results['content'] = run_content_phase(logger, args.dry_run)
+
+            # Phase 5: Analytics (always run for reporting)
             results['analytics'] = run_analytics_phase(logger, args.dry_run)
+
+            # Phase 6: Marketing dashboard
+            results['dashboard'] = run_dashboard_phase(logger, args.dry_run)
         
         # After all phases, send the daily summary email (if not dry run)
         if not args.dry_run:

@@ -27,13 +27,13 @@ except ImportError:
     # Fallback configuration
     EMAIL_CONFIG = {
         'service': 'brevo',
-        'username': os.getenv('BREVO_SMTP_USER', '96af72001@smtp-brevo.com'),
-        'password': os.getenv('BREVO_SMTP_PASSWORD', 'F9BCg30JqkyZmVWw'),
+        'username': os.getenv('BREVO_SMTP_LOGIN', ''),
+        'password': os.getenv('BREVO_SMTP_KEY', ''),
         'smtp_server': 'smtp-relay.brevo.com',
         'smtp_port': 587,
-        'from_name': 'Buildly Labs Foundry Analytics',
-        'from_email': 'team@open.build',
-        'reply_to': 'team@open.build'
+        'from_name': 'First City Foundry Analytics',
+        'from_email': os.getenv('FROM_EMAIL', 'hello@firstcityfoundry.com'),
+        'reply_to': os.getenv('REPLY_TO_EMAIL', 'hello@firstcityfoundry.com')
     }
 
 # Configure logging

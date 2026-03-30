@@ -1,4 +1,6 @@
-# Startup Outreach Bot Dependencies
+# First City Foundry — Marketing Automation Dependencies
+
+# Core outreach
 requests>=2.28.0
 beautifulsoup4>=4.11.0
 yagmail>=0.15.0
@@ -8,7 +10,14 @@ python-dotenv>=1.0.0
 rich>=13.0.0
 schedule>=1.2.0
 
-# Analytics and Reporting Dependencies
+# AI content generation
+httpx>=0.24.0
+openai>=1.0.0
+
+# Social media posting
+requests-oauthlib>=1.3.0
+
+# Analytics and Reporting
 google-analytics-data>=0.17.0
 google-auth>=2.23.0
 google-auth-oauthlib>=1.1.0
@@ -17,11 +26,4 @@ google-api-python-client>=2.0.0
 
 # Standard library modules (no pip install needed):
 # json, csv, time, random, logging, argparse, os, datetime, dataclasses, typing
-# pathlib, smtplib, email, re, urllib
-
-# Optional: For more advanced features
-# selenium>=4.0.0  # For JavaScript-heavy sites
-# scrapy>=2.6.0    # For large-scale scraping
-# openai>=0.27.0   # For AI-powered personalization
-# sendgrid>=6.9.0  # Alternative email service
-# pushover>=0.4    # For push notifications
+# pathlib, smtplib, email, re, urllib, xml.etree

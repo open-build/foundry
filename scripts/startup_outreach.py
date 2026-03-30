@@ -271,11 +271,11 @@ class StartupOutreachBot:
             'email': {
                 'smtp_server': os.getenv('BREVO_SMTP_HOST', 'smtp-relay.brevo.com'),
                 'smtp_port': int(os.getenv('BREVO_SMTP_PORT', '587')),
-                'username': os.getenv('BREVO_SMTP_USER', ''),
-                'password': os.getenv('BREVO_SMTP_PASSWORD', ''),
-                'from_email': os.getenv('FROM_EMAIL', 'team@open.build'),
-                'from_name': os.getenv('FROM_NAME', 'Open Build Foundry Team'),
-                'reply_to': os.getenv('REPLY_TO_EMAIL', 'team@open.build')
+                'username': os.getenv('BREVO_SMTP_LOGIN', ''),
+                'password': os.getenv('BREVO_SMTP_KEY', ''),
+                'from_email': os.getenv('FROM_EMAIL', 'hello@firstcityfoundry.com'),
+                'from_name': os.getenv('FROM_NAME', 'First City Foundry'),
+                'reply_to': os.getenv('REPLY_TO_EMAIL', 'hello@firstcityfoundry.com')
             },
             'cli': {'interactive_mode': True},
             'notifications': {

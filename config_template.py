@@ -6,13 +6,13 @@
 import os
 
 EMAIL_CONFIG = {
-    'service': 'brevo',  # 'gmail', 'sendgrid', 'smtp', 'brevo'
-    'username': os.getenv('BREVO_SMTP_USERNAME', 'your-brevo-username@smtp-brevo.com'),
-    'password': os.getenv('BREVO_SMTP_PASSWORD', 'your-brevo-master-password'),
-    'smtp_server': 'smtp-relay.brevo.com',
-    'smtp_port': 587,
-    'from_email': os.getenv('FROM_EMAIL', 'team@open.build'),
-    'from_name': 'Buildly Labs Foundry Team',
+    'service': 'brevo',
+    'username': os.getenv('BREVO_SMTP_LOGIN', ''),
+    'password': os.getenv('BREVO_SMTP_KEY', ''),
+    'smtp_server': os.getenv('BREVO_SMTP_HOST', 'smtp-relay.brevo.com'),
+    'smtp_port': int(os.getenv('BREVO_SMTP_PORT', '587')),
+    'from_email': os.getenv('FROM_EMAIL', 'hello@firstcityfoundry.com'),
+    'from_name': 'First City Foundry',
     'use_tls': True
 }
 
@@ -42,17 +42,17 @@ SEARCH_CONFIG = {
 
 # Site Information
 SITE_CONFIG = {
-    'name': 'Buildly Labs Foundry',
+    'name': 'First City Foundry',
     'url': 'https://www.firstcityfoundry.com',
-    'contact_email': 'team@open.build',
-    'description': 'Global startup incubator and developer foundry',
-    'partners': ['OpenBuild', 'Buildly Labs'],
+    'contact_email': 'hello@firstcityfoundry.com',
+    'description': 'Portland-based startup foundry — AI tools, community, and structured support for solo founders',
+    'partners': ['Buildly', 'Kurent Co', 'Open.Build', 'Startup Grind PDX', 'Prepare4VC'],
     'key_features': [
-        '100% equity-free support',
-        'AI-powered startup analysis',
-        'Free cloud hosting credits',
-        'Global developer community access',
-        'Focus on solo founders and developers'
+        'AI-powered startup analysis via the VMI Index',
+        'Structured founder-to-CEO pathways',
+        'Global partner ecosystem',
+        'Portland Metro regional focus',
+        'Free cloud hosting and developer tools'
     ]
 }
 

@@ -27,34 +27,29 @@ def setup_brevo_credentials():
                     key, value = line.split('=', 1)
                     env_content[key] = value
     
-    print("Please provide your Brevo SMTP credentials:")
+    print("Please provide your Brevo SMTP key:")
     print("(From your Brevo dashboard: Settings > SMTP & API)")
     print()
     
     # Get credentials securely
-    username = input("BREVO SMTP Username (e.g., 96af72001@smtp-brevo.com): ").strip()
-    if username:
-        env_content['BREVO_SMTP_USERNAME'] = username
+    smtp_key = getpass.getpass("BREVO SMTP Key (hidden input): ").strip()
+    if smtp_key:
+        env_content['BREVO_SMTP_KEY'] = smtp_key
     
-    password = getpass.getpass("BREVO Master Password (hidden input): ").strip()
-    if password:
-        env_content['BREVO_SMTP_PASSWORD'] = password
-    
-    from_email = input("From Email Address (default: team@open.build): ").strip()
+    from_email = input("From Email Address (default: hello@firstcityfoundry.com): ").strip()
     if from_email:
         env_content['FROM_EMAIL'] = from_email
     else:
-        env_content['FROM_EMAIL'] = 'team@open.build'
+        env_content['FROM_EMAIL'] = 'hello@firstcityfoundry.com'
     
     # Write .env file
     with open(env_file, 'w') as f:
-        f.write("# Environment Variables for Startup Outreach Bot\n")
+        f.write("# Environment Variables for First City Foundry\n")
         f.write("# NEVER commit this file to git!\n\n")
         
         f.write("# Brevo SMTP Configuration\n")
-        f.write(f"BREVO_SMTP_USERNAME={env_content.get('BREVO_SMTP_USERNAME', 'your-username')}\n")
-        f.write(f"BREVO_SMTP_PASSWORD={env_content.get('BREVO_SMTP_PASSWORD', 'your-password')}\n")
-        f.write(f"FROM_EMAIL={env_content.get('FROM_EMAIL', 'team@open.build')}\n")
+        f.write(f"BREVO_SMTP_KEY={env_content.get('BREVO_SMTP_KEY', '')}\n")
+        f.write(f"FROM_EMAIL={env_content.get('FROM_EMAIL', 'hello@firstcityfoundry.com')}\n")
         
         # Add other optional variables
         f.write("\n# Optional: Search API Keys\n")
@@ -75,11 +70,11 @@ def test_smtp_connection(env_content):
         import smtplib
         from email.mime.text import MIMEText
         
-        username = env_content.get('BREVO_SMTP_USERNAME')
-        password = env_content.get('BREVO_SMTP_PASSWORD')
+        username = env_content.get('BREVO_SMTP_LOGIN')
+        password = env_content.get('BREVO_SMTP_KEY')
         
-        if not username or not password:
-            print("❌ Missing credentials, skipping connection test")
+        if not password:
+            print("❌ Missing SMTP key, skipping connection test")
             return
         
         # Test connection
