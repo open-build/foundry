@@ -1,0 +1,31 @@
+{
+  "jobs": [
+    {
+      "name": "foundry-daily-report",
+      "description": "Generate the daily analytics dashboard report",
+      "schedule": "0 8 * * *",
+      "command": "python3 ai-tools/reporting/generate_report.py",
+      "workdir": ".",
+      "enabled": true,
+      "tags": ["reporting", "daily"]
+    },
+    {
+      "name": "foundry-weekly-summary",
+      "description": "Build a weekly summary of all daily reports",
+      "schedule": "0 9 * * 1",
+      "command": "python3 ai-tools/reporting/weekly_summary.py --days 7",
+      "workdir": ".",
+      "enabled": true,
+      "tags": ["reporting", "weekly"]
+    },
+    {
+      "name": "foundry-daily-automation",
+      "description": "Run the main daily automation pipeline (outreach + analytics)",
+      "schedule": "30 8 * * *",
+      "command": "python3 ai-tools/automation/task_runner.py scripts/daily_automation.py",
+      "workdir": ".",
+      "enabled": false,
+      "tags": ["outreach", "daily"]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "skills": [
+    {
+      "name": "foundry-report",
+      "description": "Generate or retrieve Buildly Labs Foundry analytics reports. Produces an HTML dashboard with outreach metrics, website traffic, and campaign status.",
+      "triggers": [
+        "generate report",
+        "analytics report",
+        "foundry dashboard",
+        "show report"
+      ],
+      "actions": [
+        {
+          "type": "shell",
+          "command": "cd /Users/greglind/Projects/foundry && python3 ai-tools/reporting/generate_report.py"
+        }
+      ],
+      "tags": ["reporting", "analytics"]
+    },
+    {
+      "name": "foundry-weekly",
+      "description": "Build a weekly summary aggregating the last 7 days of daily reports.",
+      "triggers": [
+        "weekly summary",
+        "weekly report",
+        "week recap"
+      ],
+      "actions": [
+        {
+          "type": "shell",
+          "command": "cd /Users/greglind/Projects/foundry && python3 ai-tools/reporting/weekly_summary.py"
+        }
+      ],
+      "tags": ["reporting", "weekly"]
+    },
+    {
+      "name": "foundry-outreach-status",
+      "description": "Show the current status of outreach campaigns and contacts.",
+      "triggers": [
+        "outreach status",
+        "campaign status",
+        "outreach summary"
+      ],
+      "actions": [
+        {
+          "type": "shell",
+          "command": "cd /Users/greglind/Projects/foundry && python3 ai-tools/automation/task_runner.py scripts/analytics_reporter.py"
+        }
+      ],
+      "tags": ["outreach", "status"]
+    },
+    {
+      "name": "foundry-forgeweb",
+      "description": "Start the ForgeWeb local admin server for content management.",
+      "triggers": [
+        "start forgeweb",
+        "website admin",
+        "content editor"
+      ],
+      "actions": [
+        {
+          "type": "shell",
+          "command": "cd /Users/greglind/Projects/foundry/ForgeWeb && ./ops/startup.sh start"
+        }
+      ],
+      "tags": ["forgeweb", "admin"]
+    }
+  ]
+}

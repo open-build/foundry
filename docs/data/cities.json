@@ -1,0 +1,6 @@
+[
+  { "name": "Portland", "region": "Pacific Northwest", "status": "active", "launch": "2025" },
+  { "name": "Medellín", "region": "Latin America", "status": "planned", "launch": "2026" },
+  { "name": "Nairobi", "region": "East Africa", "status": "planned", "launch": "2027" },
+  { "name": "Lisbon", "region": "Europe", "status": "planned", "launch": "2027" }
+]

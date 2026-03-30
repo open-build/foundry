@@ -131,8 +131,15 @@ dmypy.json
 # Outreach System
 # Outreach Data - Keep private
 outreach_data/
-*.json
 config.py
+config*.json
+outreach_*.json
+
+# Allow public data files
+!docs/data/*.json
+!package.json
+!package-lock.json
+!ai-tools/openclaw/*.json
 
 # Python
 __pycache__/
