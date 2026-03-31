@@ -832,32 +832,31 @@ Subject: Partnership Opportunity: Global Startup Foundry Launch + Bootstrapped F
 
 {{ contact_name }},
 
-I hope this email finds you well. I'm reaching out from Buildly Labs Foundry, a new global startup incubator that just launched in partnership with OpenBuild and Buildly Labs.
+I hope this email finds you well. I'm reaching out from First City Foundry, Portland's equity-free startup incubator helping founders build and launch without giving up ownership.
 
-Given {{ organization }}'s focus on {{ focus_area }}, I thought you might be interested in covering our unique approach to supporting software developers and entrepreneurs worldwide.
+Given {{ organization }}'s focus on {{ focus_area }}, I thought you might be interested in covering our approach to supporting software developers and entrepreneurs in the Pacific Northwest and beyond.
 
 What makes us different:
-• 100% equity-free support (unprecedented in the industry)
-• AI-powered startup analysis and recommendations  
-• Free cloud hosting credits through partnerships
-• Global developer community access via OpenBuild
-• Focus on solo founders and first-time entrepreneurs
-• FirstCityFoundry Bootstrapped Founders Podcast featuring real founder stories
+• 100% equity-free support — founders keep full ownership
+• AI-powered startup analysis and recommendations
+• Free cloud hosting credits through our partner network
+• Community-driven mentorship from Portland's startup ecosystem
+• Focus on solo founders, first-time entrepreneurs, and bootstrapped teams
+• Bootstrapped Founders Podcast featuring real founder stories
 
-Our platform at https://www.firstcityfoundry.com showcases how we're democratizing startup support globally, and our podcast (https://www.firstcityfoundry.com/podcast.html) highlights authentic bootstrapping journeys from Portland StartupGrind community.
+Learn more at https://www.firstcityfoundry.com and listen to our podcast at https://www.firstcityfoundry.com/podcast.html
 
 Would you be interested in:
-- Learning more about our story and partnerships
+- Learning more about our story and approach
 - Interviewing some of our founders
-- Having our founders as podcast guests to share their bootstrapping stories
-- Featuring our podcast content or cross-promoting with your audience
+- Having our founders as podcast guests
+- Featuring our podcast content or cross-promoting
 
 I'd be happy to provide additional information, press materials, or arrange interviews.
 
-Please feel free to reach out with any questions or inquiries to team@open.build.
-
 Best regards,
-Buildly Labs Foundry Team
+First City Foundry Team
+hello@firstcityfoundry.com
 
 P.S. We're also happy to provide exclusive early access to our platform for {{ organization }}'s readers if that would be of interest.
 
@@ -872,88 +871,85 @@ Subject: New Global Startup Foundry + Bootstrapped Founders Podcast - Partnershi
 
 I've been following your work at {{ organization }} and your insights on {{ focus_area }} - really appreciate your perspective on the startup ecosystem.
 
-I wanted to introduce you to Buildly Labs Foundry, a new global startup incubator we've just launched. What caught my attention is how our approach aligns with many of the challenges you've highlighted about traditional accelerators.
+I wanted to introduce you to First City Foundry, Portland's equity-free startup incubator. What caught my attention is how our approach aligns with many of the challenges you've highlighted about traditional accelerators.
 
 Key differentiators:
-• Zero equity required (keeping founders in full control)
-• AI-powered startup evaluation and recommendations 
-• Partnership with OpenBuild for global developer community access
+• Zero equity required — founders keep full control
+• AI-powered startup evaluation and recommendations
+• Community-driven mentorship from Portland's tech ecosystem
 • Free cloud infrastructure support
-• Specific focus on solo founders and developers transitioning to entrepreneurship
-• FirstCityFoundry Bootstrapped Founders Podcast showcasing real founder journeys
+• Focus on solo founders and developers transitioning to entrepreneurship
+• Bootstrapped Founders Podcast showcasing real founder journeys
 
-You can check out our platform at https://www.firstcityfoundry.com and our podcast at https://www.firstcityfoundry.com/podcast.html
+Check us out at https://www.firstcityfoundry.com and our podcast at https://www.firstcityfoundry.com/podcast.html
 
-Given your influence in the startup community, I'd love to get your thoughts on our approach. Would you be open to:
+Given your influence in the startup community, I'd love to get your thoughts. Would you be open to:
 - A brief conversation about what we're building
-- Being a guest on our Bootstrapped Founders Podcast to share your insights
+- Being a guest on our Bootstrapped Founders Podcast
 - Cross-promoting our podcast content with your audience
 
-If this resonates with your community, we'd also be happy to discuss other collaboration opportunities or provide exclusive insights.
-
-Feel free to reach out with questions to team@open.build.
+Happy to discuss other collaboration opportunities too.
 
 Best,
-Buildly Labs Foundry Team
+First City Foundry Team
+hello@firstcityfoundry.com
 
 ---
 If you no longer wish to receive these communications, you can unsubscribe here: {{ opt_out_link }}
             """,
             
             'platform': """
-Subject: Partnership Opportunity: Buildly Labs Foundry Launch + Podcast Content
+Subject: Partnership Opportunity: First City Foundry + Podcast Content
 
 {{ contact_name }},
 
-I'm reaching out from Buildly Labs Foundry, a new global startup incubator that recently launched in partnership with OpenBuild and Buildly Labs.
+I'm reaching out from First City Foundry, Portland's equity-free startup incubator.
 
 Given {{ organization }}'s platform and community, I believe there could be great synergy between our missions to support entrepreneurs and developers.
 
-Our unique approach:
+Our approach:
 • 100% equity-free incubator model
 • AI-powered startup analysis and strategic recommendations
-• Global reach through OpenBuild partnership  
+• Community mentorship from Portland's tech ecosystem
 • Free cloud hosting and technical infrastructure
-• Focus on underserved founders (solo, first-time, international)
-• FirstCityFoundry Bootstrapped Founders Podcast with authentic founder stories
+• Focus on solo founders, first-time entrepreneurs, and bootstrapped teams
+• Bootstrapped Founders Podcast with authentic founder stories
 
 Our platform: https://www.firstcityfoundry.com
 Our podcast: https://www.firstcityfoundry.com/podcast.html
 
-I'd love to explore potential partnership opportunities, whether that's:
+I'd love to explore potential partnership opportunities:
 - Cross-promotion to relevant communities
-- Integration opportunities
 - Content collaboration (including podcast content sharing)
 - Joint events or initiatives
 - Podcast guest exchanges
 
-Would you be interested in a conversation about how we might work together to better serve the startup community?
-
-Please reach out to team@open.build with any questions or to discuss further.
+Would you be interested in a conversation about working together?
 
 Best regards,
-Buildly Labs Foundry Partnership Team
+First City Foundry Team
+hello@firstcityfoundry.com
 
 ---
 If you no longer wish to receive these communications, you can unsubscribe here: {{ opt_out_link }}
             """,
             
             'community': """
-Subject: Introducing Buildly Labs Foundry + Bootstrapped Founders Podcast
+Subject: Introducing First City Foundry + Bootstrapped Founders Podcast
 
 {{ contact_name }},
 
-I hope you're doing well! I wanted to share something new that I think the {{ organization }} community would find interesting.
+I hope you're doing well! I wanted to share something I think the {{ organization }} community would find interesting.
 
-We've just launched Buildly Labs Foundry, a global startup incubator with a fundamentally different approach to supporting entrepreneurs and developers.
+We're First City Foundry, Portland's equity-free startup incubator with a fundamentally different approach to supporting entrepreneurs and developers.
 
 What makes us unique:
-• Completely equity-free (founders keep 100% ownership)
+• Completely equity-free — founders keep 100% ownership
 • AI-powered analysis and personalized recommendations
-• Partnership with OpenBuild for global developer community access
-• Free cloud hosting and infrastructure support  
-• Designed specifically for solo founders, developers, and first-time entrepreneurs
-• FirstCityFoundry Bootstrapped Founders Podcast featuring real founder stories from Portland StartupGrind
+• Community mentorship from Portland's startup ecosystem
+• Free cloud hosting and infrastructure support
+• Designed for solo founders, developers, and first-time entrepreneurs
+• Bootstrapped Founders Podcast featuring real founder stories
 
 Check it out: https://www.firstcityfoundry.com
 Our podcast: https://www.firstcityfoundry.com/podcast.html
@@ -961,15 +957,16 @@ Our podcast: https://www.firstcityfoundry.com/podcast.html
 I thought this might resonate with {{ organization }}'s community, especially those looking to transition from development to entrepreneurship or seeking startup support without giving up equity.
 
 Would you be open to:
-- Me sharing this with the community
+- Sharing this with the community
 - Discussing collaboration opportunities
-- Having community members as podcast guests to share their bootstrapping journeys
+- Having community members as podcast guests
 - Cross-promoting our podcast content
 
-Happy to answer any questions at team@open.build.
+Happy to answer any questions.
 
 Cheers,
-Buildly Labs Foundry Team
+First City Foundry Team
+hello@firstcityfoundry.com
 
 ---
 If you no longer wish to receive these communications, you can unsubscribe here: {{ opt_out_link }}
@@ -997,7 +994,7 @@ If you no longer wish to receive these communications, you can unsubscribe here:
         
         # Extract subject line
         lines = message.split('\n')
-        subject = lines[0].replace('Subject: ', '') if lines[0].startswith('Subject: ') else "Partnership Opportunity: Buildly Labs Foundry"
+        subject = lines[0].replace('Subject: ', '') if lines[0].startswith('Subject: ') else "Partnership Opportunity: First City Foundry"
         body = '\n'.join(lines[2:])  # Skip subject and empty line
         
         return {
