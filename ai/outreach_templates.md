@@ -54,7 +54,7 @@ The Foundry Collective team
 
 Hi {contact_name},
 
-I'm reaching out from The Foundry Collective — a global equity-free founder network operating in Portland, with expansion planned to Medellín, Nairobi, and Lisbon.
+I'm reaching out from The Foundry Collective — a global founder network operating in Portland, with expansion planned to Medellín, Nairobi, and Lisbon.
 
 We work as a curated partner ecosystem where each organisation owns a stage of the founder lifecycle (Build → Train → Connect → Operate). We noticed {org_name} does excellent work in {their_domain}, and we currently have a gap in {lifecycle_stage}.
 

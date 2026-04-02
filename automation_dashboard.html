@@ -31,6 +31,28 @@
             font-size: 1.1rem;
             opacity: 0.9;
         }
+
+        .quick-links {
+            background: #2d3748;
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .quick-links a:hover {
+            background: rgba(255,255,255,0.15);
+        }
         
         .container {
             max-width: 1200px;
@@ -245,7 +267,14 @@
 <body>
     <div class="header">
         <h1>🚀 Buildly Labs Foundry</h1>
-        <p>Automation Dashboard - Generated 2025-10-04 at 14:59:45</p>
+        <p>Automation Dashboard - Generated 2026-03-31 at 14:54:46</p>
+    </div>
+
+    <div class="quick-links">
+        <a href="http://127.0.0.1:18789/" target="_blank">🦞 OpenClaw Dashboard</a>
+        <a href="http://localhost:8000/admin/" target="_blank">🔧 ForgeWeb Admin</a>
+        <a href="http://localhost:3000" target="_blank">🌐 Site Preview</a>
+        <a href="https://www.firstcityfoundry.com" target="_blank">🚀 Live Site</a>
     </div>
     
     <div class="container">
@@ -255,7 +284,7 @@
             
         <div class="recommendation warning">
             <h4>Missing Environment Variables</h4>
-            <p><strong>Issue:</strong> 3 required environment variables are missing</p>
+            <p><strong>Issue:</strong> 2 required environment variables are missing</p>
             <p><strong>Action:</strong> Update .env file with missing variables</p>
         </div>
         
@@ -274,20 +303,20 @@
                 <h2>📊 Automation Status</h2>
                 <div class="metric">
                     <span class="metric-label">Last 24 Hours</span>
-                    <span class="metric-value status-error">
-                        0 success, 0 failures
+                    <span class="metric-value status-good">
+                        3 success, 0 failures
                     </span>
                 </div>
                 <div class="metric">
                     <span class="metric-label">Last 7 Days</span>
                     <span class="metric-value">
-                        0 success, 0 failures
+                        5 success, 1 failures
                     </span>
                 </div>
                 <div class="metric">
                     <span class="metric-label">Last 30 Days</span>
                     <span class="metric-value">
-                        8 success, 0 failures
+                        5 success, 1 failures
                     </span>
                 </div>
             </div>
@@ -297,7 +326,7 @@
                 <h2>📧 Outreach Performance</h2>
                 <div class="metric">
                     <span class="metric-label">Total Contacts</span>
-                    <span class="metric-value">68</span>
+                    <span class="metric-value">35</span>
                 </div>
                 <div class="metric">
                     <span class="metric-label">New Today</span>
@@ -309,7 +338,7 @@
                 </div>
                 <div class="metric">
                     <span class="metric-label">Pending Messages</span>
-                    <span class="metric-value ">7</span>
+                    <span class="metric-value ">29</span>
                 </div>
             </div>
             
@@ -318,11 +347,11 @@
                 <h2>⚙️ Configuration Status</h2>
                 <div class="metric">
                     <span class="metric-label">Configured Variables</span>
-                    <span class="metric-value status-good">8</span>
+                    <span class="metric-value status-good">7</span>
                 </div>
                 <div class="metric">
                     <span class="metric-label">Missing Variables</span>
-                    <span class="metric-value status-error">3</span>
+                    <span class="metric-value status-error">2</span>
                 </div>
                 <div class="metric">
                     <span class="metric-label">System Health</span>
@@ -347,53 +376,53 @@
                         <h2>Contact Sources</h2>
                         
         <div class="metric">
-            <span class="metric-label">https://substack.com/contact</span>
-            <span class="metric-value">6</span>
-        </div>
-        
-        <div class="metric">
-            <span class="metric-label">https://entrepreneur.com/contact</span>
+            <span class="metric-label">https://www.oen.org/press</span>
             <span class="metric-value">5</span>
         </div>
         
         <div class="metric">
-            <span class="metric-label">https://saastr.com/contact</span>
+            <span class="metric-label">https://techcrunch.com/about</span>
+            <span class="metric-value">5</span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">https://www.wweek.com/contact-us</span>
+            <span class="metric-value">5</span>
+        </div>
+        
+        <div class="metric">
+            <span class="metric-label">https://prosperportland.us/about-us</span>
             <span class="metric-value">4</span>
         </div>
         
         <div class="metric">
-            <span class="metric-label">https://uktech.news/contact</span>
+            <span class="metric-label">https://techcrunch.com/contact-us</span>
             <span class="metric-value">3</span>
         </div>
         
         <div class="metric">
-            <span class="metric-label">https://startupnorway.com/contact</span>
+            <span class="metric-label">https://oregonstoryboard.org/contact</span>
             <span class="metric-value">3</span>
         </div>
         
         <div class="metric">
-            <span class="metric-label">https://startupnorway.com/about</span>
-            <span class="metric-value">3</span>
+            <span class="metric-label">https://www.piepdx.com/about</span>
+            <span class="metric-value">2</span>
         </div>
         
         <div class="metric">
-            <span class="metric-label">https://technode.com/about</span>
-            <span class="metric-value">3</span>
+            <span class="metric-label">https://www.oen.org/contact</span>
+            <span class="metric-value">1</span>
         </div>
         
         <div class="metric">
-            <span class="metric-label">https://antler.co/about</span>
-            <span class="metric-value">3</span>
+            <span class="metric-label">https://prosperportland.us/contact</span>
+            <span class="metric-value">1</span>
         </div>
         
         <div class="metric">
-            <span class="metric-label">https://www.eban.org/contact</span>
-            <span class="metric-value">3</span>
-        </div>
-        
-        <div class="metric">
-            <span class="metric-label">https://www.eban.org/about</span>
-            <span class="metric-value">3</span>
+            <span class="metric-label">https://www.portlandseedfund.com/team</span>
+            <span class="metric-value">1</span>
         </div>
         
                     </div>
@@ -401,23 +430,18 @@
                         <h2>Target Categories</h2>
                         
         <div class="metric">
-            <span class="metric-label">Publication</span>
-            <span class="metric-value">61</span>
+            <span class="metric-label">Platform</span>
+            <span class="metric-value">11</span>
         </div>
         
         <div class="metric">
-            <span class="metric-label">Platform</span>
-            <span class="metric-value">30</span>
+            <span class="metric-label">Publication</span>
+            <span class="metric-value">10</span>
         </div>
         
         <div class="metric">
             <span class="metric-label">Community</span>
-            <span class="metric-value">8</span>
-        </div>
-        
-        <div class="metric">
-            <span class="metric-label">Podcast</span>
-            <span class="metric-value">1</span>
+            <span class="metric-value">7</span>
         </div>
         
                     </div>
@@ -439,7 +463,7 @@
                     </div>
                     <div class="metric">
                         <span class="metric-label">Total Historical</span>
-                        <span class="metric-value">170 emails</span>
+                        <span class="metric-value">0 emails</span>
                     </div>
                 </div>
             </div>
@@ -451,18 +475,18 @@
                     
         <div class="env-var configured">
             <div>
-                <div class="env-var-name">BREVO_SMTP_USER</div>
-                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">Email SMTP username for Brevo</div>
+                <div class="env-var-name">BREVO_SMTP_KEY</div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">SMTP key for Brevo</div>
             </div>
-            <div class="env-var-value">96af72001@smtp-brevo.com</div>
+            <div class="env-var-value">xsmt...oa0W</div>
         </div>
         
         <div class="env-var configured">
             <div>
-                <div class="env-var-name">BREVO_SMTP_PASSWORD</div>
-                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">Email SMTP password for Brevo</div>
+                <div class="env-var-name">BREVO_SMTP_LOGIN</div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">SMTP login for Brevo</div>
             </div>
-            <div class="env-var-value">F9BC...mVWw</div>
+            <div class="env-var-value">96af72001@smtp-brevo.com</div>
         </div>
         
         <div class="env-var configured">
@@ -483,10 +507,10 @@
         
         <div class="env-var configured">
             <div>
-                <div class="env-var-name">BCC_EMAIL</div>
-                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">BCC email (optional)</div>
+                <div class="env-var-name">GOOGLE_ANALYTICS_PROPERTY_ID</div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">GA4 Property ID for website analytics</div>
             </div>
-            <div class="env-var-value">team@open.build</div>
+            <div class="env-var-value">G-FX80RQDJ49</div>
         </div>
         
         <div class="env-var configured">
@@ -494,15 +518,7 @@
                 <div class="env-var-name">GOOGLE_ANALYTICS_API_KEY</div>
                 <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">GA4 API key (optional)</div>
             </div>
-            <div class="env-var-value">AIza...Mtq0</div>
-        </div>
-        
-        <div class="env-var configured">
-            <div>
-                <div class="env-var-name">GOOGLE_ANALYTICS_CREDENTIALS_FILE</div>
-                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">GA4 service account file (optional)</div>
-            </div>
-            <div class="env-var-value">credentials.json</div>
+            <div class="env-var-value">AIza...6vRg</div>
         </div>
         
         <div class="env-var configured">
@@ -521,14 +537,6 @@
         
         <div class="env-var missing">
             <div>
-                <div class="env-var-name">GOOGLE_ANALYTICS_PROPERTY_ID</div>
-                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">GA4 Property ID for website analytics</div>
-            </div>
-            <div class="env-var-value">MISSING</div>
-        </div>
-        
-        <div class="env-var missing">
-            <div>
                 <div class="env-var-name">YOUTUBE_CHANNEL_ID</div>
                 <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">YouTube channel ID for analytics</div>
             </div>
@@ -543,56 +551,65 @@
             <div class="env-var-value">MISSING</div>
         </div>
         </div>
+        <div class="card">
+            <h2>⚠️ Missing Optional Variables</h2>
+        
+        <div class="env-var missing">
+            <div>
+                <div class="env-var-name">BCC_EMAIL</div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">BCC email (optional)</div>
+            </div>
+            <div class="env-var-value">MISSING</div>
+        </div>
+        
+        <div class="env-var missing">
+            <div>
+                <div class="env-var-name">GOOGLE_ANALYTICS_CREDENTIALS_FILE</div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.25rem;">GA4 service account file (optional)</div>
+            </div>
+            <div class="env-var-value">MISSING</div>
+        </div>
+        </div>
             </div>
             
             <!-- Logs Tab -->
             <div id="logs" class="tab-content">
                 <div class="card">
                     <h2>Recent Error Logs</h2>
-                    <p class="status-good">No recent errors found. ✅</p>
+                    <div class="error-log">2026-03-30 14:44:28,509 - daily_automation - ERROR - Required file missing: config.py\n2026-03-30 14:44:28,509 - daily_automation - ERROR - ❌ Dependency check failed. Aborting.</div>
                 </div>
                 
                 <div class="card">
                     <h2>📋 Recent Log Files</h2>
                     
-        <div class="log-file" onclick="openLogFile('daily_automation_20250921_101210.log')">
-            <div class="log-file-name">daily_automation_20250921_101210.log</div>
-            <div class="log-file-size">0.9 KB • Modified 2025-09-21 10:12</div>
+        <div class="log-file" onclick="openLogFile('daily_automation_20260331_132037.log')">
+            <div class="log-file-name">daily_automation_20260331_132037.log</div>
+            <div class="log-file-size">2.4 KB • Modified 2026-03-31 13:20</div>
         </div>
         
-        <div class="log-file" onclick="openLogFile('daily_automation_20250921_092352.log')">
-            <div class="log-file-name">daily_automation_20250921_092352.log</div>
-            <div class="log-file-size">1.3 KB • Modified 2025-09-21 09:23</div>
+        <div class="log-file" onclick="openLogFile('daily_automation_20260330_161452.log')">
+            <div class="log-file-name">daily_automation_20260330_161452.log</div>
+            <div class="log-file-size">30.2 KB • Modified 2026-03-30 17:20</div>
         </div>
         
-        <div class="log-file" onclick="openLogFile('daily_automation_20250921_092000.log')">
-            <div class="log-file-name">daily_automation_20250921_092000.log</div>
-            <div class="log-file-size">0.9 KB • Modified 2025-09-21 09:20</div>
+        <div class="log-file" onclick="openLogFile('daily_automation_20260330_161443.log')">
+            <div class="log-file-name">daily_automation_20260330_161443.log</div>
+            <div class="log-file-size">2.4 KB • Modified 2026-03-30 16:14</div>
         </div>
         
-        <div class="log-file" onclick="openLogFile('daily_automation_20250921_090001.log')">
-            <div class="log-file-name">daily_automation_20250921_090001.log</div>
-            <div class="log-file-size">18.4 KB • Modified 2025-09-21 09:01</div>
+        <div class="log-file" onclick="openLogFile('daily_automation_20260330_144446.log')">
+            <div class="log-file-name">daily_automation_20260330_144446.log</div>
+            <div class="log-file-size">2.5 KB • Modified 2026-03-30 14:44</div>
         </div>
         
-        <div class="log-file" onclick="openLogFile('daily_automation_20250920_090002.log')">
-            <div class="log-file-name">daily_automation_20250920_090002.log</div>
-            <div class="log-file-size">18.4 KB • Modified 2025-09-20 09:01</div>
+        <div class="log-file" onclick="openLogFile('daily_automation_20260330_144438.log')">
+            <div class="log-file-name">daily_automation_20260330_144438.log</div>
+            <div class="log-file-size">1.3 KB • Modified 2026-03-30 14:44</div>
         </div>
         
-        <div class="log-file" onclick="openLogFile('daily_automation_20250919_115039.log')">
-            <div class="log-file-name">daily_automation_20250919_115039.log</div>
-            <div class="log-file-size">1.5 KB • Modified 2025-09-19 11:50</div>
-        </div>
-        
-        <div class="log-file" onclick="openLogFile('daily_automation_20250919_095156.log')">
-            <div class="log-file-name">daily_automation_20250919_095156.log</div>
-            <div class="log-file-size">18.4 KB • Modified 2025-09-19 09:52</div>
-        </div>
-        
-        <div class="log-file" onclick="openLogFile('daily_automation_20250919_093802.log')">
-            <div class="log-file-name">daily_automation_20250919_093802.log</div>
-            <div class="log-file-size">1.3 KB • Modified 2025-09-19 09:38</div>
+        <div class="log-file" onclick="openLogFile('daily_automation_20260330_144428.log')">
+            <div class="log-file-name">daily_automation_20260330_144428.log</div>
+            <div class="log-file-size">0.5 KB • Modified 2026-03-30 14:44</div>
         </div>
         
                 </div>
@@ -671,7 +688,7 @@
     </div>
     
     <div class="footer">
-        <p>Generated by Buildly Labs Foundry Dashboard • 2025-10-04 14:59:45</p>
+        <p>Generated by Buildly Labs Foundry Dashboard • 2026-03-31 14:54:46</p>
         <p>Auto-refresh this page to see updated metrics</p>
     </div>
     

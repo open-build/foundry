@@ -1,0 +1,702 @@
+[
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "info@piepdx.com",
+      "organization": "PIE (Portland Incubator Experiment)",
+      "role": "Contact",
+      "source": "https://www.piepdx.com/about",
+      "category": "platform",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: First City Foundry + Podcast Content",
+      "body": "Hello team,\n\nI'm reaching out from First City Foundry, Portland's startup incubator.\n\nGiven PIE (Portland Incubator Experiment)'s platform and community, I believe there could be great synergy between our missions to support entrepreneurs and developers.\n\nOur approach:\n\u2022 100% incubator model\n\u2022 AI-powered startup analysis and strategic recommendations\n\u2022 Community mentorship from Portland's tech ecosystem\n\u2022 Free cloud hosting and technical infrastructure\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast with authentic founder stories\n\nOur platform: https://www.firstcityfoundry.com\nOur podcast: https://www.firstcityfoundry.com/podcast.html\n\nI'd love to explore potential partnership opportunities:\n- Cross-promotion to relevant communities\n- Content collaboration (including podcast content sharing)\n- Joint events or initiatives\n- Podcast guest exchanges\n\nWould you be interested in a conversation about working together?\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=info%40piepdx.com&auto=true",
+      "template_used": "platform"
+    },
+    "timestamp": "2026-03-30T17:20:33.028095",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "rachelle@cleantechalliance.org",
+      "organization": "Oregon Entrepreneurs Network (OEN)",
+      "role": "Contact",
+      "source": "https://www.oen.org/press",
+      "category": "community",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Introducing First City Foundry + Bootstrapped Founders Podcast",
+      "body": "Hello,\n\nI hope you're doing well! I wanted to share something I think the Oregon Entrepreneurs Network (OEN) community would find interesting.\n\nWe're First City Foundry, Portland's startup incubator with a fundamentally different approach to supporting entrepreneurs and developers.\n\nWhat makes us unique:\n\u2022 Founder-first approach \u2014 founders keep 100% ownership\n\u2022 AI-powered analysis and personalized recommendations\n\u2022 Community mentorship from Portland's startup ecosystem\n\u2022 Free cloud hosting and infrastructure support\n\u2022 Designed for solo founders, developers, and first-time entrepreneurs\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nCheck it out: https://www.firstcityfoundry.com\nOur podcast: https://www.firstcityfoundry.com/podcast.html\n\nI thought this might resonate with Oregon Entrepreneurs Network (OEN)'s community, especially those looking to transition from development to entrepreneurship or seeking hands-on startup support.\n\nWould you be open to:\n- Sharing this with the community\n- Discussing collaboration opportunities\n- Having community members as podcast guests\n- Cross-promoting our podcast content\n\nHappy to answer any questions.\n\nCheers,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=rachelle%40cleantechalliance.org&auto=true",
+      "template_used": "community"
+    },
+    "timestamp": "2026-03-30T17:20:33.028645",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "info@oen.org",
+      "organization": "Oregon Entrepreneurs Network (OEN)",
+      "role": "Contact",
+      "source": "https://www.oen.org/contact",
+      "category": "community",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Introducing First City Foundry + Bootstrapped Founders Podcast",
+      "body": "Hello team,\n\nI hope you're doing well! I wanted to share something I think the Oregon Entrepreneurs Network (OEN) community would find interesting.\n\nWe're First City Foundry, Portland's startup incubator with a fundamentally different approach to supporting entrepreneurs and developers.\n\nWhat makes us unique:\n\u2022 Founder-first approach \u2014 founders keep 100% ownership\n\u2022 AI-powered analysis and personalized recommendations\n\u2022 Community mentorship from Portland's startup ecosystem\n\u2022 Free cloud hosting and infrastructure support\n\u2022 Designed for solo founders, developers, and first-time entrepreneurs\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nCheck it out: https://www.firstcityfoundry.com\nOur podcast: https://www.firstcityfoundry.com/podcast.html\n\nI thought this might resonate with Oregon Entrepreneurs Network (OEN)'s community, especially those looking to transition from development to entrepreneurship or seeking hands-on startup support.\n\nWould you be open to:\n- Sharing this with the community\n- Discussing collaboration opportunities\n- Having community members as podcast guests\n- Cross-promoting our podcast content\n\nHappy to answer any questions.\n\nCheers,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=info%40oen.org&auto=true",
+      "template_used": "community"
+    },
+    "timestamp": "2026-03-30T17:20:33.029046",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "News Tips",
+      "email": "tips@techcrunch.com",
+      "organization": "TechCrunch",
+      "role": "Contact",
+      "source": "https://techcrunch.com/contact-us",
+      "category": "publication",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: Global Startup Foundry Launch + Bootstrapped Founders Podcast",
+      "body": "News Tips,\n\nI hope this email finds you well. I'm reaching out from First City Foundry, Portland's startup incubator helping founders build and launch without giving up ownership.\n\nGiven TechCrunch's focus on startup funding and innovation, I thought you might be interested in covering our approach to supporting software developers and entrepreneurs in the Pacific Northwest and beyond.\n\nWhat makes us different:\n\u2022 Founder-first support \u2014 founders keep full ownership\n\u2022 AI-powered startup analysis and recommendations\n\u2022 Free cloud hosting credits through our partner network\n\u2022 Community-driven mentorship from Portland's startup ecosystem\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nLearn more at https://www.firstcityfoundry.com and listen to our podcast at https://www.firstcityfoundry.com/podcast.html\n\nWould you be interested in:\n- Learning more about our story and approach\n- Interviewing some of our founders\n- Having our founders as podcast guests\n- Featuring our podcast content or cross-promoting\n\nI'd be happy to provide additional information, press materials, or arrange interviews.\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\nP.S. We're also happy to provide exclusive early access to our platform for TechCrunch's readers if that would be of interest.\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=tips%40techcrunch.com&auto=true",
+      "template_used": "publication"
+    },
+    "timestamp": "2026-03-30T17:20:33.030183",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "laurenf.techcrunch@gmail.com",
+      "organization": "TechCrunch",
+      "role": "Contact",
+      "source": "https://techcrunch.com/about",
+      "category": "publication",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: Global Startup Foundry Launch + Bootstrapped Founders Podcast",
+      "body": "Hello,\n\nI hope this email finds you well. I'm reaching out from First City Foundry, Portland's startup incubator helping founders build and launch without giving up ownership.\n\nGiven TechCrunch's focus on startup funding and innovation, I thought you might be interested in covering our approach to supporting software developers and entrepreneurs in the Pacific Northwest and beyond.\n\nWhat makes us different:\n\u2022 Founder-first support \u2014 founders keep full ownership\n\u2022 AI-powered startup analysis and recommendations\n\u2022 Free cloud hosting credits through our partner network\n\u2022 Community-driven mentorship from Portland's startup ecosystem\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nLearn more at https://www.firstcityfoundry.com and listen to our podcast at https://www.firstcityfoundry.com/podcast.html\n\nWould you be interested in:\n- Learning more about our story and approach\n- Interviewing some of our founders\n- Having our founders as podcast guests\n- Featuring our podcast content or cross-promoting\n\nI'd be happy to provide additional information, press materials, or arrange interviews.\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\nP.S. We're also happy to provide exclusive early access to our platform for TechCrunch's readers if that would be of interest.\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=laurenf.techcrunch%40gmail.com&auto=true",
+      "template_used": "publication"
+    },
+    "timestamp": "2026-03-30T17:20:33.030628",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "tips@techcrunch.com.\nif",
+      "organization": "TechCrunch",
+      "role": "Contact",
+      "source": "https://techcrunch.com/contact-us",
+      "category": "publication",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: Global Startup Foundry Launch + Bootstrapped Founders Podcast",
+      "body": "Hello team,\n\nI hope this email finds you well. I'm reaching out from First City Foundry, Portland's startup incubator helping founders build and launch without giving up ownership.\n\nGiven TechCrunch's focus on startup funding and innovation, I thought you might be interested in covering our approach to supporting software developers and entrepreneurs in the Pacific Northwest and beyond.\n\nWhat makes us different:\n\u2022 Founder-first support \u2014 founders keep full ownership\n\u2022 AI-powered startup analysis and recommendations\n\u2022 Free cloud hosting credits through our partner network\n\u2022 Community-driven mentorship from Portland's startup ecosystem\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nLearn more at https://www.firstcityfoundry.com and listen to our podcast at https://www.firstcityfoundry.com/podcast.html\n\nWould you be interested in:\n- Learning more about our story and approach\n- Interviewing some of our founders\n- Having our founders as podcast guests\n- Featuring our podcast content or cross-promoting\n\nI'd be happy to provide additional information, press materials, or arrange interviews.\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\nP.S. We're also happy to provide exclusive early access to our platform for TechCrunch's readers if that would be of interest.\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=tips%40techcrunch.com.%0Aif&auto=true",
+      "template_used": "publication"
+    },
+    "timestamp": "2026-03-30T17:20:33.031091",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "tips@techcrunch.com/",
+      "organization": "TechCrunch",
+      "role": "Contact",
+      "source": "https://techcrunch.com/contact-us",
+      "category": "publication",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: Global Startup Foundry Launch + Bootstrapped Founders Podcast",
+      "body": "Hello team,\n\nI hope this email finds you well. I'm reaching out from First City Foundry, Portland's startup incubator helping founders build and launch without giving up ownership.\n\nGiven TechCrunch's focus on startup funding and innovation, I thought you might be interested in covering our approach to supporting software developers and entrepreneurs in the Pacific Northwest and beyond.\n\nWhat makes us different:\n\u2022 Founder-first support \u2014 founders keep full ownership\n\u2022 AI-powered startup analysis and recommendations\n\u2022 Free cloud hosting credits through our partner network\n\u2022 Community-driven mentorship from Portland's startup ecosystem\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nLearn more at https://www.firstcityfoundry.com and listen to our podcast at https://www.firstcityfoundry.com/podcast.html\n\nWould you be interested in:\n- Learning more about our story and approach\n- Interviewing some of our founders\n- Having our founders as podcast guests\n- Featuring our podcast content or cross-promoting\n\nI'd be happy to provide additional information, press materials, or arrange interviews.\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\nP.S. We're also happy to provide exclusive early access to our platform for TechCrunch's readers if that would be of interest.\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=tips%40techcrunch.com/&auto=true",
+      "template_used": "publication"
+    },
+    "timestamp": "2026-03-30T17:20:33.031545",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "access@prosperportland.us",
+      "organization": "Prosper Portland",
+      "role": "Contact",
+      "source": "https://prosperportland.us/contact",
+      "category": "platform",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: First City Foundry + Podcast Content",
+      "body": "Hello,\n\nI'm reaching out from First City Foundry, Portland's startup incubator.\n\nGiven Prosper Portland's platform and community, I believe there could be great synergy between our missions to support entrepreneurs and developers.\n\nOur approach:\n\u2022 100% incubator model\n\u2022 AI-powered startup analysis and strategic recommendations\n\u2022 Community mentorship from Portland's tech ecosystem\n\u2022 Free cloud hosting and technical infrastructure\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast with authentic founder stories\n\nOur platform: https://www.firstcityfoundry.com\nOur podcast: https://www.firstcityfoundry.com/podcast.html\n\nI'd love to explore potential partnership opportunities:\n- Cross-promotion to relevant communities\n- Content collaboration (including podcast content sharing)\n- Joint events or initiatives\n- Podcast guest exchanges\n\nWould you be interested in a conversation about working together?\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=access%40prosperportland.us&auto=true",
+      "template_used": "platform"
+    },
+    "timestamp": "2026-03-30T17:20:33.031926",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Zusman at",
+      "email": "azusman@wweek.com",
+      "organization": "Willamette Week",
+      "role": "Editor",
+      "source": "https://www.wweek.com/contact-us",
+      "category": "publication",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: Global Startup Foundry Launch + Bootstrapped Founders Podcast",
+      "body": "Zusman at,\n\nI hope this email finds you well. I'm reaching out from First City Foundry, Portland's startup incubator helping founders build and launch without giving up ownership.\n\nGiven Willamette Week's focus on entrepreneurship and startup development, I thought you might be interested in covering our approach to supporting software developers and entrepreneurs in the Pacific Northwest and beyond.\n\nWhat makes us different:\n\u2022 Founder-first support \u2014 founders keep full ownership\n\u2022 AI-powered startup analysis and recommendations\n\u2022 Free cloud hosting credits through our partner network\n\u2022 Community-driven mentorship from Portland's startup ecosystem\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nLearn more at https://www.firstcityfoundry.com and listen to our podcast at https://www.firstcityfoundry.com/podcast.html\n\nWould you be interested in:\n- Learning more about our story and approach\n- Interviewing some of our founders\n- Having our founders as podcast guests\n- Featuring our podcast content or cross-promoting\n\nI'd be happy to provide additional information, press materials, or arrange interviews.\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\nP.S. We're also happy to provide exclusive early access to our platform for Willamette Week's readers if that would be of interest.\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=azusman%40wweek.com&auto=true",
+      "template_used": "publication"
+    },
+    "timestamp": "2026-03-30T17:20:33.032431",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "3007emailinfo@portlandseedfund.comteam",
+      "organization": "Portland Seed Fund",
+      "role": "Contact",
+      "source": "https://www.portlandseedfund.com/team",
+      "category": "platform",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: First City Foundry + Podcast Content",
+      "body": "Hello team,\n\nI'm reaching out from First City Foundry, Portland's startup incubator.\n\nGiven Portland Seed Fund's platform and community, I believe there could be great synergy between our missions to support entrepreneurs and developers.\n\nOur approach:\n\u2022 100% incubator model\n\u2022 AI-powered startup analysis and strategic recommendations\n\u2022 Community mentorship from Portland's tech ecosystem\n\u2022 Free cloud hosting and technical infrastructure\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast with authentic founder stories\n\nOur platform: https://www.firstcityfoundry.com\nOur podcast: https://www.firstcityfoundry.com/podcast.html\n\nI'd love to explore potential partnership opportunities:\n- Cross-promotion to relevant communities\n- Content collaboration (including podcast content sharing)\n- Joint events or initiatives\n- Podcast guest exchanges\n\nWould you be interested in a conversation about working together?\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=3007emailinfo%40portlandseedfund.comteam&auto=true",
+      "template_used": "platform"
+    },
+    "timestamp": "2026-03-30T17:20:33.032823",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "97123info@oregonstoryboard.org",
+      "organization": "Oregon Story Board",
+      "role": "Contact",
+      "source": "https://oregonstoryboard.org/contact",
+      "category": "publication",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: Global Startup Foundry Launch + Bootstrapped Founders Podcast",
+      "body": "Hello team,\n\nI hope this email finds you well. I'm reaching out from First City Foundry, Portland's startup incubator helping founders build and launch without giving up ownership.\n\nGiven Oregon Story Board's focus on entrepreneurship and startup development, I thought you might be interested in covering our approach to supporting software developers and entrepreneurs in the Pacific Northwest and beyond.\n\nWhat makes us different:\n\u2022 Founder-first support \u2014 founders keep full ownership\n\u2022 AI-powered startup analysis and recommendations\n\u2022 Free cloud hosting credits through our partner network\n\u2022 Community-driven mentorship from Portland's startup ecosystem\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nLearn more at https://www.firstcityfoundry.com and listen to our podcast at https://www.firstcityfoundry.com/podcast.html\n\nWould you be interested in:\n- Learning more about our story and approach\n- Interviewing some of our founders\n- Having our founders as podcast guests\n- Featuring our podcast content or cross-promoting\n\nI'd be happy to provide additional information, press materials, or arrange interviews.\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\nP.S. We're also happy to provide exclusive early access to our platform for Oregon Story Board's readers if that would be of interest.\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=97123info%40oregonstoryboard.org&auto=true",
+      "template_used": "publication"
+    },
+    "timestamp": "2026-03-30T17:20:33.033292",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "support@dev.to",
+      "organization": "Dev.to",
+      "role": "Contact",
+      "source": "https://dev.to/contact",
+      "category": "community",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Introducing First City Foundry + Bootstrapped Founders Podcast",
+      "body": "Hello team,\n\nI hope you're doing well! I wanted to share something I think the Dev.to community would find interesting.\n\nWe're First City Foundry, Portland's startup incubator with a fundamentally different approach to supporting entrepreneurs and developers.\n\nWhat makes us unique:\n\u2022 Founder-first approach \u2014 founders keep 100% ownership\n\u2022 AI-powered analysis and personalized recommendations\n\u2022 Community mentorship from Portland's startup ecosystem\n\u2022 Free cloud hosting and infrastructure support\n\u2022 Designed for solo founders, developers, and first-time entrepreneurs\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nCheck it out: https://www.firstcityfoundry.com\nOur podcast: https://www.firstcityfoundry.com/podcast.html\n\nI thought this might resonate with Dev.to's community, especially those looking to transition from development to entrepreneurship or seeking hands-on startup support.\n\nWould you be open to:\n- Sharing this with the community\n- Discussing collaboration opportunities\n- Having community members as podcast guests\n- Cross-promoting our podcast content\n\nHappy to answer any questions.\n\nCheers,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=support%40dev.to&auto=true",
+      "template_used": "community"
+    },
+    "timestamp": "2026-03-30T17:20:33.033700",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "hn@ycombinator.com",
+      "organization": "Hacker News",
+      "role": "Contact",
+      "source": "https://news.ycombinator.com",
+      "category": "community",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Introducing First City Foundry + Bootstrapped Founders Podcast",
+      "body": "Hello,\n\nI hope you're doing well! I wanted to share something I think the Hacker News community would find interesting.\n\nWe're First City Foundry, Portland's startup incubator with a fundamentally different approach to supporting entrepreneurs and developers.\n\nWhat makes us unique:\n\u2022 Founder-first approach \u2014 founders keep 100% ownership\n\u2022 AI-powered analysis and personalized recommendations\n\u2022 Community mentorship from Portland's startup ecosystem\n\u2022 Free cloud hosting and infrastructure support\n\u2022 Designed for solo founders, developers, and first-time entrepreneurs\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nCheck it out: https://www.firstcityfoundry.com\nOur podcast: https://www.firstcityfoundry.com/podcast.html\n\nI thought this might resonate with Hacker News's community, especially those looking to transition from development to entrepreneurship or seeking hands-on startup support.\n\nWould you be open to:\n- Sharing this with the community\n- Discussing collaboration opportunities\n- Having community members as podcast guests\n- Cross-promoting our podcast content\n\nHappy to answer any questions.\n\nCheers,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=hn%40ycombinator.com&auto=true",
+      "template_used": "community"
+    },
+    "timestamp": "2026-03-30T17:20:33.035049",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "conference@thenextweb.com",
+      "organization": "The Next Web",
+      "role": "Contact",
+      "source": "https://thenextweb.com/about",
+      "category": "publication",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: Global Startup Foundry Launch + Bootstrapped Founders Podcast",
+      "body": "Hello,\n\nI hope this email finds you well. I'm reaching out from First City Foundry, Portland's startup incubator helping founders build and launch without giving up ownership.\n\nGiven The Next Web's focus on entrepreneurship and startup development, I thought you might be interested in covering our approach to supporting software developers and entrepreneurs in the Pacific Northwest and beyond.\n\nWhat makes us different:\n\u2022 Founder-first support \u2014 founders keep full ownership\n\u2022 AI-powered startup analysis and recommendations\n\u2022 Free cloud hosting credits through our partner network\n\u2022 Community-driven mentorship from Portland's startup ecosystem\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nLearn more at https://www.firstcityfoundry.com and listen to our podcast at https://www.firstcityfoundry.com/podcast.html\n\nWould you be interested in:\n- Learning more about our story and approach\n- Interviewing some of our founders\n- Having our founders as podcast guests\n- Featuring our podcast content or cross-promoting\n\nI'd be happy to provide additional information, press materials, or arrange interviews.\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\nP.S. We're also happy to provide exclusive early access to our platform for The Next Web's readers if that would be of interest.\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=conference%40thenextweb.com&auto=true",
+      "template_used": "publication"
+    },
+    "timestamp": "2026-03-30T17:20:33.037603",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "hello@startupstash.com",
+      "organization": "Startup Stash",
+      "role": "Contact",
+      "source": "https://startupstash.com/about",
+      "category": "platform",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: First City Foundry + Podcast Content",
+      "body": "Hello team,\n\nI'm reaching out from First City Foundry, Portland's startup incubator.\n\nGiven Startup Stash's platform and community, I believe there could be great synergy between our missions to support entrepreneurs and developers.\n\nOur approach:\n\u2022 100% incubator model\n\u2022 AI-powered startup analysis and strategic recommendations\n\u2022 Community mentorship from Portland's tech ecosystem\n\u2022 Free cloud hosting and technical infrastructure\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast with authentic founder stories\n\nOur platform: https://www.firstcityfoundry.com\nOur podcast: https://www.firstcityfoundry.com/podcast.html\n\nI'd love to explore potential partnership opportunities:\n- Cross-promotion to relevant communities\n- Content collaboration (including podcast content sharing)\n- Joint events or initiatives\n- Podcast guest exchanges\n\nWould you be interested in a conversation about working together?\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=hello%40startupstash.com&auto=true",
+      "template_used": "platform"
+    },
+    "timestamp": "2026-03-30T17:20:33.038203",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "info@piepdx.com",
+      "organization": "PIE (Portland Incubator Experiment)",
+      "role": "Contact",
+      "source": "https://www.piepdx.com/about",
+      "category": "platform",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: First City Foundry + Podcast Content",
+      "body": "Hello team,\n\nI'm reaching out from First City Foundry, Portland's startup incubator.\n\nGiven PIE (Portland Incubator Experiment)'s platform and community, I believe there could be great synergy between our missions to support entrepreneurs and developers.\n\nOur approach:\n\u2022 100% incubator model\n\u2022 AI-powered startup analysis and strategic recommendations\n\u2022 Community mentorship from Portland's tech ecosystem\n\u2022 Free cloud hosting and technical infrastructure\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast with authentic founder stories\n\nOur platform: https://www.firstcityfoundry.com\nOur podcast: https://www.firstcityfoundry.com/podcast.html\n\nI'd love to explore potential partnership opportunities:\n- Cross-promotion to relevant communities\n- Content collaboration (including podcast content sharing)\n- Joint events or initiatives\n- Podcast guest exchanges\n\nWould you be interested in a conversation about working together?\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=info%40piepdx.com&auto=true",
+      "template_used": "platform"
+    },
+    "timestamp": "2026-03-31T13:20:38.774507",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "rachelle@cleantechalliance.org",
+      "organization": "Oregon Entrepreneurs Network (OEN)",
+      "role": "Contact",
+      "source": "https://www.oen.org/press",
+      "category": "community",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Introducing First City Foundry + Bootstrapped Founders Podcast",
+      "body": "Hello,\n\nI hope you're doing well! I wanted to share something I think the Oregon Entrepreneurs Network (OEN) community would find interesting.\n\nWe're First City Foundry, Portland's startup incubator with a fundamentally different approach to supporting entrepreneurs and developers.\n\nWhat makes us unique:\n\u2022 Founder-first approach \u2014 founders keep 100% ownership\n\u2022 AI-powered analysis and personalized recommendations\n\u2022 Community mentorship from Portland's startup ecosystem\n\u2022 Free cloud hosting and infrastructure support\n\u2022 Designed for solo founders, developers, and first-time entrepreneurs\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nCheck it out: https://www.firstcityfoundry.com\nOur podcast: https://www.firstcityfoundry.com/podcast.html\n\nI thought this might resonate with Oregon Entrepreneurs Network (OEN)'s community, especially those looking to transition from development to entrepreneurship or seeking hands-on startup support.\n\nWould you be open to:\n- Sharing this with the community\n- Discussing collaboration opportunities\n- Having community members as podcast guests\n- Cross-promoting our podcast content\n\nHappy to answer any questions.\n\nCheers,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=rachelle%40cleantechalliance.org&auto=true",
+      "template_used": "community"
+    },
+    "timestamp": "2026-03-31T13:20:38.775157",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "kleinerg@comcast.net",
+      "organization": "Oregon Entrepreneurs Network (OEN)",
+      "role": "Contact",
+      "source": "https://www.oen.org/press",
+      "category": "community",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Introducing First City Foundry + Bootstrapped Founders Podcast",
+      "body": "Hello,\n\nI hope you're doing well! I wanted to share something I think the Oregon Entrepreneurs Network (OEN) community would find interesting.\n\nWe're First City Foundry, Portland's startup incubator with a fundamentally different approach to supporting entrepreneurs and developers.\n\nWhat makes us unique:\n\u2022 Founder-first approach \u2014 founders keep 100% ownership\n\u2022 AI-powered analysis and personalized recommendations\n\u2022 Community mentorship from Portland's startup ecosystem\n\u2022 Free cloud hosting and infrastructure support\n\u2022 Designed for solo founders, developers, and first-time entrepreneurs\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nCheck it out: https://www.firstcityfoundry.com\nOur podcast: https://www.firstcityfoundry.com/podcast.html\n\nI thought this might resonate with Oregon Entrepreneurs Network (OEN)'s community, especially those looking to transition from development to entrepreneurship or seeking hands-on startup support.\n\nWould you be open to:\n- Sharing this with the community\n- Discussing collaboration opportunities\n- Having community members as podcast guests\n- Cross-promoting our podcast content\n\nHappy to answer any questions.\n\nCheers,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=kleinerg%40comcast.net&auto=true",
+      "template_used": "community"
+    },
+    "timestamp": "2026-03-31T13:20:38.775623",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "info@oen.org",
+      "organization": "Oregon Entrepreneurs Network (OEN)",
+      "role": "Contact",
+      "source": "https://www.oen.org/contact",
+      "category": "community",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Introducing First City Foundry + Bootstrapped Founders Podcast",
+      "body": "Hello team,\n\nI hope you're doing well! I wanted to share something I think the Oregon Entrepreneurs Network (OEN) community would find interesting.\n\nWe're First City Foundry, Portland's startup incubator with a fundamentally different approach to supporting entrepreneurs and developers.\n\nWhat makes us unique:\n\u2022 Founder-first approach \u2014 founders keep 100% ownership\n\u2022 AI-powered analysis and personalized recommendations\n\u2022 Community mentorship from Portland's startup ecosystem\n\u2022 Free cloud hosting and infrastructure support\n\u2022 Designed for solo founders, developers, and first-time entrepreneurs\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nCheck it out: https://www.firstcityfoundry.com\nOur podcast: https://www.firstcityfoundry.com/podcast.html\n\nI thought this might resonate with Oregon Entrepreneurs Network (OEN)'s community, especially those looking to transition from development to entrepreneurship or seeking hands-on startup support.\n\nWould you be open to:\n- Sharing this with the community\n- Discussing collaboration opportunities\n- Having community members as podcast guests\n- Cross-promoting our podcast content\n\nHappy to answer any questions.\n\nCheers,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=info%40oen.org&auto=true",
+      "template_used": "community"
+    },
+    "timestamp": "2026-03-31T13:20:38.776049",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "tips@techcrunch.com/",
+      "organization": "TechCrunch",
+      "role": "Contact",
+      "source": "https://techcrunch.com/contact-us",
+      "category": "publication",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: Global Startup Foundry Launch + Bootstrapped Founders Podcast",
+      "body": "Hello team,\n\nI hope this email finds you well. I'm reaching out from First City Foundry, Portland's startup incubator helping founders build and launch without giving up ownership.\n\nGiven TechCrunch's focus on startup funding and innovation, I thought you might be interested in covering our approach to supporting software developers and entrepreneurs in the Pacific Northwest and beyond.\n\nWhat makes us different:\n\u2022 Founder-first support \u2014 founders keep full ownership\n\u2022 AI-powered startup analysis and recommendations\n\u2022 Free cloud hosting credits through our partner network\n\u2022 Community-driven mentorship from Portland's startup ecosystem\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nLearn more at https://www.firstcityfoundry.com and listen to our podcast at https://www.firstcityfoundry.com/podcast.html\n\nWould you be interested in:\n- Learning more about our story and approach\n- Interviewing some of our founders\n- Having our founders as podcast guests\n- Featuring our podcast content or cross-promoting\n\nI'd be happy to provide additional information, press materials, or arrange interviews.\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\nP.S. We're also happy to provide exclusive early access to our platform for TechCrunch's readers if that would be of interest.\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=tips%40techcrunch.com/&auto=true",
+      "template_used": "publication"
+    },
+    "timestamp": "2026-03-31T13:20:38.776584",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "laurenf.techcrunch@gmail.com",
+      "organization": "TechCrunch",
+      "role": "Contact",
+      "source": "https://techcrunch.com/about",
+      "category": "publication",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: Global Startup Foundry Launch + Bootstrapped Founders Podcast",
+      "body": "Hello,\n\nI hope this email finds you well. I'm reaching out from First City Foundry, Portland's startup incubator helping founders build and launch without giving up ownership.\n\nGiven TechCrunch's focus on startup funding and innovation, I thought you might be interested in covering our approach to supporting software developers and entrepreneurs in the Pacific Northwest and beyond.\n\nWhat makes us different:\n\u2022 Founder-first support \u2014 founders keep full ownership\n\u2022 AI-powered startup analysis and recommendations\n\u2022 Free cloud hosting credits through our partner network\n\u2022 Community-driven mentorship from Portland's startup ecosystem\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nLearn more at https://www.firstcityfoundry.com and listen to our podcast at https://www.firstcityfoundry.com/podcast.html\n\nWould you be interested in:\n- Learning more about our story and approach\n- Interviewing some of our founders\n- Having our founders as podcast guests\n- Featuring our podcast content or cross-promoting\n\nI'd be happy to provide additional information, press materials, or arrange interviews.\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\nP.S. We're also happy to provide exclusive early access to our platform for TechCrunch's readers if that would be of interest.\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=laurenf.techcrunch%40gmail.com&auto=true",
+      "template_used": "publication"
+    },
+    "timestamp": "2026-03-31T13:20:38.777043",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "access@prosperportland.us",
+      "organization": "Prosper Portland",
+      "role": "Contact",
+      "source": "https://prosperportland.us/contact",
+      "category": "platform",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: First City Foundry + Podcast Content",
+      "body": "Hello,\n\nI'm reaching out from First City Foundry, Portland's startup incubator.\n\nGiven Prosper Portland's platform and community, I believe there could be great synergy between our missions to support entrepreneurs and developers.\n\nOur approach:\n\u2022 100% incubator model\n\u2022 AI-powered startup analysis and strategic recommendations\n\u2022 Community mentorship from Portland's tech ecosystem\n\u2022 Free cloud hosting and technical infrastructure\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast with authentic founder stories\n\nOur platform: https://www.firstcityfoundry.com\nOur podcast: https://www.firstcityfoundry.com/podcast.html\n\nI'd love to explore potential partnership opportunities:\n- Cross-promotion to relevant communities\n- Content collaboration (including podcast content sharing)\n- Joint events or initiatives\n- Podcast guest exchanges\n\nWould you be interested in a conversation about working together?\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=access%40prosperportland.us&auto=true",
+      "template_used": "platform"
+    },
+    "timestamp": "2026-03-31T13:20:38.777437",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Zusman at",
+      "email": "azusman@wweek.com",
+      "organization": "Willamette Week",
+      "role": "Editor",
+      "source": "https://www.wweek.com/contact-us",
+      "category": "publication",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: Global Startup Foundry Launch + Bootstrapped Founders Podcast",
+      "body": "Zusman at,\n\nI hope this email finds you well. I'm reaching out from First City Foundry, Portland's startup incubator helping founders build and launch without giving up ownership.\n\nGiven Willamette Week's focus on entrepreneurship and startup development, I thought you might be interested in covering our approach to supporting software developers and entrepreneurs in the Pacific Northwest and beyond.\n\nWhat makes us different:\n\u2022 Founder-first support \u2014 founders keep full ownership\n\u2022 AI-powered startup analysis and recommendations\n\u2022 Free cloud hosting credits through our partner network\n\u2022 Community-driven mentorship from Portland's startup ecosystem\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nLearn more at https://www.firstcityfoundry.com and listen to our podcast at https://www.firstcityfoundry.com/podcast.html\n\nWould you be interested in:\n- Learning more about our story and approach\n- Interviewing some of our founders\n- Having our founders as podcast guests\n- Featuring our podcast content or cross-promoting\n\nI'd be happy to provide additional information, press materials, or arrange interviews.\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\nP.S. We're also happy to provide exclusive early access to our platform for Willamette Week's readers if that would be of interest.\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=azusman%40wweek.com&auto=true",
+      "template_used": "publication"
+    },
+    "timestamp": "2026-03-31T13:20:38.777939",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "3007emailinfo@portlandseedfund.comteam",
+      "organization": "Portland Seed Fund",
+      "role": "Contact",
+      "source": "https://www.portlandseedfund.com/team",
+      "category": "platform",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: First City Foundry + Podcast Content",
+      "body": "Hello team,\n\nI'm reaching out from First City Foundry, Portland's startup incubator.\n\nGiven Portland Seed Fund's platform and community, I believe there could be great synergy between our missions to support entrepreneurs and developers.\n\nOur approach:\n\u2022 100% incubator model\n\u2022 AI-powered startup analysis and strategic recommendations\n\u2022 Community mentorship from Portland's tech ecosystem\n\u2022 Free cloud hosting and technical infrastructure\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast with authentic founder stories\n\nOur platform: https://www.firstcityfoundry.com\nOur podcast: https://www.firstcityfoundry.com/podcast.html\n\nI'd love to explore potential partnership opportunities:\n- Cross-promotion to relevant communities\n- Content collaboration (including podcast content sharing)\n- Joint events or initiatives\n- Podcast guest exchanges\n\nWould you be interested in a conversation about working together?\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=3007emailinfo%40portlandseedfund.comteam&auto=true",
+      "template_used": "platform"
+    },
+    "timestamp": "2026-03-31T13:20:38.778331",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "97123info@oregonstoryboard.org",
+      "organization": "Oregon Story Board",
+      "role": "Contact",
+      "source": "https://oregonstoryboard.org/contact",
+      "category": "publication",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: Global Startup Foundry Launch + Bootstrapped Founders Podcast",
+      "body": "Hello team,\n\nI hope this email finds you well. I'm reaching out from First City Foundry, Portland's startup incubator helping founders build and launch without giving up ownership.\n\nGiven Oregon Story Board's focus on entrepreneurship and startup development, I thought you might be interested in covering our approach to supporting software developers and entrepreneurs in the Pacific Northwest and beyond.\n\nWhat makes us different:\n\u2022 Founder-first support \u2014 founders keep full ownership\n\u2022 AI-powered startup analysis and recommendations\n\u2022 Free cloud hosting credits through our partner network\n\u2022 Community-driven mentorship from Portland's startup ecosystem\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nLearn more at https://www.firstcityfoundry.com and listen to our podcast at https://www.firstcityfoundry.com/podcast.html\n\nWould you be interested in:\n- Learning more about our story and approach\n- Interviewing some of our founders\n- Having our founders as podcast guests\n- Featuring our podcast content or cross-promoting\n\nI'd be happy to provide additional information, press materials, or arrange interviews.\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\nP.S. We're also happy to provide exclusive early access to our platform for Oregon Story Board's readers if that would be of interest.\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=97123info%40oregonstoryboard.org&auto=true",
+      "template_used": "publication"
+    },
+    "timestamp": "2026-03-31T13:20:38.778827",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "support@dev.to",
+      "organization": "Dev.to",
+      "role": "Contact",
+      "source": "https://dev.to/contact",
+      "category": "community",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Introducing First City Foundry + Bootstrapped Founders Podcast",
+      "body": "Hello team,\n\nI hope you're doing well! I wanted to share something I think the Dev.to community would find interesting.\n\nWe're First City Foundry, Portland's startup incubator with a fundamentally different approach to supporting entrepreneurs and developers.\n\nWhat makes us unique:\n\u2022 Founder-first approach \u2014 founders keep 100% ownership\n\u2022 AI-powered analysis and personalized recommendations\n\u2022 Community mentorship from Portland's startup ecosystem\n\u2022 Free cloud hosting and infrastructure support\n\u2022 Designed for solo founders, developers, and first-time entrepreneurs\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nCheck it out: https://www.firstcityfoundry.com\nOur podcast: https://www.firstcityfoundry.com/podcast.html\n\nI thought this might resonate with Dev.to's community, especially those looking to transition from development to entrepreneurship or seeking hands-on startup support.\n\nWould you be open to:\n- Sharing this with the community\n- Discussing collaboration opportunities\n- Having community members as podcast guests\n- Cross-promoting our podcast content\n\nHappy to answer any questions.\n\nCheers,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=support%40dev.to&auto=true",
+      "template_used": "community"
+    },
+    "timestamp": "2026-03-31T13:20:38.779252",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "conference@thenextweb.com",
+      "organization": "The Next Web",
+      "role": "Contact",
+      "source": "https://thenextweb.com/about",
+      "category": "publication",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: Global Startup Foundry Launch + Bootstrapped Founders Podcast",
+      "body": "Hello,\n\nI hope this email finds you well. I'm reaching out from First City Foundry, Portland's startup incubator helping founders build and launch without giving up ownership.\n\nGiven The Next Web's focus on entrepreneurship and startup development, I thought you might be interested in covering our approach to supporting software developers and entrepreneurs in the Pacific Northwest and beyond.\n\nWhat makes us different:\n\u2022 Founder-first support \u2014 founders keep full ownership\n\u2022 AI-powered startup analysis and recommendations\n\u2022 Free cloud hosting credits through our partner network\n\u2022 Community-driven mentorship from Portland's startup ecosystem\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast featuring real founder stories\n\nLearn more at https://www.firstcityfoundry.com and listen to our podcast at https://www.firstcityfoundry.com/podcast.html\n\nWould you be interested in:\n- Learning more about our story and approach\n- Interviewing some of our founders\n- Having our founders as podcast guests\n- Featuring our podcast content or cross-promoting\n\nI'd be happy to provide additional information, press materials, or arrange interviews.\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\nP.S. We're also happy to provide exclusive early access to our platform for The Next Web's readers if that would be of interest.\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=conference%40thenextweb.com&auto=true",
+      "template_used": "publication"
+    },
+    "timestamp": "2026-03-31T13:20:38.780169",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  },
+  {
+    "contact": {
+      "name": "Unknown",
+      "email": "hello@startupstash.com",
+      "organization": "Startup Stash",
+      "role": "Contact",
+      "source": "https://startupstash.com/about",
+      "category": "platform",
+      "social_links": [],
+      "contact_date": null,
+      "response_received": false,
+      "notes": "",
+      "outreach_count": 0,
+      "last_contact": null
+    },
+    "message": {
+      "subject": "Partnership Opportunity: First City Foundry + Podcast Content",
+      "body": "Hello team,\n\nI'm reaching out from First City Foundry, Portland's startup incubator.\n\nGiven Startup Stash's platform and community, I believe there could be great synergy between our missions to support entrepreneurs and developers.\n\nOur approach:\n\u2022 100% incubator model\n\u2022 AI-powered startup analysis and strategic recommendations\n\u2022 Community mentorship from Portland's tech ecosystem\n\u2022 Free cloud hosting and technical infrastructure\n\u2022 Focus on solo founders, first-time entrepreneurs, and bootstrapped teams\n\u2022 Bootstrapped Founders Podcast with authentic founder stories\n\nOur platform: https://www.firstcityfoundry.com\nOur podcast: https://www.firstcityfoundry.com/podcast.html\n\nI'd love to explore potential partnership opportunities:\n- Cross-promotion to relevant communities\n- Content collaboration (including podcast content sharing)\n- Joint events or initiatives\n- Podcast guest exchanges\n\nWould you be interested in a conversation about working together?\n\nBest regards,\nFirst City Foundry Team\nhello@firstcityfoundry.com\n\n---\nIf you no longer wish to receive these communications, you can unsubscribe here: https://www.firstcityfoundry.com/opt-out.html?email=hello%40startupstash.com&auto=true",
+      "template_used": "platform"
+    },
+    "timestamp": "2026-03-31T13:20:38.780547",
+    "approved": true,
+    "sent": false,
+    "approved_at": "2026-03-31T16:39:31.482680"
+  }
+]

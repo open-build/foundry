@@ -105,7 +105,7 @@
 ### **Discovery Strategy**
 - **High-value contacts found** from established startup ecosystem players
 - **Balanced portfolio** of publications, communities, and platforms
-- **Focus on equity-free approach** aligns with solo founder communities
+- **Founder-first approach** aligns with solo founder communities
 
 ## 📈 **Impact Assessment**
 

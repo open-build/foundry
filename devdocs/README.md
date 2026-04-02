@@ -53,7 +53,7 @@ All scripts are located in the `scripts/` folder:
 - **Investment Networks**: Accelerators and incubator programs
 
 ### Message Strategy
-- **Equity-Free Focus**: Unique 100% equity-free incubator model
+- **Founder-First Focus**: Hands-on support for solo founders and developers
 - **OpenBuild Partnership**: Global developer community access
 - **Solo Founder Support**: Targeting individual entrepreneurs
 - **AI-Powered Analysis**: Personalized startup recommendations

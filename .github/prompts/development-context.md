@@ -37,7 +37,7 @@ Please help me with [specific feature/issue]."
 "I need to update documentation for the Buildly Labs Foundry project. Key context:
 - Documentation is in `/devdocs/` folder
 - Scripts documentation in `/scripts/README.md`
-- Project is a global equity-free startup incubator
+- Project is a global startup incubator
 - Features automated outreach to startup publications
 - Uses Brevo SMTP, daily analytics reports, BCC monitoring
 
@@ -63,7 +63,7 @@ I need help with [specific script modification]."
 - Static site: HTML5 + Tailwind CSS + JavaScript
 - Global startup incubator focus (removed Oregon City references)
 - Emphasizes OpenBuild partnership and Buildly Labs collaboration
-- 100% equity-free model for solo founders and developers
+- Founder-first model for solo founders and developers
 - Deployed via GitHub Pages with custom domain
 - SEO optimized with structured data
 

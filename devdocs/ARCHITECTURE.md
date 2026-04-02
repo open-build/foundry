@@ -4,6 +4,16 @@
 
 ---
 
+## 0. Messaging Rules
+
+### Prohibited Language
+- **NEVER** use "equity-free" or "equity free" — this is not accurate for the business model.
+- **NEVER** say "without giving up equity", "without taking equity", "keep 100% ownership" — same reason.
+- **Use instead:** "founder-first", "hands-on support", "bootstrapped founder support".
+- Added 2026-03-31. Applies to all outreach, templates, site copy, social media, and AI prompts.
+
+---
+
 ## 1. Brand & Site Redesign
 
 **Old brand:** Buildly Labs Foundry (single-partner incubator)
@@ -76,7 +86,7 @@ Pages in `pages/` set `<meta name="path-depth" content="1">` so that `site.js` p
 | OPERATE  | Kurent Co         | core         | Operational architecture, SOPs    |
 
 ### Acceptance Rules
-- **Accept** if: covers unfilled lifecycle stage, equity-free or revenue-share, local + global capacity, aligns with V·M·I
+- **Accept** if: covers unfilled lifecycle stage, founder-first or revenue-share, local + global capacity, aligns with V·M·I
 - **Decline** if: duplicates existing partner, requires equity, generic mentorship only, can't commit to city model
 
 ### Data Flow

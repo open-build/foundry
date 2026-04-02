@@ -88,6 +88,7 @@ class Contact:
     notes: str = ""
     outreach_count: int = 0
     last_contact: Optional[str] = None
+    contact_log: Optional[List[dict]] = None
 
 @dataclass
 @dataclass
@@ -832,12 +833,12 @@ Subject: Partnership Opportunity: Global Startup Foundry Launch + Bootstrapped F
 
 {{ contact_name }},
 
-I hope this email finds you well. I'm reaching out from First City Foundry, Portland's equity-free startup incubator helping founders build and launch without giving up ownership.
+I hope this email finds you well. I'm reaching out from First City Foundry, Portland's startup incubator helping founders build and launch.
 
 Given {{ organization }}'s focus on {{ focus_area }}, I thought you might be interested in covering our approach to supporting software developers and entrepreneurs in the Pacific Northwest and beyond.
 
 What makes us different:
-• 100% equity-free support — founders keep full ownership
+• Founder-first support — hands-on help without the typical accelerator strings
 • AI-powered startup analysis and recommendations
 • Free cloud hosting credits through our partner network
 • Community-driven mentorship from Portland's startup ecosystem
@@ -871,7 +872,7 @@ Subject: New Global Startup Foundry + Bootstrapped Founders Podcast - Partnershi
 
 I've been following your work at {{ organization }} and your insights on {{ focus_area }} - really appreciate your perspective on the startup ecosystem.
 
-I wanted to introduce you to First City Foundry, Portland's equity-free startup incubator. What caught my attention is how our approach aligns with many of the challenges you've highlighted about traditional accelerators.
+I wanted to introduce you to First City Foundry, Portland's startup incubator. What caught my attention is how our approach aligns with many of the challenges you've highlighted about traditional accelerators.
 
 Key differentiators:
 • Zero equity required — founders keep full control
@@ -903,12 +904,12 @@ Subject: Partnership Opportunity: First City Foundry + Podcast Content
 
 {{ contact_name }},
 
-I'm reaching out from First City Foundry, Portland's equity-free startup incubator.
+I'm reaching out from First City Foundry, Portland's startup incubator.
 
 Given {{ organization }}'s platform and community, I believe there could be great synergy between our missions to support entrepreneurs and developers.
 
 Our approach:
-• 100% equity-free incubator model
+• Founder-first incubator model
 • AI-powered startup analysis and strategic recommendations
 • Community mentorship from Portland's tech ecosystem
 • Free cloud hosting and technical infrastructure
@@ -941,10 +942,10 @@ Subject: Introducing First City Foundry + Bootstrapped Founders Podcast
 
 I hope you're doing well! I wanted to share something I think the {{ organization }} community would find interesting.
 
-We're First City Foundry, Portland's equity-free startup incubator with a fundamentally different approach to supporting entrepreneurs and developers.
+We're First City Foundry, Portland's startup incubator with a fundamentally different approach to supporting entrepreneurs and developers.
 
 What makes us unique:
-• Completely equity-free — founders keep 100% ownership
+• Founder-first — hands-on support for bootstrapped founders
 • AI-powered analysis and personalized recommendations
 • Community mentorship from Portland's startup ecosystem
 • Free cloud hosting and infrastructure support

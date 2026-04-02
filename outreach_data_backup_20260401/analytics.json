@@ -1,0 +1,18 @@
+{
+  "timestamp": "2026-03-30T17:20:34.907281",
+  "total_targets": 28,
+  "total_contacts": 35,
+  "total_outreach_sent": 0,
+  "total_outreach_failed": 0,
+  "total_opt_outs": 0,
+  "contacts_by_category": {
+    "platform": 10,
+    "community": 8,
+    "publication": 17
+  },
+  "outreach_by_organization": {},
+  "opt_outs_by_reason": {},
+  "response_rate": 0,
+  "top_performing_templates": {},
+  "recent_activity": []
+}

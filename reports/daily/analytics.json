@@ -1,48 +1,48 @@
 {
-  "date": "2026-03-30",
-  "website_sessions": 40,
-  "website_users": 16,
-  "website_pageviews": 55,
-  "website_bounce_rate": 0.25898332205398084,
-  "website_avg_session_duration": 181.8729954118965,
+  "date": "2026-04-02",
+  "website_sessions": 35,
+  "website_users": 29,
+  "website_pageviews": 46,
+  "website_bounce_rate": 0.3985544720629074,
+  "website_avg_session_duration": 145.0651108736197,
   "website_top_pages": [
     {
       "page": "/",
-      "sessions": 16,
-      "pageviews": 19
+      "sessions": 14,
+      "pageviews": 16
     },
     {
       "page": "/register",
-      "sessions": 8,
-      "pageviews": 12
+      "sessions": 7,
+      "pageviews": 10
     },
     {
       "page": "/podcast",
-      "sessions": 6,
-      "pageviews": 9
+      "sessions": 5,
+      "pageviews": 8
     },
     {
       "page": "/about",
       "sessions": 4,
-      "pageviews": 8
+      "pageviews": 6
     }
   ],
   "website_traffic_sources": {
     "google / organic": 14,
-    "(direct) / (none)": 11,
-    "linkedin.com / referral": 3,
+    "(direct) / (none)": 10,
+    "linkedin.com / referral": 4,
     "twitter.com / referral": 2,
-    "github.com / referral": 2
+    "github.com / referral": 1
   },
-  "youtube_views": 7,
-  "youtube_subscribers": 0,
-  "youtube_watch_time": 36.7227534203032,
+  "youtube_views": 122,
+  "youtube_subscribers": 12,
+  "youtube_watch_time": 283.3153141996885,
   "emails_sent": 0,
   "emails_opened": 0,
   "emails_clicked": 0,
   "new_contacts_discovered": 0,
   "new_signups": 0,
   "search_engine_referrals": 14,
-  "social_media_referrals": 5,
-  "direct_traffic": 11
+  "social_media_referrals": 6,
+  "direct_traffic": 10
 }

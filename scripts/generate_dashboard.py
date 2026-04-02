@@ -422,6 +422,28 @@ def generate_html_dashboard() -> str:
             font-size: 1.1rem;
             opacity: 0.9;
         }}
+
+        .quick-links {{
+            background: #2d3748;
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }}
+
+        .quick-links a {{
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }}
+
+        .quick-links a:hover {{
+            background: rgba(255,255,255,0.15);
+        }}
         
         .container {{
             max-width: 1200px;
@@ -637,6 +659,13 @@ def generate_html_dashboard() -> str:
     <div class="header">
         <h1>🚀 Buildly Labs Foundry</h1>
         <p>Automation Dashboard - Generated {datetime.now().strftime('%Y-%m-%d at %H:%M:%S')}</p>
+    </div>
+
+    <div class="quick-links">
+        <a href="http://127.0.0.1:18789/" target="_blank">🦞 OpenClaw Dashboard</a>
+        <a href="http://localhost:8000/admin/" target="_blank">🔧 ForgeWeb Admin</a>
+        <a href="http://localhost:3000" target="_blank">🌐 Site Preview</a>
+        <a href="https://www.firstcityfoundry.com" target="_blank">🚀 Live Site</a>
     </div>
     
     <div class="container">

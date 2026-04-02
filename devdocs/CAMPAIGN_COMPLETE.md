@@ -51,7 +51,7 @@
 - "Introducing Buildly Labs Foundry - Global Startup Support" (Communities)
 
 **Key Message Points:**
-- 100% equity-free support model
+- Founder-first support model
 - OpenBuild partnership and global reach
 - AI-powered startup analysis
 - Focus on solo founders and developers
@@ -92,7 +92,7 @@
 
 **🎉 CAMPAIGN STATUS: FULLY OPERATIONAL**
 
-Your Buildly Labs Foundry outreach system is now live and automatically reaching out to major startup publications and communities worldwide. All messages include your equity-free incubator model, OpenBuild partnership, and focus on solo founders.
+Your Buildly Labs Foundry outreach system is now live and automatically reaching out to major startup publications and communities worldwide. All messages include your founder-first incubator model, OpenBuild partnership, and focus on solo founders.
 
 Check your email (team@open.build) for:
 - ✅ Daily analytics reports with traffic and outreach data

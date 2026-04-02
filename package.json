@@ -6,6 +6,10 @@
   "scripts": {
     "serve": "npx serve docs -p 3000",
     "dev": "npx serve docs -p 3000 --reload",
+    "start": "bash ops/startup.sh start",
+    "stop": "bash ops/startup.sh stop",
+    "restart": "bash ops/startup.sh restart",
+    "status": "bash ops/startup.sh status",
     "build": "echo 'Static site - no build process needed'",
     "deploy": "./cleanup-deploy.sh",
     "forgeweb": "cd ForgeWeb && ./ops/startup.sh start",

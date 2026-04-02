@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>First City Foundry — Automation Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: '#F97316',
+        navy: '#1E3A5F',
+        mint: '#10B981',
+      }
+    }
+  }
+}
+</script>
+<style>
+  [x-cloak] { display: none !important; }
+  .tab-active { border-bottom: 3px solid #F97316; color: #F97316; font-weight: 600; }
+  .badge { display: inline-flex; align-items: center; justify-content: center; min-width: 1.25rem; height: 1.25rem; padding: 0 0.35rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 700; }
+  .toast { animation: slideIn 0.3s ease-out; }
+  @keyframes slideIn { from { transform: translateY(-1rem); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .modal-bg { background: rgba(0,0,0,0.5); }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-[Inter,system-ui,sans-serif]">
+
+<!-- Header -->
+<header class="bg-navy text-white">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+    <div>
+      <h1 class="text-xl font-bold">🚀 First City Foundry</h1>
+      <p class="text-sm text-gray-300">Automation Dashboard</p>
+    </div>
+    <div class="flex items-center gap-4 text-sm">
+      <a href="http://localhost:8000/admin/" target="_blank" class="hover:text-brand">🔧 ForgeWeb</a>
+      <a href="http://localhost:3000" target="_blank" class="hover:text-brand">🌐 Site</a>
+      <a href="http://127.0.0.1:18789/" target="_blank" class="hover:text-brand">🦞 OpenClaw</a>
+      <span id="clock" class="text-gray-400"></span>
+    </div>
+  </div>
+</header>
+
+<!-- Status Bar -->
+<div id="status-bar" class="bg-white border-b shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 py-2 flex items-center gap-6 text-sm">
+    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-mint inline-block"></span> System Online</span>
+    <span>📇 <strong id="stat-contacts">–</strong> contacts</span>
+    <span>🎯 <strong id="stat-targets">–</strong> targets</span>
+    <span>📨 <strong id="stat-pending" class="text-brand">–</strong> pending</span>
+    <span>✅ <strong id="stat-approved">–</strong> approved</span>
+    <span>📤 <strong id="stat-sent">–</strong> sent</span>
+  </div>
+</div>
+
+<!-- Tabs -->
+<nav class="bg-white border-b">
+  <div class="max-w-7xl mx-auto px-4 flex gap-1 overflow-x-auto">
+    <button onclick="switchTab('overview')"   id="tab-overview"   class="tab-btn px-4 py-3 text-sm hover:text-brand transition whitespace-nowrap tab-active">📊 Overview</button>
+    <button onclick="switchTab('outreach')"   id="tab-outreach"   class="tab-btn px-4 py-3 text-sm hover:text-brand transition whitespace-nowrap">📨 Outreach <span id="badge-outreach" class="badge bg-brand text-white ml-1 hidden">0</span></button>
+    <button onclick="switchTab('contacts')"   id="tab-contacts"   class="tab-btn px-4 py-3 text-sm hover:text-brand transition whitespace-nowrap">📇 Contacts</button>
+    <button onclick="switchTab('targets')"    id="tab-targets"    class="tab-btn px-4 py-3 text-sm hover:text-brand transition whitespace-nowrap">🎯 Targets</button>
+    <button onclick="switchTab('content')"    id="tab-content"    class="tab-btn px-4 py-3 text-sm hover:text-brand transition whitespace-nowrap">📝 Content</button>
+    <button onclick="switchTab('discovery')"  id="tab-discovery"  class="tab-btn px-4 py-3 text-sm hover:text-brand transition whitespace-nowrap">🔍 Discovery</button>
+    <button onclick="switchTab('schedules')"  id="tab-schedules"  class="tab-btn px-4 py-3 text-sm hover:text-brand transition whitespace-nowrap">⏰ Schedules</button>
+    <button onclick="switchTab('logs')"       id="tab-logs"       class="tab-btn px-4 py-3 text-sm hover:text-brand transition whitespace-nowrap">📋 Logs</button>
+  </div>
+</nav>
+
+<!-- Toast container -->
+<div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2"></div>
+
+<!-- Main content area -->
+<main class="max-w-7xl mx-auto px-4 py-6">
+
+  <!-- ═══ Overview ═══ -->
+  <section id="panel-overview" class="panel">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div class="bg-white rounded-lg p-5 shadow-sm border">
+        <p class="text-sm text-gray-500">Total Contacts</p>
+        <p class="text-3xl font-bold text-navy" id="ov-contacts">–</p>
+      </div>
+      <div class="bg-white rounded-lg p-5 shadow-sm border">
+        <p class="text-sm text-gray-500">Pending Approval</p>
+        <p class="text-3xl font-bold text-brand" id="ov-pending">–</p>
+      </div>
+      <div class="bg-white rounded-lg p-5 shadow-sm border">
+        <p class="text-sm text-gray-500">Approved (Ready)</p>
+        <p class="text-3xl font-bold text-mint" id="ov-approved">–</p>
+      </div>
+      <div class="bg-white rounded-lg p-5 shadow-sm border">
+        <p class="text-sm text-gray-500">Total Sent</p>
+        <p class="text-3xl font-bold text-navy" id="ov-sent">–</p>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="bg-white rounded-lg p-5 shadow-sm border mb-6">
+      <h2 class="font-semibold text-lg mb-3">⚡ Quick Actions</h2>
+      <div class="flex flex-wrap gap-3">
+        <button onclick="runAutomation(true)"  class="px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 text-sm">🧪 Dry Run (Full Pipeline)</button>
+        <button onclick="runDiscovery(true)"   class="px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 text-sm">🔍 Run Discovery (Dry)</button>
+        <button onclick="runDiscovery(false)"  class="px-4 py-2 bg-mint/10 text-mint rounded-lg hover:bg-mint/20 text-sm">🔍 Run Discovery (Live)</button>
+        <button onclick="approveAll()"         class="px-4 py-2 bg-brand/10 text-brand rounded-lg hover:bg-brand/20 text-sm">✅ Approve All Outreach</button>
+        <button onclick="runAutomation(false)" class="px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 text-sm">🚀 Run Full Pipeline (Live)</button>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="bg-white rounded-lg p-5 shadow-sm border">
+      <h2 class="font-semibold text-lg mb-3">📈 Daily Reports</h2>
+      <div id="ov-reports" class="text-sm text-gray-500">Loading...</div>
+    </div>
+  </section>
+
+  <!-- ═══ Outreach ═══ -->
+  <section id="panel-outreach" class="panel hidden">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-semibold">📨 Pending Outreach Messages</h2>
+      <div class="flex gap-2">
+        <select id="outreach-filter" onchange="loadOutreach()" class="text-sm border rounded px-3 py-1.5">
+          <option value="">All</option>
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+          <option value="sent">Sent</option>
+        </select>
+        <button onclick="approveAll()" class="px-3 py-1.5 bg-mint text-white text-sm rounded hover:bg-mint/80">✅ Approve All</button>
+        <button onclick="sendApproved(true)" class="px-3 py-1.5 bg-gray-200 text-sm rounded hover:bg-gray-300">🧪 Send Dry Run</button>
+        <button onclick="sendApproved(false)" class="px-3 py-1.5 bg-brand text-white text-sm rounded hover:bg-brand/80">📤 Send Approved</button>
+      </div>
+    </div>
+    <div id="outreach-list" class="space-y-3">Loading...</div>
+  </section>
+
+  <!-- ═══ Contacts ═══ -->
+  <section id="panel-contacts" class="panel hidden">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-semibold">📇 Contacts</h2>
+      <div class="flex gap-2">
+        <input id="contacts-search" type="text" placeholder="Search..." onkeyup="loadContacts()" class="text-sm border rounded px-3 py-1.5 w-48">
+        <button onclick="showModal('contact-modal')" class="px-3 py-1.5 bg-brand text-white text-sm rounded hover:bg-brand/80">+ Add Contact</button>
+      </div>
+    </div>
+    <div class="bg-white rounded-lg shadow-sm border overflow-hidden">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50 text-left">
+          <tr>
+            <th class="px-4 py-2.5">Name</th>
+            <th class="px-4 py-2.5">Email</th>
+            <th class="px-4 py-2.5">Organization</th>
+            <th class="px-4 py-2.5">Category</th>
+            <th class="px-4 py-2.5">Contacted</th>
+            <th class="px-4 py-2.5">Last Contact</th>
+            <th class="px-4 py-2.5">Response</th>
+            <th class="px-4 py-2.5">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="contacts-table" class="divide-y"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ Targets ═══ -->
+  <section id="panel-targets" class="panel hidden">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-semibold">🎯 Targets</h2>
+      <button onclick="showModal('target-modal')" class="px-3 py-1.5 bg-brand text-white text-sm rounded hover:bg-brand/80">+ Add Target</button>
+    </div>
+    <div class="bg-white rounded-lg shadow-sm border overflow-hidden">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50 text-left">
+          <tr>
+            <th class="px-4 py-2.5">Name</th>
+            <th class="px-4 py-2.5">Website</th>
+            <th class="px-4 py-2.5">Category</th>
+            <th class="px-4 py-2.5">Priority</th>
+            <th class="px-4 py-2.5">Contacts</th>
+            <th class="px-4 py-2.5">Region</th>
+            <th class="px-4 py-2.5">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="targets-table" class="divide-y"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ Content ═══ -->
+  <section id="panel-content" class="panel hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Social -->
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-lg font-semibold">📱 Social Posts</h2>
+        </div>
+        <div id="social-list" class="space-y-3">Loading...</div>
+      </div>
+      <!-- Blog -->
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-lg font-semibold">📝 Blog Posts</h2>
+        </div>
+        <div id="blog-list" class="space-y-3">Loading...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Discovery ═══ -->
+  <section id="panel-discovery" class="panel hidden">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-semibold">🔍 Contact Discovery</h2>
+    </div>
+    <!-- Search -->
+    <div class="bg-white rounded-lg p-5 shadow-sm border mb-6">
+      <h3 class="font-medium mb-3">Search for New Contacts (Google CSE)</h3>
+      <form onsubmit="runDiscoverySearch(event)" class="flex gap-2">
+        <input id="discovery-query" type="text" placeholder="e.g. startup incubator Portland contact email" class="flex-1 border rounded px-3 py-2 text-sm" required>
+        <button type="submit" class="px-4 py-2 bg-brand text-white text-sm rounded hover:bg-brand/80">🔍 Search</button>
+      </form>
+      <div class="flex gap-2 mt-2">
+        <button onclick="searchPreset('startup community founder contact')" class="text-xs px-2 py-1 bg-gray-100 rounded hover:bg-gray-200">Startup Communities</button>
+        <button onclick="searchPreset('tech publication editor email')" class="text-xs px-2 py-1 bg-gray-100 rounded hover:bg-gray-200">Tech Publications</button>
+        <button onclick="searchPreset('developer community organizer Portland')" class="text-xs px-2 py-1 bg-gray-100 rounded hover:bg-gray-200">Dev Communities</button>
+        <button onclick="searchPreset('startup accelerator incubator program contact')" class="text-xs px-2 py-1 bg-gray-100 rounded hover:bg-gray-200">Accelerators</button>
+      </div>
+    </div>
+    <!-- Results -->
+    <div id="discovery-results" class="space-y-3 mb-6"></div>
+    <!-- Blocklist -->
+    <div class="bg-white rounded-lg p-5 shadow-sm border">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="font-medium">🚫 Blocked Contacts</h3>
+        <button onclick="loadBlocklist()" class="text-xs text-gray-500 hover:text-brand">Refresh</button>
+      </div>
+      <p class="text-xs text-gray-400 mb-3">Deleted contacts are automatically blocked from being re-added. Unblock if needed.</p>
+      <div id="blocklist-table" class="text-sm">Loading...</div>
+    </div>
+  </section>
+
+  <!-- ═══ Schedules ═══ -->
+  <section id="panel-schedules" class="panel hidden">
+    <h2 class="text-lg font-semibold mb-4">⏰ Automation Schedules</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div>
+        <h3 class="font-medium mb-2 text-sm text-gray-500 uppercase">System Cron</h3>
+        <div id="cron-list" class="bg-white rounded-lg shadow-sm border p-4 text-sm space-y-2 font-mono">Loading...</div>
+      </div>
+      <div>
+        <h3 class="font-medium mb-2 text-sm text-gray-500 uppercase">OpenClaw Jobs</h3>
+        <div id="openclaw-list" class="bg-white rounded-lg shadow-sm border p-4 text-sm space-y-2">Loading...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Logs ═══ -->
+  <section id="panel-logs" class="panel hidden">
+    <h2 class="text-lg font-semibold mb-4">📋 Recent Logs</h2>
+    <div id="logs-list" class="space-y-3">Loading...</div>
+  </section>
+
+</main>
+
+<!-- ═══ Modals ═══ -->
+
+<!-- Add Contact Modal -->
+<div id="contact-modal" class="fixed inset-0 modal-bg z-40 hidden flex items-center justify-center">
+  <div class="bg-white rounded-xl shadow-xl w-full max-w-md p-6">
+    <h3 class="text-lg font-semibold mb-4">Add Contact</h3>
+    <form onsubmit="createContact(event)" class="space-y-3">
+      <input name="name" placeholder="Name" class="w-full border rounded px-3 py-2 text-sm" required>
+      <input name="email" type="email" placeholder="Email" class="w-full border rounded px-3 py-2 text-sm" required>
+      <input name="organization" placeholder="Organization" class="w-full border rounded px-3 py-2 text-sm">
+      <input name="role" placeholder="Role" value="Contact" class="w-full border rounded px-3 py-2 text-sm">
+      <select name="category" class="w-full border rounded px-3 py-2 text-sm">
+        <option value="publication">Publication</option>
+        <option value="community">Community</option>
+        <option value="platform">Platform</option>
+        <option value="influencer">Influencer</option>
+        <option value="other">Other</option>
+      </select>
+      <textarea name="notes" placeholder="Notes" rows="2" class="w-full border rounded px-3 py-2 text-sm"></textarea>
+      <div class="flex justify-end gap-2 pt-2">
+        <button type="button" onclick="hideModal('contact-modal')" class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded">Cancel</button>
+        <button type="submit" class="px-4 py-2 text-sm bg-brand text-white rounded hover:bg-brand/80">Add Contact</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Add Target Modal -->
+<div id="target-modal" class="fixed inset-0 modal-bg z-40 hidden flex items-center justify-center">
+  <div class="bg-white rounded-xl shadow-xl w-full max-w-md p-6">
+    <h3 class="text-lg font-semibold mb-4">Add Target</h3>
+    <form onsubmit="createTarget(event)" class="space-y-3">
+      <input name="name" placeholder="Organization Name" class="w-full border rounded px-3 py-2 text-sm" required>
+      <input name="website" type="url" placeholder="https://..." class="w-full border rounded px-3 py-2 text-sm">
+      <select name="category" class="w-full border rounded px-3 py-2 text-sm">
+        <option value="publication">Publication</option>
+        <option value="community">Community</option>
+        <option value="platform">Platform</option>
+        <option value="influencer">Influencer</option>
+      </select>
+      <input name="region" placeholder="Region (e.g. Portland/OR)" class="w-full border rounded px-3 py-2 text-sm">
+      <select name="priority" class="w-full border rounded px-3 py-2 text-sm">
+        <option value="5">5 — Critical</option>
+        <option value="4">4 — High</option>
+        <option value="3" selected>3 — Medium</option>
+        <option value="2">2 — Low</option>
+        <option value="1">1 — Minimal</option>
+      </select>
+      <div class="flex justify-end gap-2 pt-2">
+        <button type="button" onclick="hideModal('target-modal')" class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded">Cancel</button>
+        <button type="submit" class="px-4 py-2 text-sm bg-brand text-white rounded hover:bg-brand/80">Add Target</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Message Detail Modal -->
+<div id="message-modal" class="fixed inset-0 modal-bg z-40 hidden flex items-center justify-center">
+  <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl p-6 max-h-[80vh] overflow-y-auto">
+    <h3 class="text-lg font-semibold mb-1" id="msg-modal-to"></h3>
+    <p class="text-sm text-gray-500 mb-3" id="msg-modal-subject"></p>
+    <div id="msg-modal-body" class="bg-gray-50 rounded p-4 text-sm whitespace-pre-wrap mb-4 max-h-64 overflow-y-auto"></div>
+    <div class="flex justify-end gap-2">
+      <button onclick="hideModal('message-modal')" class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded">Close</button>
+      <button id="msg-modal-approve" class="px-4 py-2 text-sm bg-mint text-white rounded hover:bg-mint/80">✅ Approve</button>
+      <button id="msg-modal-reject" class="px-4 py-2 text-sm bg-red-500 text-white rounded hover:bg-red-600">🗑 Reject</button>
+    </div>
+  </div>
+</div>
+
+<!-- Command Output Modal -->
+<div id="output-modal" class="fixed inset-0 modal-bg z-40 hidden flex items-center justify-center">
+  <div class="bg-white rounded-xl shadow-xl w-full max-w-3xl p-6 max-h-[80vh] overflow-y-auto">
+    <h3 class="text-lg font-semibold mb-3" id="output-modal-title">Command Output</h3>
+    <pre id="output-modal-body" class="bg-gray-900 text-green-400 rounded p-4 text-xs overflow-auto max-h-96"></pre>
+    <div class="flex justify-end mt-4">
+      <button onclick="hideModal('output-modal')" class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Log Contact Modal -->
+<div id="log-contact-modal" class="fixed inset-0 modal-bg z-40 hidden flex items-center justify-center">
+  <div class="bg-white rounded-xl shadow-xl w-full max-w-md p-6">
+    <h3 class="text-lg font-semibold mb-4">Log Contact</h3>
+    <form onsubmit="submitLogContact(event)" class="space-y-3">
+      <input name="email" type="hidden" id="log-contact-email">
+      <p class="text-sm text-gray-600">Recording contact with <strong id="log-contact-name"></strong></p>
+      <select name="method" class="w-full border rounded px-3 py-2 text-sm">
+        <option value="email">📧 Email</option>
+        <option value="phone">📞 Phone</option>
+        <option value="in-person">🤝 In-Person</option>
+        <option value="social">💬 Social Media</option>
+        <option value="other">📋 Other</option>
+      </select>
+      <textarea name="note" placeholder="Notes (optional)" rows="3" class="w-full border rounded px-3 py-2 text-sm"></textarea>
+      <div class="flex justify-end gap-2 pt-2">
+        <button type="button" onclick="hideModal('log-contact-modal')" class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded">Cancel</button>
+        <button type="submit" class="px-4 py-2 text-sm bg-brand text-white rounded hover:bg-brand/80">Log Contact</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

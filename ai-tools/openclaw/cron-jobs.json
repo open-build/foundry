@@ -24,7 +24,7 @@
       "schedule": "30 8 * * *",
       "command": "python3 ai-tools/automation/task_runner.py scripts/daily_automation.py",
       "workdir": ".",
-      "enabled": false,
+      "enabled": true,
       "tags": ["outreach", "daily"]
     }
   ]

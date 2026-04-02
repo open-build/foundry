@@ -2,7 +2,7 @@
 
 **Status**: ✅ FULLY OPERATIONAL | **Launch Date**: September 10, 2025
 
-A global startup incubator website with automated outreach capabilities, targeting startup publications and communities worldwide with an equity-free support model.
+A global startup incubator website with automated outreach capabilities, targeting startup publications and communities worldwide.
 
 ## 🌟 Current Features
 
