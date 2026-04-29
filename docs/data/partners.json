@@ -1,0 +1,48 @@
+[
+  {
+    "name": "Buildly",
+    "role": "AI Product Lifecycle Platform",
+    "description": "Buildly helps teams ship AI-native products with a modular microservices framework, integrated DevOps, and ready-to-deploy Marketplace solutions.",
+    "type": "core",
+    "url": "https://buildly.io",
+    "logo": "assets/img/partners/buildly.png",
+    "lifecycle": ["build"]
+  },
+  {
+    "name": "Kurent Co",
+    "role": "Operational Architecture & Founder Independence",
+    "description": "Kurent designs operational systems that let founders escape day-to-day execution through SOPs, delegation frameworks, and the Principal's Trap methodology.",
+    "type": "core",
+    "url": "https://kurentco.com",
+    "logo": "assets/img/partners/kurent.png",
+    "lifecycle": ["operate"]
+  },
+  {
+    "name": "Startup Grind PDX",
+    "role": "Local Founder Network & Podcast Launch Partner",
+    "description": "Portland's chapter of the global Startup Grind community, providing events, networking, and distribution for the Foundry Collective launch.",
+    "type": "distribution",
+    "url": "https://www.startupgrind.com/portland/",
+    "logo": "assets/img/partners/startupgrind.png",
+    "lifecycle": ["connect"],
+    "temporary": true
+  },
+  {
+    "name": "Open.Build",
+    "role": "Developer Training Ecosystem",
+    "description": "Open-source training programs and developer community powering the next generation of technical founders.",
+    "type": "core",
+    "url": "https://open.build",
+    "logo": "assets/img/partners/openbuild.png",
+    "lifecycle": ["train"]
+  },
+  {
+    "name": "Prepare4VC",
+    "role": "Investor Readiness",
+    "description": "Structured programs to get startups investor-ready with pitch coaching, financial modelling, and intro networks.",
+    "type": "strategic",
+    "url": "#",
+    "logo": "assets/img/partners/prepare4vc.png",
+    "lifecycle": ["connect"]
+  }
+]
