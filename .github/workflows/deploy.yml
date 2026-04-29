@@ -31,6 +31,32 @@ jobs:
       
     - name: Setup Pages
       uses: actions/configure-pages@v4
+
+    - name: Prepare publish docs folder
+      run: |
+        set -euo pipefail
+        rm -rf docs
+        mkdir -p docs
+
+        # ForgeWeb output is expected in website/docs for this repository.
+        if [ -f website/docs/index.html ]; then
+          cp -R website/docs/. docs/
+        elif [ -f website/index.html ]; then
+          cp -R website/. docs/
+        else
+          echo "No deployable site found in website/docs or website"
+          exit 1
+        fi
+
+    - name: Validate published pages
+      run: |
+        set -euo pipefail
+        test -f docs/index.html || (echo "Missing docs/index.html" && exit 1)
+        test -f docs/register.html || (echo "Missing docs/register.html" && exit 1)
+        test -f docs/pages/about.html || (echo "Missing docs/pages/about.html" && exit 1)
+        test -f docs/pages/index-report.html || (echo "Missing docs/pages/index-report.html" && exit 1)
+        test -f docs/404.html || (echo "Missing docs/404.html" && exit 1)
+        test -f docs/CNAME || (echo "Missing docs/CNAME" && exit 1)
       
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
