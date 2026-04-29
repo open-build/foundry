@@ -1,0 +1,94 @@
+<!-- Contact Page Content - NullRecords -->
+<section class="py-16 relative z-10">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-pixel text-cyber-blue mb-6 glow-text">Contact</h1>
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto font-mono">
+                Questions, submissions, or just want to say hello — drop us a line.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Contact Form -->
+            <div>
+                <h2 class="text-2xl font-pixel text-cyber-red mb-6">Send a Message</h2>
+                <form class="space-y-6" onsubmit="handleContactForm(event)">
+                    <div>
+                        <label for="name" class="block text-sm font-mono text-gray-400 mb-2">Name</label>
+                        <input type="text" id="name" name="name" required
+                               class="w-full px-4 py-2 bg-dark-card border border-dark-border rounded-md text-gray-200 font-mono focus:ring-2 focus:ring-cyber-blue focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-mono text-gray-400 mb-2">Email</label>
+                        <input type="email" id="email" name="email" required
+                               class="w-full px-4 py-2 bg-dark-card border border-dark-border rounded-md text-gray-200 font-mono focus:ring-2 focus:ring-cyber-blue focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-sm font-mono text-gray-400 mb-2">Subject</label>
+                        <input type="text" id="subject" name="subject" required
+                               class="w-full px-4 py-2 bg-dark-card border border-dark-border rounded-md text-gray-200 font-mono focus:ring-2 focus:ring-cyber-blue focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-mono text-gray-400 mb-2">Message</label>
+                        <textarea id="message" name="message" rows="6" required
+                                  class="w-full px-4 py-2 bg-dark-card border border-dark-border rounded-md text-gray-200 font-mono focus:ring-2 focus:ring-cyber-blue focus:border-transparent"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" 
+                                class="w-full bg-cyber-blue hover:bg-opacity-80 text-dark-bg font-mono font-bold py-3 px-6 rounded-md transition-all">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Contact Information -->
+            <div>
+                <h2 class="text-2xl font-pixel text-cyber-red mb-6">Find Us</h2>
+                <div class="space-y-6">
+                    <div class="card-hover rounded-lg p-4">
+                        <h3 class="text-lg font-mono text-cyber-blue mb-1">Music</h3>
+                        <p class="text-gray-400 font-mono text-sm">
+                            <a href="https://open.spotify.com/artist/4PBJ1WON6gmxC1L35HHh69" target="_blank" rel="noopener" class="hover:text-cyber-green">Spotify</a> &middot;
+                            <a href="https://music.apple.com/us/artist/my-evil-robot-army/1576251082" target="_blank" rel="noopener" class="hover:text-cyber-green">Apple Music</a>
+                        </p>
+                    </div>
+                    <div class="card-hover rounded-lg p-4">
+                        <h3 class="text-lg font-mono text-cyber-blue mb-1">Store</h3>
+                        <p class="text-gray-400 font-mono text-sm">
+                            <a href="store/" class="hover:text-cyber-green">Books & Music</a> &middot;
+                            <a href="https://nullrecords.printify.me/" target="_blank" rel="noopener" class="hover:text-cyber-green">Merch</a>
+                        </p>
+                    </div>
+                    <div class="card-hover rounded-lg p-4">
+                        <h3 class="text-lg font-mono text-cyber-blue mb-1">Web</h3>
+                        <p class="text-gray-400 font-mono text-sm">
+                            <a href="https://www.nullrecords.com" class="hover:text-cyber-green">nullrecords.com</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div id="contact-success" class="hidden mt-8 p-4 bg-cyber-green/10 border border-cyber-green/30 rounded-md">
+            <p class="text-sm font-mono text-cyber-green">
+                Message sent. We'll be in touch.
+            </p>
+        </div>
+    </div>
+</section>
+
+<script>
+function handleContactForm(event) {
+    event.preventDefault();
+    const form = event.target;
+    setTimeout(() => {
+        document.getElementById('contact-success').classList.remove('hidden');
+        form.reset();
+        setTimeout(() => {
+            document.getElementById('contact-success').classList.add('hidden');
+        }, 5000);
+    }, 500);
+}
+</script>

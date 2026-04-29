@@ -1,0 +1,505 @@
+[
+  {
+    "name": "Portland Startup Grind",
+    "website": "https://www.startupgrind.com/portland",
+    "category": "community",
+    "focus_areas": [
+      "startups",
+      "founders",
+      "networking",
+      "Portland"
+    ],
+    "contact_methods": [
+      "email",
+      "meetup"
+    ],
+    "priority": 5,
+    "contacts_found": 0,
+    "last_scraped": "2026-03-30T16:17:49.743040",
+    "region": "Portland/OR"
+  },
+  {
+    "name": "PIE (Portland Incubator Experiment)",
+    "website": "https://www.piepdx.com",
+    "category": "platform",
+    "focus_areas": [
+      "accelerator",
+      "startups",
+      "mentorship",
+      "Portland"
+    ],
+    "contact_methods": [
+      "email",
+      "contact_form"
+    ],
+    "priority": 5,
+    "contacts_found": 2,
+    "last_scraped": "2026-03-30T16:20:06.181519",
+    "region": "Portland/OR"
+  },
+  {
+    "name": "Oregon Entrepreneurs Network (OEN)",
+    "website": "https://www.oen.org",
+    "category": "community",
+    "focus_areas": [
+      "startups",
+      "funding",
+      "entrepreneurship",
+      "Oregon"
+    ],
+    "contact_methods": [
+      "email",
+      "contact_form"
+    ],
+    "priority": 5,
+    "contacts_found": 6,
+    "last_scraped": "2026-03-30T16:21:40.190364",
+    "region": "Portland/OR"
+  },
+  {
+    "name": "PDX Tech Slack",
+    "website": "https://pdxtech.community",
+    "category": "community",
+    "focus_areas": [
+      "tech",
+      "developers",
+      "networking",
+      "Portland"
+    ],
+    "contact_methods": [
+      "slack",
+      "email"
+    ],
+    "priority": 4,
+    "contacts_found": 0,
+    "last_scraped": "2026-03-30T16:22:20.930464",
+    "region": "Portland/OR"
+  },
+  {
+    "name": "Built Oregon",
+    "website": "https://www.builtoregon.com",
+    "category": "publication",
+    "focus_areas": [
+      "Oregon_startups",
+      "Portland_tech",
+      "funding",
+      "ecosystem"
+    ],
+    "contact_methods": [
+      "email",
+      "contact_form"
+    ],
+    "priority": 5,
+    "contacts_found": 0,
+    "last_scraped": "2026-03-30T16:25:07.332698",
+    "region": "Portland/OR"
+  },
+  {
+    "name": "Portland Business Journal",
+    "website": "https://www.bizjournals.com/portland",
+    "category": "publication",
+    "focus_areas": [
+      "business",
+      "startups",
+      "Portland",
+      "Oregon_economy"
+    ],
+    "contact_methods": [
+      "email",
+      "twitter"
+    ],
+    "priority": 4,
+    "contacts_found": 0,
+    "last_scraped": "2026-03-30T16:27:50.576960",
+    "region": "Portland/OR"
+  },
+  {
+    "name": "Oregon SBDC",
+    "website": "https://bizcenter.org",
+    "category": "platform",
+    "focus_areas": [
+      "small_business",
+      "entrepreneurs",
+      "mentorship",
+      "Oregon"
+    ],
+    "contact_methods": [
+      "email",
+      "contact_form"
+    ],
+    "priority": 4,
+    "contacts_found": 0,
+    "last_scraped": "2026-03-30T16:29:48.942633",
+    "region": "Portland/OR"
+  },
+  {
+    "name": "Prosper Portland",
+    "website": "https://prosperportland.us",
+    "category": "platform",
+    "focus_areas": [
+      "economic_development",
+      "startups",
+      "Portland",
+      "grants"
+    ],
+    "contact_methods": [
+      "email",
+      "contact_form"
+    ],
+    "priority": 4,
+    "contacts_found": 5,
+    "last_scraped": "2026-03-30T16:30:55.623597",
+    "region": "Portland/OR"
+  },
+  {
+    "name": "Willamette Week",
+    "website": "https://www.wweek.com",
+    "category": "publication",
+    "focus_areas": [
+      "Portland",
+      "culture",
+      "business",
+      "tech"
+    ],
+    "contact_methods": [
+      "email",
+      "twitter"
+    ],
+    "priority": 3,
+    "contacts_found": 5,
+    "last_scraped": "2026-03-30T16:31:54.360829",
+    "region": "Portland/OR"
+  },
+  {
+    "name": "Portland Seed Fund",
+    "website": "https://www.portlandseedfund.com",
+    "category": "platform",
+    "focus_areas": [
+      "seed_funding",
+      "startups",
+      "Portland",
+      "investment"
+    ],
+    "contact_methods": [
+      "email",
+      "contact_form"
+    ],
+    "priority": 5,
+    "contacts_found": 1,
+    "last_scraped": "2026-03-30T16:34:40.582213",
+    "region": "Portland/OR"
+  },
+  {
+    "name": "Indie Hackers",
+    "website": "https://indiehackers.com",
+    "category": "community",
+    "focus_areas": [
+      "solo_founders",
+      "bootstrapping",
+      "SaaS"
+    ],
+    "contact_methods": [
+      "platform_message",
+      "email"
+    ],
+    "priority": 4,
+    "contacts_found": 0,
+    "last_scraped": "2026-03-30T16:36:57.680636",
+    "region": "US/Global"
+  },
+  {
+    "name": "Product Hunt",
+    "website": "https://producthunt.com",
+    "category": "platform",
+    "focus_areas": [
+      "product_launches",
+      "startups",
+      "indie_makers"
+    ],
+    "contact_methods": [
+      "platform_message",
+      "email"
+    ],
+    "priority": 4,
+    "contacts_found": 0,
+    "last_scraped": "2026-03-30T16:39:32.131004",
+    "region": "US/Global"
+  },
+  {
+    "name": "OTBC (Oregon Technology Business Center)",
+    "website": "https://www.otbc.org",
+    "category": "platform",
+    "focus_areas": [
+      "accelerator",
+      "tech_startups",
+      "Oregon",
+      "incubator"
+    ],
+    "contact_methods": [
+      "email",
+      "contact_form"
+    ],
+    "priority": 4,
+    "contacts_found": 0,
+    "last_scraped": "2026-03-30T16:42:22.813574",
+    "region": "Portland/OR"
+  },
+  {
+    "name": "Calagator",
+    "website": "https://calagator.org",
+    "category": "community",
+    "focus_areas": [
+      "Portland_tech_events",
+      "meetups",
+      "community"
+    ],
+    "contact_methods": [
+      "email",
+      "submission"
+    ],
+    "priority": 3,
+    "contacts_found": 0,
+    "last_scraped": "2026-03-30T16:44:53.145235",
+    "region": "Portland/OR"
+  },
+  {
+    "name": "Elevate Capital",
+    "website": "https://www.elevatecapital.com",
+    "category": "platform",
+    "focus_areas": [
+      "venture_capital",
+      "underrepresented_founders",
+      "Portland",
+      "seed_stage"
+    ],
+    "contact_methods": [
+      "email",
+      "contact_form"
+    ],
+    "priority": 5,
+    "contacts_found": 0,
+    "last_scraped": "2026-03-30T16:47:09.762983",
+    "region": "Portland/OR"
+  },
+  {
+    "name": "Oregon Story Board",
+    "website": "https://oregonstoryboard.org",
+    "category": "publication",
+    "focus_areas": [
+      "Oregon_startups",
+      "entrepreneurship",
+      "stories"
+    ],
+    "contact_methods": [
+      "email",
+      "contact_form"
+    ],
+    "priority": 4,
+    "contacts_found": 3,
+    "last_scraped": "2026-03-30T16:49:40.072032",
+    "region": "Portland/OR"
+  },
+  {
+    "name": "Dev.to",
+    "website": "https://dev.to",
+    "category": "community",
+    "focus_areas": [
+      "developers",
+      "programming",
+      "startup_tools",
+      "open_source"
+    ],
+    "contact_methods": [
+      "platform_message",
+      "email"
+    ],
+    "priority": 3,
+    "contacts_found": 1,
+    "last_scraped": "2026-03-30T16:51:53.323954",
+    "region": "US/Global"
+  },
+  {
+    "name": "Hacker News",
+    "website": "https://news.ycombinator.com",
+    "category": "community",
+    "focus_areas": [
+      "tech",
+      "startups",
+      "programming"
+    ],
+    "contact_methods": [
+      "submission"
+    ],
+    "priority": 3,
+    "contacts_found": 1,
+    "last_scraped": "2026-03-30T16:54:08.570534",
+    "region": "US/Global"
+  },
+  {
+    "name": "Prepare4VC",
+    "website": "https://www.prepare4vc.com",
+    "category": "platform",
+    "focus_areas": [
+      "founder_readiness",
+      "venture_capital",
+      "pitch_prep"
+    ],
+    "contact_methods": [
+      "email",
+      "contact_form"
+    ],
+    "priority": 5,
+    "contacts_found": 0,
+    "last_scraped": "2026-03-30T16:56:43.800174",
+    "region": "Portland/OR"
+  },
+  {
+    "name": "The Next Web",
+    "website": "https://thenextweb.com",
+    "category": "publication",
+    "focus_areas": [
+      "tech",
+      "startups",
+      "AI",
+      "innovation"
+    ],
+    "contact_methods": [
+      "email",
+      "twitter"
+    ],
+    "priority": 4,
+    "contacts_found": 1,
+    "last_scraped": "2026-03-30T17:00:01.501776",
+    "region": "US/Global"
+  },
+  {
+    "name": "Startup Stash",
+    "website": "https://startupstash.com",
+    "category": "platform",
+    "focus_areas": [
+      "startup_tools",
+      "resources",
+      "founders"
+    ],
+    "contact_methods": [
+      "email",
+      "contact_form"
+    ],
+    "priority": 3,
+    "contacts_found": 2,
+    "last_scraped": "2026-03-30T17:02:38.984428",
+    "region": "US/Global"
+  },
+  {
+    "name": "The Next Web",
+    "website": "https://thenextweb.com",
+    "category": "publication",
+    "focus_areas": [
+      "tech",
+      "startups",
+      "AI",
+      "innovation"
+    ],
+    "contact_methods": [
+      "email",
+      "twitter"
+    ],
+    "priority": 4,
+    "contacts_found": 1,
+    "last_scraped": "2026-03-30T17:05:28.582699",
+    "region": "US/Global"
+  },
+  {
+    "name": "The Next Web",
+    "website": "https://thenextweb.com",
+    "category": "publication",
+    "focus_areas": [
+      "tech",
+      "startups",
+      "AI",
+      "innovation"
+    ],
+    "contact_methods": [
+      "email",
+      "twitter"
+    ],
+    "priority": 4,
+    "contacts_found": 1,
+    "last_scraped": "2026-03-30T17:08:26.781771",
+    "region": "US/Global"
+  },
+  {
+    "name": "Startup Stash",
+    "website": "https://startupstash.com",
+    "category": "platform",
+    "focus_areas": [
+      "startup_tools",
+      "resources",
+      "founders"
+    ],
+    "contact_methods": [
+      "email",
+      "contact_form"
+    ],
+    "priority": 3,
+    "contacts_found": 2,
+    "last_scraped": "2026-03-30T17:11:04.449277",
+    "region": "US/Global"
+  },
+  {
+    "name": "The Next Web",
+    "website": "https://thenextweb.com",
+    "category": "publication",
+    "focus_areas": [
+      "tech",
+      "startups",
+      "AI",
+      "innovation"
+    ],
+    "contact_methods": [
+      "email",
+      "twitter"
+    ],
+    "priority": 4,
+    "contacts_found": 1,
+    "last_scraped": "2026-03-30T17:13:58.596127",
+    "region": "US/Global"
+  },
+  {
+    "name": "The Next Web",
+    "website": "https://thenextweb.com",
+    "category": "publication",
+    "focus_areas": [
+      "tech",
+      "startups",
+      "AI",
+      "innovation"
+    ],
+    "contact_methods": [
+      "email",
+      "twitter"
+    ],
+    "priority": 4,
+    "contacts_found": 1,
+    "last_scraped": "2026-03-30T17:17:03.445834",
+    "region": "US/Global"
+  },
+  {
+    "name": "Startup Stash",
+    "website": "https://startupstash.com",
+    "category": "platform",
+    "focus_areas": [
+      "startup_tools",
+      "resources",
+      "founders"
+    ],
+    "contact_methods": [
+      "email",
+      "contact_form"
+    ],
+    "priority": 3,
+    "contacts_found": 2,
+    "last_scraped": "2026-03-30T17:19:36.865387",
+    "region": "US/Global"
+  }
+]
