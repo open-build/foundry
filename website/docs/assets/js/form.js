@@ -3,10 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Configuration - Replace with your actual URLs
     const CONFIG = {
-        GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzaXn82jf98akTlphk00Ao0luuM9lDQF6kN2ZN73lWGdSblLsdKtBjxLSfobnlknSvG/exec',
-        BABBLE_BEAVER_API: 'https://api.babblebeaver.com/analyze', // Fixed URL
-        // Set to true for development/testing
-        DEVELOPMENT_MODE: true  // Enable debugging
+        COLLABHUB_API: 'https://collab.buildly.io/onboarding/api/foundry-intake/applications/',
+        DEVELOPMENT_MODE: false
     };
     
     let currentStep = 1;
@@ -49,39 +47,32 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        // Validate Turnstile CAPTCHA
+        const turnstileToken = window.turnstile && window.turnstile.getResponse();
+        if (!turnstileToken) {
+            showMessage('Please complete the CAPTCHA verification before submitting.', 'error');
+            return;
+        }
+
         const originalText = showLoading(submitBtn);
-        
+
         try {
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
-            
-            // Submit to Google Sheets
-            const googleResult = await submitToGoogleSheets(data);
-            if (!googleResult.success) {
-                throw new Error('Failed to submit application');
-            }
 
-            // Submit to BabbleBeaver for AI analysis
-            const analysisResult = await submitToBabbleBeaver(data);
-            
-            // Show success message and redirect
-            if (analysisResult.success) {
-                showMessage('Application submitted successfully! You will receive your AI startup analysis via email within 24 hours.', 'success');
-                
-                // Redirect to success page after 3 seconds
-                setTimeout(() => {
-                    window.location.href = 'success.html';
-                }, 3000);
-            } else {
-                showMessage('Application submitted successfully! AI analysis will be processed separately.', 'success');
-                setTimeout(() => {
-                    window.location.href = 'success.html';
-                }, 3000);
-            }
-            
+            await submitToCollabHub(data, turnstileToken);
+
+            localStorage.removeItem('startupApplicationDraft');
+
+            showMessage('Application submitted successfully! You will receive a confirmation email shortly.', 'success');
+            setTimeout(() => {
+                window.location.href = 'success.html';
+            }, 2000);
+
         } catch (error) {
             console.error('Submission error:', error);
-            showMessage('There was an error submitting your application. Please try again.', 'error');
+            if (window.turnstile) window.turnstile.reset();
+            showMessage(error.userMessage || 'There was an error submitting your application. Please try again.', 'error');
         } finally {
             hideLoading(submitBtn, originalText);
         }
@@ -107,6 +98,12 @@ document.addEventListener('DOMContentLoaded', function() {
         prevBtn.style.display = step === 1 ? 'none' : 'inline-flex';
         nextBtn.style.display = step === totalSteps ? 'none' : 'inline-flex';
         submitBtn.style.display = step === totalSteps ? 'inline-flex' : 'none';
+
+        // Show Turnstile widget on final step
+        const turnstileWidget = document.getElementById('turnstileWidget');
+        if (turnstileWidget) {
+            turnstileWidget.style.display = step === totalSteps ? 'block' : 'none';
+        }
 
         // Mark completed steps
         for (let i = 1; i < step; i++) {
@@ -188,98 +185,86 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Google Sheets Integration
-    async function submitToGoogleSheets(formData) {
-        try {
-            console.log('📋 Starting Google Sheets submission...');
-            console.log('Form data:', formData);
-            
-            // Check if Google Script URL is configured
-            if (CONFIG.GOOGLE_SCRIPT_URL.includes('YOUR_GOOGLE_SCRIPT_ID')) {
-                console.log('Google Sheets not configured, using fallback storage');
-                return { success: true, note: 'Development mode - no Google Sheets integration' };
-            }
-
-            console.log('🚀 Submitting to:', CONFIG.GOOGLE_SCRIPT_URL);
-            
-            const response = await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams(formData)
-            });
-            
-            console.log('📡 Response status:', response.status, response.statusText);
-            console.log('📡 Response headers:', [...response.headers.entries()]);
-            
-            if (response.ok) {
-                const result = await response.text(); // Get as text first
-                console.log('📄 Raw response:', result);
-                
-                try {
-                    const jsonResult = JSON.parse(result);
-                    console.log('✅ Parsed response:', jsonResult);
-                    return { success: true, data: jsonResult };
-                } catch (parseError) {
-                    console.log('⚠️ Response is not JSON, treating as success:', result);
-                    return { success: true, data: { message: result } };
-                }
-            } else {
-                const errorText = await response.text();
-                console.error('❌ Error response:', errorText);
-                throw new Error(`HTTP ${response.status}: ${response.statusText} - ${errorText}`);
-            }
-        } catch (error) {
-            console.error('💥 Google Sheets error:', error);
-            console.error('Stack trace:', error.stack);
-            
-            // In production, still consider it successful if other systems work
-            if (CONFIG.DEVELOPMENT_MODE) {
-                throw error;
-            } else {
-                console.log('Google Sheets failed but continuing with other integrations...');
-                return { success: true, note: 'Google Sheets integration failed, data stored via backup method' };
-            }
-        }
+    // CollabHub Intake API Integration
+    function generateIdempotencyKey() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            const r = Math.random() * 16 | 0;
+            return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
     }
 
-    // BabbleBeaver AI Analysis Integration
-    async function submitToBabbleBeaver(formData) {
-        try {
-            const analysisData = {
-                startup_idea: formData.business_description,
-                business_model: formData.revenue_model,
-                target_market: formData.target_audience,
-                competition_analysis: formData.competition_analysis || 'Not provided',
-                team_info: `Founders: ${formData.founder_names}. Team: ${formData.team_members || 'Not specified'}`,
-                development_stage: formData.development_stage,
-                funding_status: `Current: ${formData.current_funding_sources}. Future: ${formData.future_funding_plans}`,
-                competitive_advantage: formData.competitive_advantage || 'Not specified',
-                contact_email: formData.contact_email,
-                company_name: formData.company_name
-            };
+    async function submitToCollabHub(data, captchaToken) {
+        const nameParts = (data.founder_names || '').trim().split(/\s+/);
+        const firstName = nameParts[0] || '';
+        const lastName = nameParts.slice(1).join(' ') || '';
 
-            const response = await fetch(CONFIG.BABBLE_BEAVER_API, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(analysisData)
-            });
-            
-            if (response.ok) {
-                const result = await response.json();
-                return { success: true, data: result };
-            } else {
-                throw new Error('Failed to submit to BabbleBeaver');
-            }
-        } catch (error) {
-            console.error('BabbleBeaver error:', error);
-            // For demo purposes, simulate success
-            console.log('Simulating BabbleBeaver analysis submission...');
-            return { success: true, data: { message: 'Analysis queued for processing' } };
+        const payload = {
+            source: 'firstcityfoundry_register',
+            captcha_token: captchaToken,
+            contact: {
+                email: data.contact_email || '',
+                full_name: data.founder_names || '',
+                first_name: firstName,
+                last_name: lastName
+            },
+            company: {
+                name: data.company_name || '',
+                legal_structure: data.legal_structure || ''
+            },
+            application: {
+                business_description: data.business_description || '',
+                development_stage: data.development_stage || '',
+                annual_revenue: parseFloat(data.annual_revenue) || 0,
+                funding_amount: parseFloat(data.funding_amount) || 0,
+                outstanding_debt: parseFloat(data.outstanding_debt) || 0,
+                revenue_model: data.revenue_model || '',
+                target_audience: data.target_audience || '',
+                competition_analysis: data.competition_analysis || '',
+                market_demand_proof: data.market_demand_proof || '',
+                marketing_strategy: data.marketing_strategy || '',
+                intellectual_property: data.intellectual_property || '',
+                customer_base: data.customer_base || '',
+                customer_acquisition_strategy: data.customer_acquisition_strategy || '',
+                current_funding_sources: data.current_funding_sources || '',
+                future_funding_plans: data.future_funding_plans || '',
+                pricing_strategy: data.pricing_strategy || '',
+                competitive_advantage: data.competitive_advantage || '',
+                milestones_achievements: data.milestones_achievements || '',
+                social_impact: data.social_impact || '',
+                team_members: data.team_members || '',
+                advisors_mentors: data.advisors_mentors || '',
+                references_recommendations: data.references_recommendations || '',
+                referral_code: data.referral_code || ''
+            },
+            attachments: []
+        };
+
+        const response = await fetch(CONFIG.COLLABHUB_API, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Idempotency-Key': generateIdempotencyKey()
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+            return await response.json();
         }
+
+        let errorBody = {};
+        try { errorBody = await response.json(); } catch (_) {}
+
+        const err = new Error(`Submission failed: HTTP ${response.status}`);
+        if (response.status === 400) {
+            err.userMessage = errorBody.detail || 'Please check your form entries and try again.';
+        } else if (response.status === 429) {
+            err.userMessage = 'Too many submissions. Please wait a few minutes and try again.';
+        } else {
+            err.userMessage = 'An unexpected error occurred. Please try again later.' +
+                (errorBody.trace_id ? ` (Ref: ${errorBody.trace_id})` : '');
+        }
+        throw err;
     }
 
     // Helper function to show loading state
@@ -389,56 +374,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load any previously saved data
     loadFormData();
 
-    // Clear saved data on successful submission
-    form.addEventListener('submit', function() {
-        localStorage.removeItem('startupApplicationDraft');
-    });
-
 });
 
-// Google Apps Script for Google Sheets integration
-// You'll need to create this script in Google Apps Script
-/*
-function doPost(e) {
-    const sheet = SpreadsheetApp.openById('YOUR_SPREADSHEET_ID').getActiveSheet();
-    
-    const data = e.parameter;
-    const timestamp = new Date();
-    
-    const row = [
-        timestamp,
-        data.company_name || '',
-        data.contact_email || '',
-        data.business_description || '',
-        data.legal_structure || '',
-        data.annual_revenue || '',
-        data.funding_amount || '',
-        data.outstanding_debt || '',
-        data.founder_names || '',
-        data.team_members || '',
-        data.advisors_mentors || '',
-        data.target_audience || '',
-        data.competition_analysis || '',
-        data.market_demand_proof || '',
-        data.marketing_strategy || '',
-        data.development_stage || '',
-        data.intellectual_property || '',
-        data.customer_base || '',
-        data.customer_acquisition_strategy || '',
-        data.current_funding_sources || '',
-        data.future_funding_plans || '',
-        data.revenue_model || '',
-        data.pricing_strategy || '',
-        data.competitive_advantage || '',
-        data.milestones_achievements || '',
-        data.social_impact || '',
-        data.references_recommendations || '',
-        data.referral_code || ''
-    ];
-    
-    sheet.appendRow(row);
-    
-    return ContentService.createTextOutput(JSON.stringify({result: 'success'}))
-        .setMimeType(ContentService.MimeType.JSON);
-}
-*/
