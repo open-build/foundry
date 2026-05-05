@@ -1,0 +1,48 @@
+{
+  "date": "2025-09-28",
+  "website_sessions": 41,
+  "website_users": 15,
+  "website_pageviews": 64,
+  "website_bounce_rate": 0.428239926732884,
+  "website_avg_session_duration": 139.43157308830553,
+  "website_top_pages": [
+    {
+      "page": "/",
+      "sessions": 16,
+      "pageviews": 22
+    },
+    {
+      "page": "/register",
+      "sessions": 8,
+      "pageviews": 14
+    },
+    {
+      "page": "/podcast",
+      "sessions": 6,
+      "pageviews": 11
+    },
+    {
+      "page": "/about",
+      "sessions": 4,
+      "pageviews": 9
+    }
+  ],
+  "website_traffic_sources": {
+    "google / organic": 15,
+    "(direct) / (none)": 8,
+    "linkedin.com / referral": 5,
+    "twitter.com / referral": 3,
+    "github.com / referral": 2
+  },
+  "youtube_views": 5,
+  "youtube_subscribers": 3,
+  "youtube_watch_time": 46.73817613885494,
+  "emails_sent": 0,
+  "emails_opened": 0,
+  "emails_clicked": 0,
+  "new_contacts_discovered": 0,
+  "new_signups": 0,
+  "search_engine_referrals": 15,
+  "social_media_referrals": 8,
+  "direct_traffic": 8
+}
