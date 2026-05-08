@@ -45,12 +45,28 @@
 
 <!-- Hero -->
 <section class="bg-gradient-to-br from-navy-900 via-navy-800 to-navy-700 text-white pt-28 pb-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <p class="uppercase tracking-widest text-brand-500 text-sm font-semibold mb-3">Now Streaming</p>
-        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">The Foundry Podcast</h1>
-        <p class="text-gray-300 text-lg max-w-xl mx-auto">
-            Real conversations with founders, operators, and builders about visibility, margin, and independence.
-        </p>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row items-center gap-8">
+            <!-- Cover Art -->
+            <div class="flex-shrink-0">
+                <img id="podcast-cover-art"
+                     src=""
+                     alt="The Foundry Podcast cover art"
+                     class="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl shadow-2xl hidden object-cover border-2 border-white/10">
+                <div id="podcast-cover-placeholder"
+                     class="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl bg-navy-800 border-2 border-white/10 flex items-center justify-center">
+                    <i class="fa-solid fa-microphone-lines text-6xl text-brand-500 opacity-40"></i>
+                </div>
+            </div>
+            <!-- Text -->
+            <div class="text-center sm:text-left">
+                <p class="uppercase tracking-widest text-brand-500 text-sm font-semibold mb-3">Now Streaming</p>
+                <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">The Foundry Podcast</h1>
+                <p class="text-gray-300 text-lg max-w-xl">
+                    Real conversations with founders, operators, and builders about visibility, margin, and independence.
+                </p>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -90,8 +106,16 @@
         <h2 class="text-2xl font-bold mb-8">Latest Episodes</h2>
 
         <div class="space-y-6" id="episode-list">
-            <!-- Episode placeholder -->
-            <div class="bg-gray-50 rounded-xl p-8 text-center border border-dashed border-gray-300">
+            <!-- Loading state -->
+            <div id="episode-loading" class="flex items-center justify-center py-12 text-gray-400">
+                <svg class="animate-spin h-6 w-6 mr-3 text-brand-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                </svg>
+                <span class="text-sm">Loading episodes…</span>
+            </div>
+            <!-- Coming soon fallback (hidden until needed) -->
+            <div id="episode-fallback" class="hidden bg-gray-50 rounded-xl p-8 text-center border border-dashed border-gray-300">
                 <i class="fa-solid fa-microphone-lines text-4xl text-gray-300 mb-4"></i>
                 <h3 class="font-bold text-lg text-gray-500 mb-2">First episodes dropping soon</h3>
                 <p class="text-gray-400 text-sm max-w-md mx-auto">
@@ -117,21 +141,266 @@
 <section class="py-16">
     <div class="max-w-3xl mx-auto px-4 text-center">
         <h2 class="text-2xl font-bold mb-4">Listen Everywhere</h2>
-        <div class="flex flex-wrap justify-center gap-4 text-gray-500">
-            <span class="flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full text-sm">
-                <i class="fa-brands fa-spotify text-green-500"></i> Spotify — coming soon
-            </span>
-            <span class="flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full text-sm">
-                <i class="fa-brands fa-apple text-gray-800"></i> Apple Podcasts — coming soon
-            </span>
-            <span class="flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full text-sm">
-                <i class="fa-brands fa-youtube text-red-500"></i> YouTube — coming soon
-            </span>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a id="platform-spotify" href="#" target="_blank" rel="noopener noreferrer"
+               class="platform-badge flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full text-sm text-gray-500 cursor-not-allowed opacity-60"
+               data-label="Spotify">
+                <i class="fa-brands fa-spotify text-green-500"></i>
+                <span>Spotify</span>
+                <span class="platform-status text-gray-400 text-xs">— coming soon</span>
+            </a>
+            <a id="platform-apple" href="#" target="_blank" rel="noopener noreferrer"
+               class="platform-badge flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full text-sm text-gray-500 cursor-not-allowed opacity-60"
+               data-label="Apple Podcasts">
+                <i class="fa-brands fa-apple text-gray-800"></i>
+                <span>Apple Podcasts</span>
+                <span class="platform-status text-gray-400 text-xs">— coming soon</span>
+            </a>
+            <a id="platform-youtube" href="#" target="_blank" rel="noopener noreferrer"
+               class="platform-badge flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full text-sm text-gray-500 cursor-not-allowed opacity-60"
+               data-label="YouTube">
+                <i class="fa-brands fa-youtube text-red-500"></i>
+                <span>YouTube</span>
+                <span class="platform-status text-gray-400 text-xs">— coming soon</span>
+            </a>
+            <a id="platform-rss" href="#" target="_blank" rel="noopener noreferrer"
+               class="platform-badge flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full text-sm text-gray-500 cursor-not-allowed opacity-60"
+               data-label="RSS Feed">
+                <i class="fa-solid fa-rss text-orange-400"></i>
+                <span>RSS Feed</span>
+                <span class="platform-status text-gray-400 text-xs">— coming soon</span>
+            </a>
         </div>
     </div>
 </section>
 
 <div id="footer-slot"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  var RSS_URL = 'https://market.firstcityfoundry.com/producer/ledger/shows/foundry/feed.xml';
+  var PROXY_URL = 'https://api.allorigins.win/raw?url=';
+  var ITUNES_NS = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
+
+  function esc(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function safeUrl(url) {
+    try {
+      var u = new URL(url);
+      return (u.protocol === 'https:' || u.protocol === 'http:') ? url : '';
+    } catch (e) { return ''; }
+  }
+
+  function getItunes(el, tag) {
+    var nodes = el.getElementsByTagNameNS(ITUNES_NS, tag);
+    return nodes.length ? nodes[0] : null;
+  }
+
+  function getText(el, selector) {
+    var node = el.querySelector(selector);
+    return node ? (node.textContent || '').trim() : '';
+  }
+
+  function formatDate(str) {
+    var d = new Date(str);
+    if (isNaN(d.getTime())) return '';
+    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  }
+
+  function formatDuration(raw) {
+    if (!raw) return '';
+    raw = raw.trim();
+    if (/^\d+$/.test(raw)) {
+      var s = parseInt(raw, 10);
+      var h = Math.floor(s / 3600);
+      var m = Math.floor((s % 3600) / 60);
+      var sec = s % 60;
+      if (h > 0) return h + ':' + pad(m) + ':' + pad(sec);
+      return m + ':' + pad(sec);
+    }
+    return raw;
+  }
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function stripHTML(html) {
+    var tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    return (tmp.textContent || tmp.innerText || '').trim();
+  }
+
+  function truncate(str, max) {
+    if (!str || str.length <= max) return str;
+    return str.slice(0, max).trimEnd() + '\u2026';
+  }
+
+  function activatePlatform(id, url) {
+    var el = document.getElementById(id);
+    if (!el || !url) return;
+    el.href = url;
+    el.classList.remove('cursor-not-allowed', 'opacity-60');
+    el.classList.add('hover:bg-gray-200', 'cursor-pointer');
+    var status = el.querySelector('.platform-status');
+    if (status) status.remove();
+  }
+
+  function showCoverArt(channelImg) {
+    if (!channelImg) return;
+    var coverEl = document.getElementById('podcast-cover-art');
+    var placeholder = document.getElementById('podcast-cover-placeholder');
+    if (!coverEl) return;
+    coverEl.src = channelImg;
+    coverEl.classList.remove('hidden');
+    coverEl.onerror = function () {
+      coverEl.classList.add('hidden');
+      if (placeholder) placeholder.classList.remove('hidden');
+    };
+    if (placeholder) placeholder.classList.add('hidden');
+  }
+
+  function showFallback() {
+    var loading = document.getElementById('episode-loading');
+    var fallback = document.getElementById('episode-fallback');
+    if (loading) loading.remove();
+    if (fallback) fallback.classList.remove('hidden');
+  }
+
+  function renderEpisodes(items, channelImg) {
+    var list = document.getElementById('episode-list');
+    var loading = document.getElementById('episode-loading');
+    var fallback = document.getElementById('episode-fallback');
+    if (loading) loading.remove();
+    if (fallback) fallback.remove();
+
+    items.forEach(function (item, idx) {
+      var title = getText(item, 'title') || ('Episode ' + (idx + 1));
+      var pubDate = formatDate(getText(item, 'pubDate'));
+      var rawLink = getText(item, 'link');
+      var enclosure = item.querySelector('enclosure');
+      var enclosureUrl = enclosure ? safeUrl(enclosure.getAttribute('url') || '') : '';
+      var listenUrl = safeUrl(rawLink) || enclosureUrl;
+      var durEl = getItunes(item, 'duration');
+      var duration = formatDuration(durEl ? (durEl.textContent || '').trim() : '');
+      var epNumEl = getItunes(item, 'episode');
+      var epNum = epNumEl ? (epNumEl.textContent || '').trim() : String(idx + 1);
+      var summaryEl = getItunes(item, 'summary') || getItunes(item, 'subtitle');
+      var rawDesc = summaryEl ? (summaryEl.textContent || '') : getText(item, 'description');
+      var description = truncate(stripHTML(rawDesc), 200);
+      var epImgEl = getItunes(item, 'image');
+      var episodeImg = epImgEl ? safeUrl(epImgEl.getAttribute('href') || '') : '';
+      var thumbImg = episodeImg || channelImg;
+
+      var card = document.createElement('div');
+      card.className = 'bg-white rounded-xl border border-gray-200 overflow-hidden flex flex-col sm:flex-row shadow-sm hover:shadow-md transition-shadow';
+
+      var thumbHTML = '';
+      if (thumbImg) {
+        thumbHTML = '<div class="sm:w-40 flex-shrink-0 bg-gray-100">'
+          + '<img src="' + esc(thumbImg) + '" alt="" class="w-full h-44 sm:h-full object-cover" loading="lazy">'
+          + '</div>';
+      }
+
+      var metaHTML = '';
+      if (pubDate) metaHTML += '<span class="text-xs text-gray-400">' + esc(pubDate) + '</span>';
+      if (duration) metaHTML += '<span class="text-xs text-gray-400"><i class="fa-regular fa-clock mr-1"></i>' + esc(duration) + '</span>';
+
+      var listenHTML = '';
+      if (listenUrl) {
+        listenHTML = '<div class="mt-4">'
+          + '<a href="' + esc(listenUrl) + '" target="_blank" rel="noopener noreferrer"'
+          + ' class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">'
+          + '<i class="fa-solid fa-play text-xs"></i> Listen Now</a></div>';
+      }
+
+      card.innerHTML = thumbHTML
+        + '<div class="p-6 flex flex-col justify-between flex-1">'
+        + '<div>'
+        + '<div class="flex flex-wrap items-center gap-3 mb-2">'
+        + '<span class="text-xs font-semibold text-brand-500 uppercase tracking-wider">Ep. ' + esc(epNum) + '</span>'
+        + metaHTML
+        + '</div>'
+        + '<h3 class="font-bold text-gray-900 text-lg leading-snug mb-2">' + esc(title) + '</h3>'
+        + (description ? '<p class="text-gray-500 text-sm leading-relaxed">' + esc(description) + '</p>' : '')
+        + '</div>'
+        + listenHTML
+        + '</div>';
+
+      list.appendChild(card);
+    });
+  }
+
+  function parseFeed(text) {
+    var xml = new DOMParser().parseFromString(text, 'text/xml');
+    if (xml.querySelector('parsererror')) throw new Error('XML parse error');
+    var channel = xml.querySelector('channel');
+    if (!channel) throw new Error('No channel element');
+
+    // Cover art — always render regardless of episode count
+    var chImgEl = getItunes(channel, 'image');
+    var channelImg = chImgEl ? safeUrl(chImgEl.getAttribute('href') || '') : '';
+    if (!channelImg) channelImg = safeUrl(getText(channel, 'image > url'));
+    showCoverArt(channelImg);
+
+    // Platform links from podcast namespace
+    var ns = 'https://podcastindex.org/namespace/1.0';
+    var platforms = xml.getElementsByTagNameNS(ns, 'platform') || [];
+    for (var i = 0; i < platforms.length; i++) {
+      var p = platforms[i];
+      var pUrl = safeUrl(p.getAttribute('url') || '');
+      var pType = (p.getAttribute('id') || '').toLowerCase();
+      if (pUrl && pType === 'spotify')  activatePlatform('platform-spotify', pUrl);
+      if (pUrl && pType === 'apple')    activatePlatform('platform-apple', pUrl);
+      if (pUrl && pType === 'youtube')  activatePlatform('platform-youtube', pUrl);
+    }
+
+    // Episodes
+    var items = Array.from(xml.querySelectorAll('channel > item')).slice(0, 3);
+    if (items.length === 0) {
+      showFallback(); // feed is live but no episodes published yet
+      return;
+    }
+    renderEpisodes(items, channelImg);
+  }
+
+  // Activate RSS link immediately
+  activatePlatform('platform-rss', RSS_URL);
+
+  // Try direct fetch first; CORS failure (TypeError) falls through to proxy
+  fetch(RSS_URL, { mode: 'cors' })
+    .then(function (resp) {
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      return resp.text();
+    })
+    .then(parseFeed)
+    .catch(function (directErr) {
+      if (directErr instanceof TypeError) {
+        // Likely CORS — retry via proxy
+        fetch(PROXY_URL + encodeURIComponent(RSS_URL))
+          .then(function (resp) {
+            if (!resp.ok) throw new Error('Proxy HTTP ' + resp.status);
+            return resp.text();
+          })
+          .then(parseFeed)
+          .catch(function (proxyErr) {
+            console.debug('Podcast feed (proxy):', proxyErr.message);
+            showFallback();
+          });
+      } else {
+        console.debug('Podcast feed:', directErr.message);
+        showFallback();
+      }
+    });
+}());
+</script>
 
 </body>
 </html>
