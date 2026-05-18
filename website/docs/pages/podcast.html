@@ -1,178 +1,183 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FX80RQDJ49"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-FX80RQDJ49');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="path-depth" content="1">
-    <title>The Foundry Podcast — Build. Scale. Escape.</title>
-    <meta name="description" content="Real conversations with founders, operators, and builders about visibility, margin, and independence. Hosted from Portland.">
+    <title>Events - First City Foundry</title>
+    <meta name="description" content="First City Foundry events, founder conversations, podcast episodes, workshops, and community gatherings in Portland.">
     <link rel="canonical" href="https://www.firstcityfoundry.com/pages/podcast.html">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    brand:  { 500: '#F97316', 600: '#EA580C', 700: '#C2410C' },
-                    navy:   { 700: '#1E3A5F', 800: '#162D4A', 900: '#0F1F35' },
-                    mint:   { 500: '#10B981', 600: '#059669' },
-                    forest: { 50: '#F0FDF4', 100: '#DCFCE7', 500: '#22C55E', 600: '#16A34A', 700: '#15803D', 800: '#1A3A2A', 900: '#14261D' }
-                },
-                fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
-            }
-        }
-    }
+        (function() {
+            var savedTheme = localStorage.getItem('foundry-theme');
+            document.documentElement.setAttribute('data-theme', savedTheme || 'light');
+        })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        coral: { 50: '#FFF1F3', 100: '#FFE2E6', 500: '#FF5A6B', 600: '#EE4053', 700: '#D72F44' },
+                        ink: '#0F1B2A',
+                        charcoal: '#1F2937',
+                        slatebrand: '#475569',
+                        warm: '#F1EFEA',
+                        softwhite: '#FFFFFF'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Clash Grotesk', 'Space Grotesk', 'Inter', 'system-ui', 'sans-serif']
+                    },
+                    borderRadius: { foundry: '8px' }
+                }
+            }
+        }
+    </script>
     <script src="../assets/js/site.js" defer></script>
 </head>
-<body class="bg-white text-gray-900 font-sans antialiased">
-
+<body class="foundry-page antialiased">
 <div id="header-slot"></div>
 
-<!-- Hero -->
-<section class="bg-gradient-to-br from-navy-900 via-navy-800 to-navy-700 text-white pt-28 pb-16">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col sm:flex-row items-center gap-8">
-            <!-- Cover Art -->
-            <div class="flex-shrink-0">
-                <img id="podcast-cover-art"
-                     src=""
-                     alt="The Foundry Podcast cover art"
-                     class="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl shadow-2xl hidden object-cover border-2 border-white/10">
-                <div id="podcast-cover-placeholder"
-                     class="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl bg-navy-800 border-2 border-white/10 flex items-center justify-center">
-                    <i class="fa-solid fa-microphone-lines text-6xl text-brand-500 opacity-40"></i>
+<main>
+    <section class="foundry-page-hero pt-28">
+        <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-14 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+            <div>
+                <span class="foundry-page-badge">Events</span>
+                <h1 class="font-display mt-5 max-w-3xl text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">Gatherings and conversations for builders.</h1>
+                <p class="mt-6 max-w-2xl text-lg leading-8 text-white/80">Join workshops, founder meetups, and recorded conversations about visibility, margin, independence, and community-driven growth.</p>
+                <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <a href="../register.html" class="btn-primary">Attend an event</a>
+                    <a href="#episodes" class="btn-ghost border-white/20 bg-white/10 text-white hover:bg-white hover:text-ink">Listen to episodes</a>
                 </div>
             </div>
-            <!-- Text -->
-            <div class="text-center sm:text-left">
-                <p class="uppercase tracking-widest text-brand-500 text-sm font-semibold mb-3">Now Streaming</p>
-                <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">The Foundry Podcast</h1>
-                <p class="text-gray-300 text-lg max-w-xl">
-                    Real conversations with founders, operators, and builders about visibility, margin, and independence.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Themes -->
-<section class="py-16 bg-gray-50">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-2xl font-bold text-center mb-10">Three Themes, Every Episode</h2>
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="bg-white rounded-xl p-6 border border-gray-100 text-center">
-                <div class="w-12 h-12 bg-orange-100 text-brand-600 rounded-full flex items-center justify-center text-xl mx-auto mb-4">
-                    <i class="fa-solid fa-eye"></i>
+            <div class="foundry-page-card bg-white/95 p-6 text-ink">
+                <div class="flex items-start gap-5">
+                    <div class="foundry-page-icon shrink-0">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3M5 11h14M6 5h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg>
+                    </div>
+                    <div>
+                        <div class="eyebrow mb-2">Next community meetup</div>
+                        <h2 class="font-display text-2xl font-bold">Community Meetup</h2>
+                        <p class="mt-3 text-sm leading-6 text-slatebrand">A local gathering for founders, mentors, partners, and builders shaping the next Portland startup chapter.</p>
+                    </div>
                 </div>
-                <h3 class="font-bold mb-1">Visibility</h3>
-                <p class="text-gray-600 text-sm">Dashboards, KPIs, and knowing what's really happening in your business.</p>
-            </div>
-            <div class="bg-white rounded-xl p-6 border border-gray-100 text-center">
-                <div class="w-12 h-12 bg-emerald-100 text-mint-600 rounded-full flex items-center justify-center text-xl mx-auto mb-4">
-                    <i class="fa-solid fa-chart-line"></i>
+                <div class="mt-6 grid grid-cols-2 gap-4">
+                    <div class="rounded-foundry bg-coral-500 px-4 py-3 text-center text-white">
+                        <div class="text-xs font-bold uppercase">Jun</div>
+                        <div class="font-display text-3xl font-bold">18</div>
+                    </div>
+                    <div class="rounded-foundry border border-ink/10 p-4">
+                        <div class="font-display text-2xl font-bold">5 PM</div>
+                        <div class="text-sm text-slatebrand">Portland</div>
+                    </div>
                 </div>
-                <h3 class="font-bold mb-1">Margin</h3>
-                <p class="text-gray-600 text-sm">Automation, AI leverage, plus the ratio of output to effort.</p>
             </div>
-            <div class="bg-white rounded-xl p-6 border border-gray-100 text-center">
-                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xl mx-auto mb-4">
-                    <i class="fa-solid fa-door-open"></i>
+        </div>
+    </section>
+
+    <section class="foundry-page-section py-16">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-3xl text-center">
+                <span class="foundry-page-badge">Event formats</span>
+                <h2 class="font-display mt-4 text-3xl font-bold text-ink sm:text-4xl">Designed for useful connection.</h2>
+                <p class="mt-4 text-slatebrand">Every event should give attendees clearer context, stronger relationships, and a practical next step.</p>
+            </div>
+            <div class="mt-10 grid gap-5 md:grid-cols-3">
+                <article class="foundry-page-card p-6">
+                    <div class="foundry-page-icon mb-5"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 0 0-4-4h-1M9 20H4v-2a4 4 0 0 1 4-4h1m3-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg></div>
+                    <h3 class="font-display text-2xl font-bold text-ink">Founder meetups</h3>
+                    <p class="mt-3 text-sm leading-6 text-slatebrand">Peer connection, local ecosystem updates, and warm introductions.</p>
+                </article>
+                <article class="foundry-page-card p-6">
+                    <div class="foundry-page-icon mb-5"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 19V5M4 19h16M8 16l3-4 3 2 4-7"/></svg></div>
+                    <h3 class="font-display text-2xl font-bold text-ink">Workshops</h3>
+                    <p class="mt-3 text-sm leading-6 text-slatebrand">Hands-on sessions for operations, AI adoption, product systems, and partner readiness.</p>
+                </article>
+                <article class="foundry-page-card p-6">
+                    <div class="foundry-page-icon mb-5"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18v3m0-3a6 6 0 0 0 6-6V7a6 6 0 0 0-12 0v5a6 6 0 0 0 6 6z"/></svg></div>
+                    <h3 class="font-display text-2xl font-bold text-ink">Recorded conversations</h3>
+                    <p class="mt-3 text-sm leading-6 text-slatebrand">Founder stories and operator lessons that keep the community learning between events.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="episodes" class="bg-white py-16">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+                <div>
+                    <span class="foundry-page-badge">Podcast</span>
+                    <h2 class="font-display mt-4 text-3xl font-bold text-ink sm:text-4xl">The Foundry Podcast.</h2>
+                    <p class="mt-4 text-slatebrand">Real conversations with founders, operators, and builders about visibility, margin, and independence.</p>
+                    <div class="mt-6">
+                        <img id="podcast-cover-art" src="" alt="The Foundry Podcast cover art" class="hidden h-44 w-44 rounded-foundry object-cover shadow-xl">
+                        <div id="podcast-cover-placeholder" class="foundry-page-card flex h-44 w-44 items-center justify-center">
+                            <div class="foundry-page-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18v3m0-3a6 6 0 0 0 6-6V7a6 6 0 0 0-12 0v5a6 6 0 0 0 6 6z"/></svg></div>
+                        </div>
+                    </div>
+                    <div class="mt-6 rounded-foundry border border-coral-500/20 bg-coral-50 p-4">
+                        <div class="text-xs font-bold uppercase tracking-[0.14em] text-coral-600">Latest release status</div>
+                        <p class="mt-2 text-sm leading-6 text-slatebrand">The newest Foundry episode is live on YouTube and Spotify. Apple Podcasts is pending, but the episode is released.</p>
+                    </div>
                 </div>
-                <h3 class="font-bold mb-1">Independence</h3>
-                <p class="text-gray-600 text-sm">SOPs, delegation, decision autonomy — building a business that runs without you.</p>
+                <div>
+                    <h3 class="font-display text-2xl font-bold text-ink">Latest episode</h3>
+                    <article id="latest-video-card" class="foundry-page-card mt-5 overflow-hidden">
+                        <div class="aspect-video bg-ink">
+                            <iframe id="latest-youtube-embed" class="h-full w-full" src="https://www.youtube.com/embed/7nfI9XCQgUw" title="The Future of AI-Native Startups | FirstCity Foundry Podcast" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-5">
+                            <div class="mb-3 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-[0.14em]">
+                                <span class="rounded-full bg-red-50 px-3 py-1 text-red-600">Released on YouTube</span>
+                                <span class="rounded-full bg-green-50 px-3 py-1 text-green-700">Released on Spotify</span>
+                                <span class="rounded-full bg-slate-100 px-3 py-1 text-slatebrand">Apple pending</span>
+                            </div>
+                            <h4 id="latest-release-title" class="font-display text-xl font-bold text-ink">The Future of AI-Native Startups | FirstCity Foundry Podcast</h4>
+                            <p id="latest-release-meta" class="mt-2 text-sm font-semibold text-coral-600">Most recent episode - published May 6, 2026</p>
+                            <p id="latest-release-description" class="mt-2 text-sm leading-6 text-slatebrand">StartupGrind PDX relaunches with a practical conversation about integrating AI into startup operations, stronger local ecosystems, and human-centered product work.</p>
+                            <div class="mt-4 flex flex-wrap gap-3">
+                                <a id="latest-youtube-link" href="https://www.youtube.com/watch?v=7nfI9XCQgUw" target="_blank" rel="noopener noreferrer" class="btn-primary text-sm">Watch on YouTube</a>
+                                <a id="latest-spotify-link" href="https://open.spotify.com/episode/69xZoXUbdAfyR29S9oKkul" target="_blank" rel="noopener noreferrer" class="btn-ghost text-sm">Listen on Spotify</a>
+                            </div>
+                        </div>
+                    </article>
+                    <h3 class="font-display mt-8 text-2xl font-bold text-ink">Episode release log</h3>
+                    <div id="episode-list" class="mt-5 space-y-4">
+                        <div id="episode-loading" class="foundry-page-card p-6 text-slatebrand">Loading episodes...</div>
+                        <div id="episode-fallback" class="foundry-page-card hidden p-6">
+                            <h4 class="font-display text-xl font-bold text-ink">Latest release available now</h4>
+                            <p class="mt-2 text-sm leading-6 text-slatebrand">The RSS feed has not published episode items yet, but the latest Foundry episode is live on YouTube and Spotify.</p>
+                        </div>
+                    </div>
+                    <div class="mt-8 flex flex-wrap gap-3">
+                        <a id="platform-spotify" href="https://open.spotify.com/episode/69xZoXUbdAfyR29S9oKkul" target="_blank" rel="noopener noreferrer" class="platform-badge foundry-page-card px-4 py-2 text-sm font-semibold text-ink" data-label="Spotify">Spotify <span class="platform-status text-xs text-green-700">released</span></a>
+                        <span id="platform-apple" class="platform-badge foundry-page-card px-4 py-2 text-sm font-semibold text-slatebrand" data-label="Apple Podcasts">Apple Podcasts <span class="platform-status text-xs">pending</span></span>
+                        <a id="platform-youtube" href="https://www.youtube.com/watch?v=7nfI9XCQgUw" target="_blank" rel="noopener noreferrer" class="platform-badge foundry-page-card px-4 py-2 text-sm font-semibold text-ink" data-label="YouTube">YouTube <span class="platform-status text-xs text-red-600">released</span></a>
+                        <a id="platform-rss" href="#" target="_blank" rel="noopener noreferrer" class="platform-badge foundry-page-card px-4 py-2 text-sm font-semibold text-slatebrand opacity-60" data-label="RSS Feed">RSS Feed <span class="platform-status text-xs">syncing</span></a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Episodes -->
-<section class="py-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-2xl font-bold mb-8">Latest Episodes</h2>
-
-        <div class="space-y-6" id="episode-list">
-            <!-- Loading state -->
-            <div id="episode-loading" class="flex items-center justify-center py-12 text-gray-400">
-                <svg class="animate-spin h-6 w-6 mr-3 text-brand-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-                </svg>
-                <span class="text-sm">Loading episodes…</span>
+    <section class="foundry-page-dark py-16">
+        <div class="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_auto] lg:px-8">
+            <div>
+                <span class="foundry-page-badge">Participate</span>
+                <h2 class="font-display mt-4 text-3xl font-bold sm:text-4xl">Have a founder story or workshop idea?</h2>
+                <p class="mt-4 max-w-2xl text-white/70">We are looking for grounded stories, useful practices, and partners who can help founders move from noise to action.</p>
             </div>
-            <!-- Coming soon fallback (hidden until needed) -->
-            <div id="episode-fallback" class="hidden bg-gray-50 rounded-xl p-8 text-center border border-dashed border-gray-300">
-                <i class="fa-solid fa-microphone-lines text-4xl text-gray-300 mb-4"></i>
-                <h3 class="font-bold text-lg text-gray-500 mb-2">First episodes dropping soon</h3>
-                <p class="text-gray-400 text-sm max-w-md mx-auto">
-                    We're recording conversations with Portland founders right now. Subscribe to get notified when episodes go live.
-                </p>
-            </div>
+            <a href="../podcast.html" class="btn-primary">Apply to be a guest</a>
         </div>
-    </div>
-</section>
-
-<!-- Be a Guest CTA -->
-<section class="py-16 bg-gray-50">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-        <h2 class="text-2xl font-bold mb-3">Want to be a guest?</h2>
-        <p class="text-gray-600 mb-6">We're looking for founders who've built something real — bootstrapped, scrappy, and still standing. Tell us your story.</p>
-        <a href="../podcast.html" class="inline-block bg-brand-500 hover:bg-brand-600 text-white font-semibold px-8 py-3.5 rounded-lg transition-colors">
-            Apply to Be a Guest
-        </a>
-    </div>
-</section>
-
-<!-- Subscribe -->
-<section class="py-16">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-        <h2 class="text-2xl font-bold mb-4">Listen Everywhere</h2>
-        <div class="flex flex-wrap justify-center gap-4">
-            <a id="platform-spotify" href="#" target="_blank" rel="noopener noreferrer"
-                 class="platform-badge flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full text-sm text-gray-700 hover:bg-gray-200 transition-colors"
-                 data-label="Spotify"
-                 href="https://open.spotify.com/show/033dbCfDFZEsd2GG7SczA3?si=a054b0488aea4b7d">
-                <i class="fa-brands fa-spotify text-green-500"></i>
-                <span>Spotify</span>
-              </a>
-            <a id="platform-apple" href="#" target="_blank" rel="noopener noreferrer"
-               class="platform-badge flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full text-sm text-gray-500 cursor-not-allowed opacity-60"
-               data-label="Apple Podcasts">
-                <i class="fa-brands fa-apple text-gray-800"></i>
-                <span>Apple Podcasts</span>
-                <span class="platform-status text-gray-400 text-xs">— coming soon</span>
-            </a>
-            <a id="platform-youtube" href="#" target="_blank" rel="noopener noreferrer"
-                 class="platform-badge flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full text-sm text-gray-700 hover:bg-gray-200 transition-colors"
-                 data-label="YouTube"
-                 href="https://www.youtube.com/@FirstCityFoundry">
-                <i class="fa-brands fa-youtube text-red-500"></i>
-                <span>YouTube</span>
-              </a>
-            <a id="platform-rss" href="#" target="_blank" rel="noopener noreferrer"
-               class="platform-badge flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full text-sm text-gray-500 cursor-not-allowed opacity-60"
-               data-label="RSS Feed">
-                <i class="fa-solid fa-rss text-orange-400"></i>
-                <span>RSS Feed</span>
-                <span class="platform-status text-gray-400 text-xs">— coming soon</span>
-            </a>
-        </div>
-    </div>
-</section>
+    </section>
+</main>
 
 <div id="footer-slot"></div>
 
@@ -181,8 +186,22 @@
   'use strict';
 
   var RSS_URL = 'https://market.firstcityfoundry.com/producer/ledger/shows/foundry/feed.xml';
+  var YOUTUBE_FEED_URL = 'https://www.youtube.com/feeds/videos.xml?channel_id=UCRqoM2Q1_6FwEVC-oac63UA';
+  var DEFAULT_VIDEO_ID = '7nfI9XCQgUw';
+  var SPOTIFY_EPISODE_URL = 'https://open.spotify.com/episode/69xZoXUbdAfyR29S9oKkul';
   var PROXY_URL = 'https://api.allorigins.win/raw?url=';
   var ITUNES_NS = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
+  var ATOM_NS = 'http://www.w3.org/2005/Atom';
+  var YT_NS = 'http://www.youtube.com/xml/schemas/2015';
+  var MANUAL_RELEASES = [{
+    title: 'The Future of AI-Native Startups | FirstCity Foundry Podcast',
+    pubDate: 'May 6, 2026',
+    epNum: '1',
+    description: 'StartupGrind PDX relaunches with a practical conversation about integrating AI into startup operations, stronger local ecosystems, and human-centered product work.',
+    listenUrl: SPOTIFY_EPISODE_URL,
+    youtubeUrl: 'https://www.youtube.com/watch?v=' + DEFAULT_VIDEO_ID,
+    thumbImg: 'https://i.ytimg.com/vi/' + DEFAULT_VIDEO_ID + '/hqdefault.jpg'
+  }];
 
   function esc(str) {
     return String(str || '')
@@ -197,7 +216,9 @@
     try {
       var u = new URL(url);
       return (u.protocol === 'https:' || u.protocol === 'http:') ? url : '';
-    } catch (e) { return ''; }
+    } catch (e) {
+      return '';
+    }
   }
 
   function getItunes(el, tag) {
@@ -216,22 +237,6 @@
     return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   }
 
-  function formatDuration(raw) {
-    if (!raw) return '';
-    raw = raw.trim();
-    if (/^\d+$/.test(raw)) {
-      var s = parseInt(raw, 10);
-      var h = Math.floor(s / 3600);
-      var m = Math.floor((s % 3600) / 60);
-      var sec = s % 60;
-      if (h > 0) return h + ':' + pad(m) + ':' + pad(sec);
-      return m + ':' + pad(sec);
-    }
-    return raw;
-  }
-
-  function pad(n) { return String(n).padStart(2, '0'); }
-
   function stripHTML(html) {
     var tmp = document.createElement('div');
     tmp.innerHTML = html;
@@ -240,17 +245,38 @@
 
   function truncate(str, max) {
     if (!str || str.length <= max) return str;
-    return str.slice(0, max).trimEnd() + '\u2026';
+    return str.slice(0, max).trimEnd() + '...';
   }
 
   function activatePlatform(id, url) {
     var el = document.getElementById(id);
     if (!el || !url) return;
-    el.href = url;
-    el.classList.remove('cursor-not-allowed', 'opacity-60');
-    el.classList.add('hover:bg-gray-200', 'cursor-pointer');
+    if ('href' in el) el.href = url;
+    el.classList.remove('opacity-60');
     var status = el.querySelector('.platform-status');
-    if (status) status.remove();
+    if (status && !/released|pending|syncing/i.test(status.textContent || '')) status.remove();
+  }
+
+  function updateLatestVideo(video) {
+    if (!video || !video.videoId) return;
+    var embed = document.getElementById('latest-youtube-embed');
+    var title = document.getElementById('latest-release-title');
+    var meta = document.getElementById('latest-release-meta');
+    var desc = document.getElementById('latest-release-description');
+    var ytLink = document.getElementById('latest-youtube-link');
+    if (embed) {
+      embed.src = 'https://www.youtube.com/embed/' + encodeURIComponent(video.videoId);
+      embed.title = video.title || embed.title;
+    }
+    if (title && video.title) title.textContent = video.title;
+    if (meta && video.pubDate) meta.textContent = 'Most recent episode - published ' + video.pubDate;
+    if (desc && video.description) desc.textContent = truncate(stripHTML(video.description), 240);
+    if (ytLink) ytLink.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(video.videoId);
+    activatePlatform('platform-youtube', 'https://www.youtube.com/watch?v=' + video.videoId);
+    MANUAL_RELEASES[0].title = video.title || MANUAL_RELEASES[0].title;
+    MANUAL_RELEASES[0].pubDate = video.pubDate || MANUAL_RELEASES[0].pubDate;
+    MANUAL_RELEASES[0].youtubeUrl = 'https://www.youtube.com/watch?v=' + video.videoId;
+    MANUAL_RELEASES[0].thumbImg = 'https://i.ytimg.com/vi/' + video.videoId + '/hqdefault.jpg';
   }
 
   function showCoverArt(channelImg) {
@@ -268,16 +294,46 @@
   }
 
   function showFallback() {
+    renderManualEpisodes();
+  }
+
+  function renderManualEpisodes() {
+    var list = document.getElementById('episode-list');
     var loading = document.getElementById('episode-loading');
     var fallback = document.getElementById('episode-fallback');
+    if (!list) return;
     if (loading) loading.remove();
-    if (fallback) fallback.classList.remove('hidden');
+    if (fallback) fallback.remove();
+
+    MANUAL_RELEASES.forEach(function (episode) {
+      var card = document.createElement('article');
+      card.className = 'foundry-page-card overflow-hidden md:flex';
+      var thumbHTML = episode.thumbImg
+        ? '<div class="md:w-40 shrink-0 bg-coral-50"><img src="' + esc(episode.thumbImg) + '" alt="" class="h-44 w-full object-cover md:h-full" loading="lazy"></div>'
+        : '';
+      card.innerHTML = thumbHTML
+        + '<div class="p-5">'
+        + '<div class="mb-2 flex flex-wrap gap-3 text-xs font-bold uppercase tracking-[0.14em] text-coral-500">'
+        + '<span>Episode ' + esc(episode.epNum) + '</span>'
+        + '<span>' + esc(episode.pubDate) + '</span>'
+        + '<span>Released on YouTube + Spotify</span>'
+        + '</div>'
+        + '<h4 class="font-display text-xl font-bold text-ink">' + esc(episode.title) + '</h4>'
+        + '<p class="mt-2 text-sm leading-6 text-slatebrand">' + esc(episode.description) + '</p>'
+        + '<div class="mt-4 flex flex-wrap gap-3">'
+        + '<a href="' + esc(episode.youtubeUrl) + '" target="_blank" rel="noopener noreferrer" class="btn-primary text-sm">Watch</a>'
+        + '<a href="' + esc(episode.listenUrl) + '" target="_blank" rel="noopener noreferrer" class="btn-ghost text-sm">Listen</a>'
+        + '</div>'
+        + '</div>';
+      list.appendChild(card);
+    });
   }
 
   function renderEpisodes(items, channelImg) {
     var list = document.getElementById('episode-list');
     var loading = document.getElementById('episode-loading');
     var fallback = document.getElementById('episode-fallback');
+    if (!list) return;
     if (loading) loading.remove();
     if (fallback) fallback.remove();
 
@@ -288,50 +344,31 @@
       var enclosure = item.querySelector('enclosure');
       var enclosureUrl = enclosure ? safeUrl(enclosure.getAttribute('url') || '') : '';
       var listenUrl = safeUrl(rawLink) || enclosureUrl;
-      var durEl = getItunes(item, 'duration');
-      var duration = formatDuration(durEl ? (durEl.textContent || '').trim() : '');
       var epNumEl = getItunes(item, 'episode');
       var epNum = epNumEl ? (epNumEl.textContent || '').trim() : String(idx + 1);
       var summaryEl = getItunes(item, 'summary') || getItunes(item, 'subtitle');
       var rawDesc = summaryEl ? (summaryEl.textContent || '') : getText(item, 'description');
-      var description = truncate(stripHTML(rawDesc), 200);
+      var description = truncate(stripHTML(rawDesc), 190);
       var epImgEl = getItunes(item, 'image');
       var episodeImg = epImgEl ? safeUrl(epImgEl.getAttribute('href') || '') : '';
       var thumbImg = episodeImg || channelImg;
 
-      var card = document.createElement('div');
-      card.className = 'bg-white rounded-xl border border-gray-200 overflow-hidden flex flex-col sm:flex-row shadow-sm hover:shadow-md transition-shadow';
+      var card = document.createElement('article');
+      card.className = 'foundry-page-card overflow-hidden md:flex';
 
-      var thumbHTML = '';
-      if (thumbImg) {
-        thumbHTML = '<div class="sm:w-40 flex-shrink-0 bg-gray-100">'
-          + '<img src="' + esc(thumbImg) + '" alt="" class="w-full h-44 sm:h-full object-cover" loading="lazy">'
-          + '</div>';
-      }
-
-      var metaHTML = '';
-      if (pubDate) metaHTML += '<span class="text-xs text-gray-400">' + esc(pubDate) + '</span>';
-      if (duration) metaHTML += '<span class="text-xs text-gray-400"><i class="fa-regular fa-clock mr-1"></i>' + esc(duration) + '</span>';
-
-      var listenHTML = '';
-      if (listenUrl) {
-        listenHTML = '<div class="mt-4">'
-          + '<a href="' + esc(listenUrl) + '" target="_blank" rel="noopener noreferrer"'
-          + ' class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">'
-          + '<i class="fa-solid fa-play text-xs"></i> Listen Now</a></div>';
-      }
+      var thumbHTML = thumbImg
+        ? '<div class="md:w-40 shrink-0 bg-coral-50"><img src="' + esc(thumbImg) + '" alt="" class="h-44 w-full object-cover md:h-full" loading="lazy"></div>'
+        : '';
 
       card.innerHTML = thumbHTML
-        + '<div class="p-6 flex flex-col justify-between flex-1">'
-        + '<div>'
-        + '<div class="flex flex-wrap items-center gap-3 mb-2">'
-        + '<span class="text-xs font-semibold text-brand-500 uppercase tracking-wider">Ep. ' + esc(epNum) + '</span>'
-        + metaHTML
+        + '<div class="p-5">'
+        + '<div class="mb-2 flex flex-wrap gap-3 text-xs font-bold uppercase tracking-[0.14em] text-coral-500">'
+        + '<span>Episode ' + esc(epNum) + '</span>'
+        + (pubDate ? '<span>' + esc(pubDate) + '</span>' : '')
         + '</div>'
-        + '<h3 class="font-bold text-gray-900 text-lg leading-snug mb-2">' + esc(title) + '</h3>'
-        + (description ? '<p class="text-gray-500 text-sm leading-relaxed">' + esc(description) + '</p>' : '')
-        + '</div>'
-        + listenHTML
+        + '<h4 class="font-display text-xl font-bold text-ink">' + esc(title) + '</h4>'
+        + (description ? '<p class="mt-2 text-sm leading-6 text-slatebrand">' + esc(description) + '</p>' : '')
+        + (listenUrl ? '<a href="' + esc(listenUrl) + '" target="_blank" rel="noopener noreferrer" class="btn-primary mt-4 text-sm">Listen now</a>' : '')
         + '</div>';
 
       list.appendChild(card);
@@ -344,63 +381,74 @@
     var channel = xml.querySelector('channel');
     if (!channel) throw new Error('No channel element');
 
-    // Cover art — always render regardless of episode count
     var chImgEl = getItunes(channel, 'image');
     var channelImg = chImgEl ? safeUrl(chImgEl.getAttribute('href') || '') : '';
     if (!channelImg) channelImg = safeUrl(getText(channel, 'image > url'));
     showCoverArt(channelImg);
 
-    // Platform links from podcast namespace
     var ns = 'https://podcastindex.org/namespace/1.0';
     var platforms = xml.getElementsByTagNameNS(ns, 'platform') || [];
     for (var i = 0; i < platforms.length; i++) {
       var p = platforms[i];
       var pUrl = safeUrl(p.getAttribute('url') || '');
       var pType = (p.getAttribute('id') || '').toLowerCase();
-      if (pUrl && pType === 'spotify')  activatePlatform('platform-spotify', pUrl);
-      if (pUrl && pType === 'apple')    activatePlatform('platform-apple', pUrl);
-      if (pUrl && pType === 'youtube')  activatePlatform('platform-youtube', pUrl);
+      if (pUrl && pType === 'spotify') activatePlatform('platform-spotify', pUrl);
+      if (pUrl && pType === 'apple') activatePlatform('platform-apple', pUrl);
+      if (pUrl && pType === 'youtube') activatePlatform('platform-youtube', pUrl);
     }
 
-    // Episodes
     var items = Array.from(xml.querySelectorAll('channel > item')).slice(0, 3);
-    if (items.length === 0) {
-      showFallback(); // feed is live but no episodes published yet
+    if (!items.length) {
+      showFallback();
       return;
     }
     renderEpisodes(items, channelImg);
   }
 
-  // Activate RSS link immediately
-  activatePlatform('platform-rss', RSS_URL);
+  function parseYouTubeFeed(text) {
+    var xml = new DOMParser().parseFromString(text, 'text/xml');
+    if (xml.querySelector('parsererror')) throw new Error('YouTube XML parse error');
+    var entry = xml.getElementsByTagNameNS(ATOM_NS, 'entry')[0] || xml.querySelector('entry');
+    if (!entry) return;
+    var videoNode = entry.getElementsByTagNameNS(YT_NS, 'videoId')[0] || entry.querySelector('videoId');
+    var titleNode = entry.getElementsByTagNameNS(ATOM_NS, 'title')[0] || entry.querySelector('title');
+    var publishedNode = entry.getElementsByTagNameNS(ATOM_NS, 'published')[0] || entry.querySelector('published');
+    var descNode = entry.getElementsByTagName('media:description')[0];
+    updateLatestVideo({
+      videoId: videoNode ? (videoNode.textContent || '').trim() : '',
+      title: titleNode ? (titleNode.textContent || '').trim() : '',
+      pubDate: publishedNode ? formatDate((publishedNode.textContent || '').trim()) : '',
+      description: descNode ? (descNode.textContent || '').trim() : ''
+    });
+  }
 
-  // Try direct fetch first; CORS failure (TypeError) falls through to proxy
+  activatePlatform('platform-rss', RSS_URL);
+  activatePlatform('platform-spotify', SPOTIFY_EPISODE_URL);
+
+  fetch(PROXY_URL + encodeURIComponent(YOUTUBE_FEED_URL))
+    .then(function (resp) {
+      if (!resp.ok) throw new Error('YouTube proxy HTTP ' + resp.status);
+      return resp.text();
+    })
+    .then(parseYouTubeFeed)
+    .catch(function () {});
+
   fetch(RSS_URL, { mode: 'cors' })
     .then(function (resp) {
       if (!resp.ok) throw new Error('HTTP ' + resp.status);
       return resp.text();
     })
     .then(parseFeed)
-    .catch(function (directErr) {
-      if (directErr instanceof TypeError) {
-        // Likely CORS — retry via proxy
-        fetch(PROXY_URL + encodeURIComponent(RSS_URL))
-          .then(function (resp) {
-            if (!resp.ok) throw new Error('Proxy HTTP ' + resp.status);
-            return resp.text();
-          })
-          .then(parseFeed)
-          .catch(function (proxyErr) {
-            console.debug('Podcast feed (proxy):', proxyErr.message);
-            showFallback();
-          });
-      } else {
-        console.debug('Podcast feed:', directErr.message);
-        showFallback();
-      }
+    .catch(function () {
+      fetch(PROXY_URL + encodeURIComponent(RSS_URL))
+        .then(function (resp) {
+          if (!resp.ok) throw new Error('Proxy HTTP ' + resp.status);
+          return resp.text();
+        })
+        .then(parseFeed)
+        .catch(showFallback);
     });
 }());
 </script>
-
 </body>
 </html>

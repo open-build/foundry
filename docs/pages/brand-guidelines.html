@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="path-depth" content="1">
+    <title>First City Foundry Brand Guidelines</title>
+    <meta name="description" content="First City Foundry brand guidelines for logo usage, colors, typography, UI styling, and messaging.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <script>
+        (function() {
+            var savedTheme = localStorage.getItem('foundry-theme');
+            document.documentElement.setAttribute('data-theme', savedTheme || 'light');
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        coral: { 50: '#FFF1F3', 500: '#FF5A6B', 600: '#EE4053' },
+                        ink: '#0F1B2A',
+                        slatebrand: '#475569',
+                        warm: '#F1EFEA'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Clash Grotesk', 'Space Grotesk', 'Inter', 'system-ui', 'sans-serif']
+                    },
+                    borderRadius: {
+                        foundry: '8px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background: #F1EFEA; color: #0F1B2A; font-family: 'Inter', system-ui, sans-serif; }
+        h1, h2, h3, .font-display { font-family: 'Clash Grotesk', 'Space Grotesk', 'Inter', system-ui, sans-serif; letter-spacing: 0; }
+        .panel { background: #fff; border: 1px solid rgba(15, 27, 42, 0.12); border-radius: 8px; box-shadow: 0 14px 30px rgba(15, 27, 42, 0.06); }
+        .eyebrow { color: #FF5A6B; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.24em; text-transform: uppercase; }
+        .swatch { min-height: 108px; border: 1px solid rgba(15, 27, 42, 0.12); border-radius: 8px; }
+        @media print { #header-slot, #footer-slot, .print-hide { display: none; } body { background: white; } .panel { box-shadow: none; } }
+    </style>
+    <script src="../assets/js/site.js" defer></script>
+</head>
+<body>
+<div id="header-slot"></div>
+
+<main class="mx-auto max-w-7xl px-4 pb-16 pt-28 sm:px-6 lg:px-8">
+    <section class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+        <div>
+            <div class="eyebrow mb-4">First City Foundry design system</div>
+            <h1 class="font-display text-5xl font-bold leading-tight sm:text-6xl">Build community. Create opportunity.</h1>
+            <p class="mt-5 max-w-2xl text-lg leading-8 text-slatebrand">First City Foundry should feel welcoming, community-first, opportunity-driven, practical, collaborative, and trustworthy.</p>
+        </div>
+        <div class="panel flex items-center justify-center p-8">
+            <img src="../assets/img/logo-horizontal.png" alt="First City Foundry logo" class="brand-logo-card max-h-36 w-auto rounded-foundry bg-white px-4 py-3">
+        </div>
+    </section>
+
+    <section class="mt-12 grid gap-5 lg:grid-cols-3">
+        <div class="panel p-6 lg:col-span-2">
+            <div class="eyebrow mb-4">Brand Mark Suite</div>
+            <div class="grid gap-4 sm:grid-cols-2">
+                <div class="rounded-foundry border border-ink/10 bg-white p-5">
+                    <div class="text-sm font-bold text-slatebrand">Primary lockup</div>
+                    <img src="../assets/img/logo-horizontal.png" alt="First City Foundry primary logo" class="brand-logo-card mt-5 h-20 w-auto rounded-foundry bg-white px-3 py-2">
+                </div>
+                <div class="rounded-foundry border border-white/10 bg-ink p-5">
+                    <div class="text-sm font-bold text-white/70">On navy ink</div>
+                    <img src="../assets/img/logo-horizontal.png" alt="First City Foundry logo on dark" class="brand-logo-card mt-5 h-20 w-auto rounded-foundry bg-white px-3 py-2">
+                </div>
+            </div>
+        </div>
+        <div class="panel p-6">
+            <div class="eyebrow mb-4">Typography</div>
+            <div class="font-display text-5xl font-bold">H1</div>
+            <p class="mt-2 font-display text-xl font-bold">Clash Grotesk / Space Grotesk</p>
+            <p class="mt-5 text-sm leading-6 text-slatebrand">Use display type for civic headlines, program cards, and section titles. Use Inter for body, forms, event details, captions, and navigation.</p>
+        </div>
+    </section>
+
+    <section class="mt-12">
+        <div class="eyebrow mb-4">Color Palette</div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
+            <div><div class="swatch bg-coral-500"></div><h3 class="mt-3 font-bold">Forge Coral</h3><p class="text-sm text-slatebrand">#FF5A6B</p></div>
+            <div><div class="swatch bg-ink"></div><h3 class="mt-3 font-bold">Navy Ink</h3><p class="text-sm text-slatebrand">#0F1B2A</p></div>
+            <div><div class="swatch bg-[#1F2937]"></div><h3 class="mt-3 font-bold">Charcoal</h3><p class="text-sm text-slatebrand">#1F2937</p></div>
+            <div><div class="swatch bg-[#475569]"></div><h3 class="mt-3 font-bold">Slate</h3><p class="text-sm text-slatebrand">#475569</p></div>
+            <div><div class="swatch bg-warm"></div><h3 class="mt-3 font-bold">Warm Gray</h3><p class="text-sm text-slatebrand">#F1EFEA</p></div>
+            <div><div class="swatch bg-white"></div><h3 class="mt-3 font-bold">Soft White</h3><p class="text-sm text-slatebrand">#FFFFFF</p></div>
+        </div>
+    </section>
+
+    <section class="mt-14 grid gap-5 lg:grid-cols-2">
+        <div class="panel p-6">
+            <div class="eyebrow mb-4">UI Components</div>
+            <h2 class="font-display text-3xl font-bold">Community and program focused.</h2>
+            <div class="mt-6 grid gap-4">
+                <div class="rounded-foundry border border-ink/10 bg-white p-4">
+                    <div class="mb-2 text-xs font-bold uppercase text-coral-500">Accepting applications</div>
+                    <h3 class="font-display text-xl font-bold">Founder Launchpad</h3>
+                    <p class="mt-2 text-sm text-slatebrand">A 12-week program for early-stage founders.</p>
+                    <button class="mt-4 rounded-foundry bg-coral-500 px-4 py-2 text-sm font-bold text-white">Apply now</button>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <button class="rounded-foundry bg-coral-500 px-4 py-2 text-sm font-bold text-white">Primary</button>
+                    <button class="rounded-foundry bg-ink px-4 py-2 text-sm font-bold text-white">Secondary</button>
+                    <button class="rounded-foundry border border-ink/10 bg-white px-4 py-2 text-sm font-bold text-ink">Tertiary</button>
+                </div>
+            </div>
+        </div>
+        <div class="panel p-6">
+            <div class="eyebrow mb-4">Voice and Content</div>
+            <h2 class="font-display text-3xl font-bold">Lead with practical opportunity.</h2>
+            <div class="mt-6 grid gap-4 text-sm leading-6 text-slatebrand">
+                <div class="rounded-foundry bg-coral-50 p-4"><strong>Use:</strong> community, mentorship, resources, founders, opportunity, programs, events, impact.</div>
+                <div class="rounded-foundry bg-white p-4 ring-1 ring-ink/10"><strong>Avoid:</strong> abstract startup jargon, exclusive language, and claims that sound disconnected from local community impact.</div>
+                <div class="rounded-foundry bg-white p-4 ring-1 ring-ink/10"><strong>Core line:</strong> We connect people, ideas, and resources to build a better city for everyone.</div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div id="footer-slot"></div>
+</body>
+</html>

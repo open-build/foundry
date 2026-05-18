@@ -1,144 +1,188 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FX80RQDJ49"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-FX80RQDJ49');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="path-depth" content="1">
-    <title>Partners — The Foundry Collective</title>
-    <meta name="description" content="Meet the partners behind the Foundry Collective — Buildly, Kurent Co, Startup Grind PDX, Open.Build, and Prepare4VC.">
+    <title>Partners - First City Foundry</title>
+    <meta name="description" content="Meet the partners behind First City Foundry and the founder support lifecycle across build, train, connect, and operate.">
     <link rel="canonical" href="https://www.firstcityfoundry.com/pages/partners.html">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    brand:  { 500: '#F97316', 600: '#EA580C', 700: '#C2410C' },
-                    navy:   { 700: '#1E3A5F', 800: '#162D4A', 900: '#0F1F35' },
-                    mint:   { 500: '#10B981', 600: '#059669' },
-                    forest: { 50: '#F0FDF4', 100: '#DCFCE7', 500: '#22C55E', 600: '#16A34A', 700: '#15803D', 800: '#1A3A2A', 900: '#14261D' }
-                },
-                fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
-            }
-        }
-    }
+        (function() {
+            var savedTheme = localStorage.getItem('foundry-theme');
+            document.documentElement.setAttribute('data-theme', savedTheme || 'light');
+        })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        coral: { 50: '#FFF1F3', 100: '#FFE2E6', 500: '#FF5A6B', 600: '#EE4053', 700: '#D72F44' },
+                        ink: '#0F1B2A',
+                        charcoal: '#1F2937',
+                        slatebrand: '#475569',
+                        warm: '#F1EFEA',
+                        softwhite: '#FFFFFF'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Clash Grotesk', 'Space Grotesk', 'Inter', 'system-ui', 'sans-serif']
+                    },
+                    borderRadius: { foundry: '8px' }
+                }
+            }
+        }
+    </script>
     <script src="../assets/js/site.js" defer></script>
 </head>
-<body class="bg-white text-gray-900 font-sans antialiased">
-
+<body class="foundry-page antialiased">
 <div id="header-slot"></div>
 
-<!-- Hero -->
-<section class="bg-gradient-to-br from-navy-900 via-navy-800 to-navy-700 text-white pt-28 pb-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <p class="uppercase tracking-widest text-brand-500 text-sm font-semibold mb-3">The Ecosystem</p>
-        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Our Partners</h1>
-        <p class="text-gray-300 text-lg max-w-xl mx-auto">
-            Not an accelerator. A curated network of partners covering the full founder lifecycle — from first line of code to founder independence.
-        </p>
-    </div>
-</section>
-
-<!-- Ecosystem Model -->
-<section class="py-16 bg-gray-50">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-2xl font-bold text-center mb-4">How It Works</h2>
-        <p class="text-gray-600 text-center max-w-2xl mx-auto mb-10">Each partner owns a stage of the lifecycle. Startups flow through the network, receiving specialised support at every stage.</p>
-        <div class="grid md:grid-cols-4 gap-4">
-            <div class="bg-white rounded-xl p-5 border border-gray-100 text-center">
-                <div class="text-2xl mb-2">🏗️</div>
-                <h3 class="font-bold text-sm mb-1">BUILD</h3>
-                <p class="text-gray-500 text-xs">Product development with AI-native tools and open-source rails</p>
-                <p class="text-brand-600 font-semibold text-xs mt-2">Buildly</p>
+<main>
+    <section class="foundry-page-hero pt-28">
+        <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-14 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+            <div>
+                <span class="foundry-page-badge">Partner network</span>
+                <h1 class="font-display mt-5 max-w-3xl text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">A civic startup system built with specialists.</h1>
+                <p class="mt-6 max-w-2xl text-lg leading-8 text-white/80">First City Foundry brings aligned partners together around one practical founder lifecycle: build, train, connect, and operate.</p>
+                <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <a href="../register.html" class="btn-primary">Become a partner</a>
+                    <a href="index-report.html" class="btn-ghost border-white/20 bg-white/10 text-white hover:bg-white hover:text-ink">Explore programs</a>
+                </div>
             </div>
-            <div class="bg-white rounded-xl p-5 border border-gray-100 text-center">
-                <div class="text-2xl mb-2">🎓</div>
-                <h3 class="font-bold text-sm mb-1">TRAIN</h3>
-                <p class="text-gray-500 text-xs">Skills workshops, open-source onboarding, and CollabHub projects</p>
-                <p class="text-blue-600 font-semibold text-xs mt-2">Open.Build</p>
-            </div>
-            <div class="bg-white rounded-xl p-5 border border-gray-100 text-center">
-                <div class="text-2xl mb-2">📡</div>
-                <h3 class="font-bold text-sm mb-1">CONNECT</h3>
-                <p class="text-gray-500 text-xs">Local events, investor readiness, and community distribution</p>
-                <p class="text-purple-600 font-semibold text-xs mt-2">Startup Grind PDX · P4VC</p>
-            </div>
-            <div class="bg-white rounded-xl p-5 border border-gray-100 text-center">
-                <div class="text-2xl mb-2">⚙️</div>
-                <h3 class="font-bold text-sm mb-1">OPERATE</h3>
-                <p class="text-gray-500 text-xs">Operational architecture, SOPs, and founder independence systems</p>
-                <p class="text-mint-600 font-semibold text-xs mt-2">Kurent Co</p>
+            <div class="grid gap-4 sm:grid-cols-2">
+                <div class="foundry-page-card bg-white/95 p-5 text-ink">
+                    <div class="foundry-page-icon mb-4">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 17h16M7 7v10M17 7v10"/></svg>
+                    </div>
+                    <h2 class="font-display text-2xl font-bold">Shared rails</h2>
+                    <p class="mt-3 text-sm leading-6 text-slatebrand">Partners coordinate around a common path so founders know what comes next.</p>
+                </div>
+                <div class="foundry-page-card bg-white/95 p-5 text-ink">
+                    <div class="foundry-page-icon mb-4">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12M6 12h12M4 4h16v16H4z"/></svg>
+                    </div>
+                    <h2 class="font-display text-2xl font-bold">No duplication</h2>
+                    <p class="mt-3 text-sm leading-6 text-slatebrand">Each partner owns a clear lifecycle stage instead of competing for the same role.</p>
+                </div>
+                <div class="foundry-page-card bg-white/95 p-5 text-ink sm:col-span-2">
+                    <div class="flex items-center justify-between gap-4">
+                        <div>
+                            <div class="eyebrow mb-2">Current focus</div>
+                            <h2 class="font-display text-2xl font-bold">Founder support from idea to independence.</h2>
+                        </div>
+                        <div class="rounded-foundry bg-coral-500 px-4 py-3 text-center text-white">
+                            <div class="font-display text-3xl font-bold">4</div>
+                            <div class="text-xs font-bold uppercase">Stages</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Partner Cards -->
-<section class="py-16">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-2xl font-bold mb-8">Meet the Partners</h2>
-        <div id="partners-page" class="grid md:grid-cols-2 gap-6">
-            <p class="text-gray-400 col-span-2 text-center py-8">Loading partners…</p>
+    <section class="foundry-page-section py-18">
+        <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-3xl text-center">
+                <span class="foundry-page-badge">Lifecycle model</span>
+                <h2 class="font-display mt-4 text-3xl font-bold text-ink sm:text-4xl">Four stages, one founder path.</h2>
+                <p class="mt-4 text-slatebrand">The Foundry model keeps support practical. Each stage has a clear purpose, a partner owner, and an outcome founders can act on.</p>
+            </div>
+            <div class="mt-10 grid gap-4 md:grid-cols-4">
+                <article class="foundry-page-card p-5">
+                    <div class="foundry-page-icon mb-4">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 20h16M6 20V8l6-4 6 4v12M9 20v-6h6v6"/></svg>
+                    </div>
+                    <h3 class="font-display text-lg font-bold text-ink">Build</h3>
+                    <p class="mt-2 text-sm leading-6 text-slatebrand">Product development with AI-native tools, open-source rails, and deployment discipline.</p>
+                    <p class="mt-4 text-sm font-bold text-coral-500">Buildly</p>
+                </article>
+                <article class="foundry-page-card p-5">
+                    <div class="foundry-page-icon mb-4">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 19.5V6a2 2 0 0 1 2-2h12v15.5M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg>
+                    </div>
+                    <h3 class="font-display text-lg font-bold text-ink">Train</h3>
+                    <p class="mt-2 text-sm leading-6 text-slatebrand">Workshops, open-source onboarding, and hands-on pathways for technical growth.</p>
+                    <p class="mt-4 text-sm font-bold text-coral-500">Open.Build</p>
+                </article>
+                <article class="foundry-page-card p-5">
+                    <div class="foundry-page-icon mb-4">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h8M12 8v8M5 5h14v14H5z"/></svg>
+                    </div>
+                    <h3 class="font-display text-lg font-bold text-ink">Connect</h3>
+                    <p class="mt-2 text-sm leading-6 text-slatebrand">Local events, investor readiness, mentor access, and community distribution.</p>
+                    <p class="mt-4 text-sm font-bold text-coral-500">Startup Grind PDX + P4VC</p>
+                </article>
+                <article class="foundry-page-card p-5">
+                    <div class="foundry-page-icon mb-4">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h10M4 6h2m4 6h10M4 12h2m4 6h10M4 18h2"/></svg>
+                    </div>
+                    <h3 class="font-display text-lg font-bold text-ink">Operate</h3>
+                    <p class="mt-2 text-sm leading-6 text-slatebrand">Operational architecture, SOPs, delegation systems, and founder independence.</p>
+                    <p class="mt-4 text-sm font-bold text-coral-500">Kurent Co</p>
+                </article>
+            </div>
         </div>
-    </div>
-</section>
-<script>document.addEventListener('DOMContentLoaded', () => { if (typeof loadPartners === 'function') loadPartners('partners-page'); });</script>
+    </section>
 
-<!-- Partner Criteria -->
-<section class="py-16 bg-gray-50">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-2xl font-bold text-center mb-6">Partnership Criteria</h2>
-        <p class="text-gray-600 text-center mb-8">We accept partners who extend the founder lifecycle. We decline partners who duplicate existing capabilities or extract equity without adding operational value.</p>
-        <div class="grid sm:grid-cols-2 gap-4">
-            <div class="bg-white rounded-lg p-5 border border-green-200">
-                <h3 class="font-semibold text-green-700 mb-2"><i class="fa-solid fa-check mr-2"></i>We accept partners who…</h3>
-                <ul class="text-sm text-gray-600 space-y-1">
-                    <li>• Cover a unique lifecycle stage</li>
-                    <li>• Operate with flexible deal structures</li>
-                    <li>• Have local + global capacity</li>
-                    <li>• Align with the V·M·I framework</li>
+    <section class="bg-white py-16">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                    <span class="foundry-page-badge">Partner directory</span>
+                    <h2 class="font-display mt-4 text-3xl font-bold text-ink">Meet the partners.</h2>
+                </div>
+                <p class="max-w-xl text-sm leading-6 text-slatebrand">This directory is loaded from Foundry data, but now renders in the same card and badge system as the rest of the site.</p>
+            </div>
+            <div id="partners-page" class="grid gap-5 md:grid-cols-2">
+                <p class="text-slatebrand md:col-span-2">Loading partners...</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="foundry-page-section py-16">
+        <div class="mx-auto grid max-w-6xl gap-6 px-4 sm:px-6 md:grid-cols-2 lg:px-8">
+            <div class="foundry-page-card p-6">
+                <h2 class="font-display text-2xl font-bold text-ink">We accept partners who...</h2>
+                <ul class="mt-5 space-y-3 text-sm leading-6 text-slatebrand">
+                    <li>Cover a distinct lifecycle stage.</li>
+                    <li>Operate with flexible, founder-friendly structures.</li>
+                    <li>Have local presence and broader network capacity.</li>
+                    <li>Align with the visibility, margin, and independence model.</li>
                 </ul>
             </div>
-            <div class="bg-white rounded-lg p-5 border border-red-200">
-                <h3 class="font-semibold text-red-700 mb-2"><i class="fa-solid fa-xmark mr-2"></i>We decline partners who…</h3>
-                <ul class="text-sm text-gray-600 space-y-1">
-                    <li>• Compete with an existing partner</li>
-                    <li>• Require equity as payment</li>
-                    <li>• Offer only generic mentorship</li>
-                    <li>• Can't commit to the city model</li>
+            <div class="foundry-page-card p-6">
+                <h2 class="font-display text-2xl font-bold text-ink">We decline partners who...</h2>
+                <ul class="mt-5 space-y-3 text-sm leading-6 text-slatebrand">
+                    <li>Duplicate an existing partner role.</li>
+                    <li>Require equity before creating operational value.</li>
+                    <li>Offer only generic mentorship without a delivery path.</li>
+                    <li>Cannot commit to the city-level operating model.</li>
                 </ul>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- CTA -->
-<section class="py-12 bg-brand-500 text-white">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-        <h2 class="text-2xl font-bold mb-3">Want to join the collective?</h2>
-        <p class="text-orange-100 mb-6">If your organisation covers a lifecycle stage we haven't filled, we'd love to talk.</p>
-        <a href="../register.html" class="inline-block bg-white text-brand-600 hover:bg-gray-100 font-semibold px-8 py-3.5 rounded-lg transition-colors">
-            Get in Touch
-        </a>
-    </div>
-</section>
+    <section class="foundry-page-dark py-16">
+        <div class="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_auto] lg:px-8">
+            <div>
+                <span class="foundry-page-badge">Partnership</span>
+                <h2 class="font-display mt-4 text-3xl font-bold sm:text-4xl">Have a missing stage we should add?</h2>
+                <p class="mt-4 max-w-2xl text-white/70">If your organization fills a clear gap in the founder lifecycle, we would like to understand the role you can play.</p>
+            </div>
+            <a href="../register.html" class="btn-primary">Start the conversation</a>
+        </div>
+    </section>
+</main>
 
 <div id="footer-slot"></div>
-
+<script>document.addEventListener('DOMContentLoaded', function () { if (typeof loadPartners === 'function') loadPartners('partners-page'); });</script>
 </body>
 </html>

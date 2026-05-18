@@ -159,6 +159,22 @@ class ForgeWebDB:
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         ''')
+
+        # Portland Operations & AI Index submissions
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS index_submissions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                company_name TEXT,
+                contact_name_role TEXT,
+                contact_email TEXT,
+                score_visibility INTEGER DEFAULT 0,
+                score_margin INTEGER DEFAULT 0,
+                score_independence INTEGER DEFAULT 0,
+                score_ai_readiness INTEGER DEFAULT 0,
+                data TEXT NOT NULL
+            )
+        ''')
         
         self.conn.commit()
         print("✓ Database initialized")
@@ -434,6 +450,73 @@ class ForgeWebDB:
                 WHERE id = ?
             ''', (position, nav_id))
         self.conn.commit()
+
+    # Portland Operations & AI Index methods
+    def save_index_submission(self, data, scores=None):
+        """Save one completed Index assessment."""
+        scores = scores or {}
+        cursor = self.conn.cursor()
+        cursor.execute('''
+            INSERT INTO index_submissions
+            (company_name, contact_name_role, contact_email, score_visibility,
+             score_margin, score_independence, score_ai_readiness, data)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            data.get('company_name', ''),
+            data.get('contact_name_role', ''),
+            data.get('contact_email', ''),
+            int(scores.get('visibility', 0) or 0),
+            int(scores.get('margin', 0) or 0),
+            int(scores.get('independence', 0) or 0),
+            int(scores.get('ai_readiness', 0) or 0),
+            json.dumps(data, sort_keys=True)
+        ))
+        self.conn.commit()
+        return cursor.lastrowid
+
+    def get_index_submissions(self, limit=500):
+        """Return recent Index submissions with parsed response data."""
+        cursor = self.conn.cursor()
+        cursor.execute('''
+            SELECT * FROM index_submissions
+            ORDER BY submitted_at DESC, id DESC
+            LIMIT ?
+        ''', (int(limit),))
+        submissions = []
+        for row in cursor.fetchall():
+            item = dict(row)
+            try:
+                item['data'] = json.loads(item.get('data') or '{}')
+            except json.JSONDecodeError:
+                item['data'] = {}
+            item['scores'] = {
+                'visibility': item.get('score_visibility', 0),
+                'margin': item.get('score_margin', 0),
+                'independence': item.get('score_independence', 0),
+                'ai_readiness': item.get('score_ai_readiness', 0)
+            }
+            submissions.append(item)
+        return submissions
+
+    def get_index_submission(self, submission_id):
+        """Return one Index submission by id."""
+        cursor = self.conn.cursor()
+        cursor.execute('SELECT * FROM index_submissions WHERE id = ?', (submission_id,))
+        row = cursor.fetchone()
+        if not row:
+            return None
+        item = dict(row)
+        try:
+            item['data'] = json.loads(item.get('data') or '{}')
+        except json.JSONDecodeError:
+            item['data'] = {}
+        item['scores'] = {
+            'visibility': item.get('score_visibility', 0),
+            'margin': item.get('score_margin', 0),
+            'independence': item.get('score_independence', 0),
+            'ai_readiness': item.get('score_ai_readiness', 0)
+        }
+        return item
     
     def close(self):
         """Close database connection"""

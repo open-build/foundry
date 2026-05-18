@@ -1,479 +1,184 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FX80RQDJ49"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-FX80RQDJ49');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apply to Buildly Labs Foundry - Registration Form</title>
-    <meta name="description" content="Apply to join the Buildly Labs Foundry network and accelerate your startup journey.">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="path-depth" content="0">
+    <title>Join the Portland Operations & AI Index - First City Foundry</title>
+    <meta name="description" content="Join the Portland Operations & AI Index and help benchmark how local founders are using systems, automation, and AI to scale durable companies.">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.firstcityfoundry.com/register.html">
+    <meta property="og:title" content="Join the Portland Operations & AI Index">
+    <meta property="og:description" content="Take the assessment and help map the operating systems, AI adoption, and growth leverage inside Portland companies.">
+    <meta property="og:image" content="https://www.firstcityfoundry.com/assets/img/logo-horizontal.png">
+
+    <link rel="canonical" href="https://www.firstcityfoundry.com/register.html">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <script>
+        (function() {
+            var savedTheme = localStorage.getItem('foundry-theme');
+            document.documentElement.setAttribute('data-theme', savedTheme || 'light');
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: {
-                            50: '#eff6ff',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                        },
-                        accent: {
-                            500: '#f59e0b',
-                            600: '#d97706',
-                        }
+                        coral: { 50: '#FFF1F3', 100: '#FFE2E6', 500: '#FF5A6B', 600: '#EE4053', 700: '#D72F44' },
+                        ink: '#0F1B2A',
+                        charcoal: '#1F2937',
+                        slatebrand: '#475569',
+                        warm: '#F1EFEA',
+                        softwhite: '#FFFFFF'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Clash Grotesk', 'Space Grotesk', 'Inter', 'system-ui', 'sans-serif']
+                    },
+                    borderRadius: {
+                        foundry: '8px'
                     }
                 }
             }
         }
     </script>
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/main.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/img/favicon.png">
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Cloudflare Turnstile -->
+    <script src="assets/js/site.js" defer></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
-<body class="font-sans antialiased bg-gray-50">
+<body class="foundry-page antialiased">
+<div id="header-slot"></div>
 
-    <!-- Navigation -->
-    <nav class="bg-white shadow-lg fixed w-full z-50 top-0">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <a href="index.html">
-                            <img class="h-10 w-auto" src="assets/img/logo-horizontal.png" alt="Buildly Labs Foundry">
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">Home</a>
-                    <a href="index.html#about" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">About</a>
-                    <a href="index.html#benefits" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">Benefits</a>
-                    <a href="#" class="bg-primary-600 text-white px-6 py-2 rounded-md text-sm font-medium">Apply Now</a>
-                </div>
-                
-                <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center">
-                    <button type="button" class="mobile-menu-button text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" aria-label="toggle menu">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
+<main>
+    <section class="foundry-page-hero pt-28">
+        <div class="mx-auto grid min-h-[520px] max-w-7xl items-center gap-10 px-4 pb-12 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
+            <div>
+                <span class="foundry-page-badge">Portland Operations & AI Index</span>
+                <h1 class="font-display mt-6 text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
+                    How does your growth engine compare?
+                </h1>
+                <p class="mt-6 max-w-2xl text-lg leading-8 text-white/82">
+                    Take the assessment and help First City Foundry benchmark how Portland founders use systems, automation, AI, and community support to build companies with better visibility, stronger margins, and more independence.
+                </p>
+                <div class="mt-8 flex flex-wrap gap-3">
+                    <a href="#index-assessment" class="btn-primary">Start the assessment</a>
+                    <a href="pages/index-report.html" class="btn-ghost border-white/20 bg-white/10 text-white hover:bg-white hover:text-ink">View framework</a>
                 </div>
             </div>
-        </div>
-        
-        <!-- Mobile menu -->
-        <div class="mobile-menu hidden md:hidden">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
-                <a href="index.html" class="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium">Home</a>
-                <a href="index.html#about" class="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium">About</a>
-                <a href="index.html#benefits" class="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium">Benefits</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Header Section -->
-    <header class="bg-gradient-to-r from-primary-600 to-primary-700 pt-20 pb-12">
-        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <img src="assets/img/logo-horizontal.png" alt="Buildly Labs Foundry" class="h-20 mx-auto mb-8 filter brightness-0 invert">
-            <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                Submit Your Startup Application
-            </h1>
-            <p class="text-xl text-primary-100 max-w-2xl mx-auto">
-                Join the Buildly Labs Foundry and connect with our partner network of developers, investors, and industry experts.
-            </p>
-        </div>
-    </header>
-
-    <!-- Benefits Section -->
-    <section class="py-12 bg-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">
-                Join the Buildly Labs Foundry Partner Network
-            </h2>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="flex items-start space-x-3">
-                    <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
-                    <div>
-                        <h4 class="font-semibold text-gray-900">All Business Types Welcome</h4>
-                        <p class="text-gray-600">Startups, Small Business, Mid-Size Corporations all are welcome</p>
+            <div class="foundry-page-card bg-white/95 p-6 text-ink">
+                <div class="grid gap-4 sm:grid-cols-2">
+                    <div class="rounded-foundry border border-ink/10 p-4">
+                        <div class="foundry-page-icon mb-4">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 19V5m0 14h16M8 16l3-4 3 2 4-7"/></svg>
+                        </div>
+                        <h2 class="font-display text-xl font-bold">Visibility</h2>
+                        <p class="mt-2 text-sm leading-6 text-slatebrand">Dashboards, reporting speed, and decision quality.</p>
                     </div>
-                </div>
-                
-                <div class="flex items-start space-x-3">
-                    <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
-                    <div>
-                        <h4 class="font-semibold text-gray-900">Partner Network Access</h4>
-                        <p class="text-gray-600">Connect with Developers, Investors, Marketing Firms, CFO agencies and more</p>
+                    <div class="rounded-foundry border border-ink/10 p-4">
+                        <div class="foundry-page-icon mb-4">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-2.8 0-5 1.3-5 3s2.2 3 5 3 5-1.3 5-3-2.2-3-5-3Zm0 0V4m0 10v6m-6-9H3m18 0h-3"/></svg>
+                        </div>
+                        <h2 class="font-display text-xl font-bold">Margins</h2>
+                        <p class="mt-2 text-sm leading-6 text-slatebrand">Where automation is creating leverage or where manual work is still winning.</p>
                     </div>
-                </div>
-                
-                <div class="flex items-start space-x-3">
-                    <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
-                    <div>
-                        <h4 class="font-semibold text-gray-900 text-orange-600">NEW!</h4>
-                        <p class="text-gray-600">Receive a FREE AI evaluation of your startup idea via BabbleBeaver</p>
+                    <div class="rounded-foundry border border-ink/10 p-4">
+                        <div class="foundry-page-icon mb-4">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-5M5 4h14v16H5z"/></svg>
+                        </div>
+                        <h2 class="font-display text-xl font-bold">Independence</h2>
+                        <p class="mt-2 text-sm leading-6 text-slatebrand">Founder dependency, documented knowledge, and enterprise value.</p>
                     </div>
-                </div>
-                
-                <div class="flex items-start space-x-3">
-                    <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
-                    <div>
-                        <h4 class="font-semibold text-gray-900">Immediate Access</h4>
-                        <p class="text-gray-600">Get accepted and start building and collaborating with other founders right away!</p>
+                    <div class="rounded-foundry border border-ink/10 p-4">
+                        <div class="foundry-page-icon mb-4">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v3m0 12v3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1M3 12h3m12 0h3M5.6 18.4l2.1-2.1m8.6-8.6 2.1-2.1M9 12a3 3 0 1 0 6 0 3 3 0 0 0-6 0z"/></svg>
+                        </div>
+                        <h2 class="font-display text-xl font-bold">AI readiness</h2>
+                        <p class="mt-2 text-sm leading-6 text-slatebrand">AI-native operations, tooling investment, and practical use cases.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Application Form -->
-    <section class="py-12 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <!-- Message Container -->
-            <div class="message-container mb-6"></div>
-            
-            <!-- Progress Indicator -->
-            <div class="mb-8">
-                <div class="flex items-center justify-between text-sm font-medium text-gray-500">
-                    <span class="step-indicator active" data-step="1">Company Info</span>
-                    <span class="step-indicator" data-step="2">Team & Market</span>
-                    <span class="step-indicator" data-step="3">Development</span>
-                    <span class="step-indicator" data-step="4">Strategy</span>
-                </div>
-                <div class="mt-2 bg-gray-200 rounded-full h-2">
-                    <div class="progress-bar bg-primary-600 h-2 rounded-full transition-all duration-300" style="width: 25%"></div>
-                </div>
-            </div>
-
-            <form id="startupApplicationForm" class="bg-white rounded-lg shadow-lg p-8">
-                
-                <!-- Step 1: Company Information -->
-                <div class="step active" data-step="1">
-                    <h3 class="text-xl font-bold text-gray-900 mb-6">Company Information</h3>
-                    
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
-                            <input type="text" name="company_name" required 
-                                   class="form-input" 
-                                   placeholder="Enter your company name">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Contact Email *</label>
-                            <input type="email" name="contact_email" required 
-                                   class="form-input" 
-                                   placeholder="your.email@company.com">
-                        </div>
-                    </div>
-                    
-                    <div class="mt-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Business Description *</label>
-                        <textarea name="business_description" required 
-                                  class="form-textarea" 
-                                  placeholder="Describe your business, what problem you solve, and your solution"></textarea>
-                    </div>
-                    
-                    <div class="grid md:grid-cols-2 gap-6 mt-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Legal Structure *</label>
-                            <select name="legal_structure" required class="form-select">
-                                <option value="">Select legal structure</option>
-                                <option value="C Corp">C Corp</option>
-                                <option value="LLC">LLC</option>
-                                <option value="Partnership">Partnership</option>
-                                <option value="Non-Profit">Non-Profit</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Pitch Deck (Optional)</label>
-                            <input type="file" name="pitch_deck" accept=".pdf,.ppt,.pptx" 
-                                   class="form-input">
-                            <p class="text-sm text-gray-500 mt-1">Upload PDF or PowerPoint file</p>
-                        </div>
-                    </div>
-                    
-                    <div class="grid md:grid-cols-3 gap-6 mt-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Annual Revenue ($) *</label>
-                            <input type="number" name="annual_revenue" required min="0" step="0.01"
-                                   class="form-input" 
-                                   placeholder="0.00">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Funding Sought ($) *</label>
-                            <input type="number" name="funding_amount" required min="0" step="0.01"
-                                   class="form-input" 
-                                   placeholder="0.00">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Outstanding Debt ($) *</label>
-                            <input type="number" name="outstanding_debt" required min="0" step="0.01"
-                                   class="form-input" 
-                                   placeholder="0.00">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Step 2: Team & Market -->
-                <div class="step" data-step="2">
-                    <h3 class="text-xl font-bold text-gray-900 mb-6">Team & Market Information</h3>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Founder Names *</label>
-                        <input type="text" name="founder_names" required 
-                               class="form-input" 
-                               placeholder="List all founders and their roles">
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Team Members</label>
-                        <textarea name="team_members" 
-                                  class="form-textarea" 
-                                  placeholder="If you have employees on payroll, list them here with their roles"></textarea>
-                        <p class="text-sm text-gray-500 mt-1">Optional - describe your current team</p>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Advisors & Mentors</label>
-                        <textarea name="advisors_mentors" 
-                                  class="form-textarea" 
-                                  placeholder="List any advisors, mentors, or board members"></textarea>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Target Audience *</label>
-                        <textarea name="target_audience" required 
-                                  class="form-textarea" 
-                                  placeholder="Describe your primary and secondary target markets"></textarea>
-                        <p class="text-sm text-gray-500 mt-1">Who are your ideal customers?</p>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Competition Analysis</label>
-                        <textarea name="competition_analysis" 
-                                  class="form-textarea" 
-                                  placeholder="List your closest competitors and how you differentiate"></textarea>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Market Demand Proof</label>
-                        <textarea name="market_demand_proof" 
-                                  class="form-textarea" 
-                                  placeholder="Any research, surveys, or signups that validate market demand"></textarea>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Marketing Strategy</label>
-                        <textarea name="marketing_strategy" 
-                                  class="form-textarea" 
-                                  placeholder="Your marketing plans (other than paid advertising)"></textarea>
-                    </div>
-                </div>
-
-                <!-- Step 3: Development & Product -->
-                <div class="step" data-step="3">
-                    <h3 class="text-xl font-bold text-gray-900 mb-6">Product Development</h3>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Development Stage *</label>
-                        <select name="development_stage" required class="form-select">
-                            <option value="">Select development stage</option>
-                            <option value="Idea Stage">Idea Stage</option>
-                            <option value="Market Fit">Market Fit</option>
-                            <option value="Proof of Concept">Proof of Concept</option>
-                            <option value="MVP">MVP</option>
-                            <option value="Growth Stage">Growth Stage</option>
-                        </select>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Intellectual Property</label>
-                        <textarea name="intellectual_property" 
-                                  class="form-textarea" 
-                                  placeholder="What IP have you registered or plan to register?"></textarea>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Customer Base</label>
-                        <textarea name="customer_base" 
-                                  class="form-textarea" 
-                                  placeholder="Have you identified your users or personas?"></textarea>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Customer Acquisition Strategy</label>
-                        <textarea name="customer_acquisition_strategy" 
-                                  class="form-textarea" 
-                                  placeholder="What is your plan to get customers to pay for/use your product?"></textarea>
-                    </div>
-                    
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Current Funding Sources *</label>
-                            <textarea name="current_funding_sources" required 
-                                      class="form-textarea" 
-                                      placeholder="Personal savings, loans, grants, etc."></textarea>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Future Funding Plans *</label>
-                            <textarea name="future_funding_plans" required 
-                                      class="form-textarea" 
-                                      placeholder="Angel investors, VCs, crowdfunding, etc."></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Step 4: Business Strategy -->
-                <div class="step" data-step="4">
-                    <h3 class="text-xl font-bold text-gray-900 mb-6">Business Strategy & Goals</h3>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Revenue Model *</label>
-                        <select name="revenue_model" required class="form-select">
-                            <option value="">Select revenue model</option>
-                            <option value="B2B">B2B</option>
-                            <option value="B2C">B2C</option>
-                            <option value="B2G">B2G</option>
-                            <option value="B2B2C">B2B2C</option>
-                        </select>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Pricing Strategy</label>
-                        <textarea name="pricing_strategy" 
-                                  class="form-textarea" 
-                                  placeholder="How do you plan to price your product/service?"></textarea>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Competitive Advantage</label>
-                        <textarea name="competitive_advantage" 
-                                  class="form-textarea" 
-                                  placeholder="What makes your solution unique and defensible?"></textarea>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Milestones & Achievements *</label>
-                        <textarea name="milestones_achievements" required 
-                                  class="form-textarea" 
-                                  placeholder="List milestones/achievements so far for your product"></textarea>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Social Impact</label>
-                        <textarea name="social_impact" 
-                                  class="form-textarea" 
-                                  placeholder="Do you have a social mission or see positive social impact with your product?"></textarea>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">References & Recommendations</label>
-                        <textarea name="references_recommendations" 
-                                  class="form-textarea" 
-                                  placeholder="Customer or investor references (optional)"></textarea>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Referral Code</label>
-                        <input type="text" name="referral_code" 
-                               class="form-input" 
-                               placeholder="Enter referral code if you have one">
-                        <p class="text-sm text-gray-500 mt-1">Optional - if someone referred you to the program</p>
-                    </div>
-                </div>
-
-                <!-- Navigation Buttons -->
-                <div class="flex justify-between mt-8 pt-6 border-t">
-                    <button type="button" id="prevBtn" class="btn-secondary" style="display: none;">
-                        <i class="fas fa-arrow-left mr-2"></i>
-                        Previous
-                    </button>
-                    
-                    <div class="ml-auto">
-                        <button type="button" id="nextBtn" class="btn-primary">
-                            Next
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </button>
-                        
-                        <div class="cf-turnstile mb-4" data-sitekey="0x4AAAAAADGaKB4X1IMbsjhn" data-theme="light" style="display: none;" id="turnstileWidget"></div>
-
-                        <button type="submit" id="submitBtn" class="btn-primary" style="display: none;">
-                            Submit Application
-                            <i class="fas fa-paper-plane ml-2"></i>
-                        </button>
-                    </div>
-                </div>
-                
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div class="md:col-span-2">
-                    <img src="assets/img/logo-horizontal.png" alt="Buildly Labs Foundry" class="h-10 mb-4 filter brightness-0 invert">
-                    <p class="text-gray-400 mb-4 max-w-md">
-                        Empowering startups to build, scale, and succeed with comprehensive support and resources.
-                    </p>
-                </div>
-                
-                <div>
-                    <h3 class="text-white font-semibold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
-                        <li><a href="index.html#about" class="hover:text-white transition-colors">About</a></li>
-                        <li><a href="index.html#benefits" class="hover:text-white transition-colors">Benefits</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Apply</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-white font-semibold mb-4">Resources</h3>
-                    <ul class="space-y-2">
-                        <li><a href="https://labs.buildly.io" class="hover:text-white transition-colors">Buildly Labs</a></li>
-                        <li><a href="https://www.buildly.io" class="hover:text-white transition-colors">Buildly Platform</a></li>
-                        <li><a href="https://babble.buildly.io" class="hover:text-white transition-colors">BabbleBeaver</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-                <p class="text-gray-400">
-                    © 2025 Buildly Labs Foundry. All rights reserved.
+    <section id="index-assessment" class="foundry-page-section py-16">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <div class="mb-8 max-w-3xl">
+                <span class="foundry-page-badge">Less than 10 minutes</span>
+                <h2 class="font-display mt-4 text-3xl font-bold text-ink">Join the Index</h2>
+                <p class="mt-3 leading-7 text-slatebrand">
+                    Your answers feed the local benchmark report and help shape future First City Foundry programs, podcast topics, and founder support.
                 </p>
             </div>
-        </div>
-    </footer>
 
-    <!-- JavaScript -->
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/form.js"></script>
+            <div class="message-container mb-6"></div>
+
+            <div class="index-form-shell foundry-page-card p-5 sm:p-8">
+                <div class="mb-8">
+                    <div class="grid gap-2 text-xs font-bold uppercase tracking-[0.14em] text-slatebrand sm:grid-cols-3 lg:grid-cols-6">
+                        <span class="step-indicator active" data-step="1">Basics</span>
+                        <span class="step-indicator" data-step="2">Profile</span>
+                        <span class="step-indicator" data-step="3">Ops & AI</span>
+                        <span class="step-indicator" data-step="4">Margins</span>
+                        <span class="step-indicator" data-step="5">Independence</span>
+                        <span class="step-indicator" data-step="6">Report</span>
+                    </div>
+                    <div class="mt-3 h-2 overflow-hidden rounded-full bg-ink/10">
+                        <div class="progress-bar h-2 rounded-full bg-coral-500 transition-all duration-300" style="width: 16.7%"></div>
+                    </div>
+                </div>
+
+                <form id="startupApplicationForm">
+                    <div id="indexSurveySteps"></div>
+
+                    <div class="mt-8 flex flex-col gap-4 border-t border-ink/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+                        <button type="button" id="prevBtn" class="btn-ghost" style="display: none;">
+                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                            Previous
+                        </button>
+
+                        <div class="sm:ml-auto">
+                            <button type="button" id="nextBtn" class="btn-primary">
+                                Next
+                                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </button>
+
+                            <div class="cf-turnstile mb-4" data-sitekey="0x4AAAAAADGaKB4X1IMbsjhn" data-theme="light" style="display: none;" id="turnstileWidget"></div>
+
+                            <button type="submit" id="submitBtn" class="btn-primary" style="display: none;">
+                                Submit Index response
+                                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="foundry-page-dark py-16">
+        <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+            <div>
+                <span class="foundry-page-badge">Community benchmark</span>
+                <h2 class="font-display mt-4 text-3xl font-bold">Built for operators, not vanity metrics.</h2>
+                <p class="mt-3 max-w-2xl text-white/70">
+                    The Index gives founders a clearer picture of where operational architecture and AI-native workflows are changing the cost of growth.
+                </p>
+            </div>
+            <a href="pages/podcast.html" class="btn-primary">Explore events</a>
+        </div>
+    </section>
+</main>
+
+<div id="footer-slot"></div>
+
+<script src="assets/js/index-survey.js"></script>
+<script src="assets/js/form.js"></script>
 </body>
 </html>

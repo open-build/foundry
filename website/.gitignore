@@ -1,0 +1,42 @@
+# ForgeWeb GitHub Pages Repository
+# Only the docs/ folder gets deployed to GitHub Pages
+
+# ForgeWeb admin tools (not deployed)
+ForgeWeb/
+
+# Database and config (local only)
+*.db
+*.sqlite
+*.sqlite3
+admin/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+venv/
+env/
+.venv/
+.env
+.env.local
+
+# OS Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+.pytest_cache/
+*.log

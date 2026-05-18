@@ -1,129 +1,151 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FX80RQDJ49"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-FX80RQDJ49');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="path-depth" content="1">
-    <title>About — The Foundry Collective</title>
-    <meta name="description" content="The Foundry Collective is a global network helping founders build AI-native products, scale operations, and create businesses that run without them. Based in Portland, Oregon.">
+    <title>About - First City Foundry</title>
+    <meta name="description" content="First City Foundry connects people, ideas, and resources through a city-level founder support network rooted in Portland.">
     <link rel="canonical" href="https://www.firstcityfoundry.com/pages/about.html">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    brand:  { 500: '#F97316', 600: '#EA580C', 700: '#C2410C' },
-                    navy:   { 700: '#1E3A5F', 800: '#162D4A', 900: '#0F1F35' },
-                    mint:   { 500: '#10B981', 600: '#059669' },
-                    forest: { 50: '#F0FDF4', 100: '#DCFCE7', 500: '#22C55E', 600: '#16A34A', 700: '#15803D', 800: '#1A3A2A', 900: '#14261D' }
-                },
-                fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
-            }
-        }
-    }
+        (function() {
+            var savedTheme = localStorage.getItem('foundry-theme');
+            document.documentElement.setAttribute('data-theme', savedTheme || 'light');
+        })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        coral: { 50: '#FFF1F3', 100: '#FFE2E6', 500: '#FF5A6B', 600: '#EE4053', 700: '#D72F44' },
+                        ink: '#0F1B2A',
+                        charcoal: '#1F2937',
+                        slatebrand: '#475569',
+                        warm: '#F1EFEA',
+                        softwhite: '#FFFFFF'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Clash Grotesk', 'Space Grotesk', 'Inter', 'system-ui', 'sans-serif']
+                    },
+                    borderRadius: { foundry: '8px' }
+                }
+            }
+        }
+    </script>
     <script src="../assets/js/site.js" defer></script>
 </head>
-<body class="bg-white text-gray-900 font-sans antialiased">
-
+<body class="foundry-page antialiased">
 <div id="header-slot"></div>
 
-<!-- Hero -->
-<section class="bg-gradient-to-br from-navy-900 via-navy-800 to-navy-700 text-white pt-28 pb-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <p class="uppercase tracking-widest text-brand-500 text-sm font-semibold mb-3">Who We Are</p>
-        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">About the Foundry Collective</h1>
-        <p class="text-gray-300 text-lg max-w-xl mx-auto">
-            A global network, born in Portland, designed to help founders escape the businesses they've built.
-        </p>
-    </div>
-</section>
-
-<!-- Origin Story -->
-<section class="py-16">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-2xl font-bold mb-6">Why We Exist</h2>
-        <div class="prose prose-gray max-w-none">
-            <p>
-                The startup ecosystem is broken in a specific way: founders are told to "hustle" but never taught to <em>architect</em> their businesses for independence.
-                Accelerators optimise for fundraising. Incubators optimise for demo day. We optimise for <strong>founder freedom</strong>.
-            </p>
-            <p>
-                The Foundry Collective emerged from a simple observation — the most successful founders aren't the hardest working. They're the ones who built systems that run without them.
-                We call this the V·M·I framework: <strong>Visibility</strong>, <strong>Margin</strong>, and <strong>Independence</strong>.
-            </p>
-            <p>
-                Rather than being a single organisation, we operate as a curated <strong>partner network</strong>.
-                Each partner owns a stage of the founder lifecycle — build, train, connect, operate — so startups get specialised support at every phase, without paying equity or signing away their future.
-            </p>
-        </div>
-    </div>
-</section>
-
-<!-- Principles -->
-<section class="py-16 bg-gray-50">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-2xl font-bold text-center mb-10">Our Principles</h2>
-        <div class="grid sm:grid-cols-2 gap-6">
-            <div class="bg-white rounded-xl p-6 border border-gray-100">
-                <h3 class="font-bold mb-2"><i class="fa-solid fa-robot text-brand-500 mr-2"></i>AI-Native</h3>
-                <p class="text-gray-600 text-sm">Every process, from product development to outreach, is designed with AI automation at its core — not bolted on later.</p>
+<main>
+    <section class="foundry-page-hero pt-28">
+        <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-14 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+            <div>
+                <span class="foundry-page-badge">About</span>
+                <h1 class="font-display mt-5 max-w-3xl text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">A founder network built for local opportunity.</h1>
+                <p class="mt-6 max-w-2xl text-lg leading-8 text-white/80">First City Foundry began in Portland as a practical way to connect founders, operators, mentors, and partners around the work of building stronger communities.</p>
+                <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <a href="../register.html" class="btn-primary">Join the network</a>
+                    <a href="partners.html" class="btn-ghost border-white/20 bg-white/10 text-white hover:bg-white hover:text-ink">Meet partners</a>
+                </div>
             </div>
-            <div class="bg-white rounded-xl p-6 border border-gray-100">
-                <h3 class="font-bold mb-2"><i class="fa-solid fa-code-branch text-brand-500 mr-2"></i>Open-Source First</h3>
-                <p class="text-gray-600 text-sm">Our tools, frameworks, and methodology are open. We build on open-source rails and contribute back.</p>
-            </div>
-            <div class="bg-white rounded-xl p-6 border border-gray-100">
-                <h3 class="font-bold mb-2"><i class="fa-solid fa-earth-americas text-brand-500 mr-2"></i>City-by-City</h3>
-                <p class="text-gray-600 text-sm">Global scale, local roots. Each city chapter adapts to its ecosystem while sharing a common operating model.</p>
+            <div class="foundry-page-card bg-white/95 p-6 text-ink">
+                <div class="eyebrow mb-4">What we optimize for</div>
+                <div class="space-y-4">
+                    <div class="flex gap-4">
+                        <div class="foundry-page-icon shrink-0"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/></svg></div>
+                        <div><h2 class="font-display text-xl font-bold">Visibility</h2><p class="text-sm text-slatebrand">Founders need clear data, shared context, and honest operating signals.</p></div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="foundry-page-icon shrink-0"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 19V5M4 19h16M8 16l3-4 3 2 4-7"/></svg></div>
+                        <div><h2 class="font-display text-xl font-bold">Margin</h2><p class="text-sm text-slatebrand">Great teams create more output per unit of time, energy, and capital.</p></div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="foundry-page-icon shrink-0"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></div>
+                        <div><h2 class="font-display text-xl font-bold">Independence</h2><p class="text-sm text-slatebrand">A healthy organization can grow beyond one exhausted founder.</p></div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Cities -->
-<section class="py-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-2xl font-bold text-center mb-8">Our Cities</h2>
-        <div id="about-city-list" class="space-y-3 max-w-lg mx-auto">
-            <!-- populated by site.js -->
+    <section class="foundry-page-section py-16">
+        <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
+            <div>
+                <span class="foundry-page-badge">Why we exist</span>
+                <h2 class="font-display mt-4 text-3xl font-bold text-ink sm:text-4xl">Founders need systems, not just encouragement.</h2>
+            </div>
+            <div class="foundry-page-card p-6 text-slatebrand">
+                <div class="space-y-5 leading-7">
+                    <p>The startup ecosystem often celebrates hustle while leaving founders without the operating systems they need to survive the next stage.</p>
+                    <p>First City Foundry is different. We coordinate practical support around the founder lifecycle: building products, training contributors, connecting to community, and operating with independence.</p>
+                    <p>Instead of acting like a single accelerator, we operate as a curated partner network. Each partner owns a stage, and every stage points toward stronger local opportunity.</p>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
-<script>document.addEventListener('DOMContentLoaded', () => { if (typeof loadCities === 'function') loadCities('about-city-list'); });</script>
+    </section>
 
-<!-- Contact -->
-<section class="py-16 bg-navy-900 text-white">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-        <h2 class="text-2xl font-bold mb-4">Let's Talk</h2>
-        <p class="text-gray-400 mb-6">Whether you're a founder, a potential partner, or just curious — we'd love to hear from you.</p>
-        <div class="flex flex-wrap justify-center gap-4">
-            <a href="../register.html" class="inline-block bg-brand-500 hover:bg-brand-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
-                Join the Index
-            </a>
-            <a href="mailto:hello@firstcityfoundry.com" class="inline-block border border-white/30 hover:border-white/60 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
-                <i class="fa-solid fa-envelope mr-2"></i>Email Us
-            </a>
+    <section class="bg-white py-16">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-3xl text-center">
+                <span class="foundry-page-badge">Principles</span>
+                <h2 class="font-display mt-4 text-3xl font-bold text-ink sm:text-4xl">How the Foundry works.</h2>
+            </div>
+            <div class="mt-10 grid gap-5 md:grid-cols-3">
+                <article class="foundry-page-card p-6">
+                    <div class="foundry-page-icon mb-5"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12M6 12h12M4 4h16v16H4z"/></svg></div>
+                    <h3 class="font-display text-2xl font-bold text-ink">Practical first</h3>
+                    <p class="mt-3 text-sm leading-6 text-slatebrand">Programs should produce next actions, not vague inspiration.</p>
+                </article>
+                <article class="foundry-page-card p-6">
+                    <div class="foundry-page-icon mb-5"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 0 0-4-4h-1M9 20H4v-2a4 4 0 0 1 4-4h1m3-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg></div>
+                    <h3 class="font-display text-2xl font-bold text-ink">Community-owned</h3>
+                    <p class="mt-3 text-sm leading-6 text-slatebrand">The network should strengthen local founders, contributors, and partners together.</p>
+                </article>
+                <article class="foundry-page-card p-6">
+                    <div class="foundry-page-icon mb-5"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h8M8 12h8M8 17h5M5 4h14v16H5z"/></svg></div>
+                    <h3 class="font-display text-2xl font-bold text-ink">Open by default</h3>
+                    <p class="mt-3 text-sm leading-6 text-slatebrand">We prefer reusable playbooks, open learning, and shared operating knowledge.</p>
+                </article>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <section class="foundry-page-section py-16">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <div class="mb-8 text-center">
+                <span class="foundry-page-badge">Cities</span>
+                <h2 class="font-display mt-4 text-3xl font-bold text-ink">Local roots, shared model.</h2>
+                <p class="mt-4 text-slatebrand">Portland is the first city. The model is designed to travel when the local partner base is ready.</p>
+            </div>
+            <div id="about-city-list" class="grid gap-4 md:grid-cols-2"></div>
+        </div>
+    </section>
+
+    <section class="foundry-page-dark py-16">
+        <div class="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_auto] lg:px-8">
+            <div>
+                <span class="foundry-page-badge">Connect</span>
+                <h2 class="font-display mt-4 text-3xl font-bold sm:text-4xl">Want to help build the next chapter?</h2>
+                <p class="mt-4 max-w-2xl text-white/70">Whether you are a founder, partner, mentor, or contributor, First City Foundry is designed to make it easier to plug in.</p>
+            </div>
+            <div class="flex flex-col gap-3 sm:flex-row">
+                <a href="../register.html" class="btn-primary">Join the index</a>
+                <a href="mailto:hello@firstcityfoundry.com" class="btn-ghost border-white/20 bg-white/10 text-white hover:bg-white hover:text-ink">Email us</a>
+            </div>
+        </div>
+    </section>
+</main>
 
 <div id="footer-slot"></div>
-
+<script>document.addEventListener('DOMContentLoaded', function () { if (typeof loadCities === 'function') loadCities('about-city-list'); });</script>
 </body>
 </html>

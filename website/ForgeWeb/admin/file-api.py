@@ -60,9 +60,15 @@ class ForgeWebHandler(BaseHTTPRequestHandler):
         )
         repo_root = os.path.dirname(forge_web_dir)
 
-        # GitHub Pages branch deploys expect site content in `docs/`.
-        # Always use `docs/` as the website root (create it if missing).
-        self.website_root = os.path.join(repo_root, 'docs')
+        # Allow WEBSITE_ROOT env var to override the default docs/ folder.
+        # Set WEBSITE_ROOT=.. in ForgeWeb/.env to manage content in the repo root.
+        website_root_env = os.getenv('WEBSITE_ROOT', '').strip()
+        if website_root_env:
+            self.website_root = os.path.abspath(os.path.join(forge_web_dir, website_root_env))
+        else:
+            # GitHub Pages branch deploys expect site content in `docs/`.
+            # Always use `docs/` as the website root (create it if missing).
+            self.website_root = os.path.join(repo_root, 'docs')
         os.makedirs(self.website_root, exist_ok=True)
 
         # Create expected docs subdirectories if they are missing
@@ -218,7 +224,11 @@ Thumbs.db
 
     def do_POST(self):
         """Handle POST requests for API endpoints"""
-        if self.path == '/api/save-file':
+        if self.path == '/api/github/commit':
+            self.handle_github_commit()
+        elif self.path == '/api/github/push':
+            self.handle_github_push()
+        elif self.path == '/api/save-file':
             self.handle_save_file()
         elif self.path == '/api/create-preview':
             self.handle_create_preview()
@@ -236,6 +246,8 @@ Thumbs.db
             self.handle_social_accounts()
         elif self.path == '/api/settings':
             self.handle_settings()
+        elif self.path == '/api/index-submissions':
+            self.handle_index_submission_create()
         elif self.path == '/api/import-html':
             self.handle_html_import()
         elif self.path == '/api/navigation':
@@ -301,7 +313,9 @@ Thumbs.db
             'html-import.html': 'html-import.html',
             'media-library.html': 'media-library.html',
             'settings.html': 'settings.html',
-            'social.html': 'social.html'
+            'social.html': 'social.html',
+            'deploy.html': 'deploy.html',
+            'index-report.html': 'index-report.html'
         }
         
         if file_path in template_pages:
@@ -819,10 +833,226 @@ Thumbs.db
             print(f"✗ Design system error: {e}")
             self.send_json_error(500, str(e))
 
+    def handle_index_submissions_get(self):
+        """Return Index submissions and report summary."""
+        if not db:
+            self.send_json_error(500, 'Database not available')
+            return
+
+        parts = self.path.rstrip('/').split('/')
+        if len(parts) == 4:
+            try:
+                submission_id = int(parts[-1])
+            except ValueError:
+                self.send_json_error(400, 'Invalid submission ID')
+                return
+            submission = db.get_index_submission(submission_id)
+            if not submission:
+                self.send_json_error(404, 'Submission not found')
+                return
+            self.send_json_response({'submission': submission})
+            return
+
+        submissions = db.get_index_submissions()
+        self.send_json_response({
+            'submissions': submissions,
+            'summary': self.build_index_summary(submissions)
+        })
+
+    def handle_index_submission_create(self):
+        """Store one Index response from the public site."""
+        if not db:
+            self.send_json_error(500, 'Database not available')
+            return
+
+        try:
+            content_length = int(self.headers.get('Content-Length', 0))
+            raw_body = self.rfile.read(content_length).decode('utf-8') if content_length else '{}'
+            payload = json.loads(raw_body)
+        except json.JSONDecodeError:
+            self.send_json_error(400, 'Invalid JSON payload')
+            return
+
+        data = payload.get('data') if isinstance(payload.get('data'), dict) else payload
+        if not isinstance(data, dict):
+            self.send_json_error(400, 'Submission data must be an object')
+            return
+
+        required = ['company_name', 'contact_name_role', 'contact_email']
+        missing = [field for field in required if not str(data.get(field, '')).strip()]
+        if missing:
+            self.send_json_error(400, f"Missing required fields: {', '.join(missing)}")
+            return
+
+        data['received_at'] = datetime.utcnow().isoformat(timespec='seconds') + 'Z'
+        data['remote_addr'] = self.client_address[0] if self.client_address else ''
+
+        scores = self.calculate_index_scores(data)
+        submission_id = db.save_index_submission(data, scores)
+        self.send_json_response({
+            'success': True,
+            'id': submission_id,
+            'scores': scores
+        })
+
+    def build_index_summary(self, submissions):
+        """Build summary metrics for the admin report."""
+        total = len(submissions)
+        score_keys = ['visibility', 'margin', 'independence', 'ai_readiness']
+        averages = {key: 0 for key in score_keys}
+        if total:
+            for key in score_keys:
+                averages[key] = round(sum((item.get('scores') or {}).get(key, 0) for item in submissions) / total)
+
+        podcast_interest = {}
+        report_opt_ins = 0
+        for item in submissions:
+            data = item.get('data') or {}
+            interest = data.get('podcast_interest') or 'not_answered'
+            podcast_interest[interest] = podcast_interest.get(interest, 0) + 1
+            if 'yes_send_report' in self._as_list(data.get('report_opt_in')):
+                report_opt_ins += 1
+
+        return {
+            'total': total,
+            'averages': averages,
+            'report_opt_ins': report_opt_ins,
+            'podcast_interest': podcast_interest
+        }
+
+    def calculate_index_scores(self, data):
+        """Calculate lightweight VMI scores from the Index answers."""
+        def lookup(field, values, default=0):
+            return values.get(data.get(field), default)
+
+        def multi_count(field):
+            values = [value for value in self._as_list(data.get(field)) if value and value != 'not_yet']
+            return len(values)
+
+        visibility = self._avg([
+            lookup('backend_operations_state', {
+                'manual_heavy': 15,
+                'siloed_tech': 35,
+                'automated_integrated': 72,
+                'ai_native': 95
+            }),
+            lookup('decision_process', {
+                'gut_instinct': 20,
+                'old_reports': 42,
+                'real_time_dashboards': 78,
+                'predictive_analytics': 95
+            }),
+            lookup('profitability_report_time', {
+                'minutes': 95,
+                'hours': 72,
+                'days': 42,
+                'cannot_track': 15
+            }),
+            lookup('metrics_tracking', {
+                'manual_spreadsheets': 30,
+                'automated_rarely_used': 48,
+                'daily_dashboard': 82,
+                'predictive_alerts': 95,
+                'not_systematic': 12
+            }),
+            70 if str(data.get('ai_visibility_usage', '')).strip() else 20
+        ])
+
+        margin = self._avg([
+            lookup('first_scale_investment', {
+                'hiring': 45,
+                'marketing': 52,
+                'operational_architecture': 90,
+                'product_development': 68
+            }),
+            lookup('margin_trend', {
+                'margins_shrank': 20,
+                'margins_flat': 52,
+                'margins_expanded': 92,
+                'revenue_not_grown': 40
+            }),
+            lookup('manual_effort_area', {
+                'lead_gen_sales': 45,
+                'client_onboarding_project_management': 45,
+                'fulfillment_service_delivery': 45,
+                'back_office_admin_invoicing': 45,
+                'mostly_automated': 92
+            }),
+            min(95, 25 + (multi_count('ai_margin_uses') * 10))
+        ])
+
+        independence = self._avg([
+            lookup('founder_absence_resilience', {
+                'halt': 10,
+                'run_but_growth_stops': 38,
+                'run_smoothly': 78,
+                'continue_growing': 95
+            }),
+            lookup('knowledge_systematization', {
+                'in_heads': 12,
+                'scattered_docs': 38,
+                'documented_sops': 78,
+                'integrated_ai_workflows': 95
+            }),
+            lookup('valuation_awareness', {
+                'formal_12_months': 92,
+                'formal_older': 78,
+                'rough_idea': 52,
+                'no_idea': 15,
+                'not_interested': 38
+            }),
+            62 if str(data.get('operational_bottleneck', '')).strip() else 25
+        ])
+
+        ai_readiness = self._avg([
+            lookup('backend_operations_state', {
+                'manual_heavy': 12,
+                'siloed_tech': 32,
+                'automated_integrated': 72,
+                'ai_native': 96
+            }),
+            lookup('ai_budget_allocation', {
+                'none': 8,
+                'testing': 38,
+                'active': 68,
+                'significant': 86,
+                'ai_first': 96
+            }),
+            min(95, 20 + (multi_count('ai_margin_uses') * 12)),
+            72 if str(data.get('ai_visibility_usage', '')).strip() else 22
+        ])
+
+        return {
+            'visibility': visibility,
+            'margin': margin,
+            'independence': independence,
+            'ai_readiness': ai_readiness
+        }
+
+    def _avg(self, values):
+        values = [int(value or 0) for value in values]
+        return round(sum(values) / len(values)) if values else 0
+
+    def _as_list(self, value):
+        if value is None:
+            return []
+        if isinstance(value, list):
+            return value
+        return [value]
+
     def handle_api_get_request(self):
         """Handle GET API requests"""
         try:
-            if self.path == '/api/navigation':
+            if self.path == '/api/github/status':
+                self.handle_github_status()
+                return
+            elif self.path == '/api/github/log':
+                self.handle_github_log()
+                return
+            elif self.path == '/api/index-submissions' or self.path.startswith('/api/index-submissions/'):
+                self.handle_index_submissions_get()
+                return
+            elif self.path == '/api/navigation':
                 # Get all navigation items
                 if not db:
                     self.send_json_error(500, 'Database not available')
@@ -2206,6 +2436,130 @@ body { font-family: 'Montserrat', system-ui, sans-serif; }"""
         if clean_path.startswith('/'):
             clean_path = clean_path[1:]
         return clean_path
+
+    # ── GitHub Pages Deploy ────────────────────────────────
+
+    def _get_repo_root(self):
+        """Get the git repository root directory"""
+        return os.path.dirname(os.path.dirname(self.admin_dir))
+
+    def _run_git(self, args, check=True):
+        """Run a git command in the repo root and return the result"""
+        repo_root = self._get_repo_root()
+        result = subprocess.run(
+            ['git'] + args,
+            cwd=repo_root,
+            capture_output=True,
+            text=True,
+            timeout=30
+        )
+        if check and result.returncode != 0:
+            raise RuntimeError(result.stderr.strip() or f"git {args[0]} failed")
+        return result
+
+    def handle_github_status(self):
+        """GET /api/github/status: changed files, current branch, remote info"""
+        try:
+            branch_result = self._run_git(['rev-parse', '--abbrev-ref', 'HEAD'])
+            branch = branch_result.stdout.strip()
+
+            status_result = self._run_git(['status', '--porcelain'], check=False)
+            lines = [line for line in status_result.stdout.splitlines() if line]
+            changed_files = []
+            for line in lines:
+                status_code = line[:2].strip()
+                filepath = line[3:]
+                changed_files.append({'status': status_code, 'path': filepath})
+
+            remote_result = self._run_git(['remote', 'get-url', 'origin'], check=False)
+            remote_url = remote_result.stdout.strip() if remote_result.returncode == 0 else ''
+
+            unpushed_result = self._run_git(
+                ['log', f'origin/{branch}..HEAD', '--oneline'],
+                check=False
+            )
+            unpushed = [line for line in unpushed_result.stdout.strip().split('\n') if line] if unpushed_result.returncode == 0 else []
+
+            self.send_json_response({
+                'branch': branch,
+                'remote_url': remote_url,
+                'changed_files': changed_files,
+                'unpushed_commits': unpushed,
+                'clean': len(changed_files) == 0
+            })
+        except Exception as e:
+            self.send_json_error(500, str(e))
+
+    def handle_github_commit(self):
+        """POST /api/github/commit: stage all and commit with a message"""
+        try:
+            content_length = int(self.headers.get('Content-Length', 0))
+            body = json.loads(self.rfile.read(content_length).decode('utf-8')) if content_length else {}
+            message = body.get('message', '').strip()
+            if not message:
+                self.send_json_error(400, 'Commit message is required')
+                return
+
+            self._run_git(['add', '-A'])
+
+            status = self._run_git(['status', '--porcelain'], check=False)
+            staged = [line for line in status.stdout.strip().split('\n') if line]
+            if not staged:
+                self.send_json_error(400, 'Nothing to commit - working tree clean')
+                return
+
+            self._run_git(['commit', '-m', message])
+
+            hash_result = self._run_git(['rev-parse', '--short', 'HEAD'])
+            commit_hash = hash_result.stdout.strip()
+
+            self.send_json_response({
+                'success': True,
+                'commit': commit_hash,
+                'message': message,
+                'files_committed': len(staged)
+            })
+        except Exception as e:
+            self.send_json_error(500, str(e))
+
+    def handle_github_push(self):
+        """POST /api/github/push: push current branch to origin"""
+        try:
+            branch_result = self._run_git(['rev-parse', '--abbrev-ref', 'HEAD'])
+            branch = branch_result.stdout.strip()
+
+            self._run_git(['push', 'origin', branch])
+
+            self.send_json_response({
+                'success': True,
+                'branch': branch,
+                'message': f'Pushed to origin/{branch}'
+            })
+        except Exception as e:
+            self.send_json_error(500, str(e))
+
+    def handle_github_log(self):
+        """GET /api/github/log: recent commit history"""
+        try:
+            log_result = self._run_git([
+                'log', '--oneline', '--format=%H|%h|%s|%an|%ar', '-20'
+            ], check=False)
+            commits = []
+            for line in log_result.stdout.strip().split('\n'):
+                if '|' not in line:
+                    continue
+                parts = line.split('|', 4)
+                if len(parts) == 5:
+                    commits.append({
+                        'hash': parts[0],
+                        'short_hash': parts[1],
+                        'message': parts[2],
+                        'author': parts[3],
+                        'date': parts[4]
+                    })
+            self.send_json_response({'commits': commits})
+        except Exception as e:
+            self.send_json_error(500, str(e))
 
     def send_json_response(self, data):
         """Send JSON response"""

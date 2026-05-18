@@ -1,378 +1,284 @@
-// Multi-step form handling and submission
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // Configuration - Replace with your actual URLs
-    const CONFIG = {
-        COLLABHUB_API: 'https://collab.buildly.io/onboarding/api/foundry-intake/applications/',
-        DEVELOPMENT_MODE: false
-    };
-    
-    let currentStep = 1;
-    const totalSteps = 4;
-    
-    const form = document.getElementById('startupApplicationForm');
-    const steps = document.querySelectorAll('.step');
-    const stepIndicators = document.querySelectorAll('.step-indicator');
-    const progressBar = document.querySelector('.progress-bar');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const submitBtn = document.getElementById('submitBtn');
+// Join the Index form handling and local ForgeWeb submission.
+document.addEventListener("DOMContentLoaded", function() {
+  const CONFIG = {
+    INDEX_API: "/api/index-submissions",
+    REQUIRE_TURNSTILE: false
+  };
 
-    // Initialize form
-    showStep(currentStep);
+  const form = document.getElementById("startupApplicationForm");
+  if (!form) return;
 
-    // Next button handler
-    nextBtn.addEventListener('click', function() {
-        if (validateCurrentStep()) {
-            if (currentStep < totalSteps) {
-                currentStep++;
-                showStep(currentStep);
-            }
-        }
+  const surveyRoot = document.getElementById("indexSurveySteps");
+  if (surveyRoot && !surveyRoot.querySelector(".step") && window.renderIndexSurvey) {
+    window.renderIndexSurvey(surveyRoot);
+  }
+
+  let currentStep = 1;
+  let steps = Array.from(document.querySelectorAll(".step"));
+  const totalSteps = steps.length || 1;
+  const stepIndicators = Array.from(document.querySelectorAll(".step-indicator"));
+  const progressBar = document.querySelector(".progress-bar");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const submitBtn = document.getElementById("submitBtn");
+  const draftKey = "foundryIndexSurveyDraft";
+
+  showStep(currentStep);
+  loadFormData();
+  attachAutosave();
+
+  nextBtn.addEventListener("click", function() {
+    if (!validateCurrentStep()) return;
+    if (currentStep < totalSteps) {
+      currentStep += 1;
+      showStep(currentStep);
+    }
+  });
+
+  prevBtn.addEventListener("click", function() {
+    if (currentStep > 1) {
+      currentStep -= 1;
+      showStep(currentStep);
+    }
+  });
+
+  form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+    if (!validateCurrentStep()) return;
+
+    const turnstileToken = window.turnstile ? window.turnstile.getResponse() : "";
+    if (CONFIG.REQUIRE_TURNSTILE && !turnstileToken) {
+      showMessage("Please complete the verification before submitting.", "error");
+      return;
+    }
+
+    const originalText = showLoading(submitBtn);
+
+    try {
+      const data = getFormDataObject();
+      if (turnstileToken) data.turnstile_token = turnstileToken;
+      data.submitted_page = window.location.pathname;
+      data.source = "first_city_foundry_index";
+
+      await submitIndexSurvey(data);
+      localStorage.removeItem(draftKey);
+
+      showMessage("Your Index response has been recorded. Thank you for contributing to the benchmark.", "success");
+      setTimeout(function() {
+        window.location.href = "success.html?submitted=index";
+      }, 1200);
+    } catch (error) {
+      console.error("Submission error:", error);
+      if (window.turnstile) window.turnstile.reset();
+      showMessage(error.userMessage || "There was an error submitting your response. Please try again.", "error");
+    } finally {
+      hideLoading(submitBtn, originalText);
+    }
+  });
+
+  function showStep(step) {
+    steps = Array.from(document.querySelectorAll(".step"));
+    steps.forEach(section => section.classList.remove("active"));
+    stepIndicators.forEach(indicator => {
+      indicator.classList.remove("active");
+      indicator.classList.remove("completed");
     });
 
-    // Previous button handler
-    prevBtn.addEventListener('click', function() {
-        if (currentStep > 1) {
-            currentStep--;
-            showStep(currentStep);
-        }
+    const currentStepElement = document.querySelector(`.step[data-step="${step}"]`);
+    const currentIndicator = document.querySelector(`.step-indicator[data-step="${step}"]`);
+
+    if (currentStepElement) currentStepElement.classList.add("active");
+    if (currentIndicator) currentIndicator.classList.add("active");
+
+    for (let i = 1; i < step; i += 1) {
+      const indicator = document.querySelector(`.step-indicator[data-step="${i}"]`);
+      if (indicator) indicator.classList.add("completed");
+    }
+
+    if (progressBar) {
+      const progress = Math.max(1, Math.round((step / totalSteps) * 100));
+      progressBar.style.width = `${progress}%`;
+    }
+
+    prevBtn.style.display = step === 1 ? "none" : "inline-flex";
+    nextBtn.style.display = step === totalSteps ? "none" : "inline-flex";
+    submitBtn.style.display = step === totalSteps ? "inline-flex" : "none";
+
+    const turnstileWidget = document.getElementById("turnstileWidget");
+    if (turnstileWidget) {
+      turnstileWidget.style.display = step === totalSteps && CONFIG.REQUIRE_TURNSTILE ? "block" : "none";
+    }
+
+    const formTop = document.querySelector(".index-form-shell");
+    if (formTop) formTop.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function validateCurrentStep() {
+    const currentStepElement = document.querySelector(`.step[data-step="${currentStep}"]`);
+    if (!currentStepElement) return false;
+
+    let isValid = true;
+    currentStepElement.querySelectorAll(".error-message").forEach(error => error.remove());
+    currentStepElement.querySelectorAll(".border-red-500").forEach(field => field.classList.remove("border-red-500"));
+
+    currentStepElement.querySelectorAll("input[required], textarea[required], select[required]").forEach(field => {
+      if (!String(field.value || "").trim()) {
+        isValid = false;
+        showFieldError(field, "This field is required");
+      }
     });
 
-    // Form submission handler
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        if (!validateCurrentStep()) {
-            return;
-        }
-
-        // Validate Turnstile CAPTCHA
-        const turnstileToken = window.turnstile && window.turnstile.getResponse();
-        if (!turnstileToken) {
-            showMessage('Please complete the CAPTCHA verification before submitting.', 'error');
-            return;
-        }
-
-        const originalText = showLoading(submitBtn);
-
-        try {
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
-
-            await submitToCollabHub(data, turnstileToken);
-
-            localStorage.removeItem('startupApplicationDraft');
-
-            showMessage('Application submitted successfully! You will receive a confirmation email shortly.', 'success');
-            setTimeout(() => {
-                window.location.href = 'success.html';
-            }, 2000);
-
-        } catch (error) {
-            console.error('Submission error:', error);
-            if (window.turnstile) window.turnstile.reset();
-            showMessage(error.userMessage || 'There was an error submitting your application. Please try again.', 'error');
-        } finally {
-            hideLoading(submitBtn, originalText);
-        }
+    currentStepElement.querySelectorAll("[data-required-group='true']").forEach(group => {
+      const fieldName = group.dataset.fieldName;
+      const checked = group.querySelectorAll(`input[name="${cssEscape(fieldName)}"]:checked`);
+      if (!checked.length) {
+        isValid = false;
+        showFieldError(group, "Please choose at least one option");
+      }
     });
 
-    function showStep(step) {
-        // Hide all steps
-        steps.forEach(s => s.classList.remove('active'));
-        stepIndicators.forEach(s => s.classList.remove('active'));
-
-        // Show current step
-        const currentStepElement = document.querySelector(`.step[data-step="${step}"]`);
-        const currentIndicator = document.querySelector(`.step-indicator[data-step="${step}"]`);
-        
-        if (currentStepElement) currentStepElement.classList.add('active');
-        if (currentIndicator) currentIndicator.classList.add('active');
-
-        // Update progress bar
-        const progress = (step / totalSteps) * 100;
-        progressBar.style.width = `${progress}%`;
-
-        // Update buttons
-        prevBtn.style.display = step === 1 ? 'none' : 'inline-flex';
-        nextBtn.style.display = step === totalSteps ? 'none' : 'inline-flex';
-        submitBtn.style.display = step === totalSteps ? 'inline-flex' : 'none';
-
-        // Show Turnstile widget on final step
-        const turnstileWidget = document.getElementById('turnstileWidget');
-        if (turnstileWidget) {
-            turnstileWidget.style.display = step === totalSteps ? 'block' : 'none';
-        }
-
-        // Mark completed steps
-        for (let i = 1; i < step; i++) {
-            const indicator = document.querySelector(`.step-indicator[data-step="${i}"]`);
-            if (indicator) {
-                indicator.classList.add('completed');
-            }
-        }
-    }
-
-    function validateCurrentStep() {
-        const currentStepElement = document.querySelector(`.step[data-step="${currentStep}"]`);
-        if (!currentStepElement) return false;
-
-        const requiredFields = currentStepElement.querySelectorAll('[required]');
-        let isValid = true;
-
-        // Clear previous errors
-        currentStepElement.querySelectorAll('.error-message').forEach(error => {
-            error.remove();
-        });
-
-        requiredFields.forEach(field => {
-            field.classList.remove('border-red-500');
-            
-            if (!field.value.trim()) {
-                isValid = false;
-                field.classList.add('border-red-500');
-                
-                const error = document.createElement('div');
-                error.className = 'error-message text-red-500 text-sm mt-1';
-                error.textContent = 'This field is required';
-                field.parentNode.appendChild(error);
-            }
-        });
-
-        // Email validation
-        const emailFields = currentStepElement.querySelectorAll('input[type="email"]');
-        emailFields.forEach(field => {
-            if (field.value && !isValidEmail(field.value)) {
-                isValid = false;
-                field.classList.add('border-red-500');
-                
-                const error = document.createElement('div');
-                error.className = 'error-message text-red-500 text-sm mt-1';
-                error.textContent = 'Please enter a valid email address';
-                field.parentNode.appendChild(error);
-            }
-        });
-
-        // Number validation
-        const numberFields = currentStepElement.querySelectorAll('input[type="number"]');
-        numberFields.forEach(field => {
-            if (field.hasAttribute('required') && field.value && parseFloat(field.value) < 0) {
-                isValid = false;
-                field.classList.add('border-red-500');
-                
-                const error = document.createElement('div');
-                error.className = 'error-message text-red-500 text-sm mt-1';
-                error.textContent = 'Please enter a valid positive number';
-                field.parentNode.appendChild(error);
-            }
-        });
-
-        if (!isValid) {
-            // Scroll to first error
-            const firstError = currentStepElement.querySelector('.border-red-500');
-            if (firstError) {
-                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        }
-
-        return isValid;
-    }
-
-    function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    }
-
-    // Google Sheets Integration
-    // CollabHub Intake API Integration
-    function generateIdempotencyKey() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            const r = Math.random() * 16 | 0;
-            return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-        });
-    }
-
-    async function submitToCollabHub(data, captchaToken) {
-        const nameParts = (data.founder_names || '').trim().split(/\s+/);
-        const firstName = nameParts[0] || '';
-        const lastName = nameParts.slice(1).join(' ') || '';
-
-        const payload = {
-            source: 'firstcityfoundry_register',
-            captcha_token: captchaToken,
-            contact: {
-                email: data.contact_email || '',
-                full_name: data.founder_names || '',
-                first_name: firstName,
-                last_name: lastName
-            },
-            company: {
-                name: data.company_name || '',
-                legal_structure: data.legal_structure || ''
-            },
-            application: {
-                business_description: data.business_description || '',
-                development_stage: data.development_stage || '',
-                annual_revenue: parseFloat(data.annual_revenue) || 0,
-                funding_amount: parseFloat(data.funding_amount) || 0,
-                outstanding_debt: parseFloat(data.outstanding_debt) || 0,
-                revenue_model: data.revenue_model || '',
-                target_audience: data.target_audience || '',
-                competition_analysis: data.competition_analysis || '',
-                market_demand_proof: data.market_demand_proof || '',
-                marketing_strategy: data.marketing_strategy || '',
-                intellectual_property: data.intellectual_property || '',
-                customer_base: data.customer_base || '',
-                customer_acquisition_strategy: data.customer_acquisition_strategy || '',
-                current_funding_sources: data.current_funding_sources || '',
-                future_funding_plans: data.future_funding_plans || '',
-                pricing_strategy: data.pricing_strategy || '',
-                competitive_advantage: data.competitive_advantage || '',
-                milestones_achievements: data.milestones_achievements || '',
-                social_impact: data.social_impact || '',
-                team_members: data.team_members || '',
-                advisors_mentors: data.advisors_mentors || '',
-                references_recommendations: data.references_recommendations || '',
-                referral_code: data.referral_code || ''
-            },
-            attachments: []
-        };
-
-        const response = await fetch(CONFIG.COLLABHUB_API, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Idempotency-Key': generateIdempotencyKey()
-            },
-            body: JSON.stringify(payload)
-        });
-
-        if (response.ok) {
-            return await response.json();
-        }
-
-        let errorBody = {};
-        try { errorBody = await response.json(); } catch (_) {}
-
-        const err = new Error(`Submission failed: HTTP ${response.status}`);
-        if (response.status === 400) {
-            err.userMessage = errorBody.detail || 'Please check your form entries and try again.';
-        } else if (response.status === 429) {
-            err.userMessage = 'Too many submissions. Please wait a few minutes and try again.';
-        } else {
-            err.userMessage = 'An unexpected error occurred. Please try again later.' +
-                (errorBody.trace_id ? ` (Ref: ${errorBody.trace_id})` : '');
-        }
-        throw err;
-    }
-
-    // Helper function to show loading state
-    function showLoading(button) {
-        const originalText = button.textContent;
-        button.disabled = true;
-        button.innerHTML = '<span class="spinner mr-2"></span>Submitting...';
-        return originalText;
-    }
-
-    // Helper function to hide loading state
-    function hideLoading(button, originalText) {
-        button.disabled = false;
-        button.textContent = originalText;
-    }
-
-    // Helper function to show messages
-    function showMessage(message, type = 'success') {
-        const messageContainer = document.querySelector('.message-container');
-        const messageElement = document.createElement('div');
-        messageElement.className = `alert-${type}`;
-        messageElement.textContent = message;
-        
-        messageContainer.innerHTML = '';
-        messageContainer.appendChild(messageElement);
-        
-        // Scroll to message
-        messageContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        
-        // Auto-remove success messages after 5 seconds
-        if (type === 'success') {
-            setTimeout(() => {
-                messageElement.remove();
-            }, 5000);
-        }
-    }
-
-    // File upload handling
-    const fileInputs = document.querySelectorAll('input[type="file"]');
-    fileInputs.forEach(input => {
-        input.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                // Validate file size (max 10MB)
-                if (file.size > 10 * 1024 * 1024) {
-                    showMessage('File size must be less than 10MB', 'error');
-                    e.target.value = '';
-                    return;
-                }
-                
-                // Validate file type for pitch deck
-                if (input.name === 'pitch_deck') {
-                    const allowedTypes = [
-                        'application/pdf',
-                        'application/vnd.ms-powerpoint',
-                        'application/vnd.openxmlformats-officedocument.presentationml.presentation'
-                    ];
-                    
-                    if (!allowedTypes.includes(file.type)) {
-                        showMessage('Please upload a PDF or PowerPoint file for pitch deck', 'error');
-                        e.target.value = '';
-                        return;
-                    }
-                }
-            }
-        });
+    currentStepElement.querySelectorAll("input[type='email']").forEach(field => {
+      if (field.value && !isValidEmail(field.value)) {
+        isValid = false;
+        showFieldError(field, "Please enter a valid email address");
+      }
     });
 
-    // Auto-save functionality (optional)
+    if (!isValid) {
+      const firstError = currentStepElement.querySelector(".border-red-500, .error-message");
+      if (firstError) firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    return isValid;
+  }
+
+  function showFieldError(field, message) {
+    field.classList.add("border-red-500");
+    const error = document.createElement("div");
+    error.className = "error-message text-sm mt-2";
+    error.textContent = message;
+
+    const slot = field.querySelector ? field.querySelector(".field-error-slot") : null;
+    if (slot) {
+      slot.innerHTML = "";
+      slot.appendChild(error);
+    } else if (field.parentNode) {
+      field.parentNode.appendChild(error);
+    }
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function cssEscape(value) {
+    if (window.CSS && window.CSS.escape) return window.CSS.escape(value);
+    return String(value).replace(/"/g, '\\"');
+  }
+
+  function getFormDataObject() {
+    const formData = new FormData(form);
+    const data = {};
+
+    formData.forEach((value, key) => {
+      if (Object.prototype.hasOwnProperty.call(data, key)) {
+        if (!Array.isArray(data[key])) data[key] = [data[key]];
+        data[key].push(value);
+      } else {
+        data[key] = value;
+      }
+    });
+
+    const questions = (window.INDEX_SURVEY && window.INDEX_SURVEY.questions) || [];
+    questions.forEach(question => {
+      if (question.type === "multi" || question.type === "checkbox") {
+        data[question.name] = formData.getAll(question.name);
+      }
+    });
+
+    return data;
+  }
+
+  async function submitIndexSurvey(data) {
+    const response = await fetch(CONFIG.INDEX_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+
+    if (response.ok) return response.json();
+
+    let errorBody = {};
+    try {
+      errorBody = await response.json();
+    } catch (_) {}
+
+    const err = new Error(`Submission failed: HTTP ${response.status}`);
+    if (response.status === 404) {
+      err.userMessage = "The ForgeWeb admin reporting API is not available from this page. Please preview through ForgeWeb and try again.";
+    } else {
+      err.userMessage = errorBody.error || "The response could not be saved. Please try again.";
+    }
+    throw err;
+  }
+
+  function showLoading(button) {
+    const originalText = button.textContent;
+    button.disabled = true;
+    button.innerHTML = '<span class="spinner mr-2"></span>Submitting...';
+    return originalText;
+  }
+
+  function hideLoading(button, originalText) {
+    button.disabled = false;
+    button.textContent = originalText;
+  }
+
+  function showMessage(message, type) {
+    const messageContainer = document.querySelector(".message-container");
+    const messageElement = document.createElement("div");
+    messageElement.className = `alert-${type || "success"}`;
+    messageElement.textContent = message;
+
+    messageContainer.innerHTML = "";
+    messageContainer.appendChild(messageElement);
+    messageContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function attachAutosave() {
     let autoSaveTimeout;
-    const formInputs = form.querySelectorAll('input, textarea, select');
-    
-    formInputs.forEach(input => {
-        input.addEventListener('input', function() {
-            clearTimeout(autoSaveTimeout);
-            autoSaveTimeout = setTimeout(() => {
-                saveFormData();
-            }, 2000); // Save after 2 seconds of inactivity
+    form.addEventListener("input", queueSave);
+    form.addEventListener("change", queueSave);
+
+    function queueSave() {
+      clearTimeout(autoSaveTimeout);
+      autoSaveTimeout = setTimeout(saveFormData, 600);
+    }
+  }
+
+  function saveFormData() {
+    localStorage.setItem(draftKey, JSON.stringify(getFormDataObject()));
+  }
+
+  function loadFormData() {
+    const savedData = localStorage.getItem(draftKey);
+    if (!savedData) return;
+
+    try {
+      const data = JSON.parse(savedData);
+      Object.keys(data).forEach(key => {
+        const values = Array.isArray(data[key]) ? data[key] : [data[key]];
+        const fields = form.querySelectorAll(`[name="${cssEscape(key)}"]`);
+        fields.forEach(field => {
+          if (field.type === "radio" || field.type === "checkbox") {
+            field.checked = values.includes(field.value);
+          } else {
+            field.value = data[key] || "";
+          }
         });
-    });
-
-    // Save form data to localStorage
-    function saveFormData() {
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-        localStorage.setItem('startupApplicationDraft', JSON.stringify(data));
+      });
+    } catch (error) {
+      console.error("Error loading saved Index response:", error);
     }
-
-    // Load saved form data
-    function loadFormData() {
-        const savedData = localStorage.getItem('startupApplicationDraft');
-        if (savedData) {
-            try {
-                const data = JSON.parse(savedData);
-                Object.keys(data).forEach(key => {
-                    const field = form.querySelector(`[name="${key}"]`);
-                    if (field && field.type !== 'file') {
-                        field.value = data[key];
-                    }
-                });
-            } catch (error) {
-                console.error('Error loading saved form data:', error);
-            }
-        }
-    }
-
-    // Load any previously saved data
-    loadFormData();
-
+  }
 });
-

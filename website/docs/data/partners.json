@@ -23,7 +23,7 @@
     "description": "Portland's chapter of the global Startup Grind community, providing events, networking, and distribution for the Foundry Collective launch.",
     "type": "distribution",
     "url": "https://www.startupgrind.com/portland/",
-    "logo": "assets/img/partners/startupgrind.png",
+    "logo": "assets/img/partners/startupgrind.svg",
     "lifecycle": ["connect"],
     "temporary": true
   },

@@ -1,3 +1,230 @@
+/* First City Foundry design tokens */
+:root {
+  --foundry-coral: #FF5A6B;
+  --foundry-coral-dark: #EE4053;
+  --foundry-ink: #0F1B2A;
+  --foundry-charcoal: #1F2937;
+  --foundry-slate: #475569;
+  --foundry-warm: #F1EFEA;
+  --foundry-white: #FFFFFF;
+}
+
+.bg-ink { background-color: var(--foundry-ink); }
+.bg-warm { background-color: var(--foundry-warm); }
+.bg-coral-500 { background-color: var(--foundry-coral); }
+.bg-coral-600 { background-color: var(--foundry-coral-dark); }
+.bg-coral-50 { background-color: #FFF1F3; }
+.text-ink { color: var(--foundry-ink); }
+.text-slatebrand { color: var(--foundry-slate); }
+.text-coral-500 { color: var(--foundry-coral); }
+.text-white\/62 { color: rgba(255, 255, 255, 0.62); }
+.text-white\/36 { color: rgba(255, 255, 255, 0.36); }
+.border-ink\/10 { border-color: rgba(15, 27, 42, 0.1); }
+.rounded-foundry { border-radius: 8px; }
+.bg-white\/92 { background-color: rgba(255, 255, 255, 0.92); }
+.bg-white\/96 { background-color: rgba(255, 255, 255, 0.96); }
+.hover\:text-coral-500:hover { color: var(--foundry-coral); }
+.hover\:bg-coral-600:hover { background-color: var(--foundry-coral-dark); }
+
+.foundry-page {
+  background: var(--foundry-warm);
+  color: var(--foundry-ink);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.foundry-page h1,
+.foundry-page h2,
+.foundry-page h3,
+.foundry-page .font-display {
+  font-family: 'Clash Grotesk', 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+.foundry-page-hero {
+  background:
+    linear-gradient(90deg, rgba(15, 27, 42, 0.92), rgba(15, 27, 42, 0.68)),
+    url('../images/Portland_panorama3.jpg');
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+}
+
+.foundry-page-section {
+  background: var(--foundry-warm);
+}
+
+.foundry-page-card {
+  background: #fff;
+  border: 1px solid rgba(15, 27, 42, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 14px 30px rgba(15, 27, 42, 0.06);
+}
+
+.foundry-page-card.soft {
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.foundry-page-icon {
+  align-items: center;
+  background: #FFF1F3;
+  border: 1px solid rgba(255, 90, 107, 0.22);
+  border-radius: 8px;
+  color: var(--foundry-coral);
+  display: inline-flex;
+  height: 48px;
+  justify-content: center;
+  width: 48px;
+}
+
+.foundry-page-icon svg {
+  height: 24px;
+  width: 24px;
+}
+
+.foundry-page-badge {
+  background: #FFF1F3;
+  border: 1px solid rgba(255, 90, 107, 0.2);
+  border-radius: 9999px;
+  color: var(--foundry-coral);
+  display: inline-flex;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  padding: 0.35rem 0.75rem;
+  text-transform: uppercase;
+}
+
+.foundry-page-dark {
+  background: var(--foundry-ink);
+  color: #fff;
+}
+
+.foundry-page-link {
+  color: var(--foundry-coral);
+  font-weight: 700;
+}
+
+.foundry-page-link:hover {
+  color: var(--foundry-coral-dark);
+}
+
+.foundry-step-number {
+  align-items: center;
+  background: var(--foundry-coral);
+  border-radius: 8px;
+  color: #fff;
+  display: inline-flex;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  min-width: 40px;
+}
+
+html[data-theme="dark"] .foundry-page {
+  background: #0F1B2A;
+  color: #F8FAFC;
+}
+
+html[data-theme="dark"] .foundry-page-section {
+  background: #0F1B2A;
+}
+
+html[data-theme="dark"] .foundry-page-card,
+html[data-theme="dark"] .foundry-page-card.soft {
+  background: #111827;
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+}
+
+html[data-theme="dark"] .foundry-page-icon,
+html[data-theme="dark"] .foundry-page-badge {
+  background: rgba(255, 90, 107, 0.12);
+  border-color: rgba(255, 90, 107, 0.26);
+}
+
+.foundry-theme-toggle {
+  align-items: center;
+  background: #fff;
+  border: 1px solid rgba(15, 27, 42, 0.16);
+  border-radius: 8px;
+  color: var(--foundry-ink);
+  display: inline-flex;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+}
+
+html[data-theme="dark"] .foundry-logo-mark {
+  background: #fff;
+  border-radius: 8px;
+  box-sizing: content-box;
+  padding: 0.35rem 0.6rem;
+}
+
+html[data-theme="dark"] .brand-logo-card {
+  background: #fff !important;
+}
+
+.foundry-theme-toggle .sun-icon,
+html[data-theme="light"] .foundry-theme-toggle .moon-icon {
+  display: none;
+}
+
+html[data-theme="light"] .foundry-theme-toggle .sun-icon {
+  display: block;
+}
+
+html[data-theme="dark"] body {
+  background: #0F1B2A;
+  color: #F8FAFC;
+}
+
+html[data-theme="dark"] #site-nav {
+  background: rgba(15, 27, 42, 0.9);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme="dark"] #mobile-nav,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .bg-white,
+html[data-theme="dark"] footer.bg-ink {
+  background-color: #111827 !important;
+}
+
+html[data-theme="dark"] img.brand-logo-card.bg-white {
+  background: #fff !important;
+}
+
+html[data-theme="dark"] .bg-warm {
+  background-color: #0D1117 !important;
+}
+
+html[data-theme="dark"] .text-ink {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .text-slatebrand {
+  color: #A3A9B3 !important;
+}
+
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .foundry-theme-toggle {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+}
+
+html[data-theme="dark"] .foundry-theme-toggle {
+  background: #111827;
+  color: #F8FAFC;
+}
+
+html[data-theme="dark"] .btn-ghost {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #F8FAFC;
+}
+
 /* Custom CSS for Buildly Labs Foundry */
 
 /* Smooth scrolling */
@@ -58,46 +285,51 @@ html {
 .form-input {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
+  border: 1px solid rgba(15, 27, 42, 0.16);
+  border-radius: 8px;
   transition: all 0.3s ease;
+  background: #fff;
+  color: var(--foundry-ink);
 }
 
 .form-input:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
-  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(255, 90, 107, 0.18);
+  border-color: var(--foundry-coral);
 }
 
 .form-textarea {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
+  border: 1px solid rgba(15, 27, 42, 0.16);
+  border-radius: 8px;
   transition: all 0.3s ease;
   resize: vertical;
   min-height: 8rem;
+  background: #fff;
+  color: var(--foundry-ink);
 }
 
 .form-textarea:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
-  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(255, 90, 107, 0.18);
+  border-color: var(--foundry-coral);
 }
 
 .form-select {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
+  border: 1px solid rgba(15, 27, 42, 0.16);
+  border-radius: 8px;
   transition: all 0.3s ease;
   background-color: white;
+  color: var(--foundry-ink);
 }
 
 .form-select:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
-  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(255, 90, 107, 0.18);
+  border-color: var(--foundry-coral);
 }
 
 .btn-primary {
@@ -205,6 +437,74 @@ html {
   transition: width 0.3s ease;
 }
 
+.index-choice {
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(15, 27, 42, 0.12);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  gap: 0.75rem;
+  line-height: 1.5;
+  padding: 0.85rem 1rem;
+  transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.index-choice:hover {
+  background: #fff;
+  border-color: rgba(255, 90, 107, 0.45);
+  transform: translateY(-1px);
+}
+
+.index-choice input {
+  accent-color: var(--foundry-coral);
+  flex: 0 0 auto;
+  margin-top: 0.22rem;
+}
+
+.index-question-group.border-red-500,
+.form-input.border-red-500,
+.form-textarea.border-red-500,
+.form-select.border-red-500 {
+  border-color: #dc2626 !important;
+}
+
+.error-message {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+html[data-theme="dark"] .index-form-shell,
+html[data-theme="dark"] .form-input,
+html[data-theme="dark"] .form-textarea,
+html[data-theme="dark"] .form-select,
+html[data-theme="dark"] .index-choice {
+  background: #111827;
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #F8FAFC;
+}
+
+html[data-theme="dark"] .index-choice:hover {
+  border-color: rgba(255, 90, 107, 0.5);
+}
+
+html[data-theme="dark"] .form-input::placeholder,
+html[data-theme="dark"] .form-textarea::placeholder {
+  color: rgba(248, 250, 252, 0.5);
+}
+
+html[data-theme="dark"] .alert-success {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #A7F3D0;
+}
+
+html[data-theme="dark"] .alert-error {
+  background: rgba(220, 38, 38, 0.12);
+  border-color: rgba(248, 113, 113, 0.3);
+  color: #FCA5A5;
+}
+
 /* File input styling */
 input[type="file"] {
   padding: 0.5rem;
@@ -235,6 +535,38 @@ input[type="file"]:focus {
   background-color: #f3f4f6;
   color: #9ca3af;
   cursor: not-allowed;
+}
+
+/* First City Foundry page-level button overrides */
+.foundry-page .btn-primary {
+  align-items: center;
+  background: var(--foundry-coral) !important;
+  border-radius: 8px;
+  color: #fff !important;
+  display: inline-flex;
+  font-weight: 700;
+  gap: 0.5rem;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.75rem 1.1rem;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.foundry-page .btn-primary:hover {
+  background: var(--foundry-coral-dark) !important;
+  transform: translateY(-1px);
+}
+
+.foundry-page .btn-ghost {
+  align-items: center;
+  border-radius: 8px;
+  display: inline-flex;
+  font-weight: 700;
+  gap: 0.5rem;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.75rem 1.1rem;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
 }
 
 /* Mobile responsive adjustments */

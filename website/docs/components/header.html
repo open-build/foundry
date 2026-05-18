@@ -1,29 +1,37 @@
-<!-- First City Foundry — Shared Header -->
-<nav id="site-nav" class="bg-white/90 backdrop-blur-md border-b border-stone-200/50 fixed w-full z-50 top-0">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between h-16 items-center">
-      <a href="index.html" class="flex items-center gap-3">
-        <img src="assets/img/logo-horizontal.png" alt="First City Foundry" class="h-10 w-auto" onerror="this.style.display='none'">
+<!-- First City Foundry - Shared Header -->
+<nav id="site-nav" class="fixed top-0 z-50 w-full border-b border-ink/10 bg-white/92 backdrop-blur-md">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3" aria-label="First City Foundry home">
+        <img src="assets/img/logo-horizontal.png" alt="First City Foundry" class="foundry-logo-mark h-10 w-auto" onerror="this.style.display='none'">
       </a>
-      <div class="hidden md:flex items-center gap-6 text-sm font-medium">
-        <a href="index.html" class="text-gray-600 hover:text-amber-600 transition-colors">Home</a>
-        <a href="pages/partners.html" class="text-gray-600 hover:text-amber-600 transition-colors">Partners</a>
-        <a href="pages/podcast.html" class="text-gray-600 hover:text-amber-600 transition-colors">Podcast</a>
-        <a href="pages/index-report.html" class="text-gray-600 hover:text-amber-600 transition-colors">The Index</a>
-        <a href="pages/about.html" class="text-gray-600 hover:text-amber-600 transition-colors">About</a>
-        <a href="register.html" class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-xl transition-colors">Join the Index</a>
+      <div class="hidden items-center gap-6 text-sm font-semibold md:flex">
+        <a href="index.html" class="text-slatebrand hover:text-coral-500 transition-colors">Home</a>
+        <a href="pages/partners.html" class="text-slatebrand hover:text-coral-500 transition-colors">Partners</a>
+        <a href="pages/podcast.html" class="text-slatebrand hover:text-coral-500 transition-colors">Events</a>
+        <a href="pages/index-report.html" class="text-slatebrand hover:text-coral-500 transition-colors">Programs</a>
+        <a href="pages/about.html" class="text-slatebrand hover:text-coral-500 transition-colors">About</a>
+        <button class="foundry-theme-toggle" type="button" data-theme-toggle aria-label="Switch theme" title="Switch light/dark theme">
+          <svg class="moon-icon h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8z"/></svg>
+          <svg class="sun-icon h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4V2m0 20v-2m8-8h2M2 12h2m14.95 6.95 1.41 1.41M3.64 3.64l1.41 1.41m13.9-1.41-1.41 1.41M5.05 18.95l-1.41 1.41M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/></svg>
+        </button>
+        <a href="register.html" class="rounded-foundry bg-coral-500 px-4 py-2 text-white transition-colors hover:bg-coral-600">Join the Index</a>
       </div>
-      <button id="mobile-toggle" class="md:hidden text-gray-600" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <button id="mobile-toggle" class="md:hidden text-ink" aria-label="Open menu" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
   </div>
-  <div id="mobile-nav" class="hidden md:hidden border-t border-stone-200/50 bg-white/95 backdrop-blur-md px-4 pb-4 pt-2 space-y-2">
-    <a href="index.html" class="block py-2 text-gray-600 hover:text-amber-600">Home</a>
-    <a href="pages/partners.html" class="block py-2 text-gray-600 hover:text-amber-600">Partners</a>
-    <a href="pages/podcast.html" class="block py-2 text-gray-600 hover:text-amber-600">Podcast</a>
-    <a href="pages/index-report.html" class="block py-2 text-gray-600 hover:text-amber-600">The Index</a>
-    <a href="pages/about.html" class="block py-2 text-gray-600 hover:text-amber-600">About</a>
-    <a href="register.html" class="block py-2 bg-amber-500 text-white text-center rounded-xl">Join the Index</a>
+  <div id="mobile-nav" class="hidden border-t border-ink/10 bg-white/96 px-4 pb-4 pt-2 md:hidden">
+    <a href="index.html" class="block py-2 text-slatebrand hover:text-coral-500">Home</a>
+    <a href="pages/partners.html" class="block py-2 text-slatebrand hover:text-coral-500">Partners</a>
+    <a href="pages/podcast.html" class="block py-2 text-slatebrand hover:text-coral-500">Events</a>
+    <a href="pages/index-report.html" class="block py-2 text-slatebrand hover:text-coral-500">Programs</a>
+    <a href="pages/about.html" class="block py-2 text-slatebrand hover:text-coral-500">About</a>
+    <button class="foundry-theme-toggle my-2" type="button" data-theme-toggle aria-label="Switch theme" title="Switch light/dark theme">
+      <svg class="moon-icon h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8z"/></svg>
+      <svg class="sun-icon h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4V2m0 20v-2m8-8h2M2 12h2m14.95 6.95 1.41 1.41M3.64 3.64l1.41 1.41m13.9-1.41-1.41 1.41M5.05 18.95l-1.41 1.41M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/></svg>
+    </button>
+    <a href="register.html" class="block rounded-foundry bg-coral-500 py-2 text-center text-white">Join the Index</a>
   </div>
 </nav>
