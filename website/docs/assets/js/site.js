@@ -122,8 +122,9 @@ async function loadPartners(containerId) {
             <div class="text-xs font-bold uppercase tracking-[0.18em] text-slatebrand">Website</div>
             <div class="mt-1 text-sm text-ink">${websiteHost}</div>
             <a href="${website}" target="_blank" rel="noopener noreferrer" class="btn-primary mt-4 inline-flex items-center justify-center px-4 py-2 text-sm">Visit website</a>
-          </div>
-        `;
+          </div>` : ''}
+      `;
+      container.appendChild(card);
     });
   } catch { container.innerHTML = '<p class="text-gray-500">Unable to load partners.</p>'; }
 }
