@@ -76,6 +76,13 @@ const TYPE_COLORS = {
   future: 'Future'
 };
 
+const LIFECYCLE_LABELS = {
+  build: 'Build',
+  train: 'Train',
+  connect: 'Connect',
+  operate: 'Operate'
+};
+
 async function loadPartners(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -88,23 +95,35 @@ async function loadPartners(containerId) {
     partners.forEach(p => {
       const label = TYPE_COLORS[p.type] || TYPE_COLORS.future;
       const logo = p.logo ? (prefix + p.logo) : '';
+      const lifecycleBadges = Array.isArray(p.lifecycle)
+        ? p.lifecycle.map(stage => `<span class="rounded-full bg-coral-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-coral-600">${LIFECYCLE_LABELS[stage] || stage}</span>`).join('')
+        : '';
+      const website = p.url && p.url !== '#' ? p.url : '';
+      const websiteHost = website ? new URL(website).hostname.replace(/^www\./, '') : '';
       const card = document.createElement('div');
-      card.className = 'foundry-page-card p-6 transition-all';
+      card.className = 'foundry-page-card flex h-full flex-col p-6 transition-all hover:-translate-y-1 hover:shadow-xl';
       card.innerHTML = `
         <div class="flex items-start gap-5">
-          <img src="${logo}" alt="${p.name}" class="h-14 w-14 rounded-foundry object-contain bg-white p-2 ring-1 ring-ink/10"
+          <img src="${logo}" alt="${p.name}" class="h-16 w-16 rounded-foundry object-contain bg-white p-2 ring-1 ring-ink/10"
                onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 56 56%22><rect fill=%22%23FFF1F3%22 width=%2256%22 height=%2256%22 rx=%228%22/><text x=%2228%22 y=%2236%22 text-anchor=%22middle%22 fill=%22%23FF5A6B%22 font-size=%2220%22 font-family=%22Arial%22>${p.name[0]}</text></svg>'">
           <div class="flex-1">
-            <div class="flex flex-wrap items-center gap-2 mb-2">
+            <div class="mb-2 flex flex-wrap items-center gap-2">
               <h3 class="font-display text-xl font-bold text-ink">${p.name}</h3>
               <span class="foundry-page-badge !px-2 !py-0.5 !text-[0.65rem]">${label}</span>
+              ${p.temporary ? '<span class="rounded-full bg-warm px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-slatebrand">Launch partner</span>' : ''}
             </div>
-            <p class="text-sm text-coral-500 font-bold mb-2">${p.role}</p>
-            <p class="text-sm text-slatebrand leading-relaxed">${p.description}</p>
-            ${p.url && p.url !== '#' ? `<a href="${p.url}" target="_blank" rel="noopener" class="foundry-page-link inline-block mt-3 text-sm">Learn more &rarr;</a>` : ''}
+            <p class="mb-3 text-sm font-bold text-coral-500">${p.role}</p>
+            <p class="text-sm leading-relaxed text-slatebrand">${p.description}</p>
           </div>
-        </div>`;
-      container.appendChild(card);
+        </div>
+        ${lifecycleBadges ? `<div class="mt-5 flex flex-wrap gap-2">${lifecycleBadges}</div>` : ''}
+        ${website ? `
+          <div class="mt-5 border-t border-ink/10 pt-4">
+            <div class="text-xs font-bold uppercase tracking-[0.18em] text-slatebrand">Website</div>
+            <div class="mt-1 text-sm text-ink">${websiteHost}</div>
+            <a href="${website}" target="_blank" rel="noopener noreferrer" class="btn-primary mt-4 inline-flex items-center justify-center px-4 py-2 text-sm">Visit website</a>
+          </div>
+        `;
     });
   } catch { container.innerHTML = '<p class="text-gray-500">Unable to load partners.</p>'; }
 }
