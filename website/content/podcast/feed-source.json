@@ -2,7 +2,7 @@
   "show": {
     "title": "FirstCityFoundry Podcast",
     "site_url": "https://www.firstcityfoundry.com/podcast.html",
-    "feed_url": "https://market.firstcityfoundry.com/producer/ledger/shows/foundry/feed.xml",
+    "feed_url": "https://www.firstcityfoundry.com/producer/ledger/shows/foundry/feed.xml",
     "description": "Real conversations with founders, operators, and builders about visibility, margin, and independence.",
     "language": "en-us",
     "author": "FirstCity Foundry",
