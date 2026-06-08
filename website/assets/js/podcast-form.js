@@ -157,35 +157,16 @@ document.addEventListener('DOMContentLoaded', function() {
             
             console.log('🚀 Submitting to:', CONFIG.GOOGLE_SCRIPT_URL);
             
-            const response = await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
+            await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
                 method: 'POST',
-                mode: 'cors',
+                mode: 'no-cors',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: new URLSearchParams(formData)
             });
-            
-            console.log('📡 Response status:', response.status, response.statusText);
-            console.log('📡 Response headers:', [...response.headers.entries()]);
-            
-            if (response.ok) {
-                const result = await response.text(); // Get as text first
-                console.log('📄 Raw response:', result);
-                
-                try {
-                    const jsonResult = JSON.parse(result);
-                    console.log('✅ Parsed response:', jsonResult);
-                    return { success: true, data: jsonResult };
-                } catch (parseError) {
-                    console.log('⚠️ Response is not JSON, treating as success:', result);
-                    return { success: true, data: { message: result } };
-                }
-            } else {
-                const errorText = await response.text();
-                console.error('❌ Error response:', errorText);
-                throw new Error(`HTTP ${response.status}: ${response.statusText} - ${errorText}`);
-            }
+
+            return { success: true, note: 'Submission sent to Google Apps Script' };
         } catch (error) {
             console.error('💥 Google Sheets error:', error);
             console.error('Stack trace:', error.stack);

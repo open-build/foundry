@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+  <channel>
+    <title>FirstCityFoundry Podcast</title>
+    <link>https://www.firstcityfoundry.com/podcast.html</link>
+    <atom:link href="https://market.firstcityfoundry.com/producer/ledger/shows/foundry/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Founder conversations from FirstCity Foundry.</description>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 06 May 2026 00:00:00 GMT</lastBuildDate>
+    <itunes:author>FirstCity Foundry</itunes:author>
+    <itunes:image href="https://i.ytimg.com/vi/7nfI9XCQgUw/hqdefault.jpg" />
+    <item>
+      <title>StartupGrind PDX Relaunch: Integrating AI in Startup Operations</title>
+      <link>https://open.spotify.com/episode/69xZoXUbdAfyR29S9oKkul</link>
+      <guid isPermaLink="false">foundry-podcast-episode-1</guid>
+      <pubDate>Wed, 08 May 2026 00:00:00 GMT</pubDate>
+      <description>In the first episode of the First City Foundry Podcast, we introduce the relaunch of StartupGrind Portland and explore how AI is changing the way startups operate, build, and scale. This episode brings together the core themes behind First City Foundry: founders, operators, builders, and the practical use of AI in real companies. Rather than treating AI as hype, we look at how startup teams can use it to improve operations, reduce friction, support better decision-making, and move faster without losing the human judgment that makes great companies work. We also introduce the growing collaboration between First City Foundry, StartupGrind PDX, Kurent, Buildly, and Open Build — a community-focused effort to support Portland founders, operators, and builders as they navigate the next era of startup growth. Topics include: Why StartupGrind Portland is relaunching now; How AI can support startup operations without replacing people; The role of operators, founders, and product teams in the AI era; Building stronger local startup ecosystems in Portland and beyond; How practical AI tools can help early-stage companies move from idea to execution. This is the starting point for a broader conversation about building better startups with smarter systems, stronger communities, and humans in the middle. Presented by First City Foundry. In partnership with StartupGrind Portland, Kurent, Buildly, and Open Build.</description>
+      <itunes:episode>1</itunes:episode>
+      <itunes:image href="https://i.ytimg.com/vi/7nfI9XCQgUw/hqdefault.jpg" />
+    </item>
+  </channel>
+</rss>

@@ -114,10 +114,10 @@
             <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
                 <div>
                     <span class="foundry-page-badge">Podcast</span>
-                    <h2 class="font-display mt-4 text-3xl font-bold text-ink sm:text-4xl">The Foundry Podcast.</h2>
+                    <h2 class="font-display mt-4 text-3xl font-bold text-ink sm:text-4xl">FirstCityFoundry Podcast.</h2>
                     <p class="mt-4 text-slatebrand">Real conversations with founders, operators, and builders about visibility, margin, and independence.</p>
                     <div class="mt-6">
-                        <img id="podcast-cover-art" src="" alt="The Foundry Podcast cover art" class="hidden h-44 w-44 rounded-foundry object-cover shadow-xl">
+                        <img id="podcast-cover-art" src="" alt="FirstCityFoundry Podcast cover art" class="hidden h-44 w-44 rounded-foundry object-cover shadow-xl">
                         <div id="podcast-cover-placeholder" class="foundry-page-card flex h-44 w-44 items-center justify-center">
                             <div class="foundry-page-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18v3m0-3a6 6 0 0 0 6-6V7a6 6 0 0 0-12 0v5a6 6 0 0 0 6 6z"/></svg></div>
                         </div>
@@ -131,7 +131,7 @@
                     <h3 class="font-display text-2xl font-bold text-ink">Latest episode</h3>
                     <article id="latest-video-card" class="foundry-page-card mt-5 overflow-hidden">
                         <div class="aspect-video bg-ink">
-                            <iframe id="latest-youtube-embed" class="h-full w-full" src="https://www.youtube.com/embed/7nfI9XCQgUw" title="The Future of AI-Native Startups | FirstCity Foundry Podcast" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <iframe id="latest-youtube-embed" class="h-full w-full" src="https://www.youtube.com/embed/7nfI9XCQgUw" title="StartupGrind PDX Relaunch: Integrating AI in Startup Operations" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
                         <div class="p-5">
                             <div class="mb-3 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-[0.14em]">
@@ -139,9 +139,9 @@
                                 <span class="rounded-full bg-green-50 px-3 py-1 text-green-700">Released on Spotify</span>
                                 <span class="rounded-full bg-slate-100 px-3 py-1 text-slatebrand">Apple pending</span>
                             </div>
-                            <h4 id="latest-release-title" class="font-display text-xl font-bold text-ink">The Future of AI-Native Startups | FirstCity Foundry Podcast</h4>
-                            <p id="latest-release-meta" class="mt-2 text-sm font-semibold text-coral-600">Most recent episode - published May 6, 2026</p>
-                            <p id="latest-release-description" class="mt-2 text-sm leading-6 text-slatebrand">StartupGrind PDX relaunches with a practical conversation about integrating AI into startup operations, stronger local ecosystems, and human-centered product work.</p>
+                            <h4 id="latest-release-title" class="font-display text-xl font-bold text-ink">StartupGrind PDX Relaunch: Integrating AI in Startup Operations</h4>
+                            <p id="latest-release-meta" class="mt-2 text-sm font-semibold text-coral-600">Most recent episode - published May 8, 2026</p>
+                            <p id="latest-release-description" class="mt-2 text-sm leading-6 text-slatebrand">In the first episode of the First City Foundry Podcast, we introduce the relaunch of StartupGrind Portland and explore how AI is changing the way startups operate, build, and scale. This episode brings together the core themes behind First City Foundry: founders, operators, builders, and the practical use of AI in real companies. Rather than treating AI as hype, we look at how startup teams can use it to improve operations, reduce friction, support better decision-making, and move faster without losing the human judgment that makes great companies work. We also introduce the growing collaboration between First City Foundry, StartupGrind PDX, Kurent, Buildly, and Open Build — a community-focused effort to support Portland founders, operators, and builders as they navigate the next era of startup growth.</p>
                             <div class="mt-4 flex flex-wrap gap-3">
                                 <a id="latest-youtube-link" href="https://www.youtube.com/watch?v=7nfI9XCQgUw" target="_blank" rel="noopener noreferrer" class="btn-primary text-sm">Watch on YouTube</a>
                                 <a id="latest-spotify-link" href="https://open.spotify.com/episode/69xZoXUbdAfyR29S9oKkul" target="_blank" rel="noopener noreferrer" class="btn-ghost text-sm">Listen on Spotify</a>
@@ -185,7 +185,7 @@
 (function () {
   'use strict';
 
-  var RSS_URL = 'https://market.firstcityfoundry.com/producer/ledger/shows/foundry/feed.xml';
+  var RSS_URL = '/producer/ledger/shows/foundry/feed.xml';
   var YOUTUBE_FEED_URL = 'https://www.youtube.com/feeds/videos.xml?channel_id=UCRqoM2Q1_6FwEVC-oac63UA';
   var DEFAULT_VIDEO_ID = '7nfI9XCQgUw';
   var SPOTIFY_EPISODE_URL = 'https://open.spotify.com/episode/69xZoXUbdAfyR29S9oKkul';
@@ -194,10 +194,10 @@
   var ATOM_NS = 'http://www.w3.org/2005/Atom';
   var YT_NS = 'http://www.youtube.com/xml/schemas/2015';
   var MANUAL_RELEASES = [{
-    title: 'The Future of AI-Native Startups | FirstCity Foundry Podcast',
-    pubDate: 'May 6, 2026',
+    title: 'StartupGrind PDX Relaunch: Integrating AI in Startup Operations',
+    pubDate: 'May 8, 2026',
     epNum: '1',
-    description: 'StartupGrind PDX relaunches with a practical conversation about integrating AI into startup operations, stronger local ecosystems, and human-centered product work.',
+    description: 'In the first episode of the First City Foundry Podcast, we introduce the relaunch of StartupGrind Portland and explore how AI is changing the way startups operate, build, and scale. This episode brings together the core themes behind First City Foundry: founders, operators, builders, and the practical use of AI in real companies. Rather than treating AI as hype, we look at how startup teams can use it to improve operations, reduce friction, support better decision-making, and move faster without losing the human judgment that makes great companies work. We also introduce the growing collaboration between First City Foundry, StartupGrind PDX, Kurent, Buildly, and Open Build — a community-focused effort to support Portland founders, operators, and builders as they navigate the next era of startup growth.',
     listenUrl: SPOTIFY_EPISODE_URL,
     youtubeUrl: 'https://www.youtube.com/watch?v=' + DEFAULT_VIDEO_ID,
     thumbImg: 'https://i.ytimg.com/vi/' + DEFAULT_VIDEO_ID + '/hqdefault.jpg'
