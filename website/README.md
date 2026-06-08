@@ -122,6 +122,16 @@ Forms automatically submit to Google Sheets for data collection and management.
 ### BabbleBeaver AI
 Startup applications receive AI-powered analysis and feedback via BabbleBeaver API.
 
+### Podcast RSS Feed
+The podcast feed is generated from a single source file at `content/podcast/feed-source.json`.
+
+To publish a new episode:
+1. Upload the media file to your public host.
+2. Update the episode entry in `content/podcast/feed-source.json` with the episode title, summary, and `media_url`.
+3. Run `python3 scripts/generate_podcast_feed.py` from the `website/` directory.
+
+The generator writes both `producer/ledger/shows/foundry/feed.xml` and `docs/producer/ledger/shows/foundry/feed.xml`.
+
 ### GitHub Pages
 Optimized for seamless deployment and hosting on GitHub Pages.
 

@@ -48,7 +48,7 @@ Positioned in the Pacific Northwest, Portland offers strategic advantages for ex
 First City Foundry is here to support your journey from idea to scalable company. Our VMI Index (Viability-Market-Innovation) scoring helps you assess and refine your startup’s potential. We focus on empowering solo founders and small teams with the tools, resources, and community needed to thrive.
 
 - **Partnerships and Resources**: Benefit from our collaborations with Buildly, Kurent Co, and others to access cutting-edge technology and business solutions.
-- **The Foundry Podcast**: Gain insights from real conversations with founders and operators to inform your strategy and execution.
+- **FirstCityFoundry Podcast**: Gain insights from real conversations with founders and operators to inform your strategy and execution.
 
 ## Discover Your Portland Opportunity
 

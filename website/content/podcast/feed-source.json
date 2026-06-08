@@ -1,0 +1,25 @@
+{
+  "show": {
+    "title": "FirstCityFoundry Podcast",
+    "site_url": "https://www.firstcityfoundry.com/podcast.html",
+    "feed_url": "https://market.firstcityfoundry.com/producer/ledger/shows/foundry/feed.xml",
+    "description": "Real conversations with founders, operators, and builders about visibility, margin, and independence.",
+    "language": "en-us",
+    "author": "FirstCity Foundry",
+    "image_url": "https://i.scdn.co/image/ab67656300005f1f63196efacda8aad5fc7191e9"
+  },
+  "episodes": [
+    {
+      "guid": "foundry-podcast-episode-1",
+      "title": "StartupGrind PDX Relaunch: Integrating AI in Startup Operations",
+      "link": "https://open.spotify.com/episode/69xZoXUbdAfyR29S9oKkul",
+      "pub_date": "2026-05-08T00:00:00Z",
+      "description": "In the first episode of the First City Foundry Podcast, we introduce the relaunch of StartupGrind Portland and explore how AI is changing the way startups operate, build, and scale. This episode brings together the core themes behind First City Foundry: founders, operators, builders, and the practical use of AI in real companies. Rather than treating AI as hype, we look at how startup teams can use it to improve operations, reduce friction, support better decision-making, and move faster without losing the human judgment that makes great companies work. We also introduce the growing collaboration between First City Foundry, StartupGrind PDX, Kurent, Buildly, and Open Build - a community-focused effort to support Portland founders, operators, and builders as they navigate the next era of startup growth.",
+      "media_url": "https://cdn.firstcityfoundry.com/podcast/foundry-episode-1.mp4",
+      "media_type": "video/mp4",
+      "media_length": 0,
+      "episode_number": 1,
+      "image_url": "https://i.ytimg.com/vi/7nfI9XCQgUw/hqdefault.jpg"
+    }
+  ]
+}
