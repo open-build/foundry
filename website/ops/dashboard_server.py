@@ -24,7 +24,6 @@ import os
 import subprocess
 import sys
 import traceback
-import uuid
 from datetime import datetime
 from functools import partial
 from http.server import HTTPServer, BaseHTTPRequestHandler

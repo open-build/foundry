@@ -1,7 +1,9 @@
 // Join the Index form handling and local ForgeWeb submission.
 document.addEventListener("DOMContentLoaded", function() {
   const CONFIG = {
-    INDEX_API: "/api/index-submissions",
+    INDEX_API_PATH: "/api/index-submissions",
+    MARKETING_API_BASE: "https://market.firstcityfoundry.com",
+    GOOGLE_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbzaXn82jf98akTlphk00Ao0luuM9lDQF6kN2ZN73lWGdSblLsdKtBjxLSfobnlknSvG/exec",
     REQUIRE_TURNSTILE: false
   };
 
@@ -22,6 +24,9 @@ document.addEventListener("DOMContentLoaded", function() {
   const nextBtn = document.getElementById("nextBtn");
   const submitBtn = document.getElementById("submitBtn");
   const draftKey = "foundryIndexSurveyDraft";
+  const pageLoadedAt = Date.now();
+  let formReadyAt = pageLoadedAt;
+  formReadyAt = Date.now();
 
   showStep(currentStep);
   loadFormData();
@@ -59,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
       if (turnstileToken) data.turnstile_token = turnstileToken;
       data.submitted_page = window.location.pathname;
       data.source = "first_city_foundry_index";
+      data.reporting = buildReportingMetadata();
 
       await submitIndexSurvey(data);
       localStorage.removeItem(draftKey);
@@ -200,26 +206,122 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   async function submitIndexSurvey(data) {
-    const response = await fetch(CONFIG.INDEX_API, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
+    const endpoint = buildMarketingApiUrl(CONFIG.INDEX_API_PATH);
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        try {
+          return await response.json();
+        } catch (_) {
+          return { ok: true };
+        }
+      }
+
+      if (shouldFallbackToGoogleScript(response.status)) {
+        return submitIndexSurveyToGoogleScript(data);
+      }
+
+      let errorBody = {};
+      try {
+        errorBody = await response.json();
+      } catch (_) {}
+
+      const err = new Error(`Submission failed: HTTP ${response.status}`);
+      err.userMessage = errorBody.error || "The response could not be saved. Please try again.";
+      throw err;
+    } catch (error) {
+      if (error && error.name === "TypeError") {
+        return submitIndexSurveyToGoogleScript(data);
+      }
+      throw error;
+    }
+  }
+
+  function shouldFallbackToGoogleScript(status) {
+    return status === 404 || status === 405 || status === 501;
+  }
+
+  function buildMarketingApiUrl(path) {
+    const cleanPath = path.startsWith("/") ? path : `/${path}`;
+    return `${CONFIG.MARKETING_API_BASE}${cleanPath}`;
+  }
+
+  function getDefaultMarketingApiBase() {
+    if (window.FOUNDRY_MARKETING_API_BASE) {
+      return String(window.FOUNDRY_MARKETING_API_BASE).replace(/\/$/, "");
+    }
+    const host = window.location.hostname;
+    const port = window.location.port;
+    if ((host === "localhost" || host === "127.0.0.1") && (port === "3000" || port === "3001")) {
+      return `${window.location.protocol}//${host}:4000`;
+    }
+    return "";
+  }
+
+  function buildReportingMetadata() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      submitted_page: window.location.pathname,
+      referrer: document.referrer || "",
+      user_agent: navigator.userAgent || "",
+      language: navigator.language || "",
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "",
+      screen: {
+        width: window.screen && window.screen.width ? window.screen.width : null,
+        height: window.screen && window.screen.height ? window.screen.height : null,
+      },
+      viewport: {
+        width: window.innerWidth || null,
+        height: window.innerHeight || null,
+      },
+      utm: {
+        source: params.get("utm_source") || "",
+        medium: params.get("utm_medium") || "",
+        campaign: params.get("utm_campaign") || "",
+        term: params.get("utm_term") || "",
+        content: params.get("utm_content") || "",
+      },
+      timing: {
+        ms_since_page_load: Date.now() - pageLoadedAt,
+        ms_since_form_ready: Date.now() - formReadyAt,
+      },
+    };
+  }
+
+  async function submitIndexSurveyToGoogleScript(data) {
+    const params = new URLSearchParams();
+    Object.keys(data).forEach(key => {
+      const value = data[key];
+      if (Array.isArray(value)) {
+        value.forEach(item => params.append(key, String(item)));
+      } else if (value !== null && typeof value !== "undefined") {
+        params.append(key, String(value));
+      }
     });
 
-    if (response.ok) return response.json();
+    const response = await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params
+    });
 
-    let errorBody = {};
-    try {
-      errorBody = await response.json();
-    } catch (_) {}
-
-    const err = new Error(`Submission failed: HTTP ${response.status}`);
-    if (response.status === 404) {
-      err.userMessage = "The ForgeWeb admin reporting API is not available from this page. Please preview through ForgeWeb and try again.";
-    } else {
-      err.userMessage = errorBody.error || "The response could not be saved. Please try again.";
+    if (!response.ok) {
+      const err = new Error(`Fallback submission failed: HTTP ${response.status}`);
+      err.userMessage = "The response could not be saved right now. Please try again in a moment.";
+      throw err;
     }
-    throw err;
+
+    try {
+      return await response.json();
+    } catch (_) {
+      return { ok: true };
+    }
   }
 
   function showLoading(button) {
