@@ -1,7 +1,7 @@
 // Join the Index form handling and local ForgeWeb submission.
 document.addEventListener("DOMContentLoaded", function() {
   const CONFIG = {
-    INDEX_API_PATH: "/api/index-submissions",
+    INDEX_API_PATH: "/marketing/api/index-submissions",
     MARKETING_API_BASE: "https://market.firstcityfoundry.com",
     GOOGLE_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbzaXn82jf98akTlphk00Ao0luuM9lDQF6kN2ZN73lWGdSblLsdKtBjxLSfobnlknSvG/exec",
     REQUIRE_TURNSTILE: false
