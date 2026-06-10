@@ -25,13 +25,16 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Any, Optional
 
-# Add scripts directory to path
-SCRIPT_DIR = Path(__file__).parent / 'scripts'
+# Anchor all paths to this file's location so the script works from any cwd.
+SCRIPT_DIR = Path(__file__).parent          # website/scripts/
+WEBSITE_DIR = SCRIPT_DIR.parent             # website/
+REPO_ROOT   = WEBSITE_DIR.parent            # repo root (where config.py lives)
 sys.path.insert(0, str(SCRIPT_DIR))
+sys.path.insert(0, str(REPO_ROOT))          # exposes config.py to imports
 
 def setup_logging() -> logging.Logger:
     """Set up comprehensive logging"""
-    log_dir = Path('logs')
+    log_dir = WEBSITE_DIR / 'logs'
     log_dir.mkdir(exist_ok=True)
     
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -56,24 +59,32 @@ def setup_logging() -> logging.Logger:
 def check_dependencies(logger: logging.Logger) -> bool:
     """Check if all required dependencies are available"""
     try:
+        # Use absolute paths so the check passes regardless of cwd.
         required_files = [
-            'scripts/startup_outreach.py',
-            'scripts/analytics_reporter.py', 
-            'config.py'
+            SCRIPT_DIR / 'startup_outreach.py',
+            SCRIPT_DIR / 'analytics_reporter.py',
         ]
-        
+
         for file_path in required_files:
-            if not Path(file_path).exists():
+            if not file_path.exists():
                 logger.error(f"Required file missing: {file_path}")
                 return False
-        
-        # Test imports
+
+        # config.py is optional — scripts fall back to env vars when absent.
+        config_path = REPO_ROOT / 'config.py'
+        if not config_path.exists():
+            logger.warning(
+                f"config.py not found at {config_path}; "
+                "will rely on environment variables."
+            )
+
+        # Test imports (sys.path already includes SCRIPT_DIR and REPO_ROOT).
         from startup_outreach import StartupOutreachBot
         from analytics_reporter import AnalyticsCollector
-        
+
         logger.info("✅ All dependencies check passed")
         return True
-        
+
     except Exception as e:
         logger.error(f"Dependency check failed: {e}")
         return False

@@ -1,0 +1,123 @@
+{
+  "events": [
+    {
+      "id": "startup-grind-pdx-relaunch-2026",
+      "title": "StartupGrind PDX Relaunch",
+      "subtitle": "Startup Grind returns to Portland — and we're kicking off the relaunch with the people who make this city's startup scene worth showing up for.",
+      "date": "2026-06-11",
+      "dateFormatted": "Thursday, June 11, 2026",
+      "time": {
+        "start": "5:30 PM",
+        "end": "8:00 PM"
+      },
+      "location": {
+        "venue": "Hyatt Regency Portland",
+        "address": "375 NE Holladay St",
+        "city": "Portland, OR 97232",
+        "coordinates": {
+          "lat": 45.5314,
+          "lng": -122.6650
+        }
+      },
+      "description": "Join us for the highly anticipated relaunch of StartupGrind Portland! This is the community event for founders, operators, and startup enthusiasts.",
+      "image": "assets/img/events/startup-grind-pdx-hero.png",
+      "featured": true,
+      "status": "upcoming",
+      "capacity": {
+        "total": 150,
+        "signedUp": 300,
+        "note": "Response has been incredible — over 300 signed up for a room that holds 150. Seating is first-come, first-served. Standing room is also available."
+      },
+      "schedule": [
+        {
+          "time": "5:30 PM",
+          "activity": "Doors Open & Arrival"
+        },
+        {
+          "time": "5:45 PM",
+          "activity": "Welcome Session"
+        },
+        {
+          "time": "6:00 PM",
+          "activity": "Fireside Chat with Amber AI"
+        },
+        {
+          "time": "7:00 PM - 8:00 PM",
+          "activity": "Social Hour at Spoke & Fork (Hyatt's bar, 1st floor)"
+        }
+      ],
+      "speakers": [
+        {
+          "name": "Greg Lind",
+          "title": "Chapter Director, StartupGrind",
+          "image": "assets/img/events/speaker-greg-lind.png"
+        },
+        {
+          "name": "LA Walker",
+          "company": "Kurent",
+          "image": "assets/img/events/speaker-la-walker.png"
+        },
+        {
+          "name": "Joanna Gough",
+          "company": "PDX Hacks",
+          "image": "assets/img/events/speaker-joanna-gough.png"
+        }
+      ],
+      "sponsors": [
+        {
+          "name": "Nodespace Incubator",
+          "role": "Event Sponsor",
+          "logo": "assets/img/partners/nodespace-incubator-logo.png",
+          "tagline": "Building the bridge from prompt to profit for Portland's next generation of founders."
+        }
+      ],
+      "partners": [
+        {
+          "name": "Buildly",
+          "logo": "assets/img/partners/buildly.png"
+        },
+        {
+          "name": "PDX Hacks",
+          "logo": "assets/img/partners/pdx-hacks-logo.png"
+        },
+        {
+          "name": "First City Foundry",
+          "logo": "assets/img/logo-horizontal.png"
+        },
+        {
+          "name": "Kurent",
+          "logo": "assets/img/partners/kurent-logo.png"
+        }
+      ],
+      "callToAction": {
+        "text": "Bring a friend, bring your pitch, bring your curiosity.",
+        "buttons": [
+          {
+            "label": "BRING A FRIEND",
+            "icon": "👥",
+            "action": "invite"
+          },
+          {
+            "label": "BRING YOUR PITCH",
+            "icon": "🚀",
+            "action": "pitch"
+          },
+          {
+            "label": "BRING YOUR CURIOSITY",
+            "icon": "☀️",
+            "action": "learn"
+          }
+        ]
+      },
+      "registrationUrl": "https://www.eventbrite.com/e/startup-grind-pdx-relaunch-tickets",
+      "linkedInUrl": "https://www.linkedin.com/events/startupgrindpdx/",
+      "socialMeta": {
+        "title": "StartupGrind PDX Relaunch - June 11, 2026",
+        "description": "Join the relaunch of StartupGrind Portland at the Hyatt Regency. Fireside chat, networking, and community celebration. First-come, first-served seating for 150.",
+        "image": "assets/img/events/startup-grind-pdx-hero.png",
+        "hashtags": ["#StartupGrind", "#PDX", "#PortlandTech", "#Startup", "#Entrepreneurship"]
+      },
+      "tags": ["networking", "founders", "portland", "startup", "community"]
+    }
+  ]
+}

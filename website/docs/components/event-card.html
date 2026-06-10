@@ -1,0 +1,104 @@
+<!-- Event Card Component -->
+<!-- Usage: Include this file and call renderEventCard(event) to display -->
+<template id="event-card-template">
+  <div class="event-card rounded-lg border border-ink/10 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+    <!-- Event Image -->
+    <div class="relative h-48 w-full overflow-hidden bg-gradient-to-br from-coral-500/20 to-ink/5">
+      <img id="event-image" src="" alt="" class="h-full w-full object-cover" onerror="this.style.display='none'">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+      
+      <!-- Featured Badge -->
+      <div class="absolute top-3 right-3 bg-coral-500 text-white px-3 py-1 rounded-full text-xs font-bold" style="display: none;">
+        FEATURED
+      </div>
+      
+      <!-- Date Badge -->
+      <div class="absolute bottom-3 left-3 bg-black/70 text-white px-3 py-1.5 rounded text-sm font-semibold">
+        <span id="event-date">Jun 11</span>
+      </div>
+    </div>
+    
+    <!-- Content -->
+    <div class="p-5">
+      <!-- Title -->
+      <h3 id="event-title" class="text-xl font-bold text-ink mb-1">Event Title</h3>
+      <p id="event-subtitle" class="text-sm text-slate-600 mb-3 line-clamp-2">Event subtitle</p>
+      
+      <!-- Location & Time -->
+      <div class="space-y-2 mb-4 text-sm">
+        <div class="flex items-start gap-2">
+          <svg class="w-4 h-4 text-coral-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+          </svg>
+          <span id="event-location" class="text-slate-700">Location</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <svg class="w-4 h-4 text-coral-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v2H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v2H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+          </svg>
+          <span id="event-time" class="text-slate-700">Time</span>
+        </div>
+      </div>
+      
+      <!-- Sponsors -->
+      <div id="event-sponsors" class="mb-4 pb-4 border-t border-ink/5 pt-4" style="display: none;">
+        <p class="text-xs font-semibold text-slate-500 mb-2">SPONSORED BY</p>
+        <div class="flex items-center gap-2">
+          <img id="sponsor-logo" src="" alt="Sponsor" class="h-6 object-contain">
+        </div>
+      </div>
+      
+      <!-- CTA -->
+      <a id="event-link" href="#" class="block w-full text-center bg-coral-500 hover:bg-coral-600 text-white font-semibold py-2 px-3 rounded-lg transition-colors">
+        Learn More
+      </a>
+    </div>
+  </div>
+</template>
+
+<script>
+function renderEventCard(event, containerId) {
+  const template = document.getElementById('event-card-template');
+  const clone = template.content.cloneNode(true);
+  
+  // Set image
+  if (event.image) {
+    clone.getElementById('event-image').src = event.image;
+    clone.getElementById('event-image').alt = event.title;
+  }
+  
+  // Set featured badge
+  if (event.featured) {
+    clone.querySelector('[style*="display: none"]').style.display = 'block';
+  }
+  
+  // Set date
+  const date = new Date(event.date);
+  clone.getElementById('event-date').textContent = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  
+  // Set title and subtitle
+  clone.getElementById('event-title').textContent = event.title;
+  clone.getElementById('event-subtitle').textContent = event.subtitle;
+  
+  // Set location
+  clone.getElementById('event-location').textContent = `${event.location.venue}, ${event.location.city}`;
+  
+  // Set time
+  clone.getElementById('event-time').textContent = `${event.time.start} - ${event.time.end}`;
+  
+  // Set sponsors
+  if (event.sponsors && event.sponsors.length > 0) {
+    const sponsorsDiv = clone.getElementById('event-sponsors');
+    sponsorsDiv.style.display = 'block';
+    const logoImg = clone.getElementById('sponsor-logo');
+    logoImg.src = event.sponsors[0].logo;
+    logoImg.alt = event.sponsors[0].name;
+  }
+  
+  // Set link
+  clone.getElementById('event-link').href = `events/${event.id}.html`;
+  
+  // Append to container
+  document.getElementById(containerId).appendChild(clone);
+}
+</script>
