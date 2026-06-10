@@ -109,7 +109,21 @@
           }
         ]
       },
-      "registrationUrl": "https://www.eventbrite.com/e/startup-grind-pdx-relaunch-tickets",
+      "registrationUrl": "https://www.startupgrind.com/portland",
+      "registrationLinks": [
+        {
+          "label": "Startup Grind",
+          "url": "https://www.startupgrind.com/portland",
+          "primary": true,
+          "source": "startupgrind"
+        },
+        {
+          "label": "Luma",
+          "url": "https://luma.com/65onztmu?tk=YmspOK",
+          "primary": false,
+          "source": "luma"
+        }
+      ],
       "linkedInUrl": "https://www.linkedin.com/events/startupgrindpdx/",
       "socialMeta": {
         "title": "StartupGrind PDX Relaunch - June 11, 2026",
