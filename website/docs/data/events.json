@@ -67,7 +67,7 @@
         {
           "name": "Nodespace Incubator",
           "role": "Event Sponsor",
-          "logo": "assets/img/partners/nodespace-incubator-logo.png",
+          "logo": "../assets/img/team/nodespace.png",
           "tagline": "Building the bridge from prompt to profit for Portland's next generation of founders."
         }
       ],
@@ -78,7 +78,7 @@
         },
         {
           "name": "PDX Hacks",
-          "logo": "assets/img/partners/pdx-hacks-logo.png"
+          "logo": "../assets/img/team/pdx-hacks.png"
         },
         {
           "name": "First City Foundry",
