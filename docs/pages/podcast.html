@@ -114,37 +114,39 @@
             <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
                 <div>
                     <span class="foundry-page-badge">Podcast</span>
-                    <h2 class="font-display mt-4 text-3xl font-bold text-ink sm:text-4xl">The Foundry Podcast.</h2>
+                    <h2 class="font-display mt-4 text-3xl font-bold text-ink sm:text-4xl">FirstCityFoundry Podcast.</h2>
                     <p class="mt-4 text-slatebrand">Real conversations with founders, operators, and builders about visibility, margin, and independence.</p>
                     <div class="mt-6">
-                        <img id="podcast-cover-art" src="" alt="The Foundry Podcast cover art" class="hidden h-44 w-44 rounded-foundry object-cover shadow-xl">
+                        <img id="podcast-cover-art" src="" alt="FirstCityFoundry Podcast cover art" class="hidden h-44 w-44 rounded-foundry object-cover shadow-xl">
                         <div id="podcast-cover-placeholder" class="foundry-page-card flex h-44 w-44 items-center justify-center">
                             <div class="foundry-page-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18v3m0-3a6 6 0 0 0 6-6V7a6 6 0 0 0-12 0v5a6 6 0 0 0 6 6z"/></svg></div>
                         </div>
                     </div>
                     <div class="mt-6 rounded-foundry border border-coral-500/20 bg-coral-50 p-4">
                         <div class="text-xs font-bold uppercase tracking-[0.14em] text-coral-600">Latest release status</div>
-                        <p class="mt-2 text-sm leading-6 text-slatebrand">The newest Foundry episode is live on YouTube and Spotify. Apple Podcasts is pending, but the episode is released.</p>
+                        <p id="release-status-text" class="mt-2 text-sm leading-6 text-slatebrand">Episode 2 is streaming now via Cloudflare Stream. Episode 1 is also available on YouTube and Spotify.</p>
                     </div>
                 </div>
                 <div>
-                    <h3 class="font-display text-2xl font-bold text-ink">Latest episode</h3>
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-display text-2xl font-bold text-ink" id="player-heading">Featured Episode</h3>
+                        <span id="player-type-badge" class="rounded-full bg-orange-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-orange-700">Cloudflare Stream</span>
+                    </div>
                     <article id="latest-video-card" class="foundry-page-card mt-5 overflow-hidden">
-                        <div class="aspect-video bg-ink">
-                            <iframe id="latest-youtube-embed" class="h-full w-full" src="https://www.youtube.com/embed/7nfI9XCQgUw" title="The Future of AI-Native Startups | FirstCity Foundry Podcast" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <div id="player-embed-wrapper" class="aspect-video bg-ink">
+                            <iframe id="latest-video-embed" class="h-full w-full" style="border: none;" src="https://iframe.videodelivery.net/eff9c2a22847104a41824c497478d146" title="FirstCityFoundry Podcast — Episode 2" loading="lazy" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe>
                         </div>
                         <div class="p-5">
-                            <div class="mb-3 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-[0.14em]">
-                                <span class="rounded-full bg-red-50 px-3 py-1 text-red-600">Released on YouTube</span>
-                                <span class="rounded-full bg-green-50 px-3 py-1 text-green-700">Released on Spotify</span>
-                                <span class="rounded-full bg-slate-100 px-3 py-1 text-slatebrand">Apple pending</span>
+                            <div id="latest-release-badges" class="mb-3 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-[0.14em]">
+                                <span class="rounded-full bg-orange-50 px-3 py-1 text-orange-700">Primary: Cloudflare Stream</span>
+                                <span class="rounded-full bg-slate-100 px-3 py-1 text-slatebrand">Episode 2</span>
                             </div>
-                            <h4 id="latest-release-title" class="font-display text-xl font-bold text-ink">The Future of AI-Native Startups | FirstCity Foundry Podcast</h4>
-                            <p id="latest-release-meta" class="mt-2 text-sm font-semibold text-coral-600">Most recent episode - published May 6, 2026</p>
-                            <p id="latest-release-description" class="mt-2 text-sm leading-6 text-slatebrand">StartupGrind PDX relaunches with a practical conversation about integrating AI into startup operations, stronger local ecosystems, and human-centered product work.</p>
-                            <div class="mt-4 flex flex-wrap gap-3">
-                                <a id="latest-youtube-link" href="https://www.youtube.com/watch?v=7nfI9XCQgUw" target="_blank" rel="noopener noreferrer" class="btn-primary text-sm">Watch on YouTube</a>
-                                <a id="latest-spotify-link" href="https://open.spotify.com/episode/69xZoXUbdAfyR29S9oKkul" target="_blank" rel="noopener noreferrer" class="btn-ghost text-sm">Listen on Spotify</a>
+                            <h4 id="latest-release-title" class="font-display text-xl font-bold text-ink">FirstCityFoundry Podcast — Episode 2</h4>
+                            <p id="latest-release-meta" class="mt-2 text-sm font-semibold text-coral-600">Most recent episode — published May 18, 2026</p>
+                            <p id="latest-release-description" class="mt-2 text-sm leading-6 text-slatebrand">Episode 2 of the FirstCityFoundry Podcast: In-depth conversations with founders, operators, and builders about visibility, margin, and independence, streamed in high definition via Cloudflare Stream.</p>
+                            <div id="latest-release-links" class="mt-4 flex flex-wrap gap-3">
+                                <a id="latest-primary-link" href="https://iframe.videodelivery.net/eff9c2a22847104a41824c497478d146" target="_blank" rel="noopener noreferrer" class="btn-primary text-sm">Watch Stream</a>
+                                <a id="latest-secondary-link" href="https://open.spotify.com/episode/69xZoXUbdAfyR29S9oKkul" target="_blank" rel="noopener noreferrer" class="btn-ghost text-sm">Listen on Spotify</a>
                             </div>
                         </div>
                     </article>
@@ -153,14 +155,15 @@
                         <div id="episode-loading" class="foundry-page-card p-6 text-slatebrand">Loading episodes...</div>
                         <div id="episode-fallback" class="foundry-page-card hidden p-6">
                             <h4 class="font-display text-xl font-bold text-ink">Latest release available now</h4>
-                            <p class="mt-2 text-sm leading-6 text-slatebrand">The RSS feed has not published episode items yet, but the latest Foundry episode is live on YouTube and Spotify.</p>
+                            <p class="mt-2 text-sm leading-6 text-slatebrand">The latest episode is streaming now on Cloudflare Stream. Episode 1 is also available on YouTube and Spotify.</p>
                         </div>
                     </div>
                     <div class="mt-8 flex flex-wrap gap-3">
+                        <span id="platform-cloudflare" class="platform-badge foundry-page-card px-4 py-2 text-sm font-semibold text-ink" data-label="Cloudflare Stream">Cloudflare Stream <span class="platform-status text-xs text-orange-600 font-bold">primary</span></span>
                         <a id="platform-spotify" href="https://open.spotify.com/episode/69xZoXUbdAfyR29S9oKkul" target="_blank" rel="noopener noreferrer" class="platform-badge foundry-page-card px-4 py-2 text-sm font-semibold text-ink" data-label="Spotify">Spotify <span class="platform-status text-xs text-green-700">released</span></a>
                         <span id="platform-apple" class="platform-badge foundry-page-card px-4 py-2 text-sm font-semibold text-slatebrand" data-label="Apple Podcasts">Apple Podcasts <span class="platform-status text-xs">pending</span></span>
                         <a id="platform-youtube" href="https://www.youtube.com/watch?v=7nfI9XCQgUw" target="_blank" rel="noopener noreferrer" class="platform-badge foundry-page-card px-4 py-2 text-sm font-semibold text-ink" data-label="YouTube">YouTube <span class="platform-status text-xs text-red-600">released</span></a>
-                        <a id="platform-rss" href="#" target="_blank" rel="noopener noreferrer" class="platform-badge foundry-page-card px-4 py-2 text-sm font-semibold text-slatebrand opacity-60" data-label="RSS Feed">RSS Feed <span class="platform-status text-xs">syncing</span></a>
+                        <a id="platform-rss" href="/producer/ledger/shows/foundry/feed.xml" target="_blank" rel="noopener noreferrer" class="platform-badge foundry-page-card px-4 py-2 text-sm font-semibold text-slatebrand opacity-60" data-label="RSS Feed">RSS Feed <span class="platform-status text-xs">syncing</span></a>
                     </div>
                 </div>
             </div>
@@ -185,23 +188,44 @@
 (function () {
   'use strict';
 
-  var RSS_URL = 'https://market.firstcityfoundry.com/producer/ledger/shows/foundry/feed.xml';
+  var RSS_URL = '/producer/ledger/shows/foundry/feed.xml';
   var YOUTUBE_FEED_URL = 'https://www.youtube.com/feeds/videos.xml?channel_id=UCRqoM2Q1_6FwEVC-oac63UA';
-  var DEFAULT_VIDEO_ID = '7nfI9XCQgUw';
+  var CLOUDFLARE_EP2_ID = 'eff9c2a22847104a41824c497478d146';
+  var YOUTUBE_DEFAULT_ID = '7nfI9XCQgUw';
   var SPOTIFY_EPISODE_URL = 'https://open.spotify.com/episode/69xZoXUbdAfyR29S9oKkul';
   var PROXY_URL = 'https://api.allorigins.win/raw?url=';
   var ITUNES_NS = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
   var ATOM_NS = 'http://www.w3.org/2005/Atom';
   var YT_NS = 'http://www.youtube.com/xml/schemas/2015';
-  var MANUAL_RELEASES = [{
-    title: 'The Future of AI-Native Startups | FirstCity Foundry Podcast',
-    pubDate: 'May 6, 2026',
-    epNum: '1',
-    description: 'StartupGrind PDX relaunches with a practical conversation about integrating AI into startup operations, stronger local ecosystems, and human-centered product work.',
-    listenUrl: SPOTIFY_EPISODE_URL,
-    youtubeUrl: 'https://www.youtube.com/watch?v=' + DEFAULT_VIDEO_ID,
-    thumbImg: 'https://i.ytimg.com/vi/' + DEFAULT_VIDEO_ID + '/hqdefault.jpg'
-  }];
+
+  var MANUAL_RELEASES = [
+    {
+      epNum: '2',
+      title: 'FirstCityFoundry Podcast — Episode 2',
+      pubDate: 'May 18, 2026',
+      description: 'Episode 2 of the FirstCityFoundry Podcast: In-depth conversations with founders, operators, and builders about visibility, margin, and independence, streamed in high definition via Cloudflare Stream.',
+      cloudflareId: CLOUDFLARE_EP2_ID,
+      embedUrl: 'https://iframe.videodelivery.net/' + CLOUDFLARE_EP2_ID,
+      watchUrl: 'https://iframe.videodelivery.net/' + CLOUDFLARE_EP2_ID,
+      listenUrl: SPOTIFY_EPISODE_URL,
+      thumbImg: 'https://videodelivery.net/' + CLOUDFLARE_EP2_ID + '/thumbnails/thumbnail.jpg',
+      platformLabel: 'Cloudflare Stream',
+      isPrimaryStream: true
+    },
+    {
+      epNum: '1',
+      title: 'StartupGrind PDX Relaunch: Integrating AI in Startup Operations',
+      pubDate: 'May 8, 2026',
+      description: 'In the first episode of the First City Foundry Podcast, we introduce the relaunch of StartupGrind Portland and explore how AI is changing the way startups operate, build, and scale. Rather than treating AI as hype, we look at how startup teams can use it to improve operations, reduce friction, and move faster.',
+      youtubeId: YOUTUBE_DEFAULT_ID,
+      embedUrl: 'https://www.youtube.com/embed/' + YOUTUBE_DEFAULT_ID,
+      watchUrl: 'https://www.youtube.com/watch?v=' + YOUTUBE_DEFAULT_ID,
+      listenUrl: SPOTIFY_EPISODE_URL,
+      thumbImg: 'https://i.ytimg.com/vi/' + YOUTUBE_DEFAULT_ID + '/hqdefault.jpg',
+      platformLabel: 'YouTube + Spotify',
+      isPrimaryStream: false
+    }
+  ];
 
   function esc(str) {
     return String(str || '')
@@ -254,29 +278,88 @@
     if ('href' in el) el.href = url;
     el.classList.remove('opacity-60');
     var status = el.querySelector('.platform-status');
-    if (status && !/released|pending|syncing/i.test(status.textContent || '')) status.remove();
+    if (status && !/released|pending|syncing|primary/i.test(status.textContent || '')) status.remove();
+  }
+
+  function setPrimaryPlayer(episode) {
+    if (!episode) return;
+    var embed = document.getElementById('latest-video-embed');
+    var title = document.getElementById('latest-release-title');
+    var meta = document.getElementById('latest-release-meta');
+    var desc = document.getElementById('latest-release-description');
+    var badges = document.getElementById('latest-release-badges');
+    var primaryLink = document.getElementById('latest-primary-link');
+    var secondaryLink = document.getElementById('latest-secondary-link');
+    var playerTypeBadge = document.getElementById('player-type-badge');
+
+    var isCloudflare = !!episode.cloudflareId;
+    var embedSrc = isCloudflare
+      ? ('https://iframe.videodelivery.net/' + encodeURIComponent(episode.cloudflareId))
+      : (episode.embedUrl || (episode.youtubeId ? ('https://www.youtube.com/embed/' + encodeURIComponent(episode.youtubeId)) : ''));
+
+    if (embed && embedSrc) {
+      embed.src = embedSrc;
+      embed.title = episode.title || 'FirstCityFoundry Podcast';
+      if (isCloudflare) {
+        embed.setAttribute('allow', 'accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;');
+        embed.setAttribute('allowfullscreen', 'true');
+      } else {
+        embed.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+        embed.setAttribute('allowfullscreen', 'true');
+      }
+    }
+
+    if (playerTypeBadge) {
+      playerTypeBadge.textContent = isCloudflare ? 'Cloudflare Stream' : (episode.platformLabel || 'YouTube');
+      playerTypeBadge.className = isCloudflare
+        ? 'rounded-full bg-orange-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-orange-700'
+        : 'rounded-full bg-red-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-red-700';
+    }
+
+    if (title && episode.title) title.textContent = episode.title;
+    if (meta) meta.textContent = 'Episode ' + (episode.epNum || '') + (episode.pubDate ? ' — published ' + episode.pubDate : '');
+    if (desc && episode.description) desc.textContent = episode.description;
+
+    if (badges) {
+      var badgeHtml = isCloudflare
+        ? '<span class="rounded-full bg-orange-50 px-3 py-1 text-orange-700 font-semibold">Primary: Cloudflare Stream</span>'
+        : '<span class="rounded-full bg-red-50 px-3 py-1 text-red-600 font-semibold">YouTube</span>';
+      if (episode.listenUrl) {
+        badgeHtml += '<span class="rounded-full bg-green-50 px-3 py-1 text-green-700 font-semibold">Spotify</span>';
+      }
+      badgeHtml += '<span class="rounded-full bg-slate-100 px-3 py-1 text-slatebrand">Episode ' + esc(episode.epNum) + '</span>';
+      badges.innerHTML = badgeHtml;
+    }
+
+    if (primaryLink) {
+      primaryLink.href = episode.watchUrl || embedSrc;
+      primaryLink.textContent = isCloudflare ? 'Watch Stream' : 'Watch on YouTube';
+    }
+    if (secondaryLink) {
+      if (episode.listenUrl) {
+        secondaryLink.href = episode.listenUrl;
+        secondaryLink.style.display = '';
+      } else {
+        secondaryLink.style.display = 'none';
+      }
+    }
   }
 
   function updateLatestVideo(video) {
     if (!video || !video.videoId) return;
-    var embed = document.getElementById('latest-youtube-embed');
-    var title = document.getElementById('latest-release-title');
-    var meta = document.getElementById('latest-release-meta');
-    var desc = document.getElementById('latest-release-description');
-    var ytLink = document.getElementById('latest-youtube-link');
-    if (embed) {
-      embed.src = 'https://www.youtube.com/embed/' + encodeURIComponent(video.videoId);
-      embed.title = video.title || embed.title;
+    // Keep YouTube episode info fresh for Episode 1
+    var ep1 = MANUAL_RELEASES.find(function (e) { return e.epNum === '1'; });
+    if (ep1) {
+      if (video.title) ep1.title = video.title;
+      if (video.pubDate) ep1.pubDate = video.pubDate;
+      if (video.description) ep1.description = video.description;
+      ep1.youtubeId = video.videoId;
+      ep1.embedUrl = 'https://www.youtube.com/embed/' + video.videoId;
+      ep1.watchUrl = 'https://www.youtube.com/watch?v=' + video.videoId;
+      ep1.thumbImg = 'https://i.ytimg.com/vi/' + video.videoId + '/hqdefault.jpg';
     }
-    if (title && video.title) title.textContent = video.title;
-    if (meta && video.pubDate) meta.textContent = 'Most recent episode - published ' + video.pubDate;
-    if (desc && video.description) desc.textContent = truncate(stripHTML(video.description), 240);
-    if (ytLink) ytLink.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(video.videoId);
     activatePlatform('platform-youtube', 'https://www.youtube.com/watch?v=' + video.videoId);
-    MANUAL_RELEASES[0].title = video.title || MANUAL_RELEASES[0].title;
-    MANUAL_RELEASES[0].pubDate = video.pubDate || MANUAL_RELEASES[0].pubDate;
-    MANUAL_RELEASES[0].youtubeUrl = 'https://www.youtube.com/watch?v=' + video.videoId;
-    MANUAL_RELEASES[0].thumbImg = 'https://i.ytimg.com/vi/' + video.videoId + '/hqdefault.jpg';
+    renderManualEpisodes();
   }
 
   function showCoverArt(channelImg) {
@@ -304,72 +387,55 @@
     if (!list) return;
     if (loading) loading.remove();
     if (fallback) fallback.remove();
+    list.innerHTML = '';
 
-    MANUAL_RELEASES.forEach(function (episode) {
+    MANUAL_RELEASES.forEach(function (episode, idx) {
       var card = document.createElement('article');
-      card.className = 'foundry-page-card overflow-hidden md:flex';
+      card.className = 'foundry-page-card overflow-hidden md:flex transition hover:border-coral-500/40 cursor-pointer';
       var thumbHTML = episode.thumbImg
-        ? '<div class="md:w-40 shrink-0 bg-coral-50"><img src="' + esc(episode.thumbImg) + '" alt="" class="h-44 w-full object-cover md:h-full" loading="lazy"></div>'
+        ? '<div class="md:w-44 shrink-0 bg-ink relative"><img src="' + esc(episode.thumbImg) + '" alt="" class="h-44 w-full object-cover md:h-full" loading="lazy">'
+          + '<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-80 hover:opacity-100 transition">'
+          + '<div class="h-10 w-10 rounded-full bg-white/90 text-coral-600 flex items-center justify-center shadow-md font-bold text-sm">▶</div>'
+          + '</div></div>'
         : '';
+      var platformBadge = episode.cloudflareId
+        ? '<span class="rounded-full bg-orange-50 px-2.5 py-0.5 text-xs font-bold text-orange-700">Cloudflare Stream</span>'
+        : '<span class="rounded-full bg-red-50 px-2.5 py-0.5 text-xs font-bold text-red-600">YouTube</span>';
+
       card.innerHTML = thumbHTML
-        + '<div class="p-5">'
-        + '<div class="mb-2 flex flex-wrap gap-3 text-xs font-bold uppercase tracking-[0.14em] text-coral-500">'
+        + '<div class="p-5 flex-1 flex flex-col justify-between">'
+        + '<div>'
+        + '<div class="mb-2 flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-coral-500">'
         + '<span>Episode ' + esc(episode.epNum) + '</span>'
+        + '<span>•</span>'
         + '<span>' + esc(episode.pubDate) + '</span>'
-        + '<span>Released on YouTube + Spotify</span>'
+        + '<span>•</span>'
+        + platformBadge
         + '</div>'
-        + '<h4 class="font-display text-xl font-bold text-ink">' + esc(episode.title) + '</h4>'
-        + '<p class="mt-2 text-sm leading-6 text-slatebrand">' + esc(episode.description) + '</p>'
-        + '<div class="mt-4 flex flex-wrap gap-3">'
-        + '<a href="' + esc(episode.youtubeUrl) + '" target="_blank" rel="noopener noreferrer" class="btn-primary text-sm">Watch</a>'
-        + '<a href="' + esc(episode.listenUrl) + '" target="_blank" rel="noopener noreferrer" class="btn-ghost text-sm">Listen</a>'
+        + '<h4 class="font-display text-xl font-bold text-ink hover:text-coral-600 transition">' + esc(episode.title) + '</h4>'
+        + '<p class="mt-2 text-sm leading-6 text-slatebrand line-clamp-3">' + esc(truncate(episode.description, 200)) + '</p>'
+        + '</div>'
+        + '<div class="mt-4 flex flex-wrap gap-3 items-center">'
+        + '<button type="button" class="btn-primary text-sm inline-flex items-center gap-1.5 play-btn" data-ep-idx="' + idx + '"><span>▶</span> Play Video</button>'
+        + (episode.listenUrl ? '<a href="' + esc(episode.listenUrl) + '" target="_blank" rel="noopener noreferrer" class="btn-ghost text-sm" onclick="event.stopPropagation()">Listen on Spotify</a>' : '')
         + '</div>'
         + '</div>';
-      list.appendChild(card);
-    });
-  }
 
-  function renderEpisodes(items, channelImg) {
-    var list = document.getElementById('episode-list');
-    var loading = document.getElementById('episode-loading');
-    var fallback = document.getElementById('episode-fallback');
-    if (!list) return;
-    if (loading) loading.remove();
-    if (fallback) fallback.remove();
+      card.addEventListener('click', function () {
+        setPrimaryPlayer(episode);
+        var playerSection = document.getElementById('latest-video-card');
+        if (playerSection) playerSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
 
-    items.forEach(function (item, idx) {
-      var title = getText(item, 'title') || ('Episode ' + (idx + 1));
-      var pubDate = formatDate(getText(item, 'pubDate'));
-      var rawLink = getText(item, 'link');
-      var enclosure = item.querySelector('enclosure');
-      var enclosureUrl = enclosure ? safeUrl(enclosure.getAttribute('url') || '') : '';
-      var listenUrl = safeUrl(rawLink) || enclosureUrl;
-      var epNumEl = getItunes(item, 'episode');
-      var epNum = epNumEl ? (epNumEl.textContent || '').trim() : String(idx + 1);
-      var summaryEl = getItunes(item, 'summary') || getItunes(item, 'subtitle');
-      var rawDesc = summaryEl ? (summaryEl.textContent || '') : getText(item, 'description');
-      var description = truncate(stripHTML(rawDesc), 190);
-      var epImgEl = getItunes(item, 'image');
-      var episodeImg = epImgEl ? safeUrl(epImgEl.getAttribute('href') || '') : '';
-      var thumbImg = episodeImg || channelImg;
-
-      var card = document.createElement('article');
-      card.className = 'foundry-page-card overflow-hidden md:flex';
-
-      var thumbHTML = thumbImg
-        ? '<div class="md:w-40 shrink-0 bg-coral-50"><img src="' + esc(thumbImg) + '" alt="" class="h-44 w-full object-cover md:h-full" loading="lazy"></div>'
-        : '';
-
-      card.innerHTML = thumbHTML
-        + '<div class="p-5">'
-        + '<div class="mb-2 flex flex-wrap gap-3 text-xs font-bold uppercase tracking-[0.14em] text-coral-500">'
-        + '<span>Episode ' + esc(epNum) + '</span>'
-        + (pubDate ? '<span>' + esc(pubDate) + '</span>' : '')
-        + '</div>'
-        + '<h4 class="font-display text-xl font-bold text-ink">' + esc(title) + '</h4>'
-        + (description ? '<p class="mt-2 text-sm leading-6 text-slatebrand">' + esc(description) + '</p>' : '')
-        + (listenUrl ? '<a href="' + esc(listenUrl) + '" target="_blank" rel="noopener noreferrer" class="btn-primary mt-4 text-sm">Listen now</a>' : '')
-        + '</div>';
+      var playBtn = card.querySelector('.play-btn');
+      if (playBtn) {
+        playBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          setPrimaryPlayer(episode);
+          var playerSection = document.getElementById('latest-video-card');
+          if (playerSection) playerSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      }
 
       list.appendChild(card);
     });
@@ -397,12 +463,7 @@
       if (pUrl && pType === 'youtube') activatePlatform('platform-youtube', pUrl);
     }
 
-    var items = Array.from(xml.querySelectorAll('channel > item')).slice(0, 3);
-    if (!items.length) {
-      showFallback();
-      return;
-    }
-    renderEpisodes(items, channelImg);
+    renderManualEpisodes();
   }
 
   function parseYouTubeFeed(text) {
@@ -424,6 +485,10 @@
 
   activatePlatform('platform-rss', RSS_URL);
   activatePlatform('platform-spotify', SPOTIFY_EPISODE_URL);
+
+  // Initialize with Episode 2 (Cloudflare Stream) as default primary player
+  setPrimaryPlayer(MANUAL_RELEASES[0]);
+  renderManualEpisodes();
 
   fetch(PROXY_URL + encodeURIComponent(YOUTUBE_FEED_URL))
     .then(function (resp) {

@@ -2,25 +2,33 @@
 <html lang="en">
 
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FX80RQDJ49"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FX80RQDJ49');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bootstrapped Founders Podcast | FirstCityFoundry</title>
-    <meta name="description" content="Share your bootstrapped startup journey on the FirstCityFoundry Bootstrapped Founders Podcast. A collaboration with Portland StartupGrind and Upstart Collective to inspire entrepreneurs.">
-    <meta name="keywords" content="bootstrapped startups, founders podcast, Portland startup community, startup grind, entrepreneur stories, self-funded startups, upstart collective">
+    <meta name="description" content="Share your bootstrapped startup journey on the FirstCityFoundry Bootstrapped Founders Podcast. Connect with Portland StartupGrind and inspire other entrepreneurs.">
+    <meta name="keywords" content="bootstrapped startups, founders podcast, Portland startup community, startup grind, entrepreneur stories, self-funded startups">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.firstcityfoundry.com/podcast">
     <meta property="og:title" content="Bootstrapped Founders Podcast | FirstCityFoundry">
-    <meta property="og:description" content="Share your bootstrapped startup journey on our podcast. A collaboration with Portland StartupGrind and Upstart Collective to inspire entrepreneurs.">
-    <meta property="og:image" content="https://www.firstcityfoundry.com/assets/img/partners.png">
+    <meta property="og:description" content="Share your bootstrapped startup journey on our podcast. Connect with Portland StartupGrind and inspire other entrepreneurs.">
+    <meta property="og:image" content="https://www.firstcityfoundry.com/assets/img/OpenBuild.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://www.firstcityfoundry.com/podcast">
     <meta property="twitter:title" content="Bootstrapped Founders Podcast | FirstCityFoundry">
-    <meta property="twitter:description" content="Share your bootstrapped startup journey on our podcast. A collaboration with Portland StartupGrind and Upstart Collective to inspire entrepreneurs.">
-    <meta property="twitter:image" content="https://www.firstcityfoundry.com/assets/img/partners.png">
+    <meta property="twitter:description" content="Share your bootstrapped startup journey on our podcast. Connect with Portland StartupGrind and inspire other entrepreneurs.">
+    <meta property="twitter:image" content="https://www.firstcityfoundry.com/assets/img/OpenBuild.png">
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
@@ -97,7 +105,27 @@
 
 <body class="bg-gray-50">
     
-    <!-- Navigation -->
+        <!-- Video Podcast Section (Cloudflare Stream & Episodes) -->
+        <section class="bg-black py-12">
+            <div class="max-w-4xl mx-auto px-4">
+                <div class="flex items-center justify-center gap-2 mb-2">
+                    <span class="inline-block px-3 py-1 text-xs font-bold uppercase tracking-wider text-orange-400 bg-orange-950/60 rounded-full border border-orange-500/30">Primary Stream: Cloudflare</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 text-center">🎥 FirstCityFoundry Podcast — Episode 2</h2>
+                <div class="flex flex-col items-center">
+                    <!-- Latest Video Embed (Cloudflare Stream) -->
+                    <div class="w-full aspect-w-16 aspect-h-9 mb-6 rounded-lg overflow-hidden shadow-2xl border border-gray-800" style="max-width: 800px; aspect-ratio: 16/9;">
+                        <iframe id="latest-video" class="w-full h-full" style="border: none;" src="https://iframe.videodelivery.net/eff9c2a22847104a41824c497478d146" title="FirstCityFoundry Video Podcast - Episode 2" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe>
+                    </div>
+                    <div class="flex flex-wrap gap-3 justify-center items-center">
+                        <a href="pages/podcast.html" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors">Browse All Episodes &amp; Show Notes</a>
+                        <a href="https://www.youtube.com/@FirstCityFoundry" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2 border border-gray-700 text-sm font-semibold rounded-md text-gray-300 hover:text-white hover:border-gray-500 transition-colors">Watch on YouTube</a>
+                    </div>
+                    <p class="text-gray-400 mt-4 text-center text-sm">Streaming via Cloudflare Stream. Watch all episodes on our <a href="pages/podcast.html" class="underline text-yellow-300 hover:text-yellow-400">Podcast Hub</a> or <a href="https://www.youtube.com/@FirstCityFoundry" target="_blank" class="underline text-yellow-300 hover:text-yellow-400">YouTube channel</a>.</p>
+                </div>
+            </div>
+        </section>
+        <!-- Navigation -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -111,6 +139,7 @@
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
                         <a href="index.html" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+                        <a href="pages/podcast.html" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Podcast Hub</a>
                         <a href="register.html" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Apply to Foundry</a>
                         <a href="podcast.html" class="text-primary bg-blue-50 px-3 py-2 rounded-md text-sm font-medium">Podcast Guest</a>
                     </div>
@@ -137,9 +166,8 @@
                     <span class="text-yellow-300">Podcast</span>
                 </h1>
                 <p class="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
-                    Share your bootstrapped startup journey with our Portland entrepreneurship community. 
-                    A collaboration between FirstCityFoundry, StartupGrind Portland, and Upstart Collective 
-                    to inspire and connect founders.
+                    Share your bootstrapped startup journey with the Portland StartupGrind community. 
+                    Inspire other founders with your story, challenges, and victories.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="#apply" class="bg-yellow-400 text-blue-900 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-yellow-300 transition-colors">
@@ -161,10 +189,8 @@
                     Why Share Your Story?
                 </h2>
                 <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                    The FirstCityFoundry Bootstrapped Founders Podcast is a collaboration between FirstCityFoundry, 
-                    Portland StartupGrind, and Upstart Collective. Together, we showcase the real stories behind 
-                    self-funded startups and strengthen Portland's entrepreneurship ecosystem. Your experience can 
-                    inspire and guide other entrepreneurs on their bootstrapping journey.
+                    The FirstCityFoundry Bootstrapped Founders Podcast, in partnership with Portland StartupGrind, 
+                    showcases the real stories behind self-funded startups. Your experience can inspire and guide other entrepreneurs.
                 </p>
             </div>
 
@@ -255,93 +281,6 @@
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <h4 class="font-semibold text-gray-900 mb-2">Advice for Others</h4>
                     <p class="text-sm text-gray-600">What wisdom can you share with other founders?</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Partnership Section -->
-    <section class="py-20 bg-white border-t border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                    Our Community Partners
-                </h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                    The FirstCityFoundry Bootstrapped Founders Podcast is proud to partner with 
-                    Portland StartupGrind and Upstart Collective to bring you authentic founder stories 
-                    and strengthen our local entrepreneurship ecosystem.
-                </p>
-            </div>
-
-            <div class="flex justify-center items-center">
-                <div class="max-w-2xl">
-                    <img src="assets/img/partners.png" alt="FirstCityFoundry, StartupGrind Portland, and Upstart Collective Partnership" 
-                         class="w-full h-auto rounded-lg shadow-lg">
-                </div>
-            </div>
-
-            <div class="mt-12 grid md:grid-cols-3 gap-8 text-center">
-                <div class="space-y-4">
-                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto">
-                        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900">FirstCityFoundry</h3>
-                    <p class="text-gray-600">
-                        Portland's global startup incubator supporting bootstrapped founders with resources, 
-                        mentorship, and community connections.
-                    </p>
-                </div>
-
-                <div class="space-y-4">
-                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto">
-                        <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900">StartupGrind Portland</h3>
-                    <p class="text-gray-600">
-                        Part of the global StartupGrind community, fostering entrepreneurship through 
-                        events, education, and connections in Portland.
-                    </p>
-                </div>
-
-                <div class="space-y-4">
-                    <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto">
-                        <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900">Upstart Collective</h3>
-                    <p class="text-gray-600">
-                        Building stronger startup communities through collaboration, shared resources, 
-                        and collective growth initiatives.
-                    </p>
-                </div>
-            </div>
-
-            <div class="mt-12 text-center">
-                <p class="text-gray-600 mb-6">
-                    This partnership brings together Portland's most active startup organizations to create 
-                    meaningful content and support for our entrepreneurship ecosystem.
-                </p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="https://startupgrind.com/portland" target="_blank" 
-                       class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                        </svg>
-                        Visit StartupGrind Portland
-                    </a>
-                    <a href="https://upstartcollective.org" target="_blank" 
-                       class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                        </svg>
-                        Learn About Upstart Collective
-                    </a>
                 </div>
             </div>
         </div>

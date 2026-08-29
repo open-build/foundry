@@ -16,6 +16,7 @@ SOURCE_PATH = ROOT / "content" / "podcast" / "feed-source.json"
 OUTPUT_PATHS = [
     ROOT / "producer" / "ledger" / "shows" / "foundry" / "feed.xml",
     ROOT / "docs" / "producer" / "ledger" / "shows" / "foundry" / "feed.xml",
+    ROOT.parent / "docs" / "producer" / "ledger" / "shows" / "foundry" / "feed.xml",
 ]
 
 ATOM_NS = "http://www.w3.org/2005/Atom"
