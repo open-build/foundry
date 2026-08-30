@@ -21,12 +21,13 @@
       },
       "description": "Join us for the highly anticipated relaunch of StartupGrind Portland! This is the community event for founders, operators, and startup enthusiasts.",
       "image": "../assets/images/Portland_panorama3.jpg",
-      "featured": true,
-      "status": "upcoming",
+      "featured": false,
+      "status": "past",
+      "recapUrl": "../pages/podcast.html?ep=1",
       "capacity": {
         "total": 150,
         "signedUp": 300,
-        "note": "Response has been incredible — over 300 signed up for a room that holds 150. Seating is first-come, first-served. Standing room is also available."
+        "note": "The response was incredible — over 300 signed up for a room that holds 150. Watch the recap conversation on the FirstCityFoundry Podcast."
       },
       "schedule": [
         {
