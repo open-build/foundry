@@ -32,6 +32,28 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/main.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        coral: { 50: '#FFF1F3', 100: '#FFE2E6', 500: '#FF5A6B', 600: '#EE4053', 700: '#D72F44' },
+                        ink: '#0F1B2A',
+                        charcoal: '#1F2937',
+                        slatebrand: '#475569',
+                        warm: '#F1EFEA',
+                        softwhite: '#FFFFFF'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Clash Grotesk', 'Space Grotesk', 'Inter', 'system-ui', 'sans-serif']
+                    },
+                    borderRadius: { foundry: '8px' }
+                }
+            }
+        }
+    </script>
     <style>
         .events-main {
             display: block;
@@ -343,7 +365,7 @@
     </style>
     <script src="../assets/js/site.js" defer></script>
 </head>
-<body class="foundry-page">
+<body class="foundry-page antialiased">
 <div id="header-slot"></div>
 
 <main class="events-main">
