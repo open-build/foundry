@@ -1,6 +1,46 @@
 {
   "events": [
     {
+      "id": "stripe-community-pdx-kickoff-2026",
+      "title": "Stripe Community Portland Kickoff & Hackathon",
+      "subtitle": "Join the launch of the Stripe Community Portland chapter with a hands-on hackathon for builders, founders, and developers.",
+      "date": "2026-09-19",
+      "dateFormatted": "Saturday, September 19, 2026",
+      "time": {
+        "start": "10:00 AM",
+        "end": "2:00 PM"
+      },
+      "location": {
+        "venue": "PSU Business Accelerator",
+        "address": "2130 SW 5th Ave",
+        "city": "Portland, OR 97201",
+        "coordinates": {
+          "lat": 45.5090,
+          "lng": -122.6835
+        }
+      },
+      "description": "Come celebrate the launch of the Stripe Community Portland club with a kickoff hackathon. Meet local builders, get an introduction to the new community, and hack on something new with fellow founders and developers.",
+      "image": "../assets/images/Portland_panorama3.jpg",
+      "featured": true,
+      "status": "upcoming",
+      "registrationUrl": "https://www.stripecommunity.com/home/clubs/portland/",
+      "registrationLinks": [
+        {
+          "label": "Stripe Community Portland",
+          "url": "https://www.stripecommunity.com/home/clubs/portland/",
+          "primary": true,
+          "source": "stripecommunity"
+        }
+      ],
+      "socialMeta": {
+        "title": "Stripe Community Portland Kickoff & Hackathon - September 19, 2026",
+        "description": "Join the launch of the Stripe Community Portland club with a kickoff hackathon at PSU Business Accelerator. Meet builders, founders, and developers in Portland.",
+        "image": "../assets/images/Portland_panorama3.jpg",
+        "hashtags": ["#StripeCommunity", "#PDX", "#PortlandTech", "#Hackathon", "#Startup"]
+      },
+      "tags": ["hackathon", "founders", "portland", "developers", "community"]
+    },
+    {
       "id": "startup-grind-pdx-relaunch-2026",
       "title": "StartupGrind PDX Relaunch",
       "subtitle": "Startup Grind returns to Portland — and we're kicking off the relaunch with the people who make this city's startup scene worth showing up for.",
