@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="path-depth" content="0">
+  <title>Name an Operating Problem - First City Foundry</title>
+  <meta name="description" content="A four-minute quarterly intake for founders, problem-solvers, connectors, and community builders. Start with one real operating problem.">
+  <link rel="canonical" href="https://www.firstcityfoundry.com/quarterly-room.html">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { coral: { 50: '#FFF1F3', 100: '#FFE2E6', 500: '#FF5A6B', 600: '#EE4053', 700: '#D72F44' }, ink: '#0F1B2A', charcoal: '#1F2937', slatebrand: '#475569', warm: '#F1EFEA', softwhite: '#FFFFFF' }, fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], display: ['Clash Grotesk', 'Space Grotesk', 'Inter', 'system-ui', 'sans-serif'] }, borderRadius: { foundry: '8px' } } };
+  </script>
+  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/quarterly-room.js" defer></script>
+</head>
+<body class="foundry-page antialiased">
+<div id="header-slot"></div>
+<main>
+  <section class="foundry-page-hero pt-28">
+    <div class="mx-auto max-w-7xl px-4 pb-10 pt-12 sm:px-6 lg:px-8">
+      <span class="foundry-page-badge">Kurent + Buildly / Quarterly room</span>
+      <h1 class="font-display mt-5 max-w-4xl text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">One room for a named problem.</h1>
+      <p class="mt-5 max-w-3xl text-lg leading-8 text-white/80">Four screens. About four minutes. Choose the seat you want this quarter, name the work, and tell us what would make a useful next step.</p>
+    </div>
+  </section>
+  <section class="foundry-page-section py-12 sm:py-16">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="message-container mb-5" aria-live="polite"></div>
+      <div class="index-form-shell foundry-page-card p-5 sm:p-8">
+        <div class="mb-8">
+          <div class="grid gap-2 text-xs font-bold uppercase tracking-[0.14em] text-slatebrand sm:grid-cols-4">
+            <span class="step-indicator active" data-step="1">The seat</span><span class="step-indicator" data-step="2">The person</span><span class="step-indicator" data-step="3">The problem</span><span class="step-indicator" data-step="4">This quarter</span>
+          </div>
+          <div class="mt-3 h-2 overflow-hidden rounded-full bg-ink/10"><div class="progress-bar h-2 rounded-full bg-coral-500 transition-all duration-300" style="width:25%"></div></div>
+          <p id="step-status" class="mt-3 text-sm text-slatebrand" aria-live="polite">Screen 1 of 4</p>
+        </div>
+        <form id="quarterlyRoomForm" novalidate>
+          <section class="step active" data-step="1">
+            <div class="mb-7 border-b border-ink/10 pb-5"><span class="foundry-page-badge">Screen 1</span><h2 class="font-display mt-4 text-2xl font-bold text-ink">Which seat are you taking this quarter?</h2><p class="mt-2 text-sm leading-6 text-slatebrand">Pick one. If you run a company and also sell, choose the seat you want this quarter. You only get one.</p></div>
+            <fieldset data-required-group="true" data-field-name="seat" data-field-label="Your seat" class="space-y-3"><legend class="sr-only">Choose one seat</legend>
+              <label class="index-choice"><input type="radio" name="seat" value="problem_owner"><span>I run a company, and I have a problem in it.</span></label>
+              <label class="index-choice"><input type="radio" name="seat" value="problem_solver"><span>I take a specific problem off a founder's plate.</span></label>
+              <label class="index-choice"><input type="radio" name="seat" value="connector"><span>I connect people. The work is the introduction.</span></label>
+              <label class="index-choice"><input type="radio" name="seat" value="room_builder"><span>I build the room. A community, an event, or a local network.</span></label><span class="field-error-slot"></span>
+            </fieldset>
+          </section>
+          <section class="step" data-step="2" hidden>
+            <div class="mb-7 border-b border-ink/10 pb-5"><span class="foundry-page-badge">Screen 2</span><h2 class="font-display mt-4 text-2xl font-bold text-ink">The person and the company</h2><p class="mt-2 text-sm leading-6 text-slatebrand">Tell us who you are and which organizations you know firsthand.</p></div>
+            <div class="grid gap-5 sm:grid-cols-2">
+              <label class="block"><span class="mb-2 block text-sm font-bold text-ink">Name *</span><input class="form-input" name="name" autocomplete="name" required><span class="field-error-slot"></span></label>
+              <label class="block"><span class="mb-2 block text-sm font-bold text-ink">Email *</span><input class="form-input" type="email" name="email" autocomplete="email" required><span class="field-error-slot"></span></label>
+              <label class="block"><span class="mb-2 block text-sm font-bold text-ink">City *</span><input class="form-input" name="city" autocomplete="address-level2" required><span class="field-error-slot"></span></label>
+              <label class="block"><span class="mb-2 block text-sm font-bold text-ink">Company *</span><input class="form-input" name="company" autocomplete="organization" required><span class="field-error-slot"></span></label>
+              <label class="block"><span class="mb-2 block text-sm font-bold text-ink">Your role *</span><input class="form-input" name="role" required><span class="field-error-slot"></span></label>
+              <label class="block"><span class="mb-2 block text-sm font-bold text-ink">Company site or LinkedIn</span><input class="form-input" type="url" name="company_url" placeholder="https://"><span class="field-error-slot"></span></label>
+              <label class="block sm:col-span-2"><span class="mb-2 block text-sm font-bold text-ink">In one sentence, what does the company do? *</span><textarea class="form-textarea" name="company_description" rows="2" required></textarea><span class="field-error-slot"></span></label>
+            </div>
+            <div class="mt-7 grid gap-7 md:grid-cols-2" id="size-fields">
+              <fieldset data-required-group="true" data-field-name="revenue_bands" data-field-label="Revenue size" class="space-y-3"><legend class="mb-3 text-sm font-bold text-ink">Revenue size <span class="size-hint text-slatebrand" data-size-hint>Choose one for your company.</span></legend>
+                <label class="index-choice"><input type="checkbox" name="revenue_bands" value="under_1m"><span>Under $1M</span></label><label class="index-choice"><input type="checkbox" name="revenue_bands" value="1m_10m"><span>$1M-$10M</span></label><label class="index-choice"><input type="checkbox" name="revenue_bands" value="over_10m"><span>Over $10M</span></label><label class="index-choice"><input type="checkbox" name="revenue_bands" value="no_pl"><span>No P&amp;L</span></label><span class="field-error-slot"></span>
+              </fieldset>
+              <fieldset data-required-group="true" data-field-name="people_bands" data-field-label="People size" class="space-y-3"><legend class="mb-3 text-sm font-bold text-ink">People <span class="size-hint text-slatebrand" data-size-hint>Choose one for your company.</span></legend>
+                <label class="index-choice"><input type="checkbox" name="people_bands" value="just_me"><span>Just me</span></label><label class="index-choice"><input type="checkbox" name="people_bands" value="2_10"><span>2-10</span></label><label class="index-choice"><input type="checkbox" name="people_bands" value="11_50"><span>11-50</span></label><label class="index-choice"><input type="checkbox" name="people_bands" value="51_plus"><span>51 or more</span></label><span class="field-error-slot"></span>
+              </fieldset>
+            </div>
+          </section>
+          <section class="step" data-step="3" hidden>
+            <div class="mb-7 border-b border-ink/10 pb-5"><span class="foundry-page-badge">Screen 3</span><h2 class="font-display mt-4 text-2xl font-bold text-ink">Name the problem, not the department.</h2><p class="mt-2 text-sm leading-6 text-slatebrand">The same problem list is used for every seat so a useful match has a shared starting point.</p></div>
+            <fieldset data-required-group="true" data-field-name="problem_category" data-field-label="Current problem" class="space-y-3"><legend class="mb-3 text-sm font-bold text-ink">Which one is true right now? Pick one. *</legend>
+              <label class="index-choice"><input type="radio" name="problem_category" value="visibility"><span>The founder cannot see the business clearly enough to decide.</span></label><label class="index-choice"><input type="radio" name="problem_category" value="thin_margins"><span>The work is busy and the money is thin.</span></label><label class="index-choice"><input type="radio" name="problem_category" value="founder_dependency"><span>The company stops when the founder stops.</span></label><label class="index-choice"><input type="radio" name="problem_category" value="build_gap"><span>The product or the system is not built.</span></label><label class="index-choice"><input type="radio" name="problem_category" value="customer_fit"><span>The customers are not coming, or they are the wrong ones.</span></label><label class="index-choice"><input type="radio" name="problem_category" value="team_capacity"><span>The team cannot carry the work.</span></label><label class="index-choice"><input type="radio" name="problem_category" value="capital_transition"><span>Money, a deal, or an owner transition.</span></label><label class="index-choice"><input type="radio" name="problem_category" value="people_connection"><span>The right people are not in the same room.</span></label><span class="field-error-slot"></span>
+            </fieldset>
+            <div id="seat-problem-fields" class="mt-7 grid gap-5"></div>
+            <fieldset data-required-group="true" data-field-name="last_event_skew" data-field-label="People you met at the last event" class="mt-8 space-y-3"><legend class="mb-3 text-sm font-bold text-ink">At the last event you went to, who did you meet more of? *</legend>
+              <label class="index-choice"><input type="radio" name="last_event_skew" value="problem_owners"><span>People with a problem in their own company</span></label><label class="index-choice"><input type="radio" name="last_event_skew" value="sellers"><span>People selling</span></label><label class="index-choice"><input type="radio" name="last_event_skew" value="about_the_same"><span>About the same</span></label><label class="index-choice"><input type="radio" name="last_event_skew" value="no_events"><span>I don't go to these</span></label><span class="field-error-slot"></span>
+            </fieldset>
+          </section>
+          <section class="step" data-step="4" hidden>
+            <div class="mb-7 border-b border-ink/10 pb-5"><span class="foundry-page-badge">Screen 4</span><h2 class="font-display mt-4 text-2xl font-bold text-ink">What would make this quarter useful?</h2><p class="mt-2 text-sm leading-6 text-slatebrand">Choose any that are true. “Not this quarter” can stand on its own.</p></div>
+            <fieldset data-required-group="true" data-field-name="quarter_commitments" data-field-label="This quarter" class="space-y-3"><legend class="mb-3 text-sm font-bold text-ink">This quarter I will *</legend>
+              <label class="index-choice"><input type="checkbox" name="quarter_commitments" value="take_introduction"><span>Take one introduction</span></label><label class="index-choice"><input type="checkbox" name="quarter_commitments" value="working_session"><span>Sit in one working session on a named problem</span></label><label class="index-choice"><input type="checkbox" name="quarter_commitments" value="bring_founders"><span>Bring founders</span></label><label class="index-choice"><input type="checkbox" name="quarter_commitments" value="bring_solutions"><span>Bring people who can name one problem they take</span></label><label class="index-choice"><input type="checkbox" name="quarter_commitments" value="hold"><span>Not this quarter. Keep me on file.</span></label><span class="field-error-slot"></span>
+            </fieldset>
+            <fieldset data-required-group="true" data-field-name="no_pitch_acknowledged" data-field-label="Room rule" class="mt-8 space-y-3"><legend class="mb-3 text-sm font-bold text-ink">The room rule *</legend><label class="index-choice"><input type="checkbox" name="no_pitch_acknowledged" value="true"><span>I will not pitch from the floor. If I am here as a provider, I am here for a problem someone already named.</span></label><span class="field-error-slot"></span></fieldset>
+            <fieldset data-required-group="true" data-field-name="contact_permission" data-field-label="Contact permission" class="mt-8 space-y-3"><legend class="mb-3 text-sm font-bold text-ink">May Kurent and Buildly write you about one match and the next quarterly room? *</legend><label class="index-choice"><input type="radio" name="contact_permission" value="yes"><span>Yes</span></label><label class="index-choice"><input type="radio" name="contact_permission" value="not_yet"><span>Not yet</span></label><span class="field-error-slot"></span></fieldset>
+          </section>
+          <div class="mt-8 flex flex-col gap-4 border-t border-ink/10 pt-6 sm:flex-row sm:items-center sm:justify-between"><button type="button" id="prevBtn" class="btn-ghost" hidden>Previous</button><div class="flex flex-col gap-4 sm:ml-auto sm:flex-row sm:items-center"><button type="button" id="nextBtn" class="btn-primary">Next</button><button type="submit" id="submitBtn" class="btn-primary" hidden>Send my response</button></div></div>
+          <p class="mt-4 text-xs leading-5 text-slatebrand">This intake is for quarterly introductions and working sessions. It does not replace the <a href="register.html" class="foundry-page-link">Portland Operations &amp; AI Index</a>.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+<div id="footer-slot"></div>
+</body>
+</html>

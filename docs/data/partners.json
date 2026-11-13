@@ -1,8 +1,8 @@
 [
   {
     "name": "Buildly",
-    "role": "AI Product Lifecycle Platform",
-    "description": "Buildly helps teams ship AI-native products with a modular microservices framework, integrated DevOps, and ready-to-deploy Marketplace solutions.",
+    "role": "Product and Technology Delivery",
+    "description": "Buildly helps organizations shape, build, and deliver practical technology systems, from product development to integration and deployment.",
     "type": "core",
     "url": "https://buildly.io",
     "logo": "assets/img/partners/buildly.png",
@@ -10,8 +10,8 @@
   },
   {
     "name": "Kurent Co",
-    "role": "Operational Architecture & Founder Independence",
-    "description": "Kurent designs operational systems that let founders escape day-to-day execution through SOPs, delegation frameworks, and the Principal's Trap methodology.",
+    "role": "Operational Architecture and Process Improvement",
+    "description": "Kurent helps organizations clarify how work moves, improve operating systems, and build processes that do not depend on one person.",
     "type": "core",
     "url": "https://kurentco.com",
     "logo": "assets/img/partners/kurent.png",
@@ -19,8 +19,8 @@
   },
   {
     "name": "Startup Grind PDX",
-    "role": "Local Founder Network & Podcast Launch Partner",
-    "description": "Portland's chapter of the global Startup Grind community, providing events, networking, and distribution for the Foundry Collective launch.",
+    "role": "Portland Events and Podcast Partner",
+    "description": "Startup Grind Portland hosts local conversations, events, and podcast programming for people building and operating organizations.",
     "type": "distribution",
     "url": "https://www.startupgrind.com/portland/",
     "logo": "assets/img/partners/startupgrind.svg",
@@ -29,8 +29,8 @@
   },
   {
     "name": "Open.Build",
-    "role": "Developer Training Ecosystem",
-    "description": "Open-source training programs and developer community powering the next generation of technical founders.",
+    "role": "Open Technology Learning",
+    "description": "Open.Build supports hands-on learning around open technology, software development, and the tools organizations use to build.",
     "type": "core",
     "url": "https://open.build",
     "logo": "assets/img/partners/openbuild.png",

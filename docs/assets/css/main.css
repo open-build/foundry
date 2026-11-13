@@ -402,6 +402,13 @@ html {
   display: none;
 }
 
+.step[hidden],
+#prevBtn[hidden],
+#nextBtn[hidden],
+#submitBtn[hidden] {
+  display: none !important;
+}
+
 .step.active {
   display: block;
   animation: fadeInUp 0.5s ease-out;
@@ -415,12 +422,12 @@ html {
 }
 
 .step-indicator.active {
-  background-color: #3b82f6;
+  background-color: var(--foundry-coral);
   color: white;
 }
 
 .step-indicator.completed {
-  background-color: #10b981;
+  background-color: #047857;
   color: white;
 }
 
@@ -463,10 +470,16 @@ html {
 }
 
 .index-question-group.border-red-500,
+#quarterlyRoomForm fieldset.border-red-500,
 .form-input.border-red-500,
 .form-textarea.border-red-500,
 .form-select.border-red-500 {
   border-color: #dc2626 !important;
+}
+
+#quarterlyRoomForm fieldset.border-red-500 {
+  outline: 1px solid #dc2626;
+  outline-offset: 3px;
 }
 
 .error-message {
