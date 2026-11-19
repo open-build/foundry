@@ -24,6 +24,14 @@
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <script>
         (function() {
+            var host = window.location.hostname.toLowerCase();
+            var isFoundryDomain = host === 'firstcityfoundry.com' || host === 'www.firstcityfoundry.com';
+            var isRoot = window.location.pathname === '/' || /\/(?:index\.html)?$/.test(window.location.pathname);
+
+            if (isFoundryDomain && isRoot) {
+                window.location.replace('/pages/events.html');
+            }
+
             var savedTheme = localStorage.getItem('foundry-theme');
             document.documentElement.setAttribute('data-theme', savedTheme || 'light');
         })();
