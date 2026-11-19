@@ -1,11 +1,11 @@
-/* First City Foundry design tokens */
+/* Stone & Spark design tokens */
 :root {
-  --foundry-coral: #FF5A6B;
-  --foundry-coral-dark: #EE4053;
-  --foundry-ink: #0F1B2A;
-  --foundry-charcoal: #1F2937;
+  --foundry-coral: #E07A3F;
+  --foundry-coral-dark: #C95F24;
+  --foundry-ink: #0C1A20;
+  --foundry-charcoal: #1E3446;
   --foundry-slate: #475569;
-  --foundry-warm: #F1EFEA;
+  --foundry-warm: #F3F1EA;
   --foundry-white: #FFFFFF;
 }
 
@@ -217,6 +217,49 @@ html[data-theme="dark"] .foundry-theme-toggle {
 html[data-theme="dark"] .foundry-theme-toggle {
   background: #111827;
   color: #F8FAFC;
+}
+
+/* Shared navigation fallbacks: keep links usable if Tailwind utilities are unavailable. */
+#desktop-nav {
+  align-items: center;
+  display: none;
+  gap: 1rem;
+}
+
+#mobile-toggle {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  display: inline-flex;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+}
+
+#mobile-nav.hidden {
+  display: none;
+}
+
+#mobile-nav:not(.hidden) {
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  #desktop-nav {
+    display: flex;
+  }
+
+  #mobile-toggle,
+  #mobile-nav {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  #mobile-nav {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 html[data-theme="dark"] .btn-ghost {
